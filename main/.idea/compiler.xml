@@ -9,5 +9,8 @@
         <module name="Domination_Game" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Domination_Game" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
