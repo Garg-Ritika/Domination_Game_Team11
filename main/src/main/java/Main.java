@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String [] args)
     {
-        System. out.println("binit sir lecture");
+        System.out.println("maven initial setup: complete");
     }
 }
