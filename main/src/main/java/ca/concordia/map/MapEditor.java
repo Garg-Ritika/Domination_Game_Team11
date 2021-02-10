@@ -44,6 +44,11 @@ public class MapEditor implements IConstants {
         for (Continent val : map.getListOfContinents()) {
             if (val.getID() == continentID) {
                 map.getListOfContinents().remove(val);
+                for (Country value : map.getListOfCountries()) {
+                    if (value.getContinentID() == continentID) {
+                        map.getListOfCountries().remove(continentID);
+                    }
+                }
                 return true;
             }
         }
