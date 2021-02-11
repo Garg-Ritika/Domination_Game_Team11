@@ -1,2 +1,4 @@
-package ca.concordia.model;public class MapTest {
+package ca.concordia.model;
+
+public class MapTest {
 }

@@ -6,11 +6,13 @@ package ca.concordia.model;
 
 public class Country {
 
+
     private int countryID;
     private String name;
     private int continentID;
     private int x;
     private int y;
+
 
     public Country(int countryID, int continentID) {
         this.countryID = countryID;
@@ -23,6 +25,7 @@ public class Country {
         this.name = name;
         this.x = x;
         this.y = y;
+
     }
 
     public String getName() {
@@ -64,5 +67,6 @@ public class Country {
     public int getY() {
         return y;
     }
+
 
 }
