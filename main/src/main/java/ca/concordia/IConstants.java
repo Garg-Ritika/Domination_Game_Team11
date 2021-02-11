@@ -4,6 +4,10 @@ public interface IConstants {
 
 
     // gameplay commands
+    public static String COMMAND_LOAD_MAP = "loadmap";
+    public static String COMMAND_GAME_PLAYER = "gameplayer";
+    public static String COMMAND_ASSIGN_COUNTRIES = "assigncountries";
+    public static String COMMAND_DEPLOY = "deploy";
 
 
     // com.riskgame.org.riskgame.model.map editor commands ..
