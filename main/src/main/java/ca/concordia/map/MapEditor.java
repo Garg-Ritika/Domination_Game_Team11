@@ -175,8 +175,8 @@ public class MapEditor implements IConstants {
 
                 }
             } else if (line.equalsIgnoreCase(HEADER_BORDERS)) {
-
-                while ((line = br.readLine()).length() > 0) {
+                line = br.readLine();
+                while (line!=null && line.length() > 0) {
                     System.out.println("border : " + line);
 
                     String[] borderArray = line.trim().split(" ");
@@ -187,6 +187,7 @@ public class MapEditor implements IConstants {
                     }
                     Border border = new Border(countryIdInteger, borderCountries);
                     getCurrentMap().getListOfBorders().add(border);
+                    line = br.readLine();
                 }
             }
         }
