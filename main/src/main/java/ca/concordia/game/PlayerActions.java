@@ -26,20 +26,38 @@ public class PlayerActions {
     private final Map map;
     private Player winner;
 
+    /**
+     *
+     * @param map
+     */
     public PlayerActions(Map map) {
         this.map = map;
         this.winner = null;
     }
 
+    /**
+     *
+     * @param player
+     * @return
+     */
     public boolean addPlayer(Player player) {
         //TODO: cannot add more player than number of countries check
         return this.listOfPlayers.add(player);
     }
 
+    /**
+     *
+     * @param player
+     * @return
+     */
     public boolean removePlayer(Player player) {
         return this.listOfPlayers.remove(player);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Player> getListOfPlayers(){
         return this.listOfPlayers;
     }
@@ -85,6 +103,7 @@ public class PlayerActions {
 
     /**
      * This method assigns armies to the players and their countries..
+     * @param player
      */
     public void assignReinforcementPhase(Player player) {
         // TODO: what is the logic here ?
@@ -136,10 +155,18 @@ public class PlayerActions {
         return true;
     }
 
+    /**
+     *
+     * @param player player parameter is passed
+     */
     public void setWinner(Player player){
         this.winner= player;
     }
 
+    /**
+     *
+     * @return
+     */
     public Player getWinner(){
         return this.winner;
     }

@@ -3,7 +3,7 @@ package ca.concordia.model;
 /**
  * Adjacency Matrix representation of the Maps
  *
- * @author
+ * @author xyz "Please change the name later, it is temp fix for correcting build"
  */
 
 public class Graph {

@@ -24,7 +24,8 @@ public class Continent {
 
     /**
      * Getters and Setters
-     **/
+     * @return ID
+     */
     public int getID() {
         return ID;
     }
