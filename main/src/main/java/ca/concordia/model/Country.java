@@ -4,68 +4,137 @@ package ca.concordia.model;
  * Details of maps can be found at : http://domination.sourceforge.net/makemaps.shtml
  */
 
+/**
+ * This class contains details of the country
+ *
+ * @author to be updated
+ *
+ */
 public class Country {
 
+    private int d_CountryID;
+    private String d_Name;
+    private int d_ContinentID;
+    private int d_X;
+    private int d_Y;
 
-    private int countryID;
-    private String name;
-    private int continentID;
-    private int x;
-    private int y;
-
-
-    public Country(int countryID, int continentID) {
-        this.countryID = countryID;
-        this.continentID = continentID;
+    /**
+     * Constructor initializes countryId and continentId
+     *
+     * @param p_CountryID countryId
+     * @param p_ContinentID continentId
+     */
+    public Country(int p_CountryID, int p_ContinentID) {
+        this.d_CountryID = p_CountryID;
+        this.d_ContinentID = p_ContinentID;
     }
 
-    public Country(int countryID, int continentID, String name, int x, int y) {
-        this.countryID = countryID;
-        this.continentID = continentID;
-        this.name = name;
-        this.x = x;
-        this.y = y;
+    /**
+     * Constructor initializes all the member variables of Country class
+     *
+     * @param p_CountryID countryId
+     * @param p_ContinentID continentId
+     * @param p_Name country name
+     * @param p_X x Coordinate Integer of Country's location on map
+     * @param p_Y y Coordinate Integer of Country's location on map
+     */
+    public Country(int p_CountryID, int p_ContinentID, String p_Name, int p_X, int p_Y) {
+        this.d_CountryID = p_CountryID;
+        this.d_ContinentID = p_ContinentID;
+        this.d_Name = p_Name;
+        this.d_X = p_X;
+        this.d_Y = p_Y;
 
     }
 
+    /**
+     * This method returns name of the country
+     *
+     * @return Country Name
+     */
     public String getName() {
-        return name;
+        return d_Name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * This method sets the name of the country.
+     *
+     * @param p_Name Country Name
+     */
+    public void setName(String p_Name) {
+        this.d_Name = p_Name;
     }
 
+    /**
+     * This method returns id of the country
+     *
+     * @return Country Id
+     */
     public int getCountryID() {
-        return countryID;
+        return d_CountryID;
     }
 
-    public void setCountryID(int countryID) {
-        this.countryID = countryID;
+    /**
+     * This method sets the Id of the country.
+     *
+     * @param p_CountryID Country Id
+     */
+    public void setCountryID(int p_CountryID) {
+        this.d_CountryID = p_CountryID;
     }
 
+    /**
+     * This method returns id of the continent
+     *
+     * @return Continent Id
+     */
     public int getContinentID() {
-        return continentID;
+        return d_ContinentID;
     }
 
-    public void setContinentID(int continentID) {
-        this.continentID = continentID;
+    /**
+     * This method sets the Id of the continent.
+     *
+     * @param p_ContinentID Continent Id
+     */
+    public void setContinentID(int p_ContinentID) {
+        this.d_ContinentID = p_ContinentID;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    /**
+     * This method sets the x Coordinate Integer of Country's location on map.
+     *
+     * @param p_X x Coordinate Integer
+     */
+    public void setX(int p_X) {
+        this.d_X = p_X;
     }
 
+    /**
+     * This method returns the x Coordinate Integer of Country's location on map.
+     *
+     * @return x Coordinate Integer
+     */
     public int getX() {
-        return x;
+        return d_X;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    /**
+     * This method sets the y Coordinate Integer of Country's location on map.
+     *
+     * @param p_Y y Coordinate Integer
+     */
+    public void setY(int p_Y) {
+        this.d_Y = p_Y;
     }
 
+    /**
+     * This method returns the y Coordinate Integer of Country's location on map.
+     *
+     * @return y Coordinate Integer
+     */
     public int getY() {
-        return y;
+        return d_Y;
     }
 
 
