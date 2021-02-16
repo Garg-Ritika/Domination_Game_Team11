@@ -40,5 +40,16 @@ public class Map {
         this.listOfBorders = listOfBorders;
     }
 
+    public Graph getAdjacencyMatrix() {
+        int numberOfCountries = this.getListOfCountries().size();
+        Graph graph = new Graph(numberOfCountries);
+        for (int i = 0; i < this.getListOfBorders().size(); i++) {
+            Border border = this.getListOfBorders().get(i);
+            for (int countryId : border.getNeighbours()) {
+                graph.addEdge(border.getCountryId(), countryId);
+            }
 
+        }
+        return graph;
+    }
 }

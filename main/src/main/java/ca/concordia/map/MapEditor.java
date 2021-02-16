@@ -1,10 +1,7 @@
 package ca.concordia.map;
 
 import ca.concordia.IConstants;
-import ca.concordia.model.Border;
-import ca.concordia.model.Continent;
-import ca.concordia.model.Country;
-import ca.concordia.model.Map;
+import ca.concordia.model.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -130,9 +127,9 @@ public class MapEditor implements IConstants {
         this.currentMap = new Map();
     }
 
-    private void readMapFile(File mapFile) throws IOException {
+    public Map readMapFile(File mapFile) throws IOException {
         resetCurrentMap();
-        System.out.println("reading .org.riskgame.model.map file from path: " + mapFile.getAbsolutePath());
+        System.out.println("reading .map file from path: " + mapFile.getAbsolutePath());
         FileReader fr = new FileReader(mapFile);
         BufferedReader br = new BufferedReader(fr);
 
@@ -191,10 +188,11 @@ public class MapEditor implements IConstants {
                 }
             }
         }
+        return getCurrentMap();
     }
 
     private void writeMapFile(File mapFile) throws IOException {
-        System.out.println("writing .org.riskgame.model.map file to path " + mapFile.getAbsolutePath());
+        System.out.println("writing .map file to path " + mapFile.getAbsolutePath());
         FileWriter fileWriter = new FileWriter(mapFile);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
@@ -224,7 +222,20 @@ public class MapEditor implements IConstants {
         bufferedWriter.close();
         fileWriter.close();
 
-        System.out.println("Successfully written org.riskgame.model.map to org.riskgame.model.map file at: " + mapFile.getAbsolutePath());
+        System.out.println("Successfully written map to .map file at: " + mapFile.getAbsolutePath());
     }
 
+    public Graph loadMapAsGraph(){
+        Map map = this.getCurrentMap();
+        int numberOfCountries = map.getListOfCountries().size();
+        Graph graph = new Graph(numberOfCountries);
+        for (int i = 0; i < map.getListOfBorders().size(); i++) {
+            Border border = map.getListOfBorders().get(i);
+            for (int countryId : border.getNeighbours()) {
+                graph.addEdge(border.getCountryId(), countryId);
+            }
+
+        }
+        return graph;
+    }
 }

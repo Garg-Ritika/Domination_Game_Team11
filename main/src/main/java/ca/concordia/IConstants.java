@@ -10,7 +10,7 @@ public interface IConstants {
     public static String COMMAND_DEPLOY = "deploy";
 
 
-    // com.riskgame.org.riskgame.model.map editor commands ..
+    // .map editor commands ..
     public static String COMMAND_EDIT_CONTINENT = "editcontinent";
     public static String COMMAND_EDIT_COUNTRY = "editcountry";
     public static String COMMAND_EDIT_NEIGHBOUR = "editneighbor";
@@ -21,7 +21,7 @@ public interface IConstants {
     public static String COMMAND_VALIDATE_MAP = "validatemap";
 
     //
-    /* details from domination com.riskgame.org.riskgame.model.map file */
+    /* details from domination .map file */
     public static final String HEADER_CONTINENT = "[continents]";
     public static final String HEADER_COUNTRIES = "[countries]";
     public static final String HEADER_BORDERS = "[borders]";

@@ -25,7 +25,7 @@ public class ValidateMap {
             return false;
         }
 
-        if (!DFS(getAdjacencyMatrix())) {
+        if (!DFS(this.map.getAdjacencyMatrix())) {
             return false;
         }
 
@@ -60,23 +60,6 @@ public class ValidateMap {
         return true;
     }
 
-    /**
-     * Create adjacency matrix to represent graph using map
-     *
-     * @return graph
-     */
-    private Graph getAdjacencyMatrix() {
-        int numberOfCountries = map.getListOfCountries().size();
-        Graph graph = new Graph(numberOfCountries);
-        for (int i = 0; i < map.getListOfBorders().size(); i++) {
-            Border border = map.getListOfBorders().get(i);
-            for (int countryId : border.getNeighbours()) {
-                graph.addEdge(border.getCountryId(), countryId);
-            }
-
-        }
-        return graph;
-    }
 
     /**
      * Use depth-first-search in directed connected graph  to find whether it is connected or not.
