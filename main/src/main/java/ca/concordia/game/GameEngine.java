@@ -3,12 +3,21 @@ package ca.concordia.game;
 import ca.concordia.model.Map;
 import ca.concordia.model.Player;
 
+/**
+ * Description of class will go in here
+ * Ritika please add author tag, if you work on this ;)
+ */
 public class GameEngine {
 
     private static GameEngine instance = null;
     private final Map currentMap;
     private final PlayerActions playerActions;
 
+    /**
+     *
+     * @param map to be updated
+     * @return to be updated
+     */
     public static GameEngine getInstance(Map map) {
         if (instance == null) {
             instance = new GameEngine(map);
@@ -16,20 +25,37 @@ public class GameEngine {
         return instance;
     }
 
+    /**
+     *
+     * @param map to be updated
+     */
     private GameEngine(Map map) {
         this.currentMap = map;
         this.playerActions = new PlayerActions(this.currentMap);
         this.loadMapforGame(); // automatically load game in the constructor
     }
 
+    /**
+     * to be updated
+     */
     private void loadMapforGame() {
         mainGameLoop();
     }
 
+    /**
+     *
+     * @param player to be updated
+     * @return to be updated
+     */
     public boolean addPlayer(Player player){
         return this.playerActions.addPlayer(player);
     }
 
+    /**
+     *
+     * @param player to be updated
+     * @return to be updated
+     */
     public boolean removePlayer(Player player){
         return this.playerActions.removePlayer(player);
     }
@@ -42,7 +68,7 @@ public class GameEngine {
      *
      *  (After above three steps, it self-exit the game.)
      * @author
-     * @return
+     * @return to be updated
      */
 
     private void mainGameLoop(){

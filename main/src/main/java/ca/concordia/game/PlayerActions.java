@@ -15,7 +15,7 @@ import java.util.Random;
  *  3. assign countries to the player
  *  4. assign armies to their countries of the players *
  *
- *   @author: Nilesh
+ * @author Nilesh Aggarwal
  */
 
 //TODO : do we want to make this a singleton class ?
@@ -28,7 +28,7 @@ public class PlayerActions {
 
     /**
      *
-     * @param map
+     * @param map "to be updated"
      */
     public PlayerActions(Map map) {
         this.map = map;
@@ -37,8 +37,8 @@ public class PlayerActions {
 
     /**
      *
-     * @param player
-     * @return
+     * @param player "to be updated"
+     * @return "to be updated"
      */
     public boolean addPlayer(Player player) {
         //TODO: cannot add more player than number of countries check
@@ -47,8 +47,8 @@ public class PlayerActions {
 
     /**
      *
-     * @param player
-     * @return
+     * @param player "to be updated"
+     * @return "to be updated"
      */
     public boolean removePlayer(Player player) {
         return this.listOfPlayers.remove(player);
@@ -56,7 +56,7 @@ public class PlayerActions {
 
     /**
      *
-     * @return
+     * @return "to be updated"
      */
     public List<Player> getListOfPlayers(){
         return this.listOfPlayers;
@@ -103,7 +103,7 @@ public class PlayerActions {
 
     /**
      * This method assigns armies to the players and their countries..
-     * @param player
+     * @param player "to be updated"
      */
     public void assignReinforcementPhase(Player player) {
         // TODO: what is the logic here ?
@@ -119,6 +119,8 @@ public class PlayerActions {
      *
      * Issuing order command:
      * deploy countryID num (until all reinforcements have been placed)
+     *
+     * @param player player is passed "to be updated"
      *
      */
     public void issueOrdersPhase(Player player){
@@ -137,8 +139,8 @@ public class PlayerActions {
 
     /**
      *
-     * @param player
-     * @return
+     * @param player "to be updated"
+     *
      */
     public void executeOrderPhase(Player player){
         player.nextOrder();
@@ -148,7 +150,7 @@ public class PlayerActions {
 
     /**
      * Game is only over when one player has captured all the countries ..
-     * @return
+     * @return "to be updated"
      */
     public boolean isGameOver(){
         // TODO :
@@ -165,7 +167,7 @@ public class PlayerActions {
 
     /**
      *
-     * @return
+     * @return winner
      */
     public Player getWinner(){
         return this.winner;
