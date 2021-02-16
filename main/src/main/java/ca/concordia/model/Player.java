@@ -8,7 +8,7 @@ public class Player {
     private int playerID;
     private int noOfArmies;
     private List<Country> listOfCountries;
-//    private List<Order> listOfOrders;
+    private List<Order> listOfOrders;
 
     public Player(String playerName, int playerID) {
         this.playerName = playerName;
@@ -50,13 +50,13 @@ public class Player {
         this.listOfCountries = listOfCountries;
     }
 
-//    public List<Order> getListOfOrders() {
-//        return listOfOrders;
-//    }
+    public List<Order> getListOfOrders() {
+        return listOfOrders;
+    }
 
-//    public void setListOfOrders(List<Order> listOfOrders) {
-//        this.listOfOrders = listOfOrders;
-//    }
+    public void setListOfOrders(List<Order> listOfOrders) {
+        this.listOfOrders = listOfOrders;
+    }
 
     public int nextOrder() {
          /*called by the GameEngine during the execute orders phase
