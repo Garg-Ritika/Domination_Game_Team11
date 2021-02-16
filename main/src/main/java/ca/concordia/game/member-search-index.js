@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"ca.concordia.game","c":"GameEngine","l":"addPlayer(Player)","u":"addPlayer(ca.concordia.model.Player)"},{"p":"ca.concordia.game","c":"GameEngine","l":"getInstance(Map)","u":"getInstance(ca.concordia.model.Map)"},{"p":"ca.concordia.game","c":"GameEngine","l":"removePlayer(Player)","u":"removePlayer(ca.concordia.model.Player)"}];updateSearchResults();
