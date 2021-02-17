@@ -120,7 +120,6 @@ public class MapEditor implements IConstants {
 
     public boolean validateMap() {
         return new ValidateMap(getCurrentMap()).validate();
-
     }
 
     private void resetCurrentMap() {

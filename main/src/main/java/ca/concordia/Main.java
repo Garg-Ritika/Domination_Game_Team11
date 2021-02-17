@@ -13,10 +13,10 @@ public class Main implements IConstants {
         System.out.println("Welcome to Domination Game");
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Type x to exit");
+            System.out.println("use command \"exit\" to exit the program");
             String input = scanner.nextLine();
             System.out.println("input: " + input);
-            if ("x".equalsIgnoreCase(input)) {
+            if ("exit".equalsIgnoreCase(input)) {
                 break;
             } else {
                 if (input.length() > 0) {
@@ -24,12 +24,6 @@ public class Main implements IConstants {
                     processCommands(commandArray);
                 }
             }
-        }
-
-        //TODO: do we want to remove this ?
-        System.out.println("Args length" + args.length);
-        for (int i = 0; i < args.length; i++) {
-            System.out.println(args[i]);
         }
     }
 
@@ -71,6 +65,7 @@ public class Main implements IConstants {
 
                     case COMMAND_LOAD_MAP:
                         main.processLoadGameCommand(command);
+                        break;
 
                     default:
                         System.out.println("INVALID COMMAND");

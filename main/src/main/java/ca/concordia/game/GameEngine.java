@@ -1,9 +1,7 @@
 package ca.concordia.game;
 
 import ca.concordia.IConstants;
-import ca.concordia.model.Graph;
-import ca.concordia.model.Map;
-import ca.concordia.model.Player;
+import ca.concordia.model.*;
 
 import java.util.Scanner;
 
@@ -33,6 +31,7 @@ public class GameEngine implements IConstants {
 
     /**
      * @param map to be updated
+     * @return null
      */
     private GameEngine(Map map) {
         this.currentMap = map;
@@ -43,7 +42,7 @@ public class GameEngine implements IConstants {
      * game starts with loading of user-saved map file, which loads the map
      * as a "connected-directed-graph"
      *
-     * @return void
+     * @return null
      */
     public void loadMapforGame() {
         this.graph = this.currentMap.getAdjacencyMatrix();
@@ -57,7 +56,7 @@ public class GameEngine implements IConstants {
 
     /**
      * helper method to take commands for game engine
-     * @return void
+     * @return null
      */
     private void waitingForInput(){
         Scanner scanner = new Scanner(System.in);
@@ -67,11 +66,11 @@ public class GameEngine implements IConstants {
             System.out.println("use command \"gameplayer -add playername -remove playername \" " +
                     "to add between 3 to 5 players");
             System.out.println("use command \"assigncountries\" to start turn based main-loop");
-            System.out.println("Type x to stop game engine");
+            System.out.println("use command \"exit\" to stop game engine");
 
             String input = scanner.nextLine();
             System.out.println("input: " + input);
-            if ("x".equalsIgnoreCase(input)) {
+            if ("exit".equalsIgnoreCase(input)) {
                 break;
             }else if(!GAME_STARTED ){
                 System.out.println("game is finished, stopping ..");
@@ -91,7 +90,7 @@ public class GameEngine implements IConstants {
     /**
      * helper method to process commands for game enginer
      * @param command
-     * @return void
+     * @return null
      */
     private boolean processCommands(String[] command){
         boolean breakLoop = false;
@@ -132,11 +131,26 @@ public class GameEngine implements IConstants {
      * 4. Ownership
      * 5. Connectivity in a way that enables game-play
      *
-     * @return boolean
+     * @return null
      */
     public void showMapforGame() {
         System.out.println("show game command received ");
-        // TODO : how to showmap
+
+        Graph graph = currentMap.getAdjacencyMatrix();
+        System.out.println(graph.toString());
+
+        for (Player player: this.playerActions.getListOfPlayers()){
+            System.out.println("------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("PLAYER: " + player.getPlayerName());
+            System.out.println("with total army count of : "+ player.getNoOfArmies());
+            System.out.println("has ownership of these countries: ");
+            for(Country country: player.getListOfCountries()){
+                System.out.println("id: " + country.getCountryID()
+                        + " name: "+ country.getName()
+                        + " army count: " + country.getArmyCount()
+                        + " belongs to continent " + country.getContinentID());
+            }
+        }
     }
 
     /**
@@ -147,30 +161,36 @@ public class GameEngine implements IConstants {
      * <p>
      * (After above three steps, it self-exit the game.)
      *
-     * @return void
+     * @return null
      */
 
     private void mainGameLoop() {
         this.playerActions.assignCountriesToPlayers();
 
+        GAME_STARTED = true;
         while (true) {
 
             assignReinforcementPhase();
             issueOrderPhase();
             executeOrderPhase();
 
-            if (this.playerActions.isGameOver()) {
+            if (this.playerActions.isGameOver() || GAME_STARTED == false) {
                 System.out.println("GAME OVER");
                 GAME_STARTED = false;
                 break;
             }
         }
-        System.out.println("Winner is player > id: " + playerActions.getWinner().getPlayerID() + " name: " + playerActions.getWinner().getPlayerName());
+        Player winner = this.playerActions.getWinner();
+        if(winner != null){
+            System.out.println("Winner is player > id: " + playerActions.getWinner().getPlayerID() + " name: " + playerActions.getWinner().getPlayerName());
+        }else{
+            System.out.println("Unknown winner ..");
+        }
     }
 
     /***
      * Assign to each player the correct number of reinforcement armies, according to Warzone rules
-     * @return void
+     * @return null
      */
     private void assignReinforcementPhase(){
         //assign each player the correct number of reinforcement
@@ -179,6 +199,7 @@ public class GameEngine implements IConstants {
             System.out.println("ASSIGN REINFORCEMENT PHASE : " + player.getPlayerName());
             this.playerActions.assignReinforcementPhase(player);
         }
+
     }
 
     /**
@@ -190,7 +211,7 @@ public class GameEngine implements IConstants {
      * Issuing order command:
      * deploy countryID num (until all reinforcements have been placed)
      *
-     * @return void
+     * @return null
      */
     private void issueOrderPhase(){
         //the method will wait for commands
@@ -201,7 +222,7 @@ public class GameEngine implements IConstants {
 
             Scanner scanner = new Scanner(System.in);
             while (true) {
-                System.out.println("use command \" deploy countrid num\"  ");
+                System.out.println("use command like [\"showmap\" ,  \"deploy <countryid> <num>\" , \"exit\" ");
                 String input = scanner.nextLine();
                 System.out.println("input: " + input);
 
@@ -212,6 +233,11 @@ public class GameEngine implements IConstants {
                         if ((IConstants.COMMAND_DEPLOY).equalsIgnoreCase(command)){
                             processDeployCommand(player,commandArray);
                             // TODO : do we want to break after first try only ..
+                            break;
+                        }else if((IConstants.COMMAND_SHOW_MAP).equalsIgnoreCase(command)){
+                            showMapforGame();
+                        }else if("exit".equalsIgnoreCase(command)){
+                            GAME_STARTED = false;
                             break;
                         }
                     }catch (Exception e){
@@ -226,6 +252,7 @@ public class GameEngine implements IConstants {
      * The GameEngine calls the next_order() method of the Player. Then the Order object’s execute() method
      * is called, which will enact the order. The effect of a deploy order is to place num armies on
      * the country countryID.
+     * @return null
      */
     private void executeOrderPhase(){
         for (Player player : this.playerActions.getListOfPlayers()) {
@@ -233,6 +260,8 @@ public class GameEngine implements IConstants {
             System.out.println("EXECUTE ORDER  PHASE : " + player.getPlayerName());
             this.playerActions.executeOrderPhase(player);
         }
+
+
     }
 
     /**
@@ -314,7 +343,12 @@ public class GameEngine implements IConstants {
     private boolean processAssignCountriesCommand(){
         System.out.println("assigncountries command received..");
         try {
-            return assignCountries();
+            int numberOfPlayers = this.playerActions.getListOfPlayers().size();
+            if (numberOfPlayers >=3 || numberOfPlayers <=5 ) {
+                return assignCountries();
+            }else{
+                System.out.println("number of player must be between [3 to 5] to state main-game-loop");
+            }
 
         }catch (Exception e){
             e.printStackTrace();
@@ -328,22 +362,16 @@ public class GameEngine implements IConstants {
      * @return void
      */
     public boolean assignCountries() {
-        if (instance != null) {
-            // TODO: assign countries randomly ..
-            return true;
-        } else {
-            System.out.println("use \"loadmap\" command first to load the game ");
-            GAME_STARTED = false;
-        }
-        return false;
+        return this.playerActions.assignCountriesToPlayers();
     }
 
 
 
     /**
      * helper method to process deploy command
+     * @param player
      * @param command
-     * @return void
+     * @return null
      */
     private void processDeployCommand(Player player,String[] command) {
         System.out.println("deploy  command received ..... ");
@@ -365,7 +393,7 @@ public class GameEngine implements IConstants {
      *
      * @param countryId
      * @param num
-     * @return void
+     * @return  null
      */
     public void deploy(Player player, int countryId, int num) {
 

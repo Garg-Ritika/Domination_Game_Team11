@@ -18,7 +18,6 @@ import java.util.Random;
  * @author Nilesh Aggarwal
  */
 
-//TODO : do we want to make this a singleton class ?
 public class PlayerActions {
 
     private final int MINIMUM_PLAYER_COUNT = 3;
@@ -65,10 +64,10 @@ public class PlayerActions {
     /**
      * This method assigns countries to players
      */
-    public void assignCountriesToPlayers() {
+    public boolean assignCountriesToPlayers() {
         if (listOfPlayers.size() < MINIMUM_PLAYER_COUNT) {
             System.out.println("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
-            return;
+            return false;
         }
 
         int countryCount = this.map.getListOfCountries().size();
@@ -99,6 +98,7 @@ public class PlayerActions {
             }
             player.setListOfCountries(countriesForPlayer);
         }
+        return true;
     }
 
     /**

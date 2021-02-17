@@ -12,8 +12,8 @@ public class Graph {
     private int numberOfCountries; // represent number of vertices
 
     public Graph(int numberOfCountries) {
-        this.numberOfCountries = numberOfCountries;
-        this.adjMatrix = new boolean[numberOfCountries][numberOfCountries];
+        this.numberOfCountries = numberOfCountries+1;
+        this.adjMatrix = new boolean[this.numberOfCountries][this.numberOfCountries];
     }
 
     public void addEdge(int i, int j) {

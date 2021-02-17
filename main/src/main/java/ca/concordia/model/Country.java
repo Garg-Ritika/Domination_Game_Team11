@@ -17,6 +17,7 @@ public class Country {
     private int d_ContinentID;
     private int d_X;
     private int d_Y;
+    private int d_ArmyCount;
 
     /**
      * Constructor initializes countryId and continentId
@@ -135,6 +136,25 @@ public class Country {
      */
     public int getY() {
         return d_Y;
+    }
+
+
+    /**
+     * This method sets the army count value of the country
+     *
+     * @param p_ArmyCount ArmyCount
+     */
+    public void setArmyCount(int p_ArmyCount) {
+        this.d_ArmyCount = p_ArmyCount;
+    }
+
+    /**
+     * This method returns the army count value of the country
+     *
+     * @return d_ArmyCount
+     */
+    public int getArmyCount() {
+        return d_ArmyCount;
     }
 
 

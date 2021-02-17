@@ -8,9 +8,6 @@ public class Order {
         this.orderID = orderID;
     }
 
-    /**
-     * Getters and Setters
-     **/
     public int getOrderID() {
         return orderID;
     }
