@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class Map {
 
-    private List<Continent> listOfContinents;
-    private List<Country> listOfCountries;
-    private List<Border> listOfBorders;
+    private List<Continent> d_ListOfContinents;
+    private List<Country> d_ListOfCountries;
+    private List<Border> d_ListOfBorders;
 
     /**
      *Constructor generates  an empty list with an initial capacity of ten for storing :
@@ -23,9 +23,9 @@ public class Map {
      * 3.Borders.
      */
     public Map() {
-        this.listOfContinents = new ArrayList<Continent>();
-        this.listOfCountries = new ArrayList<Country>();
-        this.listOfBorders = new ArrayList<Border>();
+        this.d_ListOfContinents = new ArrayList<Continent>();
+        this.d_ListOfCountries = new ArrayList<Country>();
+        this.d_ListOfBorders = new ArrayList<Border>();
     }
 
     /**
@@ -34,15 +34,15 @@ public class Map {
      * @return the list of continents
      */
     public List<Continent> getListOfContinents() {
-        return listOfContinents;
+        return d_ListOfContinents;
     }
 
     /**
      *This method sets the list of continent by implementing Continent class.
-     * @param listOfContinents initialising the continents in the list.
+     * @param p_ListOfContinents initialising the continents in the list.
      */
-    public void setListOfContinents(List<Continent> listOfContinents) {
-        this.listOfContinents = listOfContinents;
+    public void setListOfContinents(List<Continent> p_ListOfContinents) {
+        this.d_ListOfContinents = p_ListOfContinents;
     }
 
     /**
@@ -51,15 +51,15 @@ public class Map {
      * @return the list of continents
      */
     public List<Country> getListOfCountries() {
-        return listOfCountries;
+        return d_ListOfCountries;
     }
 
     /**
      *This method sets the list of continent by implementing Continent class.
-     * @param listOfCountries initialising the countries in the list to this method.
+     * @param p_ListOfCountries initialising the countries in the list to this method.
      */
-    public void setListOfCountries(List<Country> listOfCountries) {
-        this.listOfCountries = listOfCountries;
+    public void setListOfCountries(List<Country> p_ListOfCountries) {
+        this.d_ListOfCountries = p_ListOfCountries;
     }
 
     /**
@@ -68,15 +68,15 @@ public class Map {
      * @return the list of borders.
      */
     public List<Border> getListOfBorders() {
-        return listOfBorders;
+        return d_ListOfBorders;
     }
 
     /**
      * This method sets the list of continent by implementing Border class.
-     * @param listOfBorders initialising the borders in the list.
+     * @param p_ListOfBorders initialising the borders in the list.
      */
-    public void setListOfBorders(List<Border> listOfBorders) {
-        this.listOfBorders = listOfBorders;
+    public void setListOfBorders(List<Border> p_ListOfBorders) {
+        this.d_ListOfBorders = p_ListOfBorders;
     }
 
     /**
@@ -84,8 +84,8 @@ public class Map {
      * @return graph showing adjacency.
      */
     public Graph getAdjacencyMatrix() {
-        int numberOfCountries = this.getListOfCountries().size();
-        Graph graph = new Graph(numberOfCountries);
+        int l_NumberOfCountries = this.getListOfCountries().size();
+        Graph graph = new Graph(l_NumberOfCountries);
         for (int i = 0; i < this.getListOfBorders().size(); i++) {
             Border border = this.getListOfBorders().get(i);
             for (int countryId : border.getNeighbours()) {
