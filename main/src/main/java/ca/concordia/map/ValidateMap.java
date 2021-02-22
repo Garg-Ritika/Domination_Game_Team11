@@ -1,19 +1,36 @@
 package ca.concordia.map;
-
 import ca.concordia.model.Border;
 import ca.concordia.model.Graph;
 import ca.concordia.model.Map;
 
 import java.util.Stack;
 
+/**
+ * Class ValidateMap is used to check whether the given map is directed graph or not.
+ * If it is directed graph then it is valid map.
+ * DFS algorithm is used to check the connectivity of graph.\
+ * @author Satinder Pal Singh
+ */
 public class ValidateMap {
 
     private final Map map;
 
+    /**
+     * This method load the map in ValidateMap class as it is constructor.
+     *Constructor is automatically called whenever  class is called.
+     * @param map map is passed as parameter which is to be validated.
+     */
     public ValidateMap(Map map) {
         this.map = map;
     }
 
+    /**
+     * this method checks if no continent and countries are present in a map
+     * Then return as output that no countries and continents are available for our game.
+     * Additionally, It check if there are duplicates countries and continents are present or not
+     * Also,using Depth First Search checking whether graph is connected or not.
+     * @return the boolean false value to show it is invalid map or true if map is valid.
+     */
     public boolean validate() {
 
         if (map.getListOfContinents().size() < 0 || map.getListOfCountries().size() < 0) {
@@ -34,7 +51,8 @@ public class ValidateMap {
     }
 
     /**
-     * method to check if duplicate countries or continents exists ..
+     * This is a method to check if duplicate countries or continents exists ..
+     * If found it prints Duplicate continent/country found.
      */
     private boolean noDuplicates() {
 
@@ -63,9 +81,8 @@ public class ValidateMap {
 
     /**
      * Use depth-first-search in directed connected graph  to find whether it is connected or not.
-     *
-     * @param graph
-     * @return
+     * @param graph given graph is passed as an parameter
+     * @return connected - prints the output graph is connected or it is not connected
      */
     private boolean DFS(Graph graph) {
         if (graph.size() < 1) {
