@@ -19,8 +19,9 @@ public class GameEngine  {
     public static boolean GAME_STARTED = false;
 
     /**
-     *  This is a static method to get the instance of this singleton object
+     * This is a static method to get the instance of this singleton object
      * @param p_map map on which the game is starting..
+     * @return GameEngine object type
      */
     public static GameEngine getInstance(Map p_map) {
         if (d_instance == null) {
