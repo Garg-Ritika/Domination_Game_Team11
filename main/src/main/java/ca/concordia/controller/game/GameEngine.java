@@ -1,6 +1,6 @@
-package ca.concordia.game;
+package ca.concordia.controller.game;
 
-import ca.concordia.IConstants;
+import ca.concordia.controller.GameController;
 import ca.concordia.model.*;
 
 import java.util.Scanner;
@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Nilesh, Binit
  */
-public class GameEngine implements IConstants {
+public class GameEngine  {
 
     private static GameEngine d_instance = null;
     private final Map d_currentMap;
@@ -19,8 +19,8 @@ public class GameEngine implements IConstants {
     public static boolean GAME_STARTED = false;
 
     /**
-     * @param p_map to be updated
-     * @return to be updated
+     *  This is a static method to get the instance of this singleton object
+     * @param p_map map on which the game is starting..
      */
     public static GameEngine getInstance(Map p_map) {
         if (d_instance == null) {
@@ -30,8 +30,9 @@ public class GameEngine implements IConstants {
     }
 
     /**
-     * @param p_map to be updated
-     * @return null
+     * This is a private constructor so that it cannot be
+     * instantiate outside this class ..
+     * @param p_map   map on which the game is starting
      */
     private GameEngine(Map p_map) {
         this.d_currentMap = p_map;
@@ -42,7 +43,6 @@ public class GameEngine implements IConstants {
      * game starts with loading of user-saved map file, which loads the map
      * as a "connected-directed-graph"
      *
-     * @return null
      */
     public void loadMapforGame() {
         this.d_graph = this.d_currentMap.getAdjacencyMatrix();
@@ -56,7 +56,7 @@ public class GameEngine implements IConstants {
 
     /**
      * helper method to take commands for game engine
-     * @return null
+     *
      */
     private void waitingForInput(){
         Scanner scanner = new Scanner(System.in);
@@ -89,8 +89,8 @@ public class GameEngine implements IConstants {
 
     /**
      * helper method to process commands for game engine
-     * @param command
-     * @return null
+     * @param command commands applicable into game play
+     *
      */
     private boolean processCommands(String[] command){
         boolean breakLoop = false;
@@ -101,15 +101,15 @@ public class GameEngine implements IConstants {
 
                 switch (l_firstCommand) {
 
-                    case COMMAND_SHOW_MAP:
+                    case GameController.COMMAND_SHOW_MAP:
                         showMapforGame();
                         break;
 
-                    case COMMAND_GAME_PLAYER:
+                    case GameController.COMMAND_GAME_PLAYER:
                         processGamePlayerCommand(command);
                         break;
 
-                    case COMMAND_ASSIGN_COUNTRIES:
+                    case GameController.COMMAND_ASSIGN_COUNTRIES:
                         breakLoop = processAssignCountriesCommand();
                         break;
                     default:
@@ -131,7 +131,6 @@ public class GameEngine implements IConstants {
      * 4. Ownership
      * 5. Connectivity in a way that enables game-play
      *
-     * @return null
      */
     public void showMapforGame() {
         System.out.println("show game command received ");
@@ -161,7 +160,6 @@ public class GameEngine implements IConstants {
      * <p>
      * (After above three steps, it self-exit the game.)
      *
-     * @return null
      */
 
     private void mainGameLoop() {
@@ -190,7 +188,6 @@ public class GameEngine implements IConstants {
 
     /***
      * Assign to each player the correct number of reinforcement armies, according to Warzone rules
-     * @return null
      */
     private void assignReinforcementPhase(){
         //assign each player the correct number of reinforcement
@@ -210,8 +207,6 @@ public class GameEngine implements IConstants {
      * all their reinforcement armies on the map.
      * Issuing order command:
      * deploy countryID num (until all reinforcements have been placed)
-     *
-     * @return null
      */
     private void issueOrderPhase(){
         //the method will wait for commands
@@ -230,11 +225,11 @@ public class GameEngine implements IConstants {
                     String[] l_commandArray = input.trim().split(" ");
                     try{
                         String command = l_commandArray[0];
-                        if ((IConstants.COMMAND_DEPLOY).equalsIgnoreCase(command)){
+                        if ((GameController.COMMAND_DEPLOY).equalsIgnoreCase(command)){
                             processDeployCommand(player,l_commandArray);
                             // TODO : do we want to break after first try only ..
                             break;
-                        }else if((IConstants.COMMAND_SHOW_MAP).equalsIgnoreCase(command)){
+                        }else if((GameController.COMMAND_SHOW_MAP).equalsIgnoreCase(command)){
                             showMapforGame();
                         }else if("exit".equalsIgnoreCase(command)){
                             GAME_STARTED = false;
@@ -252,7 +247,6 @@ public class GameEngine implements IConstants {
      * The GameEngine calls the next_order() method of the Player. Then the Order object’s execute() method
      * is called, which will enact the order. The effect of a deploy order is to place num armies on
      * the country countryID.
-     * @return null
      */
     private void executeOrderPhase(){
         for (Player player : this.d_playerActions.getListOfPlayers()) {
@@ -266,8 +260,7 @@ public class GameEngine implements IConstants {
 
     /**
      * helper method to take "gameplayer command to add or remove palyers"
-     * @param command
-     * @return null
+     * @param command command array to process
      */
     private void processGamePlayerCommand(String[] command) {
         System.out.println("gameplayer command received ..... ");
@@ -301,7 +294,7 @@ public class GameEngine implements IConstants {
      * takes player name and if there is no player with such name, it adds a new player with this name
      * in playerlist
      *
-     * @param p_playerName
+     * @param p_playerName playername to add
      * @return boolean
      */
     public boolean addPlayer(String p_playerName) {
@@ -321,7 +314,7 @@ public class GameEngine implements IConstants {
     /**
      * takes playerName and if it is found in existing playerlist, remove it .
      *
-     * @param p_playerName
+     * @param p_playerName playername to remove
      * @return boolean
      */
     public boolean removePlayer(String p_playerName) {
@@ -338,7 +331,6 @@ public class GameEngine implements IConstants {
 
     /**
      * helper method to process assigncountries command
-     * @return null
      */
     private boolean processAssignCountriesCommand(){
         System.out.println("assigncountries command received..");
@@ -358,8 +350,7 @@ public class GameEngine implements IConstants {
 
     /**
      * All countries are assigned randomly to the player
-     *
-     * @return void
+     * @return boolean
      */
     public boolean assignCountries() {
         return this.d_playerActions.assignCountriesToPlayers();
@@ -369,9 +360,8 @@ public class GameEngine implements IConstants {
 
     /**
      * helper method to process deploy command
-     * @param p_player
-     * @param p_command
-     * @return null
+     * @param p_player playername
+     * @param p_command actions for the player e.g. deploy
      */
     private void processDeployCommand(Player p_player, String[] p_command) {
         System.out.println("deploy  command received ..... ");
@@ -391,11 +381,12 @@ public class GameEngine implements IConstants {
     /**
      * Issuing order command (untill all reinforcements have been placed
      *
-     * @param countryId
-     * @param num
-     * @return  null
+     * @param player player object
+     * @param countryId country name
+     * @param num number of army to deploy
+     * @return  boolean
      */
-    public void deploy(Player player, int countryId, int num) {
-
+    public boolean deploy(Player player, int countryId, int num) {
+        return false;
     }
 }

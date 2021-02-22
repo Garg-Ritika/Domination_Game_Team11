@@ -1,4 +1,4 @@
-package ca.concordia.game;
+package ca.concordia.controller.game;
 
 import ca.concordia.model.Country;
 import ca.concordia.model.Map;
@@ -63,6 +63,7 @@ public class PlayerActions {
 
     /**
      * This method assigns countries to players
+     * @return boolean
      */
     public boolean assignCountriesToPlayers() {
         if (listOfPlayers.size() < MINIMUM_PLAYER_COUNT) {

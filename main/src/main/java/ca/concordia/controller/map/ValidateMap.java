@@ -1,4 +1,4 @@
-package ca.concordia.map;
+package ca.concordia.controller.map;
 import ca.concordia.model.Border;
 import ca.concordia.model.Graph;
 import ca.concordia.model.Map;

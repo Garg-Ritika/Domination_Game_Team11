@@ -15,9 +15,6 @@ public class Player {
         this.playerID = playerID;
     }
 
-    /**
-     * Getters and Setters
-     **/
     public String getPlayerName() {
         return playerName;
     }

@@ -1,6 +1,5 @@
-package ca.concordia.map;
+package ca.concordia.controller.map;
 
-import ca.concordia.IConstants;
 import ca.concordia.model.*;
 
 import java.io.*;
@@ -8,7 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Create a singleton class, so that only instance of MapEditor will be there ...
-public class MapEditor implements IConstants {
+public class MapEditor {
+
+    //
+    /* details from domination .map file */
+    public static final String HEADER_CONTINENT = "[continents]";
+    public static final String HEADER_COUNTRIES = "[countries]";
+    public static final String HEADER_BORDERS = "[borders]";
 
     private static MapEditor instance = null;
     private static Map currentMap;
