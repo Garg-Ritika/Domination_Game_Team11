@@ -12,30 +12,30 @@ import java.util.Scanner;
  */
 public class GameEngine implements IConstants {
 
-    private static GameEngine instance = null;
-    private final Map currentMap;
-    private Graph graph;
-    private final PlayerActions playerActions;
+    private static GameEngine d_instance = null;
+    private final Map d_currentMap;
+    private Graph d_graph;
+    private final PlayerActions d_playerActions;
     public static boolean GAME_STARTED = false;
 
     /**
-     * @param map to be updated
+     * @param p_map to be updated
      * @return to be updated
      */
-    public static GameEngine getInstance(Map map) {
-        if (instance == null) {
-            instance = new GameEngine(map);
+    public static GameEngine getInstance(Map p_map) {
+        if (d_instance == null) {
+            d_instance = new GameEngine(p_map);
         }
-        return instance;
+        return d_instance;
     }
 
     /**
-     * @param map to be updated
+     * @param p_map to be updated
      * @return null
      */
-    private GameEngine(Map map) {
-        this.currentMap = map;
-        this.playerActions = new PlayerActions(this.currentMap);
+    private GameEngine(Map p_map) {
+        this.d_currentMap = p_map;
+        this.d_playerActions = new PlayerActions(this.d_currentMap);
     }
 
     /**
@@ -45,7 +45,7 @@ public class GameEngine implements IConstants {
      * @return null
      */
     public void loadMapforGame() {
-        this.graph = this.currentMap.getAdjacencyMatrix();
+        this.d_graph = this.d_currentMap.getAdjacencyMatrix();
         GAME_STARTED = true;
         System.out.println("Game engine has loaded the map");
 
@@ -61,24 +61,24 @@ public class GameEngine implements IConstants {
     private void waitingForInput(){
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            int playerListSize = this.playerActions.getListOfPlayers().size();
+            int playerListSize = this.d_playerActions.getListOfPlayers().size();
             System.out.println("number of players available is : " + playerListSize);
             System.out.println("use command \"gameplayer -add playername -remove playername \" " +
                     "to add between 3 to 5 players");
             System.out.println("use command \"assigncountries\" to start turn based main-loop");
             System.out.println("use command \"exit\" to stop game engine");
 
-            String input = scanner.nextLine();
-            System.out.println("input: " + input);
-            if ("exit".equalsIgnoreCase(input)) {
+            String l_input = scanner.nextLine();
+            System.out.println("input: " + l_input);
+            if ("exit".equalsIgnoreCase(l_input)) {
                 break;
             }else if(!GAME_STARTED ){
                 System.out.println("game is finished, stopping ..");
                 break;
             }else {
-                if (input.length() > 0) {
-                    String[] commandArray = input.trim().split(" ");
-                    if(processCommands(commandArray)){
+                if (l_input.length() > 0) {
+                    String[] l_commandArray = l_input.trim().split(" ");
+                    if(processCommands(l_commandArray)){
                         // true only when "assigncountries" command is successful to start main-loop
                         mainGameLoop();
                     }
@@ -88,7 +88,7 @@ public class GameEngine implements IConstants {
     }
 
     /**
-     * helper method to process commands for game enginer
+     * helper method to process commands for game engine
      * @param command
      * @return null
      */
@@ -96,10 +96,10 @@ public class GameEngine implements IConstants {
         boolean breakLoop = false;
         try {
             if (command.length > 0) {
-                String firstCommand = command[0].toLowerCase();
-                System.out.println("firstCommand : " + firstCommand);
+                String l_firstCommand = command[0].toLowerCase();
+                System.out.println("firstCommand : " + l_firstCommand);
 
-                switch (firstCommand) {
+                switch (l_firstCommand) {
 
                     case COMMAND_SHOW_MAP:
                         showMapforGame();
@@ -136,10 +136,10 @@ public class GameEngine implements IConstants {
     public void showMapforGame() {
         System.out.println("show game command received ");
 
-        Graph graph = currentMap.getAdjacencyMatrix();
+        Graph graph = d_currentMap.getAdjacencyMatrix();
         System.out.println(graph.toString());
 
-        for (Player player: this.playerActions.getListOfPlayers()){
+        for (Player player: this.d_playerActions.getListOfPlayers()){
             System.out.println("------------------------------------------------------------------------------------------------------------------------");
             System.out.println("PLAYER: " + player.getPlayerName());
             System.out.println("with total army count of : "+ player.getNoOfArmies());
@@ -165,7 +165,7 @@ public class GameEngine implements IConstants {
      */
 
     private void mainGameLoop() {
-        this.playerActions.assignCountriesToPlayers();
+        this.d_playerActions.assignCountriesToPlayers();
 
         GAME_STARTED = true;
         while (true) {
@@ -174,15 +174,15 @@ public class GameEngine implements IConstants {
             issueOrderPhase();
             executeOrderPhase();
 
-            if (this.playerActions.isGameOver() || GAME_STARTED == false) {
+            if (this.d_playerActions.isGameOver() || GAME_STARTED == false) {
                 System.out.println("GAME OVER");
                 GAME_STARTED = false;
                 break;
             }
         }
-        Player winner = this.playerActions.getWinner();
+        Player winner = this.d_playerActions.getWinner();
         if(winner != null){
-            System.out.println("Winner is player > id: " + playerActions.getWinner().getPlayerID() + " name: " + playerActions.getWinner().getPlayerName());
+            System.out.println("Winner is player > id: " + d_playerActions.getWinner().getPlayerID() + " name: " + d_playerActions.getWinner().getPlayerName());
         }else{
             System.out.println("Unknown winner ..");
         }
@@ -194,10 +194,10 @@ public class GameEngine implements IConstants {
      */
     private void assignReinforcementPhase(){
         //assign each player the correct number of reinforcement
-        for (Player player : this.playerActions.getListOfPlayers()) {
+        for (Player player : this.d_playerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("ASSIGN REINFORCEMENT PHASE : " + player.getPlayerName());
-            this.playerActions.assignReinforcementPhase(player);
+            this.d_playerActions.assignReinforcementPhase(player);
         }
 
     }
@@ -215,10 +215,10 @@ public class GameEngine implements IConstants {
      */
     private void issueOrderPhase(){
         //the method will wait for commands
-        for (Player player : this.playerActions.getListOfPlayers()) {
+        for (Player player : this.d_playerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("ISSUE ORDER PHASE : " + player.getPlayerName());
-            this.playerActions.issueOrdersPhase(player);
+            this.d_playerActions.issueOrdersPhase(player);
 
             Scanner scanner = new Scanner(System.in);
             while (true) {
@@ -227,11 +227,11 @@ public class GameEngine implements IConstants {
                 System.out.println("input: " + input);
 
                 if (input.length() > 0) {
-                    String[] commandArray = input.trim().split(" ");
+                    String[] l_commandArray = input.trim().split(" ");
                     try{
-                        String command = commandArray[0];
+                        String command = l_commandArray[0];
                         if ((IConstants.COMMAND_DEPLOY).equalsIgnoreCase(command)){
-                            processDeployCommand(player,commandArray);
+                            processDeployCommand(player,l_commandArray);
                             // TODO : do we want to break after first try only ..
                             break;
                         }else if((IConstants.COMMAND_SHOW_MAP).equalsIgnoreCase(command)){
@@ -255,10 +255,10 @@ public class GameEngine implements IConstants {
      * @return null
      */
     private void executeOrderPhase(){
-        for (Player player : this.playerActions.getListOfPlayers()) {
+        for (Player player : this.d_playerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("EXECUTE ORDER  PHASE : " + player.getPlayerName());
-            this.playerActions.executeOrderPhase(player);
+            this.d_playerActions.executeOrderPhase(player);
         }
 
 
@@ -274,22 +274,22 @@ public class GameEngine implements IConstants {
 
         // there could be more than one "-add" and "-remove" commands
         for (int i = 0; i < command.length; i++) {
-            String tag = command[i];
+            String l_tag = command[i];
 
-            if (tag.toLowerCase().startsWith("-add")) {
+            if (l_tag.toLowerCase().startsWith("-add")) {
                 // make sure the index is not increasing the size of array
                 if (i + 1 < command.length) {
-                    String playerName = command[++i];
-                    addPlayer(playerName);
+                    String l_playerName = command[++i];
+                    addPlayer(l_playerName);
                 } else {
                     System.out.println("INCOMPLETE COMMAND ");
                 }
 
-            } else if (tag.toLowerCase().startsWith("-remove")) {
+            } else if (l_tag.toLowerCase().startsWith("-remove")) {
                 // make sure the index is not increasing the size of array
                 if (i + 1 < command.length) {
-                    String playerName = command[++i];
-                    removePlayer(playerName);
+                    String l_playerName = command[++i];
+                    removePlayer(l_playerName);
                 } else {
                     System.out.println("INCOMPLETE COMMAND");
                 }
@@ -301,34 +301,34 @@ public class GameEngine implements IConstants {
      * takes player name and if there is no player with such name, it adds a new player with this name
      * in playerlist
      *
-     * @param playerName
+     * @param p_playerName
      * @return boolean
      */
-    public boolean addPlayer(String playerName) {
-        int count = 0;
-        for (Player player : instance.playerActions.getListOfPlayers()) {
-            count++;
-            if (player.getPlayerName().equalsIgnoreCase(playerName)) {
-                System.out.println("A player with name: " + playerName + " already exists!");
+    public boolean addPlayer(String p_playerName) {
+        int l_count = 0;
+        for (Player player : d_instance.d_playerActions.getListOfPlayers()) {
+            l_count++;
+            if (player.getPlayerName().equalsIgnoreCase(p_playerName)) {
+                System.out.println("A player with name: " + p_playerName + " already exists!");
                 return false;
             }
         }
         // at end of loop
-        Player newPlayer = new Player(playerName, count);
-        return instance.playerActions.addPlayer(newPlayer);
+        Player newPlayer = new Player(p_playerName, l_count);
+        return d_instance.d_playerActions.addPlayer(newPlayer);
     }
 
     /**
      * takes playerName and if it is found in existing playerlist, remove it .
      *
-     * @param playerName
+     * @param p_playerName
      * @return boolean
      */
-    public boolean removePlayer(String playerName) {
+    public boolean removePlayer(String p_playerName) {
 
-        for (Player player : instance.playerActions.getListOfPlayers()) {
-            if (player.getPlayerName().equalsIgnoreCase(playerName)) {
-                return instance.playerActions.removePlayer(player);
+        for (Player player : d_instance.d_playerActions.getListOfPlayers()) {
+            if (player.getPlayerName().equalsIgnoreCase(p_playerName)) {
+                return d_instance.d_playerActions.removePlayer(player);
             }
         }
         return false;
@@ -343,7 +343,7 @@ public class GameEngine implements IConstants {
     private boolean processAssignCountriesCommand(){
         System.out.println("assigncountries command received..");
         try {
-            int numberOfPlayers = this.playerActions.getListOfPlayers().size();
+            int numberOfPlayers = this.d_playerActions.getListOfPlayers().size();
             if (numberOfPlayers >=3 || numberOfPlayers <=5 ) {
                 return assignCountries();
             }else{
@@ -362,27 +362,27 @@ public class GameEngine implements IConstants {
      * @return void
      */
     public boolean assignCountries() {
-        return this.playerActions.assignCountriesToPlayers();
+        return this.d_playerActions.assignCountriesToPlayers();
     }
 
 
 
     /**
      * helper method to process deploy command
-     * @param player
-     * @param command
+     * @param p_player
+     * @param p_command
      * @return null
      */
-    private void processDeployCommand(Player player,String[] command) {
+    private void processDeployCommand(Player p_player, String[] p_command) {
         System.out.println("deploy  command received ..... ");
         //TODO : could be multiple countryid under one command ..
         try{
-            String countryID = command[1];
-            int countryIDInt = Integer.parseInt(countryID);
-            String num = command[2];
-            int numInt = Integer.parseInt(num);
+            String countryID = p_command[1];
+            int l_countryIDInt = Integer.parseInt(countryID);
+            String l_num = p_command[2];
+            int l_numInt = Integer.parseInt(l_num);
 
-            deploy(player,countryIDInt,numInt);
+            deploy(p_player,l_countryIDInt,l_numInt);
         }catch (Exception e){
             e.printStackTrace();
         }
