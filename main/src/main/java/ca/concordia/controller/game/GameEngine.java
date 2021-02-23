@@ -12,32 +12,32 @@ import java.util.Scanner;
  */
 public class GameEngine  {
 
-    private static GameEngine d_instance = null;
-    private final Map d_currentMap;
-    private Graph d_graph;
-    private final PlayerActions d_playerActions;
+    private static GameEngine d_Instance = null;
+    private final Map d_CurrentMap;
+    private Graph d_Graph;
+    private final PlayerActions d_PlayerActions;
     public static boolean GAME_STARTED = false;
 
     /**
      * This is a static method to get the instance of this singleton object
-     * @param p_map map on which the game is starting..
+     * @param p_Map map on which the game is starting..
      * @return GameEngine object type
      */
-    public static GameEngine getInstance(Map p_map) {
-        if (d_instance == null) {
-            d_instance = new GameEngine(p_map);
+    public static GameEngine getInstance(Map p_Map) {
+        if (d_Instance == null) {
+            d_Instance = new GameEngine(p_Map);
         }
-        return d_instance;
+        return d_Instance;
     }
 
     /**
      * This is a private constructor so that it cannot be
-     * instantiate outside this class ..
-     * @param p_map   map on which the game is starting
+     * instantiated outside this class ..
+     * @param p_Map   map on which the game is starting
      */
-    private GameEngine(Map p_map) {
-        this.d_currentMap = p_map;
-        this.d_playerActions = new PlayerActions(this.d_currentMap);
+    private GameEngine(Map p_Map) {
+        this.d_CurrentMap = p_Map;
+        this.d_PlayerActions = new PlayerActions(this.d_CurrentMap);
     }
 
     /**
@@ -46,7 +46,7 @@ public class GameEngine  {
      *
      */
     public void loadMapforGame() {
-        this.d_graph = this.d_currentMap.getAdjacencyMatrix();
+        this.d_Graph = this.d_CurrentMap.getAdjacencyMatrix();
         GAME_STARTED = true;
         System.out.println("Game engine has loaded the map");
 
@@ -56,30 +56,30 @@ public class GameEngine  {
     }
 
     /**
-     * helper method to take commands for game engine
+     * Helper method to take commands for game engine
      *
      */
     private void waitingForInput(){
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            int playerListSize = this.d_playerActions.getListOfPlayers().size();
-            System.out.println("number of players available is : " + playerListSize);
+            int l_PlayerListSize = this.d_PlayerActions.getListOfPlayers().size();
+            System.out.println("number of players available is : " + l_PlayerListSize);
             System.out.println("use command \"gameplayer -add playername -remove playername \" " +
                     "to add between 3 to 5 players");
             System.out.println("use command \"assigncountries\" to start turn based main-loop");
             System.out.println("use command \"exit\" to stop game engine");
 
-            String l_input = scanner.nextLine();
-            System.out.println("input: " + l_input);
-            if ("exit".equalsIgnoreCase(l_input)) {
+            String l_Input = scanner.nextLine();
+            System.out.println("input: " + l_Input);
+            if ("exit".equalsIgnoreCase(l_Input)) {
                 break;
             }else if(!GAME_STARTED ){
                 System.out.println("game is finished, stopping ..");
                 break;
             }else {
-                if (l_input.length() > 0) {
-                    String[] l_commandArray = l_input.trim().split(" ");
-                    if(processCommands(l_commandArray)){
+                if (l_Input.length() > 0) {
+                    String[] l_CommandArray = l_Input.trim().split(" ");
+                    if(processCommands(l_CommandArray)){
                         // true only when "assigncountries" command is successful to start main-loop
                         mainGameLoop();
                     }
@@ -90,14 +90,14 @@ public class GameEngine  {
 
     /**
      * helper method to process commands for game engine
-     * @param command commands applicable into game play
+     * @param p_Command commands applicable into game play
      *
      */
-    private boolean processCommands(String[] command){
+    private boolean processCommands(String[] p_Command){
         boolean breakLoop = false;
         try {
-            if (command.length > 0) {
-                String l_firstCommand = command[0].toLowerCase();
+            if (p_Command.length > 0) {
+                String l_firstCommand = p_Command[0].toLowerCase();
                 System.out.println("firstCommand : " + l_firstCommand);
 
                 switch (l_firstCommand) {
@@ -107,7 +107,7 @@ public class GameEngine  {
                         break;
 
                     case GameController.COMMAND_GAME_PLAYER:
-                        processGamePlayerCommand(command);
+                        processGamePlayerCommand(p_Command);
                         break;
 
                     case GameController.COMMAND_ASSIGN_COUNTRIES:
@@ -136,10 +136,10 @@ public class GameEngine  {
     public void showMapforGame() {
         System.out.println("show game command received ");
 
-        Graph graph = d_currentMap.getAdjacencyMatrix();
+        Graph graph = d_CurrentMap.getAdjacencyMatrix();
         System.out.println(graph.toString());
 
-        for (Player player: this.d_playerActions.getListOfPlayers()){
+        for (Player player: this.d_PlayerActions.getListOfPlayers()){
             System.out.println("------------------------------------------------------------------------------------------------------------------------");
             System.out.println("PLAYER: " + player.getPlayerName());
             System.out.println("with total army count of : "+ player.getNoOfArmies());
@@ -174,15 +174,15 @@ public class GameEngine  {
             issueOrderPhase();
             executeOrderPhase();
 
-            if (this.d_playerActions.isGameOver() || GAME_STARTED == false) {
+            if (this.d_PlayerActions.isGameOver() || GAME_STARTED == false) {
                 System.out.println("GAME OVER");
                 GAME_STARTED = false;
                 break;
             }
         }
-        Player winner = this.d_playerActions.getWinner();
+        Player winner = this.d_PlayerActions.getWinner();
         if(winner != null){
-            System.out.println("Winner is player > id: " + d_playerActions.getWinner().getPlayerID() + " name: " + d_playerActions.getWinner().getPlayerName());
+            System.out.println("Winner is player > id: " + d_PlayerActions.getWinner().getPlayerID() + " name: " + d_PlayerActions.getWinner().getPlayerName());
         }else{
             System.out.println("Unknown winner ..");
         }
@@ -194,10 +194,10 @@ public class GameEngine  {
      */
     private void assignReinforcementPhase(){
         //assign each player the correct number of reinforcement
-        for (Player player : this.d_playerActions.getListOfPlayers()) {
+        for (Player player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("ASSIGN REINFORCEMENT PHASE : " + player.getPlayerName());
-            this.d_playerActions.assignReinforcementPhase(player);
+            this.d_PlayerActions.assignReinforcementPhase(player);
         }
 
     }
@@ -213,10 +213,10 @@ public class GameEngine  {
      */
     private void issueOrderPhase(){
         //the method will wait for commands
-        for (Player player : this.d_playerActions.getListOfPlayers()) {
+        for (Player player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("ISSUE ORDER PHASE : " + player.getPlayerName());
-            this.d_playerActions.issueOrdersPhase(player);
+            this.d_PlayerActions.issueOrdersPhase(player);
 
             Scanner scanner = new Scanner(System.in);
             while (true) {
@@ -225,11 +225,11 @@ public class GameEngine  {
                 System.out.println("input: " + input);
 
                 if (input.length() > 0) {
-                    String[] l_commandArray = input.trim().split(" ");
+                    String[] l_CommandArray = input.trim().split(" ");
                     try{
-                        String command = l_commandArray[0];
+                        String command = l_CommandArray[0];
                         if ((GameController.COMMAND_DEPLOY).equalsIgnoreCase(command)){
-                            processDeployCommand(player,l_commandArray);
+                            processDeployCommand(player,l_CommandArray);
                             // TODO : do we want to break after first try only ..
                             break;
                         }else if((GameController.COMMAND_SHOW_MAP).equalsIgnoreCase(command)){
@@ -252,40 +252,38 @@ public class GameEngine  {
      * the country countryID.
      */
     private void executeOrderPhase(){
-        for (Player player : this.d_playerActions.getListOfPlayers()) {
+        for (Player player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("EXECUTE ORDER  PHASE : " + player.getPlayerName());
-            this.d_playerActions.executeOrderPhase(player);
+            this.d_PlayerActions.executeOrderPhase(player);
         }
-
-
     }
 
     /**
      * helper method to take "gameplayer command to add or remove palyers"
-     * @param command command array to process
+     * @param p_Command command array to process
      */
-    private void processGamePlayerCommand(String[] command) {
+    private void processGamePlayerCommand(String[] p_Command) {
         System.out.println("gameplayer command received ..... ");
 
         // there could be more than one "-add" and "-remove" commands
-        for (int i = 0; i < command.length; i++) {
-            String l_tag = command[i];
+        for (int i = 0; i < p_Command.length; i++) {
+            String l_Tag = p_Command[i];
 
-            if (l_tag.toLowerCase().startsWith("-add")) {
+            if (l_Tag.toLowerCase().startsWith("-add")) {
                 // make sure the index is not increasing the size of array
-                if (i + 1 < command.length) {
-                    String l_playerName = command[++i];
-                    addPlayer(l_playerName);
+                if (i + 1 < p_Command.length) {
+                    String l_PlayerName = p_Command[++i];
+                    addPlayer(l_PlayerName);
                 } else {
                     System.out.println("INCOMPLETE COMMAND ");
                 }
 
-            } else if (l_tag.toLowerCase().startsWith("-remove")) {
+            } else if (l_Tag.toLowerCase().startsWith("-remove")) {
                 // make sure the index is not increasing the size of array
-                if (i + 1 < command.length) {
-                    String l_playerName = command[++i];
-                    removePlayer(l_playerName);
+                if (i + 1 < p_Command.length) {
+                    String l_PlayerName = p_Command[++i];
+                    removePlayer(l_PlayerName);
                 } else {
                     System.out.println("INCOMPLETE COMMAND");
                 }
@@ -297,37 +295,37 @@ public class GameEngine  {
      * takes player name and if there is no player with such name, it adds a new player with this name
      * in playerlist
      *
-     * @param p_playerName playername to add
+     * @param p_PlayerName playername to add
      * @return boolean
      */
-    public boolean addPlayer(String p_playerName) {
-        int l_count = 0;
-        for (Player player : d_instance.d_playerActions.getListOfPlayers()) {
-            l_count++;
-            if (player.getPlayerName().equalsIgnoreCase(p_playerName)) {
-                System.out.println("A player with name: " + p_playerName + " already exists!");
+    public boolean addPlayer(String p_PlayerName) {
+        int l_Count = 0;
+        for (Player player : d_Instance.d_PlayerActions.getListOfPlayers()) {
+            l_Count++;
+            if (player.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
+                System.out.println("A player with name: " + p_PlayerName + " already exists!");
                 return false;
             }
         }
         // at end of loop
-        Player newPlayer = new Player(p_playerName, l_count);
-        return d_instance.d_playerActions.addPlayer(newPlayer);
+        Player l_NewPlayer = new Player(p_PlayerName, l_Count);
+        return d_Instance.d_PlayerActions.addPlayer(l_NewPlayer);
     }
 
     /**
      * takes playerName and if it is found in existing playerlist, remove it .
      *
-     * @param p_playerName playername to remove
+     * @param p_PlayerName playername to remove
      * @return boolean
      */
-    public boolean removePlayer(String p_playerName) {
+    public boolean removePlayer(String p_PlayerName) {
 
-        for (Player player : d_instance.d_playerActions.getListOfPlayers()) {
-            if (player.getPlayerName().equalsIgnoreCase(p_playerName)) {
-                return d_instance.d_playerActions.removePlayer(player);
+        for (Player l_Player : d_Instance.d_PlayerActions.getListOfPlayers()) {
+            if (l_Player.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
+                return d_Instance.d_PlayerActions.removePlayer(l_Player);
             }
         }
-        System.out.println("player not found : " + p_playerName);
+        System.out.println("player not found : " + p_PlayerName);
         return false;
     }
 
@@ -337,8 +335,8 @@ public class GameEngine  {
     private boolean processAssignCountriesCommand(){
         System.out.println("assigncountries command received..");
         try {
-            int numberOfPlayers = this.d_playerActions.getListOfPlayers().size();
-            if (numberOfPlayers >=3 && numberOfPlayers <=5 ) {
+            int l_NumberOfPlayers = this.d_PlayerActions.getListOfPlayers().size();
+            if (l_NumberOfPlayers >=3 && l_NumberOfPlayers <=5 ) {
                 System.out.println("number of countries between [3 to 5] so assign countries to player now ..");
                 return assignCountries();
             }else{
@@ -356,40 +354,40 @@ public class GameEngine  {
      * @return boolean
      */
     public boolean assignCountries() {
-        return this.d_playerActions.assignCountriesToPlayers();
+        return this.d_PlayerActions.assignCountriesToPlayers();
     }
 
 
 
     /**
-     * helper method to process deploy command
-     * @param p_player playername
-     * @param p_command actions for the player e.g. deploy
+     * Helper method to process deploy command
+     * @param p_Player playername
+     * @param p_Command actions for the player e.g. deploy
      */
-    private void processDeployCommand(Player p_player, String[] p_command) {
+    private void processDeployCommand(Player p_Player, String[] p_Command) {
         System.out.println("deploy  command received ..... ");
         //TODO : could be multiple countryid under one command ..
         try{
-            String l_countryName = p_command[1];
-            String l_num = p_command[2];
-            int l_numInt = Integer.parseInt(l_num);
+            String l_CountryName = p_Command[1];
+            String l_Num = p_Command[2];
+            int l_NumInt = Integer.parseInt(l_Num);
 
-            deploy(p_player,l_countryName,l_numInt);
+            deploy(p_Player,l_CountryName,l_NumInt);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
     /**
-     * Issuing order command (untill all reinforcements have been placed
+     * Issuing order command (until all reinforcements have been placed
      *
-     * @param player player object
-     * @param countryName country name
-     * @param num number of army to deploy
+     * @param p_Player player object
+     * @param p_CountryName country name
+     * @param p_Num number of army to deploy
      * @return  boolean
      */
-    public boolean deploy(Player player, String countryName, int num) {
-        player.issueOrder();
+    public boolean deploy(Player p_Player, String p_CountryName, int p_Num) {
+        p_Player.issueOrder();
         return false;
     }
 }
