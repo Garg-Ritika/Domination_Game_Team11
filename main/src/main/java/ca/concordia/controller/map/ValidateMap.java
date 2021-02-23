@@ -1,5 +1,4 @@
 package ca.concordia.controller.map;
-import ca.concordia.model.Border;
 import ca.concordia.model.Graph;
 import ca.concordia.model.Map;
 
@@ -13,15 +12,15 @@ import java.util.Stack;
  */
 public class ValidateMap {
 
-    private final Map map;
+    private final Map d_Map;
 
     /**
      * This method load the map in ValidateMap class as it is constructor.
      *Constructor is automatically called whenever  class is called.
-     * @param map map is passed as parameter which is to be validated.
+     * @param p_Map map is passed as parameter which is to be validated.
      */
-    public ValidateMap(Map map) {
-        this.map = map;
+    public ValidateMap(Map p_Map) {
+        this.d_Map = p_Map;
     }
 
     /**
@@ -33,12 +32,12 @@ public class ValidateMap {
      */
     public boolean validate() {
 
-        if (map.getListOfContinents().size() <= 0 ){
+        if (d_Map.getListOfContinents().size() <= 0 ){
             System.out.println(" No continents available in the map ");
             return false;
         }
 
-        if ( map.getListOfCountries().size() <= 0) {
+        if ( d_Map.getListOfCountries().size() <= 0) {
             System.out.println(" No countries available in the map ");
             return false;
         }
@@ -47,7 +46,7 @@ public class ValidateMap {
             return false;
         }
 
-        if (!DFS(this.map.getAdjacencyMatrix())) {
+        if (!DFS(this.d_Map.getAdjacencyMatrix())) {
             return false;
         }
 
@@ -61,21 +60,21 @@ public class ValidateMap {
      */
     private boolean noDuplicates() {
 
-        for (int i = 0; i < map.getListOfContinents().size() - 1; i++) {
-            for (int j = i + 1; j < map.getListOfContinents().size(); j++) {
+        for (int l_I = 0; l_I < d_Map.getListOfContinents().size() - 1; l_I++) {
+            for (int l_J = l_I + 1; l_J < d_Map.getListOfContinents().size(); l_J++) {
 
-                if (map.getListOfContinents().get(i).getID() == map.getListOfContinents().get(j).getID()) {
-                    System.out.println("duplicate continent found: " + map.getListOfContinents().get(i).getID());
+                if (d_Map.getListOfContinents().get(l_I).getID() == d_Map.getListOfContinents().get(l_J).getID()) {
+                    System.out.println("duplicate continent found: " + d_Map.getListOfContinents().get(l_I).getID());
                     return false;
                 }
             }
         }
 
-        for (int i = 0; i < map.getListOfCountries().size() - 1; i++) {
-            for (int j = i + 1; j < map.getListOfCountries().size(); j++) {
+        for (int l_I = 0; l_I < d_Map.getListOfCountries().size() - 1; l_I++) {
+            for (int l_J = l_I + 1; l_J < d_Map.getListOfCountries().size(); l_J++) {
 
-                if (map.getListOfCountries().get(i).getCountryID() == map.getListOfCountries().get(j).getCountryID()) {
-                    System.out.println("duplicate country found : " + map.getListOfCountries().get(i).getCountryID());
+                if (d_Map.getListOfCountries().get(l_I).getCountryID() == d_Map.getListOfCountries().get(l_J).getCountryID()) {
+                    System.out.println("duplicate country found : " + d_Map.getListOfCountries().get(l_I).getCountryID());
                     return false;
                 }
             }
@@ -86,60 +85,60 @@ public class ValidateMap {
 
     /**
      * Use depth-first-search in directed connected graph  to find whether it is connected or not.
-     * @param graph given graph is passed as an parameter
+     * @param p_Graph given graph is passed as an parameter
      * @return connected - prints the output graph is connected or it is not connected
      */
-    private boolean DFS(Graph graph) {
-        if (graph.size() < 1) {
+    private boolean DFS(Graph p_Graph) {
+        if (p_Graph.size() < 1) {
             return false;
         }
 
-        Stack<Integer> stack = new Stack<Integer>();
-        int source = 1; // assume the source starts from country ID 1
-        int nodeCount = graph.getAdjMatrix()[source].length - 1; // another way of finding number of countries, starting from 0
-        boolean[][] matrix = graph.getAdjMatrix();
-        boolean visited[] = new boolean[nodeCount + 1];
-        int element = source;
-        int i = source;
+        Stack<Integer> l_Stack = new Stack<Integer>();
+        int l_Source = 1; // assume the source starts from country ID 1
+        int l_NodeCount = p_Graph.getAdjMatrix()[l_Source].length - 1; // another way of finding number of countries, starting from 0
+        boolean[][] l_Matrix = p_Graph.getAdjMatrix();
+        boolean l_Visited[] = new boolean[l_NodeCount + 1];
+        int l_Element = l_Source;
+        int l_I = l_Source;
 
         // use stack to create a visited list
-        visited[source] = true;
-        stack.push(source);
-        while (!stack.isEmpty()) {
-            element = stack.peek();
-            i = element;
+        l_Visited[l_Source] = true;
+        l_Stack.push(l_Source);
+        while (!l_Stack.isEmpty()) {
+            l_Element = l_Stack.peek();
+            l_I = l_Element;
 
-            while (i <= nodeCount) {
+            while (l_I <= l_NodeCount) {
 
-                if (matrix[element][i] == true && visited[i] == false) {
-                    stack.push(i);
-                    visited[i] = true;
-                    element = i;
-                    i = 1;
+                if (l_Matrix[l_Element][l_I] == true && l_Visited[l_I] == false) {
+                    l_Stack.push(l_I);
+                    l_Visited[l_I] = true;
+                    l_Element = l_I;
+                    l_I = 1;
                     continue;
                 }
-                i++;
+                l_I++;
             }
-            stack.pop();
+            l_Stack.pop();
         }
 
         // find connectivity from visited list
-        boolean connected = false;
-        for (int node = 1; node <= nodeCount; node++) {
-            if (visited[node] == true) {
-                connected = true;
+        boolean l_Connected = false;
+        for (int l_Node = 1; l_Node <= l_NodeCount; l_Node++) {
+            if (l_Visited[l_Node] == true) {
+                l_Connected = true;
             } else {
-                connected = false;
+                l_Connected = false;
                 break;
             }
         }
 
-        if (connected) {
+        if (l_Connected) {
             System.out.println("it is a connected graph");
         } else {
             System.out.println("It is NOT a connected graph");
         }
-        return connected;
+        return l_Connected;
     }
 
 }
