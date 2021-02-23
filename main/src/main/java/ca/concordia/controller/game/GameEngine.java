@@ -325,10 +325,9 @@ public class GameEngine  {
                 return d_instance.d_playerActions.removePlayer(player);
             }
         }
+        System.out.println("player not found : " + p_playerName);
         return false;
     }
-
-
 
     /**
      * helper method to process assigncountries command

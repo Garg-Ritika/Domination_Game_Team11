@@ -16,16 +16,6 @@ public class Continent {
     private String d_Color;
     private int d_ArmyCount;
 
-    /**
-     *Constructor initializes Id and name member variables of Continent class
-     *
-     * @param p_ID Continent ID
-     * @param p_Name Continent name
-     */
-    public Continent(int p_ID, String p_Name) {
-        this.d_ID = p_ID;
-        this.d_Name = p_Name;
-    }
 
     /**
      * Constructor initializes all the member variables of Continent class

@@ -114,12 +114,12 @@ public class GameController extends Observable {
             if (tag.toLowerCase().startsWith("-add")) {
                 // make sure the index is not increasing the size of array
                 if (i + 2 < command.length) {
-                    String continentID = command[++i];
-                    int continentIdInteger = Integer.parseInt(continentID);
-                    String continentValue = command[++i];
+                    String l_ContinentName = command[++i];
+                    String l_ContinentArmyCount = command[++i];
+                    int l_ContinentArmyCountInteger = Integer.parseInt(l_ContinentArmyCount);
 
-                    if (MapEditor.getInstance().addContinent(continentIdInteger, continentValue)) {
-                        System.out.println("Successfully added continent id: " + continentID + " name: " + continentValue + " into the map");
+                    if (MapEditor.getInstance().addContinent(l_ContinentName, l_ContinentArmyCountInteger)) {
+                        System.out.println("Successfully added continent name: " + l_ContinentName + " army: " + l_ContinentArmyCount + " into the map");
                     }
 
                 } else {
@@ -129,11 +129,10 @@ public class GameController extends Observable {
             } else if (tag.toLowerCase().startsWith("-remove")) {
                 // make sure the index is not increasing the size of array
                 if (i + 1 < command.length) {
-                    String continentId = command[++i];
-                    int continentIdInt = Integer.parseInt(continentId);
+                    String l_ContinentName = command[++i];
 
-                    if (MapEditor.getInstance().removeContinent(continentIdInt)) {
-                        System.out.println("Successfully removed continent id: " + continentId + " from the map");
+                    if (MapEditor.getInstance().removeContinent(l_ContinentName)) {
+                        System.out.println("Successfully removed continent name: " + l_ContinentName + " from the map");
                     }
                 } else {
                     System.out.println("INCOMPLETE COMMAND");
@@ -152,13 +151,11 @@ public class GameController extends Observable {
             if (tag.toLowerCase().startsWith("-add")) {
                 // make sure the index is not increasing the size of array
                 if (i + 2 < command.length) {
-                    String countryID = command[++i];
-                    int countryIdInteger = Integer.parseInt(countryID);
-                    String continentID = command[++i];
-                    int continentIDInteger = Integer.parseInt(continentID);
+                    String l_CountryName = command[++i];
+                    String l_ContinentName = command[++i];
 
-                    if (MapEditor.getInstance().addCountry(countryIdInteger, continentIDInteger)) {
-                        System.out.println("Successfully added country id: " + countryIdInteger + " to continent id:  " + continentIDInteger + " into the map");
+                    if (MapEditor.getInstance().addCountry(l_CountryName, l_ContinentName)) {
+                        System.out.println("Successfully added country name: " + l_CountryName + " to continent name:  " + l_ContinentName + " into the map");
                     }
 
                 } else {
@@ -168,11 +165,10 @@ public class GameController extends Observable {
             } else if (tag.toLowerCase().startsWith("-remove")) {
                 // make sure the index is not increasing the size of array
                 if (i + 1 < command.length) {
-                    String countryId = command[++i];
-                    int countryIdInteger = Integer.parseInt(countryId);
+                    String l_CountryName = command[++i];
 
-                    if (MapEditor.getInstance().removeCountry(countryIdInteger)) {
-                        System.out.println("Successfully removed country id: " + countryIdInteger + " from the map");
+                    if (MapEditor.getInstance().removeCountryUsingName(l_CountryName)) {
+                        System.out.println("Successfully removed country name: " + l_CountryName + " from the map");
                     }
                 } else {
                     System.out.println("INCOMPLETE COMMAND");
@@ -191,13 +187,11 @@ public class GameController extends Observable {
             if (tag.toLowerCase().startsWith("-add")) {
                 // make sure the index is not increasing the size of array
                 if (i + 2 < command.length) {
-                    String countryID = command[++i];
-                    int countryIdInteger = Integer.parseInt(countryID);
-                    String neighbourCountryID = command[++i];
-                    int neighbourCounterIDInteger = Integer.parseInt(neighbourCountryID);
+                    String l_CountryName = command[++i];
+                    String l_NeighbourCountryName = command[++i];
 
-                    if (MapEditor.getInstance().addNeighbor(countryIdInteger, neighbourCounterIDInteger)) {
-                        System.out.println("Successfully added neighbour id " + neighbourCounterIDInteger + " to " + countryIdInteger + " into the map");
+                    if (MapEditor.getInstance().addNeighbor(l_CountryName,l_NeighbourCountryName)) {
+                        System.out.println("Successfully added neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
 
                 } else {
@@ -207,13 +201,11 @@ public class GameController extends Observable {
             } else if (tag.toLowerCase().startsWith("-remove")) {
                 // make sure the index is not increasing the size of array
                 if (i + 2 < command.length) {
-                    String countryID = command[++i];
-                    int countryIdInteger = Integer.parseInt(countryID);
-                    String neighbourCountryID = command[++i];
-                    int neighbourCounterIDInteger = Integer.parseInt(neighbourCountryID);
+                    String l_CountryName = command[++i];
+                    String l_NeighbourCountryName = command[++i];
 
-                    if (MapEditor.getInstance().removeNeighbor(countryIdInteger, neighbourCounterIDInteger)) {
-                        System.out.println("Successfully removed neighbour id " + neighbourCounterIDInteger + " to " + countryIdInteger + " into the map");
+                    if (MapEditor.getInstance().removeNeighbor(l_CountryName,l_NeighbourCountryName)) {
+                        System.out.println("Successfully removed neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
                 } else {
                     System.out.println("INCOMPLETE COMMAND");
@@ -229,23 +221,33 @@ public class GameController extends Observable {
 
     private void processSaveMapCommand(String[] command) {
         try {
-            System.out.println("savemap command received ..");
-            String filename = command[1];
-            File mapPath = new File(filename);
-            MapEditor.getInstance().saveMap(mapPath);
-
+            if(command.length == 2) {
+                System.out.println("savemap command received ..");
+                String filename = command[1];
+                File mapPath = new File(filename);
+                MapEditor.getInstance().saveMap(mapPath);
+            }else{
+                System.out.println("INCOMPLETE COMMAND");
+            }
         } catch (IOException io) {
             io.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException a){
+            a.printStackTrace();
         }
     }
 
     private void processEditMapCommand(String[] command) {
         try {
-            String filename = command[1];
-            if (!filename.isEmpty()) {
-                System.out.println("editmap command received ..");
-                File mapFile = new File(filename);
-                MapEditor.getInstance().editMap(mapFile);
+            if(command.length == 2) {
+                String filename = command[1];
+                if (!filename.isEmpty()) {
+                    System.out.println("editmap command received ..");
+                    File mapFile = new File(filename);
+                    MapEditor.getInstance().editMap(mapFile);
+                }
+            }else{
+                System.out.println("INCOMPLETE COMMAND, create an in-memory map file from scratch");
+                MapEditor.getInstance().editMap(null);
             }
         } catch (IOException io) {
             io.printStackTrace();

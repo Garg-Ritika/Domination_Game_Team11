@@ -19,18 +19,7 @@ public class Country {
     private int d_Y;
     private int d_ArmyCount;
 
-    /**
-     * Constructor initializes countryId and continentId
-     *
-     * @param p_CountryID countryId
-     * @param p_ContinentID continentId
-     */
-    public Country(int p_CountryID, int p_ContinentID) {
-        this.d_CountryID = p_CountryID;
-        this.d_ContinentID = p_ContinentID;
-    }
-
-    /**
+       /**
      * Constructor initializes all the member variables of Country class
      *
      * @param p_CountryID countryId

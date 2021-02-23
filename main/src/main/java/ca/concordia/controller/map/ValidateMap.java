@@ -33,8 +33,13 @@ public class ValidateMap {
      */
     public boolean validate() {
 
-        if (map.getListOfContinents().size() < 0 || map.getListOfCountries().size() < 0) {
-            System.out.println(" No countries or continents available ");
+        if (map.getListOfContinents().size() <= 0 ){
+            System.out.println(" No continents available in the map ");
+            return false;
+        }
+
+        if ( map.getListOfCountries().size() <= 0) {
+            System.out.println(" No countries available in the map ");
             return false;
         }
 

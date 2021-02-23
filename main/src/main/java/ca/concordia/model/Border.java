@@ -90,4 +90,19 @@ public class Border {
         }
         return false;
     }
+
+    /**
+     * This method find the NeighbourCountryId value from the Neighbours list of the country if exists
+     *
+     * @param p_NeighbourCountryId Neighbours Country ID associated with a country to be checked
+     * @return true if the the neighbour id is found as an existing neighbour
+     */
+    public boolean isNeighbour(int p_NeighbourCountryId){
+        for (int l_Val : getNeighbours()) {
+            if (l_Val == p_NeighbourCountryId) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
