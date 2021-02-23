@@ -1,14 +1,10 @@
 package ca.concordia.model;
 
-/**
- * Details of maps can be found at : http://domination.sourceforge.net/makemaps.shtml
- */
 
 /**
  * This class contains details of the country
- *
- * @author to be updated
- *
+ * <p>
+ * Details of maps can be found at : http://domination.sourceforge.net/makemaps.shtml
  */
 public class Country {
 
@@ -19,14 +15,14 @@ public class Country {
     private int d_Y;
     private int d_ArmyCount;
 
-       /**
+    /**
      * Constructor initializes all the member variables of Country class
      *
-     * @param p_CountryID countryId
+     * @param p_CountryID   countryId
      * @param p_ContinentID continentId
-     * @param p_Name country name
-     * @param p_X x Coordinate Integer of Country's location on map
-     * @param p_Y y Coordinate Integer of Country's location on map
+     * @param p_Name        country name
+     * @param p_X           x Coordinate Integer of Country's location on map
+     * @param p_Y           y Coordinate Integer of Country's location on map
      */
     public Country(int p_CountryID, int p_ContinentID, String p_Name, int p_X, int p_Y) {
         this.d_CountryID = p_CountryID;

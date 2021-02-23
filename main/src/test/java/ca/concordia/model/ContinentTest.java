@@ -3,10 +3,9 @@ package ca.concordia.model;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+
 /**
  * This class contains test details of Continent class
- *
- * @author Satinder Pal Singh
  */
 public class ContinentTest {
 
@@ -18,6 +17,7 @@ public class ContinentTest {
         Continent l_C = new Continent(2, "Ontario_and_Quebec", 4, "cyan");
         assertEquals(2, l_C.getID());
     }
+
     /**
      * This method tests whether expected Continent name with the actual Continent name
      */
@@ -26,6 +26,7 @@ public class ContinentTest {
         Continent l_C = new Continent(2, "Ontario_and_Quebec", 4, "cyan");
         assertEquals("Ontario_and_Quebec", l_C.getName());
     }
+
     /**
      * This method tests whether expected Army count  matches with the actual Army Count
      */
@@ -34,6 +35,7 @@ public class ContinentTest {
         Continent l_C = new Continent(2, "Ontario_and_Quebec", 4, "cyan");
         assertEquals(4, l_C.getArmyCount());
     }
+
     /**
      * This method tests whether expected Continent color matches with the actual Continent color.
      */

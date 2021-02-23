@@ -12,9 +12,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ *  GameController is the controller class in MVC pattern.
+ *  It is supposed to be the main class for all the controller functions
+ *
+ *  Currently, it is taking command input for the game
+ */
 public class GameController extends Observable {
 
-    // gameplay commands
     public static final String COMMAND_LOAD_MAP = "loadmap";
     public static final String COMMAND_GAME_PLAYER = "gameplayer";
     public static final String COMMAND_ASSIGN_COUNTRIES = "assigncountries";
@@ -34,12 +39,20 @@ public class GameController extends Observable {
     private GameModel d_GameModel;
     private GameView d_GameView;
 
-    public GameController(GameView p_GameView, GameModel p_GameModel){
+    /**
+     * Game Controller constructor
+     * @param p_GameView Game View
+     * @param p_GameModel Game model
+     */
+    public GameController(GameView p_GameView, GameModel p_GameModel) {
         d_GameView = p_GameView;
         d_GameModel = p_GameModel;
     }
 
-    public void takeCommandInput(){
+    /**
+     * Helper method to take all the command input for the mapeditor ..
+     */
+    public void takeCommandInput() {
         Scanner l_Scanner = new Scanner(System.in);
         while (true) {
             System.out.println("use command \"exit\" to exit the program");
@@ -56,7 +69,11 @@ public class GameController extends Observable {
         }
     }
 
-    private  void processCommands(String[] p_Command) {
+    /**
+     * process all the mapeditor commands as per commands and call the right method accordingly
+     * @param p_Command command array
+     */
+    private void processCommands(String[] p_Command) {
         Main l_Main = new Main();
         try {
             if (p_Command.length > 0) {
@@ -105,6 +122,11 @@ public class GameController extends Observable {
         }
     }
 
+    /**
+     *  Helper method process edit continent command
+     *  format: editcontinet -add asia 1 - add africa 2
+     * @param p_Command command array
+     */
     private void processEditContinentCommand(String[] p_Command) {
         System.out.println("editcontinent command received ..... ");
 
@@ -142,6 +164,11 @@ public class GameController extends Observable {
         }
     }
 
+    /**
+     * Helper method to process all the country command
+     * format : editcountry india asia
+     * @param p_Command command array
+     */
     private void processEditCountryCommand(String[] p_Command) {
         System.out.println("editcountry command received ..... ");
 
@@ -178,6 +205,11 @@ public class GameController extends Observable {
         }
     }
 
+    /**
+     * Helper method to process all the neighbors
+     * format : editneighbour india china
+     * @param p_Command command array
+     */
     private void processEditNeighbourCommand(String[] p_Command) {
         System.out.println("editneighbor command received ..... ");
 
@@ -191,7 +223,7 @@ public class GameController extends Observable {
                     String l_CountryName = p_Command[++l_I];
                     String l_NeighbourCountryName = p_Command[++l_I];
 
-                    if (MapEditor.getInstance().addNeighbor(l_CountryName,l_NeighbourCountryName)) {
+                    if (MapEditor.getInstance().addNeighbor(l_CountryName, l_NeighbourCountryName)) {
                         System.out.println("Successfully added neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
 
@@ -205,7 +237,7 @@ public class GameController extends Observable {
                     String l_CountryName = p_Command[++l_I];
                     String l_NeighbourCountryName = p_Command[++l_I];
 
-                    if (MapEditor.getInstance().removeNeighbor(l_CountryName,l_NeighbourCountryName)) {
+                    if (MapEditor.getInstance().removeNeighbor(l_CountryName, l_NeighbourCountryName)) {
                         System.out.println("Successfully removed neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
                 } else {
@@ -215,38 +247,49 @@ public class GameController extends Observable {
         }
     }
 
+    /**
+     *  Helper method to process "showmap" command in mapeditor pary
+     */
     private void processShowMapCommand() {
         System.out.println("showmap command received ...");
         MapEditor.getInstance().showMap();
     }
 
+    /**
+     * Helper method to process "savemap" command
+     * @param p_Command command array
+     */
     private void processSaveMapCommand(String[] p_Command) {
         try {
-            if(p_Command.length == 2) {
+            if (p_Command.length == 2) {
                 System.out.println("savemap command received ..");
                 String l_Filename = p_Command[1];
                 File l_MapPath = new File(l_Filename);
                 MapEditor.getInstance().saveMap(l_MapPath);
-            }else{
+            } else {
                 System.out.println("INCOMPLETE COMMAND");
             }
         } catch (IOException p_Io) {
             p_Io.printStackTrace();
-        } catch (ArrayIndexOutOfBoundsException p_A){
+        } catch (ArrayIndexOutOfBoundsException p_A) {
             p_A.printStackTrace();
         }
     }
 
+    /**
+     * Helper method to process editmap command
+     * @param p_Command command array
+     */
     private void processEditMapCommand(String[] p_Command) {
         try {
-            if(p_Command.length == 2) {
+            if (p_Command.length == 2) {
                 String l_Filename = p_Command[1];
                 if (!l_Filename.isEmpty()) {
                     System.out.println("editmap command received ..");
                     File l_MapFile = new File(l_Filename);
                     MapEditor.getInstance().editMap(l_MapFile);
                 }
-            }else{
+            } else {
                 System.out.println("INCOMPLETE COMMAND, create an in-memory map file from scratch");
                 MapEditor.getInstance().editMap(null);
             }
@@ -255,27 +298,34 @@ public class GameController extends Observable {
         }
     }
 
+    /**
+     * Helper method to process validate map command
+     */
     private void processValidateMapCommand() {
         System.out.println("validatemap command received ...");
         MapEditor.getInstance().validateMap();
     }
 
-    private void processLoadGameCommand(String[] p_Command){
+    /**
+     * Helper method to process loadmap command to start the game play on a map
+     * @param p_Command command array
+     */
+    private void processLoadGameCommand(String[] p_Command) {
         System.out.println("load map to start game ..");
         try {
             String l_Filename = p_Command[1];
-            if(!l_Filename.isEmpty()){
+            if (!l_Filename.isEmpty()) {
                 System.out.println("loadmap command received ..");
                 File l_MapFile = new File(l_Filename);
-                if(l_MapFile.exists()) {
+                if (l_MapFile.exists()) {
                     Map l_Map = MapEditor.getInstance().readMapFile(l_MapFile);
                     GameEngine l_GameEngine = GameEngine.getInstance(l_Map);
                     l_GameEngine.loadMapforGame();
-                }else{
+                } else {
                     System.out.println("The map file" + l_MapFile.getAbsolutePath() + "doesn't exists");
                 }
             }
-        }catch (Exception p_E){
+        } catch (Exception p_E) {
             p_E.printStackTrace();
         }
     }

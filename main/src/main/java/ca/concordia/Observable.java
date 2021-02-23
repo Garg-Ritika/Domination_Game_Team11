@@ -11,15 +11,19 @@ import java.util.List;
 
 public class Observable {
     private List<Observer> d_Observers = new ArrayList<Observer>();
+
     /**
      * attach a view to the model.
+     *
      * @param p_O: view to be added to the list of IObservers to be notified.
      */
     public void attach(Observer p_O) {
         this.d_Observers.add(p_O);
     }
+
     /**
      * detach a view from the model.
+     *
      * @param p_O: view to be removed from the list of IObservers.
      */
     public void detach(Observer p_O) {
@@ -27,8 +31,10 @@ public class Observable {
             d_Observers.remove(p_O);
         }
     }
+
     /**
      * Notify all the views attached to the model.
+     *
      * @param p_O: object that contains the information to be observed.
      */
     public void notifyObservers(Observable p_O) {

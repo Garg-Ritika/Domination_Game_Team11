@@ -2,28 +2,21 @@ package ca.concordia.model;
 
 /**
  * This class contains details of the continent
- *
- * @author to be updated
- *
  */
 public class Continent {
 
-    // TODO : why continents doesn't have unique-id like countries,
-    // TODO : can I assume their id (starting from 1 ..) as the order goes in the .com.riskgame.org.riskgame.model.map file ?
-    // final because continent name cannot be changed, but color and army-count can change
     private int d_ID;
     private String d_Name;
     private String d_Color;
     private int d_ArmyCount;
 
-
     /**
      * Constructor initializes all the member variables of Continent class
      *
-     * @param p_ID continent id
-     * @param p_Name continent name
+     * @param p_ID        continent id
+     * @param p_Name      continent name
      * @param p_ArmyCount army count
-     * @param p_Color continent color
+     * @param p_Color     continent color
      */
     public Continent(int p_ID, String p_Name, int p_ArmyCount, String p_Color) {
         this.d_ID = p_ID;

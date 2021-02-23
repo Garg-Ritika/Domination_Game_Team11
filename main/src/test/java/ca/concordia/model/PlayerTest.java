@@ -1,28 +1,27 @@
 package ca.concordia.model;
-        import org.junit.Before;
-        import org.junit.Test;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
 
-        import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * This class contains Test details about Player class
- *
- * @author Satinder
  */
 public class PlayerTest {
     Player p;
     int d_NoOfArmies = 4;
-    private List<Country> d_ListOfCountries=new ArrayList<>();
+    private List<Country> d_ListOfCountries = new ArrayList<>();
 
     /**
      * This is the method to be run before test method. It initializes the Player class object
      */
     @Before
-    public void before(){
-        p=new Player("abcd", 1);
+    public void before() {
+        p = new Player("abcd", 1);
     }
 
     /**
@@ -31,15 +30,16 @@ public class PlayerTest {
 
     @Test
     public void getPlayerName() {
-        assertEquals("abcd",p.getPlayerName());
+        assertEquals("abcd", p.getPlayerName());
     }
+
     /**
      * This method contains assert statement that checks expected and actual PlayerID
      */
 
     @Test
     public void getPlayerID() {
-        assertEquals(1,p.getPlayerID());
+        assertEquals(1, p.getPlayerID());
     }
 
     /**
@@ -48,9 +48,9 @@ public class PlayerTest {
 
     @Test
     public void getNoOfArmies() {
-        assertEquals(1,p.getPlayerID());
+        assertEquals(1, p.getPlayerID());
         p.setNoOfArmies(d_NoOfArmies);
-        assertEquals(d_NoOfArmies,p.getNoOfArmies());
+        assertEquals(d_NoOfArmies, p.getNoOfArmies());
 
     }
 
@@ -61,13 +61,13 @@ public class PlayerTest {
     @Test
     public void getListOfCountries() {
 
-        Country c1= new Country(6,2,"Quebec-North",430,261);
-        Country c2= new Country(7,3,"abc",200,205);
+        Country c1 = new Country(6, 2, "Quebec-North", 430, 261);
+        Country c2 = new Country(7, 3, "abc", 200, 205);
         d_ListOfCountries.add(c1);
         d_ListOfCountries.add(c2);
 
         p.setListOfCountries(d_ListOfCountries);
-        assertEquals(d_ListOfCountries,p.getListOfCountries());
+        assertEquals(d_ListOfCountries, p.getListOfCountries());
 
     }
 }

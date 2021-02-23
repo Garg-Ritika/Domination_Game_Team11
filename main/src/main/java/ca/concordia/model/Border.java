@@ -1,15 +1,12 @@
 package ca.concordia.model;
 
-// check details : http://domination.sourceforge.net/makemaps.shtml
-// 1 2 3 38  : the first number is the number of country and others are what country it is adjacent too
 
 import java.util.List;
 
 /**
  * This class contains details of the border
- *
- * @author to be updated
- *
+ * // check details : http://domination.sourceforge.net/makemaps.shtml
+ * // 1 2 3 38  : the first number is the number of country and others are what country it is adjacent too
  */
 public class Border {
 
@@ -19,7 +16,7 @@ public class Border {
     /**
      * Constructor initializes list of neighbors and the countryId
      *
-     * @param p_CountryId initializing the CountryID
+     * @param p_CountryId  initializing the CountryID
      * @param p_Neighbours initializing the neighbour list with corresponding CountryId
      */
     public Border(int p_CountryId, List<Integer> p_Neighbours) {
@@ -97,7 +94,7 @@ public class Border {
      * @param p_NeighbourCountryId Neighbours Country ID associated with a country to be checked
      * @return true if the the neighbour id is found as an existing neighbour
      */
-    public boolean isNeighbour(int p_NeighbourCountryId){
+    public boolean isNeighbour(int p_NeighbourCountryId) {
         for (int l_Val : getNeighbours()) {
             if (l_Val == p_NeighbourCountryId) {
                 return true;

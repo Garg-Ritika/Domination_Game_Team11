@@ -3,7 +3,7 @@ package ca.concordia.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * This class contains test details of Order class
@@ -16,9 +16,8 @@ public class OrderTest {
      */
 
     @Before
-    public void before(){
-
-        o=new Order("abcd");
+    public void before() {
+        o = new Order("deploy", "canada", 2);
     }
 
     /**
@@ -27,7 +26,7 @@ public class OrderTest {
 
     @Test
     public void getOrder() {
-        assertEquals("abcd",o.getOrder());
+        assertEquals("2", o.getArmyCount());
 
     }
 }

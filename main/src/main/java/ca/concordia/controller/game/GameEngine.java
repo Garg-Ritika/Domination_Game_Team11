@@ -7,19 +7,19 @@ import java.util.Scanner;
 
 /**
  * Game Engine class that starts with "loadmap" command and automatically ends after mainloop phases
- *
- * @author Nilesh, Binit
  */
-public class GameEngine  {
+public class GameEngine {
 
     private static GameEngine d_Instance = null;
     private final Map d_CurrentMap;
     private Graph d_Graph;
     private final PlayerActions d_PlayerActions;
     public static boolean GAME_STARTED = false;
+    public static final String ORDER_DEPLOY = "deploy";
 
     /**
      * This is a static method to get the instance of this singleton object
+     *
      * @param p_Map map on which the game is starting..
      * @return GameEngine object type
      */
@@ -33,7 +33,8 @@ public class GameEngine  {
     /**
      * This is a private constructor so that it cannot be
      * instantiated outside this class ..
-     * @param p_Map   map on which the game is starting
+     *
+     * @param p_Map map on which the game is starting
      */
     private GameEngine(Map p_Map) {
         this.d_CurrentMap = p_Map;
@@ -43,7 +44,6 @@ public class GameEngine  {
     /**
      * game starts with loading of user-saved map file, which loads the map
      * as a "connected-directed-graph"
-     *
      */
     public void loadMapforGame() {
         this.d_Graph = this.d_CurrentMap.getAdjacencyMatrix();
@@ -57,9 +57,8 @@ public class GameEngine  {
 
     /**
      * Helper method to take commands for game engine
-     *
      */
-    private void waitingForInput(){
+    private void waitingForInput() {
         Scanner l_Scanner = new Scanner(System.in);
         while (true) {
             int l_PlayerListSize = this.d_PlayerActions.getListOfPlayers().size();
@@ -73,13 +72,13 @@ public class GameEngine  {
             System.out.println("input: " + l_Input);
             if ("exit".equalsIgnoreCase(l_Input)) {
                 break;
-            }else if(!GAME_STARTED ){
+            } else if (!GAME_STARTED) {
                 System.out.println("game is finished, stopping ..");
                 break;
-            }else {
+            } else {
                 if (l_Input.length() > 0) {
                     String[] l_CommandArray = l_Input.trim().split(" ");
-                    if(processCommands(l_CommandArray)){
+                    if (processCommands(l_CommandArray)) {
                         // true only when "assigncountries" command is successful to start main-loop
                         mainGameLoop();
                     }
@@ -90,10 +89,10 @@ public class GameEngine  {
 
     /**
      * helper method to process commands for game engine
-     * @param p_Command commands applicable into game play
      *
+     * @param p_Command commands applicable into game play
      */
-    private boolean processCommands(String[] p_Command){
+    private boolean processCommands(String[] p_Command) {
         boolean l_BreakLoop = false;
         try {
             if (p_Command.length > 0) {
@@ -117,7 +116,7 @@ public class GameEngine  {
                         System.out.println("Invalid command");
                 }
             }
-        }catch (Exception l_E){
+        } catch (Exception l_E) {
             l_E.printStackTrace();
         }
         return l_BreakLoop;
@@ -131,7 +130,6 @@ public class GameEngine  {
      * 3. Armies on each countries
      * 4. Ownership
      * 5. Connectivity in a way that enables game-play
-     *
      */
     public void showMapforGame() {
         System.out.println("show game command received ");
@@ -139,12 +137,12 @@ public class GameEngine  {
         Graph l_Graph = d_CurrentMap.getAdjacencyMatrix();
         System.out.println(l_Graph.toString());
 
-        for (Player l_Player : this.d_PlayerActions.getListOfPlayers()){
+        for (Player l_Player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("------------------------------------------------------------------------------------------------------------------------");
             System.out.println("PLAYER: " + l_Player.getPlayerName());
-            System.out.println("with total army count of : "+ l_Player.getNoOfArmies());
+            System.out.println("with total army count of : " + l_Player.getNoOfArmies());
             System.out.println("has ownership of these countries: ");
-            if(l_Player.getListOfCountries() != null) {
+            if (l_Player.getListOfCountries() != null) {
                 for (Country l_Country : l_Player.getListOfCountries()) {
                     System.out.println("id: " + l_Country.getCountryID()
                             + " name: " + l_Country.getName()
@@ -162,7 +160,6 @@ public class GameEngine  {
      * 3. Execute Orders
      * <p>
      * (After above three steps, it self-exit the game.)
-     *
      */
 
     private void mainGameLoop() {
@@ -181,9 +178,9 @@ public class GameEngine  {
             }
         }
         Player l_Winner = this.d_PlayerActions.getWinner();
-        if(l_Winner != null){
+        if (l_Winner != null) {
             System.out.println("Winner is player > id: " + d_PlayerActions.getWinner().getPlayerID() + " name: " + d_PlayerActions.getWinner().getPlayerName());
-        }else{
+        } else {
             System.out.println("Unknown winner ..");
         }
     }
@@ -192,7 +189,7 @@ public class GameEngine  {
      *
      * Assign to each player the correct number of reinforcement armies, according to Warzone rules
      */
-    private void assignReinforcementPhase(){
+    private void assignReinforcementPhase() {
         //assign each player the correct number of reinforcement
         for (Player l_Player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
@@ -211,13 +208,14 @@ public class GameEngine  {
      * Issuing order command:
      * deploy countryID num (until all reinforcements have been placed)
      */
-    private void issueOrderPhase(){
-        //the method will wait for commands
+    private void issueOrderPhase() {
         for (Player l_Player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("ISSUE ORDER PHASE : " + l_Player.getPlayerName());
             this.d_PlayerActions.issueOrdersPhase(l_Player);
 
+            //the method will wait for commands
+            // TODO: the following command input is supposed to happend inside Player's issueOrder command.
             Scanner l_Scanner = new Scanner(System.in);
             while (true) {
                 System.out.println("use command like [\"showmap\" ,  \"deploy <countryid> <num>\" , \"exit\" ");
@@ -226,19 +224,22 @@ public class GameEngine  {
 
                 if (l_Input.length() > 0) {
                     String[] l_CommandArray = l_Input.trim().split(" ");
-                    try{
+                    try {
                         String l_Command = l_CommandArray[0];
-                        if ((GameController.COMMAND_DEPLOY).equalsIgnoreCase(l_Command)){
-                            processDeployCommand(l_Player,l_CommandArray);
-                            // TODO : do we want to break after first try only ..
-                            break;
-                        }else if((GameController.COMMAND_SHOW_MAP).equalsIgnoreCase(l_Command)){
+                        // Issue deployment orders here to update the order list of the player .
+                        if ((GameController.COMMAND_DEPLOY).equalsIgnoreCase(l_Command)) {
+                            processDeployCommand(l_Player, l_CommandArray);
+                            if (l_Player.getNoOfArmies() < 1) {
+                                System.out.println("All the reinforcement armies have been placed ..");
+                                break;
+                            }
+                        } else if ((GameController.COMMAND_SHOW_MAP).equalsIgnoreCase(l_Command)) {
                             showMapforGame();
-                        }else if("exit".equalsIgnoreCase(l_Command)){
+                        } else if ("exit".equalsIgnoreCase(l_Command)) {
                             GAME_STARTED = false;
                             break;
                         }
-                    }catch (Exception l_E){
+                    } catch (Exception l_E) {
                         l_E.printStackTrace();
                     }
                 }
@@ -251,7 +252,7 @@ public class GameEngine  {
      * is called, which will enact the order. The effect of a deploy order is to place num armies on
      * the country countryID.
      */
-    private void executeOrderPhase(){
+    private void executeOrderPhase() {
         for (Player l_Player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("EXECUTE ORDER  PHASE : " + l_Player.getPlayerName());
@@ -261,6 +262,7 @@ public class GameEngine  {
 
     /**
      * helper method to take "gameplayer command to add or remove palyers"
+     *
      * @param p_Command command array to process
      */
     private void processGamePlayerCommand(String[] p_Command) {
@@ -332,18 +334,18 @@ public class GameEngine  {
     /**
      * helper method to process assigncountries command
      */
-    private boolean processAssignCountriesCommand(){
+    private boolean processAssignCountriesCommand() {
         System.out.println("assigncountries command received..");
         try {
             int l_NumberOfPlayers = this.d_PlayerActions.getListOfPlayers().size();
-            if (l_NumberOfPlayers >=3 && l_NumberOfPlayers <=5 ) {
+            if (l_NumberOfPlayers >= 3 && l_NumberOfPlayers <= 5) {
                 System.out.println("number of countries between [3 to 5] so assign countries to player now ..");
                 return assignCountries();
-            }else{
+            } else {
                 System.out.println("number of player must be between [3 to 5] to state main-game-loop");
             }
 
-        }catch (Exception l_E){
+        } catch (Exception l_E) {
             l_E.printStackTrace();
         }
         return false;
@@ -351,6 +353,7 @@ public class GameEngine  {
 
     /**
      * All countries are assigned randomly to the player
+     *
      * @return boolean
      */
     public boolean assignCountries() {
@@ -358,36 +361,31 @@ public class GameEngine  {
     }
 
 
-
     /**
      * Helper method to process deploy command
-     * @param p_Player playername
+     *
+     * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
      */
     private void processDeployCommand(Player p_Player, String[] p_Command) {
         System.out.println("deploy  command received ..... ");
-        //TODO : could be multiple countryid under one command ..
-        try{
+        try {
             String l_CountryName = p_Command[1];
             String l_Num = p_Command[2];
             int l_NumInt = Integer.parseInt(l_Num);
 
-            deploy(p_Player,l_CountryName,l_NumInt);
-        }catch (Exception l_E){
+            int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
+            if (l_ArmyCountOfPlayer >= l_NumInt) {
+                p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
+                Order l_order = new Order(ORDER_DEPLOY, l_CountryName, l_NumInt);
+                p_Player.addNewOrder(l_order);
+            } else {
+                System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
+            }
+
+        } catch (Exception l_E) {
             l_E.printStackTrace();
         }
     }
 
-    /**
-     * Issuing order command (until all reinforcements have been placed
-     *
-     * @param p_Player player object
-     * @param p_CountryName country name
-     * @param p_Num number of army to deploy
-     * @return  boolean
-     */
-    public boolean deploy(Player p_Player, String p_CountryName, int p_Num) {
-        p_Player.issueOrder();
-        return false;
-    }
 }

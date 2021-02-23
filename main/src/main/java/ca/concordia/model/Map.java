@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Map class contains the details of the:
+ * Map class contains the details of the:
  * 1.list of continents in a map.
  * 2.list of countries in a map.
  * 3.list of borders in a map
  * The main feature of this class in that it checks the adjacency between the countries which is required in Graph class
- *
- * @author GURSEERUT
  */
 public class Map {
 
@@ -19,7 +17,7 @@ public class Map {
     private List<Border> d_ListOfBorders;
 
     /**
-     *Constructor generates  an empty list with an initial capacity of ten for storing :
+     * Constructor generates  an empty list with an initial capacity of ten for storing :
      * 1.Continents
      * 2.Countries
      * 3.Borders.
@@ -31,8 +29,9 @@ public class Map {
     }
 
     /**
-     *This method shows the details of continents present in a map.
+     * This method shows the details of continents present in a map.
      * additionally, returns the list of continents present in a map.
+     *
      * @return d_ListOfContinents the list of continents
      */
     public List<Continent> getListOfContinents() {
@@ -40,7 +39,8 @@ public class Map {
     }
 
     /**
-     *This method sets the list of continent by implementing Continent class.
+     * This method sets the list of continent by implementing Continent class.
+     *
      * @param p_ListOfContinents initialising the continents in the list.
      */
     public void setListOfContinents(List<Continent> p_ListOfContinents) {
@@ -48,16 +48,18 @@ public class Map {
     }
 
     /**
-     *This method shows the details of countries present in a map.
+     * This method shows the details of countries present in a map.
      * Also, returns the list of countries present in a map.
-     * @return  d_ListOfCountries the list of continents
+     *
+     * @return d_ListOfCountries the list of continents
      */
     public List<Country> getListOfCountries() {
         return d_ListOfCountries;
     }
 
     /**
-     *This method sets the list of continent by implementing Continent class.
+     * This method sets the list of continent by implementing Continent class.
+     *
      * @param p_ListOfCountries initialising the countries in the list to this method.
      */
     public void setListOfCountries(List<Country> p_ListOfCountries) {
@@ -67,6 +69,7 @@ public class Map {
     /**
      * This method shows the details of borders present in a map.
      * It returns the list of borders present in a map.
+     *
      * @return d_ListOfBorders the list of borders.
      */
     public List<Border> getListOfBorders() {
@@ -75,6 +78,7 @@ public class Map {
 
     /**
      * This method sets the list of continent by implementing Border class.
+     *
      * @param p_ListOfBorders initialising the borders in the list.
      */
     public void setListOfBorders(List<Border> p_ListOfBorders) {
@@ -82,7 +86,8 @@ public class Map {
     }
 
     /**
-     *This method shows the adjacency between the countries and returns the connected graph.
+     * This method shows the adjacency between the countries and returns the connected graph.
+     *
      * @return graph showing adjacency.
      */
     public Graph getAdjacencyMatrix() {

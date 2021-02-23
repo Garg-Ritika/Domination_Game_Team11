@@ -2,8 +2,6 @@ package ca.concordia.model;
 
 /**
  * Adjacency Matrix representation of the Maps
- *
- * @author to be updated
  */
 
 public class Graph {
@@ -17,7 +15,7 @@ public class Graph {
      * @param p_NumberOfCountries no of Countries in a map
      */
     public Graph(int p_NumberOfCountries) {
-        this.d_NumberOfCountries = p_NumberOfCountries +1;
+        this.d_NumberOfCountries = p_NumberOfCountries + 1;
         this.d_AdjMatrix = new boolean[this.d_NumberOfCountries][this.d_NumberOfCountries];
     }
 
