@@ -8,30 +8,30 @@ package ca.concordia.model;
 
 public class Graph {
 
-    private boolean adjMatrix[][];
-    private int numberOfCountries; // represent number of vertices
+    private boolean d_AdjMatrix[][];
+    private int d_NumberOfCountries; // represent number of vertices
 
-    public Graph(int numberOfCountries) {
-        this.numberOfCountries = numberOfCountries+1;
-        this.adjMatrix = new boolean[this.numberOfCountries][this.numberOfCountries];
+    public Graph(int p_NumberOfCountries) {
+        this.d_NumberOfCountries = p_NumberOfCountries +1;
+        this.d_AdjMatrix = new boolean[this.d_NumberOfCountries][this.d_NumberOfCountries];
     }
 
-    public void addEdge(int i, int j) {
-        adjMatrix[i][j] = true;
-        adjMatrix[j][i] = true;
+    public void addEdge(int p_I, int p_J) {
+        d_AdjMatrix[p_I][p_J] = true;
+        d_AdjMatrix[p_J][p_I] = true;
     }
 
-    public void removeEdge(int i, int j) {
-        adjMatrix[i][j] = false;
-        adjMatrix[j][i] = false;
+    public void removeEdge(int p_I, int p_J) {
+        d_AdjMatrix[p_I][p_J] = false;
+        d_AdjMatrix[p_J][p_I] = false;
     }
 
     public boolean[][] getAdjMatrix() {
-        return adjMatrix;
+        return d_AdjMatrix;
     }
 
     public int size() {
-        return this.numberOfCountries * this.numberOfCountries;
+        return this.d_NumberOfCountries * this.d_NumberOfCountries;
     }
 
     /**
@@ -40,14 +40,14 @@ public class Graph {
      * @return matrix string
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < numberOfCountries; i++) {
-            sb.append(i + ": ");
-            for (boolean j : adjMatrix[i]) {
-                sb.append((j ? 1 : 0) + " ");
+        StringBuilder l_Sb = new StringBuilder();
+        for (int l_I = 0; l_I < d_NumberOfCountries; l_I++) {
+            l_Sb.append(l_I + ": ");
+            for (boolean l_J : d_AdjMatrix[l_I]) {
+                l_Sb.append((l_J ? 1 : 0) + " ");
             }
-            sb.append("\n");
+            l_Sb.append("\n");
         }
-        return sb.toString();
+        return l_Sb.toString();
     }
 }
