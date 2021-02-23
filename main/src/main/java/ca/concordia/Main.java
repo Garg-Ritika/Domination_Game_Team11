@@ -6,14 +6,14 @@ import ca.concordia.view.GameView;
 
 public class Main {
 
-    GameModel d_gameModel;
-    GameController d_gameController;
-    GameView d_gameView;
+    GameModel d_GameModel;
+    GameController d_GameController;
+    GameView d_GameView;
 
     public Main(){
-        d_gameModel = new GameModel();
-        d_gameView = new GameView(d_gameModel);
-        d_gameController = new GameController(d_gameView,d_gameModel);
+        d_GameModel = new GameModel();
+        d_GameView = new GameView(d_GameModel);
+        d_GameController = new GameController(d_GameView, d_GameModel);
     }
 
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class Main {
     }
 
     public void startGame(){
-        d_gameController.takeCommandInput();
-        d_gameModel.detach(d_gameView);
+        d_GameController.takeCommandInput();
+        d_GameModel.detach(d_GameView);
     }
 }
