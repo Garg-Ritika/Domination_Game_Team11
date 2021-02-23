@@ -4,55 +4,55 @@ import java.util.List;
 
 public class Player {
 
-    private String playerName;
-    private int playerID;
-    private int noOfArmies;
-    private List<Country> listOfCountries;
-    private List<Order> listOfOrders;
+    private String d_PlayerName;
+    private int d_PlayerID;
+    private int d_NoOfArmies;
+    private List<Country> d_ListOfCountries;
+    private List<Order> d_ListOfOrders;
 
-    public Player(String playerName, int playerID) {
-        this.playerName = playerName;
-        this.playerID = playerID;
+    public Player(String p_PlayerName, int p_PlayerID) {
+        this.d_PlayerName = p_PlayerName;
+        this.d_PlayerID = p_PlayerID;
     }
 
     public String getPlayerName() {
-        return playerName;
+        return d_PlayerName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setPlayerName(String p_PlayerName) {
+        this.d_PlayerName = p_PlayerName;
     }
 
     public int getPlayerID() {
-        return playerID;
+        return d_PlayerID;
     }
 
-    public void setPlayerID(int playerID) {
-        this.playerID = playerID;
+    public void setPlayerID(int p_PlayerID) {
+        this.d_PlayerID = p_PlayerID;
     }
 
     public int getNoOfArmies() {
-        return noOfArmies;
+        return d_NoOfArmies;
     }
 
-    public void setNoOfArmies(int noOfArmies) {
-        this.noOfArmies = noOfArmies;
+    public void setNoOfArmies(int p_NoOfArmies) {
+        this.d_NoOfArmies = p_NoOfArmies;
     }
 
     public List<Country> getListOfCountries() {
-        return listOfCountries;
+        return d_ListOfCountries;
     }
 
-    public void setListOfCountries(List<Country> listOfCountries) {
-        this.listOfCountries = listOfCountries;
+    public void setListOfCountries(List<Country> p_ListOfCountries) {
+        this.d_ListOfCountries = p_ListOfCountries;
     }
 
     public List<Order> getListOfOrders() {
-        return listOfOrders;
+        return d_ListOfOrders;
     }
 
-    public void setListOfOrders(List<Order> listOfOrders) {
-        this.listOfOrders = listOfOrders;
+    public void setListOfOrders(List<Order> p_ListOfOrders) {
+        this.d_ListOfOrders = p_ListOfOrders;
     }
 
     public int nextOrder() {
