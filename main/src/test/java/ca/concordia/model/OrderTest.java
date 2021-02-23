@@ -17,6 +17,7 @@ public class OrderTest {
 
     @Before
     public void before(){
+
         o=new Order("abcd");
     }
 
@@ -27,5 +28,6 @@ public class OrderTest {
     @Test
     public void getOrder() {
         assertEquals("abcd",o.getOrder());
+
     }
 }
