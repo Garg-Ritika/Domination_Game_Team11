@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * This class contains test details of Border class
  *
- * @author to be updated
+ * @author xyz
  */
 public class BorderTest {
     private List<Integer> d_Neighbours= new LinkedList<>(Arrays.asList(1,2,3,4));
@@ -22,8 +22,8 @@ public class BorderTest {
      */
     @Test
     public void getCountryId() {
-        Border b= new Border(4, d_Neighbours  );
-        assertEquals(4, b.getCountryId());
+        Border l_B= new Border(4, d_Neighbours  );
+        assertEquals(4, l_B.getCountryId());
     }
 
     /**
@@ -31,8 +31,8 @@ public class BorderTest {
      */
     @Test
     public void getNeighbours() {
-        Border b= new Border(4, d_Neighbours  );
-        assertEquals(d_Neighbours, b.getNeighbours());
+        Border l_B= new Border(4, d_Neighbours  );
+        assertEquals(d_Neighbours, l_B.getNeighbours());
     }
 
     /**
@@ -40,8 +40,8 @@ public class BorderTest {
      */
     @Test
     public void addNeighbour() {
-        Border b= new Border(4, d_Neighbours  );
-        assertTrue(b.addNeighbour(7));
+        Border l_B= new Border(4, d_Neighbours  );
+        assertTrue(l_B.addNeighbour(7));
 
     }
 
@@ -50,8 +50,8 @@ public class BorderTest {
      */
     @Test
     public void removeNeighbour() {
-        Border b= new Border(4, d_Neighbours  );
-        assertTrue(b.removeNeighbour(3));
+        Border l_B= new Border(4, d_Neighbours  );
+        assertTrue(l_B.removeNeighbour(3));
 
     }
 
