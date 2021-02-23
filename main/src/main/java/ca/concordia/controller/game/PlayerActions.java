@@ -21,36 +21,36 @@ import java.util.Random;
 public class PlayerActions {
 
     private final int MINIMUM_PLAYER_COUNT = 3;
-    private List<Player> listOfPlayers = new ArrayList<Player>();
-    private final Map map;
-    private Player winner;
+    private List<Player> d_ListOfPlayers = new ArrayList<Player>();
+    private final Map d_Map;
+    private Player d_Winner;
 
     /**
      *
-     * @param map "to be updated"
+     * @param p_Map "to be updated"
      */
-    public PlayerActions(Map map) {
-        this.map = map;
-        this.winner = null;
+    public PlayerActions(Map p_Map) {
+        this.d_Map = p_Map;
+        this.d_Winner = null;
     }
 
     /**
      *
-     * @param player "to be updated"
+     * @param p_Player "to be updated"
      * @return "to be updated"
      */
-    public boolean addPlayer(Player player) {
+    public boolean addPlayer(Player p_Player) {
         //TODO: cannot add more player than number of countries check
-        return this.listOfPlayers.add(player);
+        return this.d_ListOfPlayers.add(p_Player);
     }
 
     /**
      *
-     * @param player "to be updated"
+     * @param p_Player "to be updated"
      * @return "to be updated"
      */
-    public boolean removePlayer(Player player) {
-        return this.listOfPlayers.remove(player);
+    public boolean removePlayer(Player p_Player) {
+        return this.d_ListOfPlayers.remove(p_Player);
     }
 
     /**
@@ -58,7 +58,7 @@ public class PlayerActions {
      * @return "to be updated"
      */
     public List<Player> getListOfPlayers(){
-        return this.listOfPlayers;
+        return this.d_ListOfPlayers;
     }
 
     /**
@@ -66,41 +66,41 @@ public class PlayerActions {
      * @return boolean
      */
     public boolean assignCountriesToPlayers() {
-        if (listOfPlayers.size() < MINIMUM_PLAYER_COUNT) {
+        if (d_ListOfPlayers.size() < MINIMUM_PLAYER_COUNT) {
             System.out.println("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
             return false;
         }
         System.out.println("start assigning countries ");
 
-        int countryCount = this.map.getListOfCountries().size();
-        int playerCount = this.listOfPlayers.size();
-        int playerCountryRatio = countryCount/playerCount;
+        int l_CountryCount = this.d_Map.getListOfCountries().size();
+        int l_PlayerCount = this.d_ListOfPlayers.size();
+        int l_PlayerCountryRatio = l_CountryCount /l_PlayerCount;
 
         // temporary country list that will be randomly assigned in quantity playCountryRatio to each player ..
-        ArrayList<Country> countriesToAssignRandomly = new ArrayList<Country>();
-        for (Country country: map.getListOfCountries()){
-            countriesToAssignRandomly.add(country);
+        ArrayList<Country> l_CountriesToAssignRandomly = new ArrayList<Country>();
+        for (Country l_Country : d_Map.getListOfCountries()){
+            l_CountriesToAssignRandomly.add(l_Country);
         }
 
-        for (Player player: listOfPlayers){
+        for (Player l_Player : d_ListOfPlayers){
 
-            ArrayList<Country> countriesForPlayer = new ArrayList<Country>();
-            while((countriesForPlayer.size() < playerCountryRatio)) {
+            ArrayList<Country> l_CountriesForPlayer = new ArrayList<Country>();
+            while((l_CountriesForPlayer.size() < l_PlayerCountryRatio)) {
 
-                int index = 0;
-                if(countriesToAssignRandomly.size() <1){
+                int l_Index = 0;
+                if(l_CountriesToAssignRandomly.size() <1){
                     System.out.println("All countries are assigned successfully ");
                     break;
-                }else if(countriesToAssignRandomly.size() > 1){
-                    index = new Random().nextInt(countriesToAssignRandomly.size() -1);
+                }else if(l_CountriesToAssignRandomly.size() > 1){
+                    l_Index = new Random().nextInt(l_CountriesToAssignRandomly.size() -1);
                 }
-                Country country = countriesToAssignRandomly.get(index);
-                countriesToAssignRandomly.remove(country);
-                countriesForPlayer.add(country);
-                System.out.println(player.getPlayerName() + " has " +country.getName());
+                Country l_Country = l_CountriesToAssignRandomly.get(l_Index);
+                l_CountriesToAssignRandomly.remove(l_Country);
+                l_CountriesForPlayer.add(l_Country);
+                System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
             }
 
-            player.setListOfCountries(countriesForPlayer);
+            l_Player.setListOfCountries(l_CountriesForPlayer);
         }
         return true;
     }
@@ -109,17 +109,17 @@ public class PlayerActions {
      * All turns start with reinforcement. Each turn, each player receives a number of armies equal to:
      * (max(3, # of countries the player own/3)+(continent value of all continents controlled by the player)).
      * - Joey's message on discord
-     * @param player "player for which the reinforcement is happening"
+     * @param p_Player "player for which the reinforcement is happening"
      */
-    public void assignReinforcementPhase(Player player) {
-        int l_CountryOwnedByPlayer = player.getListOfCountries().size();
-        System.out.println("#countries own by player: "+ player.getPlayerName() + " is "+ l_CountryOwnedByPlayer);
+    public void assignReinforcementPhase(Player p_Player) {
+        int l_CountryOwnedByPlayer = p_Player.getListOfCountries().size();
+        System.out.println("#countries own by player: "+ p_Player.getPlayerName() + " is "+ l_CountryOwnedByPlayer);
         //TODO: let's assume it is 1 for now, need to come up with a method here ..
         int l_NetContinentValue = 1;
         System.out.println("net continent value of all the continents controlled by player: " + l_NetContinentValue);
         int l_NewArmy = Math.max(3,l_CountryOwnedByPlayer/3) + l_NetContinentValue;
-        System.out.println("#new armies being assigned to playeR: "+ player.getPlayerName() + " is " + l_NewArmy);
-        player.setNoOfArmies(l_NewArmy);
+        System.out.println("#new armies being assigned to playeR: "+ p_Player.getPlayerName() + " is " + l_NewArmy);
+        p_Player.setNoOfArmies(l_NewArmy);
     }
 
     /**
@@ -132,15 +132,15 @@ public class PlayerActions {
      * Issuing order command:
      * deploy countryID num (until all reinforcements have been placed)
      *
-     * @param player player is passed "to be updated"
+     * @param p_Player player is passed "to be updated"
      *
      */
-    public void issueOrdersPhase(Player player){
+    public void issueOrdersPhase(Player p_Player){
 
         // round robin means, every player should interact with other player .. ?
-        for (Player nextPlayer: this.listOfPlayers){
+        for (Player l_NextPlayer : this.d_ListOfPlayers){
 
-            if (nextPlayer.getPlayerID() == player.getPlayerID()){
+            if (l_NextPlayer.getPlayerID() == p_Player.getPlayerID()){
                 continue;
             }
 
@@ -150,10 +150,10 @@ public class PlayerActions {
 
     /**
      *
-     * @param player "to be updated"
+     * @param p_Player "to be updated"
      *
      */
-    public void executeOrderPhase(Player player){
+    public void executeOrderPhase(Player p_Player){
 
     }
 
@@ -171,7 +171,7 @@ public class PlayerActions {
      * @param player player parameter is passed
      */
     public void setWinner(Player player){
-        this.winner= player;
+        this.d_Winner= player;
     }
 
     /**
@@ -179,6 +179,6 @@ public class PlayerActions {
      * @return winner
      */
     public Player getWinner(){
-        return this.winner;
+        return this.d_Winner;
     }
 }
