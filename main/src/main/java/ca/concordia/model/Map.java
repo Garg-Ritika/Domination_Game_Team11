@@ -9,6 +9,8 @@ import java.util.List;
  * 2.list of countries in a map.
  * 3.list of borders in a map
  * The main feature of this class in that it checks the adjacency between the countries which is required in Graph class
+ *
+ * @author GURSEERUT 
  */
 public class Map {
 
@@ -31,7 +33,7 @@ public class Map {
     /**
      *This method shows the details of continents present in a map.
      * additionally, returns the list of continents present in a map.
-     * @return the list of continents
+     * @return d_ListOfContinents the list of continents
      */
     public List<Continent> getListOfContinents() {
         return d_ListOfContinents;
@@ -48,7 +50,7 @@ public class Map {
     /**
      *This method shows the details of countries present in a map.
      * Also, returns the list of countries present in a map.
-     * @return the list of continents
+     * @return  d_ListOfCountries the list of continents
      */
     public List<Country> getListOfCountries() {
         return d_ListOfCountries;
@@ -65,7 +67,7 @@ public class Map {
     /**
      * This method shows the details of borders present in a map.
      * It returns the list of borders present in a map.
-     * @return the list of borders.
+     * @return d_ListOfBorders the list of borders.
      */
     public List<Border> getListOfBorders() {
         return d_ListOfBorders;
