@@ -15,52 +15,52 @@ public class MapEditor {
     public static final String HEADER_COUNTRIES = "[countries]";
     public static final String HEADER_BORDERS = "[borders]";
 
-    private static MapEditor instance = null;
-    private static Map currentMap;
+    private static MapEditor d_Instance = null;
+    private static Map d_CurrentMap;
 
     private MapEditor() {
-        this.currentMap = new Map();
+        this.d_CurrentMap = new Map();
     }
 
     public static MapEditor getInstance() {
-        if (instance == null) {
-            instance = new MapEditor();
+        if (d_Instance == null) {
+            d_Instance = new MapEditor();
         }
-        return instance;
+        return d_Instance;
     }
 
     private Map getCurrentMap() {
-        return this.currentMap;
+        return this.d_CurrentMap;
     }
 
-    public boolean addContinent(String continentName, int armyCount) {
+    public boolean addContinent(String p_ContinentName, int p_ArmyCount) {
         boolean l_Found = false;
-        for (Continent l_Continent: currentMap.getListOfContinents()){
-            if (l_Continent.getName().equalsIgnoreCase(continentName)){
-                l_Continent.setArmyCount(armyCount);
+        for (Continent l_Continent: d_CurrentMap.getListOfContinents()){
+            if (l_Continent.getName().equalsIgnoreCase(p_ContinentName)){
+                l_Continent.setArmyCount(p_ArmyCount);
                 l_Found = true;
             }
         }
         if(!l_Found) {
             int l_NumberOfContinents = this.getCurrentMap().getListOfContinents().size();
             //TODO : add a unique new color to the new continent
-            Continent continent = new Continent(l_NumberOfContinents + 1, continentName, armyCount, "RED");
-            Map map = this.getCurrentMap();
-            map.getListOfContinents().add(continent);
-            System.out.println(map.getListOfContinents().size());
+            Continent l_Continent = new Continent(l_NumberOfContinents + 1, p_ContinentName, p_ArmyCount, "RED");
+            Map l_Map = this.getCurrentMap();
+            l_Map.getListOfContinents().add(l_Continent);
+            System.out.println(l_Map.getListOfContinents().size());
         }
         return true;
     }
 
     public boolean removeContinent(String p_ContinentName) {
-        Map map = this.getCurrentMap();
-        for (Continent l_continent : map.getListOfContinents()) {
+        Map l_Map = this.getCurrentMap();
+        for (Continent l_continent : l_Map.getListOfContinents()) {
             if (l_continent.getName().equalsIgnoreCase(p_ContinentName)) {
                 int l_continentID = l_continent.getID();
-                map.getListOfContinents().remove(l_continent);
+                l_Map.getListOfContinents().remove(l_continent);
 
                 // also remove country and border using continentID
-                for (Country l_country: map.getListOfCountries()){
+                for (Country l_country: l_Map.getListOfCountries()){
                     if (l_country.getContinentID() == l_continentID){
                         removeCountryUsingID(l_country.getCountryID());
                     }
@@ -75,14 +75,14 @@ public class MapEditor {
 
         // find continentID from continent_name
         int l_ContinentID = 0;
-        for(Continent l_continent: currentMap.getListOfContinents()){
+        for(Continent l_continent: d_CurrentMap.getListOfContinents()){
             if(l_continent.getName().equalsIgnoreCase(p_Continent_Name)){
                 l_ContinentID = l_continent.getID();
             }
         }
         boolean l_Found = false;
         if(l_ContinentID>0) {
-            for (Country l_Country : currentMap.getListOfCountries()) {
+            for (Country l_Country : d_CurrentMap.getListOfCountries()) {
                 if (l_Country.getName().equalsIgnoreCase(p_CountryName)) {
                     l_Found = true;
                     l_Country.setContinentID(l_ContinentID);
@@ -91,10 +91,10 @@ public class MapEditor {
             }
             if(!l_Found){
                 System.out.println("Adding a new country ");
-                int l_NumberOfCountries = currentMap.getListOfCountries().size();
+                int l_NumberOfCountries = d_CurrentMap.getListOfCountries().size();
                 //TODO :by default x and y coordinates are 0,0 for now
                 Country l_country = new Country(l_NumberOfCountries+1, l_ContinentID,p_CountryName,0,0);
-                currentMap.getListOfCountries().add(l_country);
+                d_CurrentMap.getListOfCountries().add(l_country);
             }
         }else{
             System.out.println("Continent with name: "+ p_Continent_Name + " doesn't exists");
@@ -103,15 +103,15 @@ public class MapEditor {
         return true;
     }
 
-    public boolean removeCountryUsingName(String countryName){
-        for(Country l_Country : currentMap.getListOfCountries()){
-            if (l_Country.getName().equalsIgnoreCase(countryName)){
+    public boolean removeCountryUsingName(String p_CountryName){
+        for(Country l_Country : d_CurrentMap.getListOfCountries()){
+            if (l_Country.getName().equalsIgnoreCase(p_CountryName)){
                 int l_CountryID = l_Country.getCountryID();
-                currentMap.getListOfCountries().remove(l_Country);
+                d_CurrentMap.getListOfCountries().remove(l_Country);
 
-                for (Border l_Border: currentMap.getListOfBorders()){
+                for (Border l_Border: d_CurrentMap.getListOfBorders()){
                     if (l_Border.getCountryId() == l_CountryID){
-                        currentMap.getListOfBorders().remove(l_Border);
+                        d_CurrentMap.getListOfBorders().remove(l_Border);
                     }
                 }
                 return true;
@@ -120,16 +120,16 @@ public class MapEditor {
         return false;
     }
 
-    private boolean removeCountryUsingID(int countryID) {
-        Map map = this.getCurrentMap();
-        for (Country l_country : map.getListOfCountries()) {
-            if (l_country.getCountryID() == countryID) {
-                map.getListOfCountries().remove(l_country);
+    private boolean removeCountryUsingID(int p_CountryID) {
+        Map l_Map = this.getCurrentMap();
+        for (Country l_country : l_Map.getListOfCountries()) {
+            if (l_country.getCountryID() == p_CountryID) {
+                l_Map.getListOfCountries().remove(l_country);
 
                 // Also remove borders
-                for (Border l_border: map.getListOfBorders()){
-                    if(l_border.getCountryId() == countryID){
-                        map.getListOfBorders().remove(l_border);
+                for (Border l_border: l_Map.getListOfBorders()){
+                    if(l_border.getCountryId() == p_CountryID){
+                        l_Map.getListOfBorders().remove(l_border);
                     }
                 }
                 return true;
@@ -141,7 +141,7 @@ public class MapEditor {
     public boolean addNeighbor(String p_CountryName, String p_NeighborName) {
         int l_CountryID = 0 ;
         int l_NeighborID = 0;
-        for(Country l_country: currentMap.getListOfCountries()){
+        for(Country l_country: d_CurrentMap.getListOfCountries()){
             if(l_country.getName().equalsIgnoreCase(p_CountryName)){
                 l_CountryID = l_country.getCountryID();
             }else if(l_country.getName().equalsIgnoreCase(p_NeighborName)){
@@ -153,7 +153,7 @@ public class MapEditor {
         if(l_CountryID >0 && l_NeighborID >0){
             System.out.println("both country exists in map: " + p_CountryName + " " + p_NeighborName);
             boolean l_BorderFound = false;
-            for(Border l_Border: currentMap.getListOfBorders()){
+            for(Border l_Border: d_CurrentMap.getListOfBorders()){
                 // make country1 neighbour of country2
                 if(l_Border.getCountryId() == l_CountryID){
                     if(!l_Border.isNeighbour(l_CountryID)){
@@ -191,7 +191,7 @@ public class MapEditor {
     public boolean removeNeighbor(String p_CountryName, String p_NeighborName) {
         int l_CountryID = 0 ;
         int l_NeighborID = 0;
-        for(Country l_country: currentMap.getListOfCountries()){
+        for(Country l_country: d_CurrentMap.getListOfCountries()){
             if(l_country.getName().equalsIgnoreCase(p_CountryName)){
                 l_CountryID = l_country.getCountryID();
             }else if(l_country.getName().equalsIgnoreCase(p_NeighborName)){
@@ -202,7 +202,7 @@ public class MapEditor {
         if(l_CountryID >0 && l_NeighborID >0){
             System.out.println("both country exists in map: " + p_CountryName + " " + p_NeighborName);
 
-            for(Border l_Border: currentMap.getListOfBorders()){
+            for(Border l_Border: d_CurrentMap.getListOfBorders()){
                 // both are neighbour's to each other, so remove two times
                 if(l_Border.getCountryId() == l_CountryID){
                     l_Border.removeNeighbour(l_NeighborID);
@@ -220,20 +220,20 @@ public class MapEditor {
 
     public void showMap() {
         System.out.println("showing map..");
-        for (Continent val : getCurrentMap().getListOfContinents()) {
-            System.out.print(" ID: " + val.getID());
-            System.out.print(" Continent Name : " + val.getName());
-            System.out.print(" Army Count: " + val.getArmyCount());
-            System.out.print(" Color : " + val.getColor());
+        for (Continent l_Val : getCurrentMap().getListOfContinents()) {
+            System.out.print(" ID: " + l_Val.getID());
+            System.out.print(" Continent Name : " + l_Val.getName());
+            System.out.print(" Army Count: " + l_Val.getArmyCount());
+            System.out.print(" Color : " + l_Val.getColor());
 
             System.out.println(" \ncountries in this continent : ");
-            for (Country country : getCurrentMap().getListOfCountries()) {
-                if (country.getContinentID() == val.getID()) {
-                    System.out.println(country.getCountryID()+ " " + country.getName() + " " + country.getContinentID()+  " x: " + country.getX() + " Y: " + country.getY());
+            for (Country l_Country : getCurrentMap().getListOfCountries()) {
+                if (l_Country.getContinentID() == l_Val.getID()) {
+                    System.out.println(l_Country.getCountryID()+ " " + l_Country.getName() + " " + l_Country.getContinentID()+  " x: " + l_Country.getX() + " Y: " + l_Country.getY());
 
                     // show borders
                     for(Border l_Border: getCurrentMap().getListOfBorders()){
-                        if(l_Border.getCountryId() == country.getCountryID()){
+                        if(l_Border.getCountryId() == l_Country.getCountryID()){
                             int l_NeighbourCount = 0;
                             for(int l_NeighbourCountryID: l_Border.getNeighbours()){
                                 for(Country lCountry2: getCurrentMap().getListOfCountries()){
@@ -253,12 +253,12 @@ public class MapEditor {
     /**
      * Save a map to a text file exactly as edited (using the “domination” game map format).
      * and automatically validates map before saving ..
-     * @param mapPath
+     * @param p_MapPath
      * @throws IOException
      */
-    public void saveMap(File mapPath) throws IOException {
+    public void saveMap(File p_MapPath) throws IOException {
         validateMap();
-        writeMapFile(mapPath);
+        writeMapFile(p_MapPath);
     }
 
     /**
@@ -266,11 +266,11 @@ public class MapEditor {
      * or create a new map from scratch if the file does not exist.
      *
      *  and automatically validates map upon loading
-     * @param mapPath
+     * @param p_MapPath
      * @throws IOException
      */
-    public void editMap(File mapPath) throws IOException {
-        readMapFile(mapPath);
+    public void editMap(File p_MapPath) throws IOException {
+        readMapFile(p_MapPath);
 
         validateMap();
     }
@@ -280,68 +280,68 @@ public class MapEditor {
     }
 
     private void resetCurrentMap() {
-        this.currentMap = new Map();
+        this.d_CurrentMap = new Map();
     }
 
-    public Map readMapFile(File mapFile) throws IOException {
+    public Map readMapFile(File p_MapFile) throws IOException {
         resetCurrentMap();
-        if(mapFile!= null && mapFile.exists()) {
-            System.out.println("reading .map file from path: " + mapFile.getAbsolutePath());
-            FileReader fr = new FileReader(mapFile);
-            BufferedReader br = new BufferedReader(fr);
+        if(p_MapFile != null && p_MapFile.exists()) {
+            System.out.println("reading .map file from path: " + p_MapFile.getAbsolutePath());
+            FileReader l_Fr = new FileReader(p_MapFile);
+            BufferedReader l_Br = new BufferedReader(l_Fr);
 
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.equalsIgnoreCase(HEADER_CONTINENT)) {
+            String l_Line;
+            while ((l_Line = l_Br.readLine()) != null) {
+                if (l_Line.equalsIgnoreCase(HEADER_CONTINENT)) {
 
-                    int continentID = 1;
-                    while ((line = br.readLine()).length() > 0) {
-                        System.out.println("continent : " + line);
+                    int l_ContinentID = 1;
+                    while ((l_Line = l_Br.readLine()).length() > 0) {
+                        System.out.println("continent : " + l_Line);
 
-                        String[] continentArray = line.trim().split(" ");
-                        String continentName = continentArray[0];
-                        String continentArmy = continentArray[1];
-                        int continentArmyInteger = Integer.parseInt(continentArmy);
-                        String continentColor = continentArray[2];
+                        String[] l_ContinentArray = l_Line.trim().split(" ");
+                        String l_ContinentName = l_ContinentArray[0];
+                        String l_ContinentArmy = l_ContinentArray[1];
+                        int l_ContinentArmyInteger = Integer.parseInt(l_ContinentArmy);
+                        String l_ContinentColor = l_ContinentArray[2];
 
-                        Continent continent = new Continent(continentID, continentName, continentArmyInteger, continentColor);
-                        getCurrentMap().getListOfContinents().add(continent);
+                        Continent l_Continent = new Continent(l_ContinentID, l_ContinentName, l_ContinentArmyInteger, l_ContinentColor);
+                        getCurrentMap().getListOfContinents().add(l_Continent);
                         // note: the while loop is supposed to break on blank line..
                     }
-                } else if (line.equalsIgnoreCase(HEADER_COUNTRIES)) {
+                } else if (l_Line.equalsIgnoreCase(HEADER_COUNTRIES)) {
 
-                    while ((line = br.readLine()).length() > 0) {
-                        System.out.println("country : " + line);
+                    while ((l_Line = l_Br.readLine()).length() > 0) {
+                        System.out.println("country : " + l_Line);
 
-                        String[] countryArray = line.trim().split(" ");
-                        String countryId = countryArray[0];
-                        int countryIdInteger = Integer.parseInt(countryId);
-                        String countryName = countryArray[1];
-                        String continentId = countryArray[2];
-                        int continentIdInteger = Integer.parseInt(continentId);
-                        String xCoordinate = countryArray[3];
-                        int xCoordinateInteger = Integer.parseInt(xCoordinate);
-                        String yCoordinate = countryArray[4];
-                        int yCoordinateInteger = Integer.parseInt(yCoordinate);
+                        String[] l_CountryArray = l_Line.trim().split(" ");
+                        String l_CountryId = l_CountryArray[0];
+                        int l_CountryIdInteger = Integer.parseInt(l_CountryId);
+                        String l_CountryName = l_CountryArray[1];
+                        String l_ContinentId = l_CountryArray[2];
+                        int l_ContinentIdInteger = Integer.parseInt(l_ContinentId);
+                        String l_XCoordinate = l_CountryArray[3];
+                        int l_XCoordinateInteger = Integer.parseInt(l_XCoordinate);
+                        String l_YCoordinate = l_CountryArray[4];
+                        int l_YCoordinateInteger = Integer.parseInt(l_YCoordinate);
 
-                        Country country = new Country(countryIdInteger, continentIdInteger, countryName, xCoordinateInteger, yCoordinateInteger);
-                        getCurrentMap().getListOfCountries().add(country);
+                        Country l_Country = new Country(l_CountryIdInteger, l_ContinentIdInteger, l_CountryName, l_XCoordinateInteger, l_YCoordinateInteger);
+                        getCurrentMap().getListOfCountries().add(l_Country);
 
                     }
-                } else if (line.equalsIgnoreCase(HEADER_BORDERS)) {
-                    line = br.readLine();
-                    while (line != null && line.length() > 0) {
-                        System.out.println("border : " + line);
+                } else if (l_Line.equalsIgnoreCase(HEADER_BORDERS)) {
+                    l_Line = l_Br.readLine();
+                    while (l_Line != null && l_Line.length() > 0) {
+                        System.out.println("border : " + l_Line);
 
-                        String[] borderArray = line.trim().split(" ");
-                        int countryIdInteger = Integer.parseInt(borderArray[0]);
-                        ArrayList<Integer> borderCountries = new ArrayList<Integer>();
-                        for (int i = 1; i < borderArray.length; i++) {
-                            borderCountries.add(Integer.parseInt(borderArray[i]));
+                        String[] l_BorderArray = l_Line.trim().split(" ");
+                        int l_CountryIdInteger = Integer.parseInt(l_BorderArray[0]);
+                        ArrayList<Integer> l_BorderCountries = new ArrayList<Integer>();
+                        for (int l_I = 1; l_I < l_BorderArray.length; l_I++) {
+                            l_BorderCountries.add(Integer.parseInt(l_BorderArray[l_I]));
                         }
-                        Border border = new Border(countryIdInteger, borderCountries);
-                        getCurrentMap().getListOfBorders().add(border);
-                        line = br.readLine();
+                        Border l_Border = new Border(l_CountryIdInteger, l_BorderCountries);
+                        getCurrentMap().getListOfBorders().add(l_Border);
+                        l_Line = l_Br.readLine();
                     }
                 }
             }
@@ -349,51 +349,51 @@ public class MapEditor {
         return getCurrentMap();
     }
 
-    private void writeMapFile(File mapFile) throws IOException {
-        System.out.println("writing .map file to path " + mapFile.getAbsolutePath());
-        FileWriter fileWriter = new FileWriter(mapFile);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+    private void writeMapFile(File p_MapFile) throws IOException {
+        System.out.println("writing .map file to path " + p_MapFile.getAbsolutePath());
+        FileWriter l_FileWriter = new FileWriter(p_MapFile);
+        BufferedWriter l_BufferedWriter = new BufferedWriter(l_FileWriter);
 
-        String content = "; map:" + mapFile.getName() + "\r\n";
-        content += "; created by team-11 \r\n";
+        String l_Content = "; map:" + p_MapFile.getName() + "\r\n";
+        l_Content += "; created by team-11 \r\n";
 
-        content += "\r\n[continents]\r\n";
-        for (Continent continent : getCurrentMap().getListOfContinents()) {
-            content += continent.getName() + " " + continent.getArmyCount() + " " + continent.getColor() + " \r\n";
+        l_Content += "\r\n[continents]\r\n";
+        for (Continent l_Continent : getCurrentMap().getListOfContinents()) {
+            l_Content += l_Continent.getName() + " " + l_Continent.getArmyCount() + " " + l_Continent.getColor() + " \r\n";
         }
 
-        content += "\r\n[countries]\r\n";
-        for (Country country : getCurrentMap().getListOfCountries()) {
-            content += country.getCountryID() + " " + country.getName() + " " + country.getContinentID() + " " + country.getX() + " " + country.getY() + " \r\n";
+        l_Content += "\r\n[countries]\r\n";
+        for (Country l_Country : getCurrentMap().getListOfCountries()) {
+            l_Content += l_Country.getCountryID() + " " + l_Country.getName() + " " + l_Country.getContinentID() + " " + l_Country.getX() + " " + l_Country.getY() + " \r\n";
         }
 
-        content += "\r\n[borders]\r\n";
-        for (Border border : getCurrentMap().getListOfBorders()) {
-            content += border.getCountryId() + " ";
-            for (int neighbourCountryId : border.getNeighbours()) {
-                content += neighbourCountryId + " ";
+        l_Content += "\r\n[borders]\r\n";
+        for (Border l_Border : getCurrentMap().getListOfBorders()) {
+            l_Content += l_Border.getCountryId() + " ";
+            for (int neighbourCountryId : l_Border.getNeighbours()) {
+                l_Content += neighbourCountryId + " ";
             }
-            content += " \r\n";
+            l_Content += " \r\n";
         }
 
-        bufferedWriter.write(content);
-        bufferedWriter.close();
-        fileWriter.close();
+        l_BufferedWriter.write(l_Content);
+        l_BufferedWriter.close();
+        l_FileWriter.close();
 
-        System.out.println("Successfully written map to .map file at: " + mapFile.getAbsolutePath());
+        System.out.println("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
     }
 
     public Graph loadMapAsGraph(){
-        Map map = this.getCurrentMap();
-        int numberOfCountries = map.getListOfCountries().size();
-        Graph graph = new Graph(numberOfCountries);
-        for (int i = 0; i < map.getListOfBorders().size(); i++) {
-            Border border = map.getListOfBorders().get(i);
-            for (int countryId : border.getNeighbours()) {
-                graph.addEdge(border.getCountryId(), countryId);
+        Map l_Map = this.getCurrentMap();
+        int l_NumberOfCountries = l_Map.getListOfCountries().size();
+        Graph l_Graph = new Graph(l_NumberOfCountries);
+        for (int l_I = 0; l_I < l_Map.getListOfBorders().size(); l_I++) {
+            Border l_Border = l_Map.getListOfBorders().get(l_I);
+            for (int l_CountryId : l_Border.getNeighbours()) {
+                l_Graph.addEdge(l_Border.getCountryId(), l_CountryId);
             }
 
         }
-        return graph;
+        return l_Graph;
     }
 }
