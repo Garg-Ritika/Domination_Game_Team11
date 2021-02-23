@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- *  GameController is the controller class in MVC pattern.
- *  It is supposed to be the main class for all the controller functions
- *
- *  Currently, it is taking command input for the game
+ * GameController is the controller class in MVC pattern.
+ * It is supposed to be the main class for all the controller functions
+ * <p>
+ * Currently, it is taking command input for the game
  */
 public class GameController extends Observable {
 
@@ -41,7 +41,8 @@ public class GameController extends Observable {
 
     /**
      * Game Controller constructor
-     * @param p_GameView Game View
+     *
+     * @param p_GameView  Game View
      * @param p_GameModel Game model
      */
     public GameController(GameView p_GameView, GameModel p_GameModel) {
@@ -71,6 +72,7 @@ public class GameController extends Observable {
 
     /**
      * process all the mapeditor commands as per commands and call the right method accordingly
+     *
      * @param p_Command command array
      */
     private void processCommands(String[] p_Command) {
@@ -123,8 +125,9 @@ public class GameController extends Observable {
     }
 
     /**
-     *  Helper method process edit continent command
-     *  format: editcontinet -add asia 1 - add africa 2
+     * Helper method process edit continent command
+     * format: editcontinet -add asia 1 - add africa 2
+     *
      * @param p_Command command array
      */
     private void processEditContinentCommand(String[] p_Command) {
@@ -167,6 +170,7 @@ public class GameController extends Observable {
     /**
      * Helper method to process all the country command
      * format : editcountry india asia
+     *
      * @param p_Command command array
      */
     private void processEditCountryCommand(String[] p_Command) {
@@ -208,6 +212,7 @@ public class GameController extends Observable {
     /**
      * Helper method to process all the neighbors
      * format : editneighbour india china
+     *
      * @param p_Command command array
      */
     private void processEditNeighbourCommand(String[] p_Command) {
@@ -248,7 +253,7 @@ public class GameController extends Observable {
     }
 
     /**
-     *  Helper method to process "showmap" command in mapeditor pary
+     * Helper method to process "showmap" command in mapeditor pary
      */
     private void processShowMapCommand() {
         System.out.println("showmap command received ...");
@@ -257,6 +262,7 @@ public class GameController extends Observable {
 
     /**
      * Helper method to process "savemap" command
+     *
      * @param p_Command command array
      */
     private void processSaveMapCommand(String[] p_Command) {
@@ -278,6 +284,7 @@ public class GameController extends Observable {
 
     /**
      * Helper method to process editmap command
+     *
      * @param p_Command command array
      */
     private void processEditMapCommand(String[] p_Command) {
@@ -308,6 +315,7 @@ public class GameController extends Observable {
 
     /**
      * Helper method to process loadmap command to start the game play on a map
+     *
      * @param p_Command command array
      */
     private void processLoadGameCommand(String[] p_Command) {

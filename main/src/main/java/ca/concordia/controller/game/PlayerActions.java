@@ -17,8 +17,8 @@ import java.util.Random;
 public class PlayerActions {
 
     private final int MINIMUM_PLAYER_COUNT = 3;
-    private List<Player> d_ListOfPlayers = new ArrayList<Player>();
     private final Map d_Map;
+    private List<Player> d_ListOfPlayers = new ArrayList<Player>();
     private Player d_Winner;
 
     /**
@@ -151,23 +151,24 @@ public class PlayerActions {
      */
     public void executeOrderPhase(Player p_Player) {
         Order l_Order = p_Player.nextOrder();
-
-        String l_OrderType = l_Order.getOrderType();
-        switch (l_OrderType) {
-            case "deploy":
-                String l_CountryName = l_Order.getCountryName();
-                int l_ArmyCount = l_Order.getArmyCount();
-                for (Country l_country : getMap().getListOfCountries()) {
-                    if (l_country.getName().equalsIgnoreCase(l_CountryName)) {
-                        l_country.setArmyCount(l_ArmyCount);
-                        System.out.println(l_ArmyCount + "  armies are deploy to the country: " + l_CountryName);
-                        break;
+        if (l_Order != null) {
+            String l_OrderType = l_Order.getOrderType();
+            switch (l_OrderType) {
+                case "deploy":
+                    String l_CountryName = l_Order.getCountryName();
+                    int l_ArmyCount = l_Order.getArmyCount();
+                    for (Country l_country : getMap().getListOfCountries()) {
+                        if (l_country.getName().equalsIgnoreCase(l_CountryName)) {
+                            l_country.setArmyCount(l_ArmyCount);
+                            System.out.println(l_ArmyCount + "  armies are deploy to the country: " + l_CountryName);
+                            break;
+                        }
                     }
-                }
 
-                break;
-            default:
-                System.out.println(l_OrderType + " is not a valid order type to execute");
+                    break;
+                default:
+                    System.out.println(l_OrderType + " is not a valid order type to execute");
+            }
         }
 
     }
@@ -191,16 +192,16 @@ public class PlayerActions {
     }
 
     /**
-     * @param player player parameter is passed
-     */
-    public void setWinner(Player player) {
-        this.d_Winner = player;
-    }
-
-    /**
      * @return winner
      */
     public Player getWinner() {
         return this.d_Winner;
+    }
+
+    /**
+     * @param player player parameter is passed
+     */
+    public void setWinner(Player player) {
+        this.d_Winner = player;
     }
 }

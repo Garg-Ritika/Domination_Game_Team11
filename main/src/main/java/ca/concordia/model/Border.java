@@ -35,21 +35,21 @@ public class Border {
     }
 
     /**
-     * This method returns the Neighbours list associated with a country
-     *
-     * @return list of Neighbours
-     */
-    public List<Integer> getNeighbours() {
-        return d_Neighbours;
-    }
-
-    /**
      * This method sets the ID of the country.
      *
      * @param p_CountryId CountryId
      */
     public void setCountryId(int p_CountryId) {
         this.d_CountryId = p_CountryId;
+    }
+
+    /**
+     * This method returns the Neighbours list associated with a country
+     *
+     * @return list of Neighbours
+     */
+    public List<Integer> getNeighbours() {
+        return d_Neighbours;
     }
 
     /**

@@ -88,6 +88,15 @@ public class Country {
     }
 
     /**
+     * This method returns the x Coordinate Integer of Country's location on map.
+     *
+     * @return x Coordinate Integer
+     */
+    public int getX() {
+        return d_X;
+    }
+
+    /**
      * This method sets the x Coordinate Integer of Country's location on map.
      *
      * @param p_X x Coordinate Integer
@@ -97,12 +106,12 @@ public class Country {
     }
 
     /**
-     * This method returns the x Coordinate Integer of Country's location on map.
+     * This method returns the y Coordinate Integer of Country's location on map.
      *
-     * @return x Coordinate Integer
+     * @return y Coordinate Integer
      */
-    public int getX() {
-        return d_X;
+    public int getY() {
+        return d_Y;
     }
 
     /**
@@ -115,14 +124,13 @@ public class Country {
     }
 
     /**
-     * This method returns the y Coordinate Integer of Country's location on map.
+     * This method returns the army count value of the country
      *
-     * @return y Coordinate Integer
+     * @return d_ArmyCount
      */
-    public int getY() {
-        return d_Y;
+    public int getArmyCount() {
+        return d_ArmyCount;
     }
-
 
     /**
      * This method sets the army count value of the country
@@ -131,15 +139,6 @@ public class Country {
      */
     public void setArmyCount(int p_ArmyCount) {
         this.d_ArmyCount = p_ArmyCount;
-    }
-
-    /**
-     * This method returns the army count value of the country
-     *
-     * @return d_ArmyCount
-     */
-    public int getArmyCount() {
-        return d_ArmyCount;
     }
 
 

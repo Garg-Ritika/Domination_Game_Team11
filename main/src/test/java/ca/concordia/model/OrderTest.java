@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
  * This class contains test details of Order class
  */
 public class OrderTest {
-    Order o;
+    Order d_Order;
 
     /**
      * This is the method to be run before test method. It initializes the Order class object
@@ -17,7 +17,7 @@ public class OrderTest {
 
     @Before
     public void before() {
-        o = new Order("deploy", "canada", 2);
+        d_Order = new Order("deploy", "canada", 2);
     }
 
     /**
@@ -26,7 +26,7 @@ public class OrderTest {
 
     @Test
     public void getOrder() {
-        assertEquals("2", o.getArmyCount());
+        assertEquals(2, d_Order.getArmyCount());
 
     }
 }

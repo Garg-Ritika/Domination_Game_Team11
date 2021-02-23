@@ -5,7 +5,7 @@ import ca.concordia.model.GameModel;
 import ca.concordia.view.GameView;
 
 /**
- *  Starting point of the class that initializes all three model, view and controller
+ * Starting point of the class that initializes all three model, view and controller
  */
 public class Main {
 
@@ -14,7 +14,7 @@ public class Main {
     private GameView d_GameView;
 
     /**
-     *  Contructor of Main class
+     * Contructor of Main class
      */
     public Main() {
         d_GameModel = new GameModel();
@@ -23,7 +23,8 @@ public class Main {
     }
 
     /**
-     *  main method to start the exeuction
+     * main method to start the exeuction
+     *
      * @param args arguments to the program, the game is not expecting any argument on startup
      */
     public static void main(String[] args) {
@@ -32,7 +33,7 @@ public class Main {
     }
 
     /**
-     *  StartGame function to start the execution using controller by taking command inputs from users.
+     * StartGame function to start the execution using controller by taking command inputs from users.
      */
     public void startGame() {
         d_GameController.takeCommandInput();

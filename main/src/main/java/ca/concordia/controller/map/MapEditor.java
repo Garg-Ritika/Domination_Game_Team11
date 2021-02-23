@@ -29,6 +29,7 @@ public class MapEditor {
     /**
      * GetInstance method to get the single instance of the Mapeditor,
      * If there is already a instance available statically, return that otherwise create a new one
+     *
      * @return
      */
     public static MapEditor getInstance() {
@@ -40,6 +41,7 @@ public class MapEditor {
 
     /**
      * Helper method to get the current map that is being process
+     *
      * @return
      */
     private Map getCurrentMap() {
@@ -48,8 +50,9 @@ public class MapEditor {
 
     /**
      * Helper method to add continent to the map
+     *
      * @param p_ContinentName continent name
-     * @param p_ArmyCount army count
+     * @param p_ArmyCount     army count
      * @return boolean
      */
     public boolean addContinent(String p_ContinentName, int p_ArmyCount) {
@@ -73,6 +76,7 @@ public class MapEditor {
 
     /**
      * Helper method to the remove the continent from the man
+     *
      * @param p_ContinentName continent name
      * @return boolean
      */
@@ -97,7 +101,8 @@ public class MapEditor {
 
     /**
      * Helper method to add the country into the map  and assign it to a continent
-     * @param p_CountryName country name
+     *
+     * @param p_CountryName    country name
      * @param p_Continent_Name continent name
      * @return boolean
      */
@@ -135,6 +140,7 @@ public class MapEditor {
 
     /**
      * Helper method to remove the country from the map and its continent
+     *
      * @param p_CountryName country name
      * @return boolean
      */
@@ -157,6 +163,7 @@ public class MapEditor {
 
     /**
      * Helper method to remove the country using its country id
+     *
      * @param p_CountryID country id integer
      * @return boolean
      */
@@ -180,7 +187,8 @@ public class MapEditor {
 
     /**
      * Helper method to add a new neighbour country to a country
-     * @param p_CountryName country whose neighbour is being assigned
+     *
+     * @param p_CountryName  country whose neighbour is being assigned
      * @param p_NeighborName the new neighbor
      * @return boolean
      */
@@ -235,8 +243,9 @@ public class MapEditor {
     }
 
     /**
-     *  Helper method to remove a neighbor from the country
-     * @param p_CountryName country whose neighbour is being removed
+     * Helper method to remove a neighbor from the country
+     *
+     * @param p_CountryName  country whose neighbour is being removed
      * @param p_NeighborName the neighbour being removed
      * @return boolean
      */
@@ -335,6 +344,7 @@ public class MapEditor {
     /**
      * Helper method to validate map. it is being called after reading and before writing a map
      * as well as through "validatemap" command
+     *
      * @return
      */
     public boolean validateMap() {
@@ -342,7 +352,7 @@ public class MapEditor {
     }
 
     /**
-     *  private method to reset the currentmap into an empty map
+     * private method to reset the currentmap into an empty map
      */
     private void resetCurrentMap() {
         this.d_CurrentMap = new Map();
@@ -350,6 +360,7 @@ public class MapEditor {
 
     /**
      * Helper method to read the map file from filesystem
+     *
      * @param p_MapFile the file object of map file
      * @return map object
      * @throws IOException
@@ -422,6 +433,7 @@ public class MapEditor {
 
     /**
      * private method to write the map file
+     *
      * @param p_MapFile the map file object
      * @throws IOException
      */
@@ -462,6 +474,7 @@ public class MapEditor {
     /**
      * method to load the map as a graph
      * TODO: currently this method is not being used anywhere ..
+     *
      * @return
      */
     public Graph loadMapAsGraph() {

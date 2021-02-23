@@ -11,7 +11,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({BorderTest.class, ContinentTest.class, CountryTest.class, OrderTest.class
+@Suite.SuiteClasses({
+        BorderTest.class,
+        ContinentTest.class,
+        CountryTest.class,
+        OrderTest.class
 })
 public class MainTest extends TestCase {
 
@@ -23,7 +27,6 @@ public class MainTest extends TestCase {
     public static Test suite() {
 
         return new TestSuite(MainTest.class);
-
 
     }
 

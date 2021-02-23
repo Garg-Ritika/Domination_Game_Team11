@@ -62,15 +62,6 @@ public class Continent {
     }
 
     /**
-     * This method sets the color of the continent
-     *
-     * @param p_Color country color
-     */
-    public void setColor(String p_Color) {
-        this.d_Color = p_Color;
-    }
-
-    /**
      * This method returns the color of the continent
      *
      * @return d_Color
@@ -80,12 +71,12 @@ public class Continent {
     }
 
     /**
-     * This method sets the army count.
+     * This method sets the color of the continent
      *
-     * @param p_ArmyCount army count
+     * @param p_Color country color
      */
-    public void setArmyCount(int p_ArmyCount) {
-        this.d_ArmyCount = p_ArmyCount;
+    public void setColor(String p_Color) {
+        this.d_Color = p_Color;
     }
 
     /**
@@ -95,5 +86,14 @@ public class Continent {
      */
     public int getArmyCount() {
         return d_ArmyCount;
+    }
+
+    /**
+     * This method sets the army count.
+     *
+     * @param p_ArmyCount army count
+     */
+    public void setArmyCount(int p_ArmyCount) {
+        this.d_ArmyCount = p_ArmyCount;
     }
 }

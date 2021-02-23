@@ -10,12 +10,23 @@ import java.util.Scanner;
  */
 public class GameEngine {
 
+    public static final String ORDER_DEPLOY = "deploy";
+    public static boolean GAME_STARTED = false;
     private static GameEngine d_Instance = null;
     private final Map d_CurrentMap;
-    private Graph d_Graph;
     private final PlayerActions d_PlayerActions;
-    public static boolean GAME_STARTED = false;
-    public static final String ORDER_DEPLOY = "deploy";
+    private Graph d_Graph;
+
+    /**
+     * This is a private constructor so that it cannot be
+     * instantiated outside this class ..
+     *
+     * @param p_Map map on which the game is starting
+     */
+    private GameEngine(Map p_Map) {
+        this.d_CurrentMap = p_Map;
+        this.d_PlayerActions = new PlayerActions(this.d_CurrentMap);
+    }
 
     /**
      * This is a static method to get the instance of this singleton object
@@ -28,17 +39,6 @@ public class GameEngine {
             d_Instance = new GameEngine(p_Map);
         }
         return d_Instance;
-    }
-
-    /**
-     * This is a private constructor so that it cannot be
-     * instantiated outside this class ..
-     *
-     * @param p_Map map on which the game is starting
-     */
-    private GameEngine(Map p_Map) {
-        this.d_CurrentMap = p_Map;
-        this.d_PlayerActions = new PlayerActions(this.d_CurrentMap);
     }
 
     /**

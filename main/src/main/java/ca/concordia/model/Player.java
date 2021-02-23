@@ -1,5 +1,6 @@
 package ca.concordia.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,9 +11,9 @@ public class Player {
     private String d_PlayerName;
     private int d_PlayerID;
     private int d_NoOfArmies;
-    private List<Country> d_ListOfCountries;
-    private List<Continent> d_ListOfContinents;
-    private List<Order> d_ListOfOrders;
+    private List<Country> d_ListOfCountries = new ArrayList<Country>();
+    private List<Continent> d_ListOfContinents = new ArrayList<Continent>();
+    private List<Order> d_ListOfOrders = new ArrayList<Order>();
 
     /**
      * Constructor initializes the following below member variables of Player class
