@@ -3,7 +3,7 @@ package ca.concordia.model;
 /**
  * Adjacency Matrix representation of the Maps
  *
- * @author xyz "Please change the name later, it is temp fix for correcting build"
+ * @author to be updated
  */
 
 public class Graph {
@@ -11,25 +11,52 @@ public class Graph {
     private boolean d_AdjMatrix[][];
     private int d_NumberOfCountries; // represent number of vertices
 
+    /**
+     * Constructor initializes the no of Countries associated at a given time to represent matrix representation of map
+     *
+     * @param p_NumberOfCountries no of Countries in a map
+     */
     public Graph(int p_NumberOfCountries) {
         this.d_NumberOfCountries = p_NumberOfCountries +1;
         this.d_AdjMatrix = new boolean[this.d_NumberOfCountries][this.d_NumberOfCountries];
     }
 
+    /**
+     * This method is used to add edges to graph representation for each connected country in a map
+     *
+     * @param p_I Borders country Id
+     * @param p_J country Id
+     */
     public void addEdge(int p_I, int p_J) {
         d_AdjMatrix[p_I][p_J] = true;
         d_AdjMatrix[p_J][p_I] = true;
     }
 
+    /**
+     * This method is used to remove edges from graph representation for each removed connected country in a map
+     *
+     * @param p_I Borders country Id
+     * @param p_J country Id
+     */
     public void removeEdge(int p_I, int p_J) {
         d_AdjMatrix[p_I][p_J] = false;
         d_AdjMatrix[p_J][p_I] = false;
     }
 
+    /**
+     * This method returns the matrix formed to check for the validation of the map if it is connected and valid
+     *
+     * @return the matrix representation of the map
+     */
     public boolean[][] getAdjMatrix() {
         return d_AdjMatrix;
     }
 
+    /**
+     * This method returns the size of the graph that is of matrix table
+     *
+     * @return (no of countries)^2
+     */
     public int size() {
         return this.d_NumberOfCountries * this.d_NumberOfCountries;
     }
