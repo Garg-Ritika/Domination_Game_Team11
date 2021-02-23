@@ -6,13 +6,13 @@ import ca.concordia.model.GameModel;
 
 public class GameView implements Observer {
 
-    public GameView(GameModel p_gameModel) {
-        p_gameModel.attach(this);
+    public GameView(GameModel p_GameModel) {
+        p_GameModel.attach(this);
     }
 
     @Override
-    public void update(Observable p_observable_state) {
-        String text = ((GameModel) p_observable_state).getDisplayString();
+    public void update(Observable p_ObservableState) {
+        String text = ((GameModel) p_ObservableState).getDisplayString();
         System.out.println(text);
     }
 }
