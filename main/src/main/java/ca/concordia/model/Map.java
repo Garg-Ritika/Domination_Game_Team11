@@ -10,7 +10,7 @@ import java.util.List;
  * 3.list of borders in a map
  * The main feature of this class in that it checks the adjacency between the countries which is required in Graph class
  *
- * @author GURSEERUT 
+ * @author GURSEERUT
  */
 public class Map {
 
