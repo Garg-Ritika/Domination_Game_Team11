@@ -70,6 +70,7 @@ public class PlayerActions {
             System.out.println("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
             return false;
         }
+        System.out.println("start assigning countries ");
 
         int countryCount = this.map.getListOfCountries().size();
         int playerCount = this.listOfPlayers.size();
@@ -96,19 +97,29 @@ public class PlayerActions {
                 Country country = countriesToAssignRandomly.get(index);
                 countriesToAssignRandomly.remove(country);
                 countriesForPlayer.add(country);
+                System.out.println(player.getPlayerName() + " has " +country.getName());
             }
+
             player.setListOfCountries(countriesForPlayer);
         }
         return true;
     }
 
     /**
-     * This method assigns armies to the players and their countries..
-     * @param player "to be updated"
+     * All turns start with reinforcement. Each turn, each player receives a number of armies equal to:
+     * (max(3, # of countries the player own/3)+(continent value of all continents controlled by the player)).
+     * - Joey's message on discord
+     * @param player "player for which the reinforcement is happening"
      */
     public void assignReinforcementPhase(Player player) {
-        // TODO: what is the logic here ?
-
+        int l_CountryOwnedByPlayer = player.getListOfCountries().size();
+        System.out.println("#countries own by player: "+ player.getPlayerName() + " is "+ l_CountryOwnedByPlayer);
+        //TODO: let's assume it is 1 for now, need to come up with a method here ..
+        int l_NetContinentValue = 1;
+        System.out.println("net continent value of all the continents controlled by player: " + l_NetContinentValue);
+        int l_NewArmy = Math.max(3,l_CountryOwnedByPlayer/3) + l_NetContinentValue;
+        System.out.println("#new armies being assigned to playeR: "+ player.getPlayerName() + " is " + l_NewArmy);
+        player.setNoOfArmies(l_NewArmy);
     }
 
     /**
@@ -132,8 +143,7 @@ public class PlayerActions {
             if (nextPlayer.getPlayerID() == player.getPlayerID()){
                 continue;
             }
-            //TODO: how "deploy countryID num* command will be used here ?
-            player.issueOrder();
+
         }
     }
 
@@ -144,9 +154,7 @@ public class PlayerActions {
      *
      */
     public void executeOrderPhase(Player player){
-        player.nextOrder();
-        // TODO: how to execute order ?
-        // TODO: what are thing required here ?
+
     }
 
     /**

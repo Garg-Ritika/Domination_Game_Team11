@@ -5,6 +5,7 @@ import ca.concordia.Observable;
 import ca.concordia.controller.game.GameEngine;
 import ca.concordia.controller.map.MapEditor;
 import ca.concordia.model.GameModel;
+import ca.concordia.model.Map;
 import ca.concordia.view.GameView;
 
 import java.io.File;
@@ -266,8 +267,13 @@ public class GameController extends Observable {
             if(!filename.isEmpty()){
                 System.out.println("loadmap command received ..");
                 File mapFile = new File(filename);
-                GameEngine gameEngine = GameEngine.getInstance(MapEditor.getInstance().readMapFile(mapFile));
-                gameEngine.loadMapforGame();
+                if(mapFile.exists()) {
+                    Map map = MapEditor.getInstance().readMapFile(mapFile);
+                    GameEngine gameEngine = GameEngine.getInstance(map);
+                    gameEngine.loadMapforGame();
+                }else{
+                    System.out.println("The map file" + mapFile.getAbsolutePath() + "doesn't exists");
+                }
             }
         }catch (Exception e){
             e.printStackTrace();

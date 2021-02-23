@@ -144,11 +144,13 @@ public class GameEngine  {
             System.out.println("PLAYER: " + player.getPlayerName());
             System.out.println("with total army count of : "+ player.getNoOfArmies());
             System.out.println("has ownership of these countries: ");
-            for(Country country: player.getListOfCountries()){
-                System.out.println("id: " + country.getCountryID()
-                        + " name: "+ country.getName()
-                        + " army count: " + country.getArmyCount()
-                        + " belongs to continent " + country.getContinentID());
+            if(player.getListOfCountries() != null) {
+                for (Country country : player.getListOfCountries()) {
+                    System.out.println("id: " + country.getCountryID()
+                            + " name: " + country.getName()
+                            + " army count: " + country.getArmyCount()
+                            + " belongs to continent " + country.getContinentID());
+                }
             }
         }
     }
@@ -164,7 +166,6 @@ public class GameEngine  {
      */
 
     private void mainGameLoop() {
-        this.d_playerActions.assignCountriesToPlayers();
 
         GAME_STARTED = true;
         while (true) {
@@ -188,6 +189,7 @@ public class GameEngine  {
     }
 
     /***
+     *
      * Assign to each player the correct number of reinforcement armies, according to Warzone rules
      */
     private void assignReinforcementPhase(){
@@ -336,7 +338,8 @@ public class GameEngine  {
         System.out.println("assigncountries command received..");
         try {
             int numberOfPlayers = this.d_playerActions.getListOfPlayers().size();
-            if (numberOfPlayers >=3 || numberOfPlayers <=5 ) {
+            if (numberOfPlayers >=3 && numberOfPlayers <=5 ) {
+                System.out.println("number of countries between [3 to 5] so assign countries to player now ..");
                 return assignCountries();
             }else{
                 System.out.println("number of player must be between [3 to 5] to state main-game-loop");
@@ -367,12 +370,11 @@ public class GameEngine  {
         System.out.println("deploy  command received ..... ");
         //TODO : could be multiple countryid under one command ..
         try{
-            String countryID = p_command[1];
-            int l_countryIDInt = Integer.parseInt(countryID);
+            String l_countryName = p_command[1];
             String l_num = p_command[2];
             int l_numInt = Integer.parseInt(l_num);
 
-            deploy(p_player,l_countryIDInt,l_numInt);
+            deploy(p_player,l_countryName,l_numInt);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -382,11 +384,12 @@ public class GameEngine  {
      * Issuing order command (untill all reinforcements have been placed
      *
      * @param player player object
-     * @param countryId country name
+     * @param countryName country name
      * @param num number of army to deploy
      * @return  boolean
      */
-    public boolean deploy(Player player, int countryId, int num) {
+    public boolean deploy(Player player, String countryName, int num) {
+        player.issueOrder();
         return false;
     }
 }

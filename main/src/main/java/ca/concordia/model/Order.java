@@ -2,22 +2,14 @@ package ca.concordia.model;
 
 public class Order {
 
-    private int orderID;
+    private String d_OrderCommand;
 
-    public Order(int orderID) {
-        this.orderID = orderID;
+    public Order(String p_OrderCommand) {
+        d_OrderCommand = p_OrderCommand;
     }
 
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
-    public void execute() {
-        // to enact the order- more clarity on this required?
+    public String getOrder() {
+        return d_OrderCommand;
     }
 
 }
