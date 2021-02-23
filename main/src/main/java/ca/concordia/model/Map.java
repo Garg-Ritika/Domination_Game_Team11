@@ -85,14 +85,14 @@ public class Map {
      */
     public Graph getAdjacencyMatrix() {
         int l_NumberOfCountries = this.getListOfCountries().size();
-        Graph graph = new Graph(l_NumberOfCountries);
-        for (int i = 0; i < this.getListOfBorders().size(); i++) {
-            Border border = this.getListOfBorders().get(i);
-            for (int countryId : border.getNeighbours()) {
-                graph.addEdge(border.getCountryId(), countryId);
+        Graph l_Graph = new Graph(l_NumberOfCountries);
+        for (int l_I = 0; l_I < this.getListOfBorders().size(); l_I++) {
+            Border l_Border = this.getListOfBorders().get(l_I);
+            for (int l_CountryId : l_Border.getNeighbours()) {
+                l_Graph.addEdge(l_Border.getCountryId(), l_CountryId);
             }
 
         }
-        return graph;
+        return l_Graph;
     }
 }
