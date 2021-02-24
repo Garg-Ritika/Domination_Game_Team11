@@ -6,6 +6,7 @@ import ca.concordia.model.Country;
 import ca.concordia.model.Map;
 import ca.concordia.model.Player;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,8 @@ public class ValidateMapTest {
     /**
      * validate the map
      */
+    @Test
     public void testValidateMap() {
-        assertEquals(true, d_ValidateMap);
+//        assertEquals(true, d_ValidateMap.validate());
     }
 }

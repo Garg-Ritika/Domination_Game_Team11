@@ -5,6 +5,7 @@ import ca.concordia.model.Country;
 import ca.concordia.model.Map;
 import ca.concordia.model.Player;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class PlayerActionsTest {
      * 7. test get winner
      * 8. test is game over
      */
+    @Test
     public void testAll() {
         testAddRemovePlayer();
         testAssignCountries();
@@ -64,6 +66,7 @@ public class PlayerActionsTest {
     /**
      * test add or remove player in Player actions
      */
+    @Test
     public void testAddRemovePlayer() {
         // test adding and removing players
         assertEquals(false, d_PlayerActions.removePlayer(d_Player1));
@@ -78,6 +81,7 @@ public class PlayerActionsTest {
     /**
      * Test assign countries algorithm triggered by "assigcountries" command
      */
+//    @Test
     public void testAssignCountries() {
         // test assigning countries
         assertEquals(true, d_PlayerActions.assignCountriesToPlayers());
@@ -87,6 +91,7 @@ public class PlayerActionsTest {
     /**
      * test main game play loop
      */
+    @Test
     public void testMainLoop() {
         // test-main loop
         for (Player l_player : d_PlayerList) {
@@ -100,6 +105,7 @@ public class PlayerActionsTest {
     /**
      * test game endphase winner ..
      */
+    @Test
     public void testGameEndPhase() {
         // test winner selection and game closing phase
         d_PlayerActions.setWinner(d_Player1);
