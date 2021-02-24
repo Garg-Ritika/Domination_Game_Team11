@@ -229,6 +229,7 @@ public class GameEngine {
                         // Issue deployment orders here to update the order list of the player .
                         if ((GameController.COMMAND_DEPLOY).equalsIgnoreCase(l_Command)) {
                             processDeployCommand(l_Player, l_CommandArray);
+                            System.out.println("armies left to deply are : " + l_Player.getNoOfArmies());
                             if (l_Player.getNoOfArmies() < 1) {
                                 System.out.println("All the reinforcement armies have been placed ..");
                                 break;
@@ -370,19 +371,20 @@ public class GameEngine {
     private void processDeployCommand(Player p_Player, String[] p_Command) {
         System.out.println("deploy  command received ..... ");
         try {
-            String l_CountryName = p_Command[1];
-            String l_Num = p_Command[2];
-            int l_NumInt = Integer.parseInt(l_Num);
+            if (p_Command.length == 3) {
+                String l_CountryName = p_Command[1];
+                String l_Num = p_Command[2];
+                int l_NumInt = Integer.parseInt(l_Num);
 
-            int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
-            if (l_ArmyCountOfPlayer >= l_NumInt) {
-                p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
-                Order l_order = new Order(ORDER_DEPLOY, l_CountryName, l_NumInt);
-                p_Player.addNewOrder(l_order);
-            } else {
-                System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
+                int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
+                if (l_ArmyCountOfPlayer >= l_NumInt) {
+                    p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
+                    Order l_order = new Order(ORDER_DEPLOY, l_CountryName, l_NumInt);
+                    p_Player.addNewOrder(l_order);
+                } else {
+                    System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
+                }
             }
-
         } catch (Exception l_E) {
             l_E.printStackTrace();
         }

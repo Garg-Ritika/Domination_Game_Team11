@@ -2,6 +2,7 @@ package ca.concordia.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class contains details of the Player
@@ -204,7 +205,12 @@ public class Player {
 
         // Also, there is no point running "showmap" before main game-play loop
         // TODO: think about this in next release
-
+        System.out.println("Number of armies available for player " + d_PlayerName + " is "  + getNoOfArmies()) ;
+        System.out.print("Countries available for player are: ");
+        for (Country l_country: d_ListOfCountries){
+            System.out.print(" " + l_country.getName() + " ");
+        }
+        System.out.println("");
     }
 
     /**

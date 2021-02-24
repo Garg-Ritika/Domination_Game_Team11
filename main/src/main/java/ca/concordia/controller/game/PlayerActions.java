@@ -72,11 +72,18 @@ public class PlayerActions {
             System.out.println("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
             return false;
         }
+        if(getMap().getListOfCountries().size()==0){
+            System.out.println("Zero countries in the map, so unable to assign anything to players");
+            return false;
+        }
+        System.out.println("Number of countries available is : " + getMap().getListOfCountries().size());
+
         System.out.println("start assigning countries ");
 
         int l_CountryCount = this.d_Map.getListOfCountries().size();
         int l_PlayerCount = this.d_ListOfPlayers.size();
         int l_PlayerCountryRatio = l_CountryCount / l_PlayerCount;
+        System.out.println("player-country ratio: " + l_PlayerCountryRatio);
 
         // temporary country list that will be randomly assigned in quantity playCountryRatio to each player ..
         ArrayList<Country> l_CountriesToAssignRandomly = new ArrayList<Country>();
@@ -84,25 +91,26 @@ public class PlayerActions {
             l_CountriesToAssignRandomly.add(l_Country);
         }
 
-        for (Player l_Player : d_ListOfPlayers) {
-
-            ArrayList<Country> l_CountriesForPlayer = new ArrayList<Country>();
-            while ((l_CountriesForPlayer.size() < l_PlayerCountryRatio)) {
-
-                int l_Index = 0;
-                if (l_CountriesToAssignRandomly.size() < 1) {
-                    System.out.println("All countries are assigned successfully ");
+        while(l_CountriesToAssignRandomly.size() >0){
+            for (Player l_Player : d_ListOfPlayers){
+                if(l_CountriesToAssignRandomly.size() ==0){
+                    System.out.println("All countries has been assigned ");
                     break;
-                } else if (l_CountriesToAssignRandomly.size() > 1) {
-                    l_Index = new Random().nextInt(l_CountriesToAssignRandomly.size() - 1);
+                }else if (l_CountriesToAssignRandomly.size() == 1){
+                    Country l_Country = l_CountriesToAssignRandomly.get(0);
+                    l_CountriesToAssignRandomly.remove(l_Country);
+                    l_Player.addNewCountry(l_Country);
+                    System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
+                }else{
+                    // Assign countries one-by-one, pick it randomly
+                    int l_Index =  new Random().nextInt(l_CountriesToAssignRandomly.size() - 1);
+                    Country l_Country = l_CountriesToAssignRandomly.get(l_Index);
+                    l_CountriesToAssignRandomly.remove(l_Country);
+                    l_Player.addNewCountry(l_Country);
+                    System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
                 }
-                Country l_Country = l_CountriesToAssignRandomly.get(l_Index);
-                l_CountriesToAssignRandomly.remove(l_Country);
-                l_CountriesForPlayer.add(l_Country);
-                System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
-            }
 
-            l_Player.setListOfCountries(l_CountriesForPlayer);
+            }
         }
         return true;
     }
