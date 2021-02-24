@@ -214,7 +214,7 @@ public class Player {
     }
 
     /**
-     * The player class must also have a “next_order()” (no parameters) method
+     * The player class must also have a next_order() (no parameters) method
      * that is called by the GameEngine  during the execute orders phase
      * and returns the first order in the player’s list of orders,
      * then removes it from the list

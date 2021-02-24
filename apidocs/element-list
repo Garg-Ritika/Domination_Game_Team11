@@ -1,1 +1,6 @@
+ca.concordia
+ca.concordia.controller
+ca.concordia.controller.game
+ca.concordia.controller.map
 ca.concordia.model
+ca.concordia.view

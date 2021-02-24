@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ca.concordia.model"}]
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ca.concordia"},{"l":"ca.concordia.controller"},{"l":"ca.concordia.controller.game"},{"l":"ca.concordia.controller.map"},{"l":"ca.concordia.model"},{"l":"ca.concordia.view"}];updateSearchResults();

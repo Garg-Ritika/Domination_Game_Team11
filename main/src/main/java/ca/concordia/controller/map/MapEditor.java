@@ -315,7 +315,8 @@ public class MapEditor {
     }
 
     /**
-     * Save a map to a text file exactly as edited (using the “domination” game map format).
+     * Save a map to a text file exactly as edited using
+     * domination game map format.
      * and automatically validates map before saving ..
      *
      * @param p_MapPath
@@ -327,7 +328,7 @@ public class MapEditor {
     }
 
     /**
-     * Load a map from an existing “domination” map file,
+     * Load a map from an existing domination map file,
      * or create a new map from scratch if the file does not exist.
      * <p>
      * and automatically validates map upon loading
