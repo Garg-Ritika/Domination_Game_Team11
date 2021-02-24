@@ -103,14 +103,14 @@ public class Map {
         return l_Graph;
     }
 
-    public Graph getContinentSubGraph(String p_ContinentName){
+    public Graph getContinentSubGraph(String p_ContinentName) {
         List<Integer> l_TempCountryIDList = new ArrayList<>();
-        for(Continent l_Continent: this.getListOfContinents()){
-            if(l_Continent.getName().equalsIgnoreCase(p_ContinentName)) {
+        for (Continent l_Continent : this.getListOfContinents()) {
+            if (l_Continent.getName().equalsIgnoreCase(p_ContinentName)) {
                 int l_ContinentID = l_Continent.getID();
 
-                for (Country l_Country: this.getListOfCountries()){
-                    if(l_Country.getContinentID() == l_ContinentID){
+                for (Country l_Country : this.getListOfCountries()) {
+                    if (l_Country.getContinentID() == l_ContinentID) {
                         l_TempCountryIDList.add(l_Country.getCountryID());
                     }
                 }
@@ -121,9 +121,9 @@ public class Map {
         Graph l_Graph = new Graph(l_NumberOfCountries);
         for (int l_TempCountryId : l_TempCountryIDList) {
             for (Border l_Border : this.getListOfBorders()) {
-                if(l_TempCountryId == l_Border.getCountryId()) {
+                if (l_TempCountryId == l_Border.getCountryId()) {
                     for (int l_CountryId : l_Border.getNeighbours()) {
-                        if(l_TempCountryIDList.contains(l_CountryId)) {
+                        if (l_TempCountryIDList.contains(l_CountryId)) {
                             l_Graph.addEdge(l_Border.getCountryId(), l_CountryId);
                         }
                     }

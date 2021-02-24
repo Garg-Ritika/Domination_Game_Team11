@@ -72,7 +72,7 @@ public class PlayerActions {
             System.out.println("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
             return false;
         }
-        if(getMap().getListOfCountries().size()==0){
+        if (getMap().getListOfCountries().size() == 0) {
             System.out.println("Zero countries in the map, so unable to assign anything to players");
             return false;
         }
@@ -91,19 +91,19 @@ public class PlayerActions {
             l_CountriesToAssignRandomly.add(l_Country);
         }
 
-        while(l_CountriesToAssignRandomly.size() >0){
-            for (Player l_Player : d_ListOfPlayers){
-                if(l_CountriesToAssignRandomly.size() ==0){
+        while (l_CountriesToAssignRandomly.size() > 0) {
+            for (Player l_Player : d_ListOfPlayers) {
+                if (l_CountriesToAssignRandomly.size() == 0) {
                     System.out.println("All countries has been assigned ");
                     break;
-                }else if (l_CountriesToAssignRandomly.size() == 1){
+                } else if (l_CountriesToAssignRandomly.size() == 1) {
                     Country l_Country = l_CountriesToAssignRandomly.get(0);
                     l_CountriesToAssignRandomly.remove(l_Country);
                     l_Player.addNewCountry(l_Country);
                     System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
-                }else{
+                } else {
                     // Assign countries one-by-one, pick it randomly
-                    int l_Index =  new Random().nextInt(l_CountriesToAssignRandomly.size() - 1);
+                    int l_Index = new Random().nextInt(l_CountriesToAssignRandomly.size() - 1);
                     Country l_Country = l_CountriesToAssignRandomly.get(l_Index);
                     l_CountriesToAssignRandomly.remove(l_Country);
                     l_Player.addNewCountry(l_Country);
@@ -167,7 +167,7 @@ public class PlayerActions {
                     String l_CountryName = l_Order.getCountryName();
                     int l_ArmyCount = l_Order.getArmyCount();
                     int l_PlayerArmyAvailable = p_Player.getNoOfArmies();
-                    if(l_PlayerArmyAvailable < l_ArmyCount) {
+                    if (l_PlayerArmyAvailable < l_ArmyCount) {
                         System.out.println("Invalid: player " + p_Player.getPlayerName() + "cannot assign more armies than it has..");
                         l_ArmyCount = p_Player.getNoOfArmies();
                     }
@@ -175,7 +175,7 @@ public class PlayerActions {
                     for (Country l_country : getMap().getListOfCountries()) {
                         if (l_country.getName().equalsIgnoreCase(l_CountryName)) {
                             l_country.setArmyCount(l_ArmyCount);
-                            p_Player.setNoOfArmies(l_PlayerArmyAvailable-l_ArmyCount);
+                            p_Player.setNoOfArmies(l_PlayerArmyAvailable - l_ArmyCount);
                             System.out.println(l_ArmyCount + "  armies are deploy to the country: " + l_CountryName);
                             break;
                         }

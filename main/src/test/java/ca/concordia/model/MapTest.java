@@ -16,7 +16,7 @@ public class MapTest {
     Map d_Map;
 
     @Before
-    public void before(){
+    public void before() {
         // Initialize map
         d_Map = new Map();
         //continents
@@ -31,15 +31,15 @@ public class MapTest {
         l_NeighboursOfCanada.add(2);
         l_NeighboursOfCanada.add(3);
         l_NeighboursOfCanada.add(4);
-        d_Map.getListOfBorders().add(new Border(1,l_NeighboursOfCanada));
+        d_Map.getListOfBorders().add(new Border(1, l_NeighboursOfCanada));
 
     }
 
     @Test
-    public void testMap(){
-        assertEquals(4,d_Map.getListOfCountries().size());
-        assertEquals(1,d_Map.getListOfContinents().size());
-        assertEquals(1,d_Map.getListOfBorders().size());
+    public void testMap() {
+        assertEquals(4, d_Map.getListOfCountries().size());
+        assertEquals(1, d_Map.getListOfContinents().size());
+        assertEquals(1, d_Map.getListOfBorders().size());
         assertEquals(25, d_Map.getAdjacencyMatrix().size());
     }
 }

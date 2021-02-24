@@ -1,6 +1,5 @@
 package ca.concordia.controller.map;
 
-import ca.concordia.controller.game.PlayerActions;
 import ca.concordia.model.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class ValidateMapTest {
         l_NeighboursOfCanada.add(2);
         l_NeighboursOfCanada.add(3);
         l_NeighboursOfCanada.add(4);
-        d_Map.getListOfBorders().add(new Border(1,l_NeighboursOfCanada));
+        d_Map.getListOfBorders().add(new Border(1, l_NeighboursOfCanada));
         //validate map
         d_ValidateMap = new ValidateMap(d_Map);
     }
@@ -48,10 +47,8 @@ public class ValidateMapTest {
      */
     @Test
     public void testValidateMap() {
-        assertEquals(true,d_ValidateMap.validate());
+        assertEquals(true, d_ValidateMap.validate());
         Graph continentGraph = d_Map.getContinentSubGraph("NorthAmerica");
-        assertEquals(true,d_ValidateMap.validate());
+        assertEquals(true, d_ValidateMap.validate());
     }
-
-
 }

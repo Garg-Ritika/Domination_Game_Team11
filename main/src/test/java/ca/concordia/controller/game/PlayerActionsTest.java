@@ -63,6 +63,7 @@ public class PlayerActionsTest {
     /**
      * test add or remove player in Player actions
      */
+    @Test
     public void testAddRemovePlayer() {
         // test adding and removing players
         assertEquals(false, d_PlayerActions.removePlayer(d_Player1));
@@ -77,6 +78,7 @@ public class PlayerActionsTest {
     /**
      * Test assign countries algorithm triggered by "assigcountries" command
      */
+//    @Test
     public void testAssignCountries() {
         // test assigning countries
         assertEquals(true, d_PlayerActions.assignCountriesToPlayers());
@@ -85,9 +87,10 @@ public class PlayerActionsTest {
 
     /**
      * test main game play loop
-     *  + calculation of number of reinforcement armies;
-     *  + player cannot deploy more armies that there is in their reinforcement pool.
+     * + 3. calculation of number of reinforcement armies;
+     * + 4. player cannot deploy more armies that there is in their reinforcement pool.
      */
+    @Test
     public void testMainLoop() {
         // test-main loop
         for (Player l_Player : d_PlayerList) {
@@ -101,21 +104,21 @@ public class PlayerActionsTest {
             int l_NewArmy = Math.max(3, l_CountryOwnedByPlayer / 3) + l_NetContinentValue;
 
             //3.verify the number of reinforcement armies
-            assertEquals(l_NewArmy,d_PlayerActions.assignReinforcementPhase(l_Player));
+            assertEquals(l_NewArmy, d_PlayerActions.assignReinforcementPhase(l_Player));
 
             l_Player.addNewOrder(new Order("deploy", "Canada", 5));
             d_PlayerActions.issueOrdersPhase(l_Player);
             d_PlayerActions.executeOrderPhase(l_Player);
 
             //4. player cannot deploy more armies that there is in their reinforcement pool.
-            assertEquals(0,l_Player.getNoOfArmies());
+            assertEquals(0, l_Player.getNoOfArmies());
             int l_ArmiesAssignedToCanada = 0;
-            for(Country l_country: d_Map.getListOfCountries()){
-                if(l_country.getName().equalsIgnoreCase("Canada")){
+            for (Country l_country : d_Map.getListOfCountries()) {
+                if (l_country.getName().equalsIgnoreCase("Canada")) {
                     l_ArmiesAssignedToCanada = l_country.getArmyCount();
                 }
             }
-            assertEquals(l_NewArmy,l_ArmiesAssignedToCanada);
+            assertEquals(l_NewArmy, l_ArmiesAssignedToCanada);
         }
     }
 
@@ -123,6 +126,7 @@ public class PlayerActionsTest {
     /**
      * test game endphase winner ..
      */
+    @Test
     public void testGameEndPhase() {
         // test winner selection and game closing phase
         d_PlayerActions.setWinner(d_Player1);

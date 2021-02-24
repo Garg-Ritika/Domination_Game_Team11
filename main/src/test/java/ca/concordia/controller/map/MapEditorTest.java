@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Test class for MapEditor
@@ -40,7 +41,7 @@ public class MapEditorTest {
         l_NeighboursOfCanada.add(2);
         l_NeighboursOfCanada.add(3);
         l_NeighboursOfCanada.add(4);
-        d_Map.getListOfBorders().add(new Border(1,l_NeighboursOfCanada));
+        d_Map.getListOfBorders().add(new Border(1, l_NeighboursOfCanada));
 
         d_mapEditor = MapEditor.getInstance();
     }
@@ -51,13 +52,13 @@ public class MapEditorTest {
     @Test
     public void testMapEditor() throws IOException {
         // continent
-        assertEquals(true, d_mapEditor.addContinent("Asia",1));
-        assertEquals(true, d_mapEditor.addContinent("Africa",1));
+        assertEquals(true, d_mapEditor.addContinent("Asia", 1));
+        assertEquals(true, d_mapEditor.addContinent("Africa", 1));
         assertEquals(true, d_mapEditor.removeContinent("Africa"));
 
-        assertEquals(true, d_mapEditor.addCountry("India","Asia"));
-        assertEquals(true, d_mapEditor.addCountry("China","Asia"));
-        assertEquals(true, d_mapEditor.addCountry("Nepal","Asia"));
+        assertEquals(true, d_mapEditor.addCountry("India", "Asia"));
+        assertEquals(true, d_mapEditor.addCountry("China", "Asia"));
+        assertEquals(true, d_mapEditor.addCountry("Nepal", "Asia"));
 
         assertEquals(true, d_mapEditor.addNeighbor("India", "Nepal"));
         assertEquals(true, d_mapEditor.addNeighbor("India", "China"));
@@ -73,9 +74,8 @@ public class MapEditorTest {
             d_mapEditor.readMapFile(new File("abc.map"));
             d_mapEditor.editMap(new File("abc.map"));
             d_mapEditor.showMap();
-        }catch (IOException io){
+        } catch (IOException io) {
             io.printStackTrace();
         }
     }
-
 }

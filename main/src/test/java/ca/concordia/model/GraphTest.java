@@ -17,7 +17,7 @@ public class GraphTest {
      * Create an graph instance before starting to test ..
      */
     @Before
-    public void before(){
+    public void before() {
         d_Graph = new Graph(5);
     }
 
@@ -25,10 +25,10 @@ public class GraphTest {
      * Test method for graph method creating adjacency matrix.
      */
     @Test
-    public void testGraphMethods(){
-        assertEquals(36,d_Graph.size());
+    public void testGraphMethods() {
+        assertEquals(36, d_Graph.size());
         assertNotNull(d_Graph.getAdjMatrix());
-        d_Graph.addEdge(1,2);
-        d_Graph.removeEdge(2,3);
+        d_Graph.addEdge(1, 2);
+        d_Graph.removeEdge(2, 3);
     }
 }

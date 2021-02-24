@@ -1,9 +1,10 @@
 package ca.concordia;
 
-import ca.concordia.model.BorderTest;
-import ca.concordia.model.ContinentTest;
-import ca.concordia.model.CountryTest;
-import ca.concordia.model.OrderTest;
+import ca.concordia.controller.game.GameEngineTest;
+import ca.concordia.controller.game.PlayerActionsTest;
+import ca.concordia.controller.map.MapEditorTest;
+import ca.concordia.controller.map.ValidateMapTest;
+import ca.concordia.model.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -15,7 +16,12 @@ import org.junit.runners.Suite;
         BorderTest.class,
         ContinentTest.class,
         CountryTest.class,
-        OrderTest.class
+        OrderTest.class,
+        PlayerTest.class,
+        GameEngineTest.class,
+        PlayerActionsTest.class,
+        MapEditorTest.class,
+        ValidateMapTest.class
 })
 public class MainTest extends TestCase {
 
