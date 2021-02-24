@@ -1,10 +1,8 @@
 package ca.concordia.controller.game;
 
-import ca.concordia.model.Continent;
-import ca.concordia.model.Country;
-import ca.concordia.model.Map;
-import ca.concordia.model.Player;
+import ca.concordia.model.*;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +52,7 @@ public class PlayerActionsTest {
      * 7. test get winner
      * 8. test is game over
      */
+    @Test
     public void testAll() {
         testAddRemovePlayer();
         testAssignCountries();
@@ -86,13 +85,37 @@ public class PlayerActionsTest {
 
     /**
      * test main game play loop
+     *  + calculation of number of reinforcement armies;
+     *  + player cannot deploy more armies that there is in their reinforcement pool.
      */
     public void testMainLoop() {
         // test-main loop
-        for (Player l_player : d_PlayerList) {
-            d_PlayerActions.assignReinforcementPhase(l_player);
-            d_PlayerActions.issueOrdersPhase(l_player);
-            d_PlayerActions.executeOrderPhase(l_player);
+        for (Player l_Player : d_PlayerList) {
+            int l_CountryOwnedByPlayer = l_Player.getListOfCountries().size();
+            int l_NetContinentValue = 0;
+            if (l_Player.getListOfContinents().size() > 1) {
+                for (Continent p_Continent : l_Player.getListOfContinents()) {
+                    l_NetContinentValue += p_Continent.getArmyCount();
+                }
+            }
+            int l_NewArmy = Math.max(3, l_CountryOwnedByPlayer / 3) + l_NetContinentValue;
+
+            //3.verify the number of reinforcement armies
+            assertEquals(l_NewArmy,d_PlayerActions.assignReinforcementPhase(l_Player));
+
+            l_Player.addNewOrder(new Order("deploy", "Canada", 5));
+            d_PlayerActions.issueOrdersPhase(l_Player);
+            d_PlayerActions.executeOrderPhase(l_Player);
+
+            //4. player cannot deploy more armies that there is in their reinforcement pool.
+            assertEquals(0,l_Player.getNoOfArmies());
+            int l_ArmiesAssignedToCanada = 0;
+            for(Country l_country: d_Map.getListOfCountries()){
+                if(l_country.getName().equalsIgnoreCase("Canada")){
+                    l_ArmiesAssignedToCanada = l_country.getArmyCount();
+                }
+            }
+            assertEquals(l_NewArmy,l_ArmiesAssignedToCanada);
         }
     }
 

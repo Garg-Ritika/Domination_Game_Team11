@@ -86,7 +86,7 @@ public class ValidateMap {
 
 
     /**
-     * Use depth-first-search in directed connected graph  to find whether it is connected or not.
+     * Use depth-first-search in connected graph  to find whether it is connected or not.
      *
      * @param p_Graph given graph is passed as an parameter
      * @return connected - prints the output graph is connected or it is not connected

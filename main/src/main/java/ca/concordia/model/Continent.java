@@ -37,10 +37,10 @@ public class Continent {
     /**
      * This method sets the id of the continent
      *
-     * @param p_CountryID country id
+     * @param p_ContinentID country id
      */
-    public void setID(int p_CountryID) {
-        this.d_ID = p_CountryID;
+    public void setID(int p_ContinentID) {
+        this.d_ID = p_ContinentID;
     }
 
     /**

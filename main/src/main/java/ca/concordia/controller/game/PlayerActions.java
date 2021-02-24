@@ -122,10 +122,10 @@ public class PlayerActions {
      *
      * @param p_Player "player for which the reinforcement is happening"
      */
-    public void assignReinforcementPhase(Player p_Player) {
+    public int assignReinforcementPhase(Player p_Player) {
         int l_CountryOwnedByPlayer = p_Player.getListOfCountries().size();
         System.out.println("#countries own by player: " + p_Player.getPlayerName() + " is " + l_CountryOwnedByPlayer);
-        int l_NetContinentValue = 1;
+        int l_NetContinentValue = 0;
         if (p_Player.getListOfContinents().size() > 1) {
             for (Continent p_Continent : p_Player.getListOfContinents()) {
                 l_NetContinentValue += p_Continent.getArmyCount();
@@ -135,6 +135,7 @@ public class PlayerActions {
         int l_NewArmy = Math.max(3, l_CountryOwnedByPlayer / 3) + l_NetContinentValue;
         System.out.println("#new armies being assigned to playeR: " + p_Player.getPlayerName() + " is " + l_NewArmy);
         p_Player.setNoOfArmies(l_NewArmy);
+        return l_NewArmy;
     }
 
     /**
@@ -165,9 +166,16 @@ public class PlayerActions {
                 case "deploy":
                     String l_CountryName = l_Order.getCountryName();
                     int l_ArmyCount = l_Order.getArmyCount();
+                    int l_PlayerArmyAvailable = p_Player.getNoOfArmies();
+                    if(l_PlayerArmyAvailable < l_ArmyCount) {
+                        System.out.println("Invalid: player " + p_Player.getPlayerName() + "cannot assign more armies than it has..");
+                        l_ArmyCount = p_Player.getNoOfArmies();
+                    }
+
                     for (Country l_country : getMap().getListOfCountries()) {
                         if (l_country.getName().equalsIgnoreCase(l_CountryName)) {
                             l_country.setArmyCount(l_ArmyCount);
+                            p_Player.setNoOfArmies(l_PlayerArmyAvailable-l_ArmyCount);
                             System.out.println(l_ArmyCount + "  armies are deploy to the country: " + l_CountryName);
                             break;
                         }
