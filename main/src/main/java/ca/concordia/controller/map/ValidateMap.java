@@ -65,7 +65,7 @@ public class ValidateMap {
         for (int l_I = 0; l_I < d_Map.getListOfContinents().size() - 1; l_I++) {
             for (int l_J = l_I + 1; l_J < d_Map.getListOfContinents().size(); l_J++) {
 
-                if (d_Map.getListOfContinents().get(l_I).getID() == d_Map.getListOfContinents().get(l_J).getID()) {
+                if (d_Map.getListOfContinents().get(l_I).getName().equals(d_Map.getListOfContinents().get(l_J).getName())) {
                     System.out.println("duplicate continent found: " + d_Map.getListOfContinents().get(l_I).getID());
                     return false;
                 }
@@ -75,7 +75,7 @@ public class ValidateMap {
         for (int l_I = 0; l_I < d_Map.getListOfCountries().size() - 1; l_I++) {
             for (int l_J = l_I + 1; l_J < d_Map.getListOfCountries().size(); l_J++) {
 
-                if (d_Map.getListOfCountries().get(l_I).getCountryID() == d_Map.getListOfCountries().get(l_J).getCountryID()) {
+                if (d_Map.getListOfCountries().get(l_I).getName().equals(d_Map.getListOfCountries().get(l_J).getName())) {
                     System.out.println("duplicate country found : " + d_Map.getListOfCountries().get(l_I).getCountryID());
                     return false;
                 }
