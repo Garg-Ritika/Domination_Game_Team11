@@ -3,7 +3,7 @@ Domination Game
 
 **commands for map-editor**
 - editcontinent -add asia 2 -add america 3 -add africa 4
-- editcountry -add india asia -add china asia -add pak china
+- editcountry -add india asia -add china asia -add pak asia
 - editneighbor -add india china -add pak china -add india pak
 - showmap
 - savemap d:\abc.map
