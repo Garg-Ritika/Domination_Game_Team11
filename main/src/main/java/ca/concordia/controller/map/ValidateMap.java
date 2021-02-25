@@ -97,22 +97,18 @@ public class ValidateMap {
         }
 
         Stack<Integer> l_Stack = new Stack<Integer>();
-        int l_Source = 1; // assume the source starts from country ID 1
-        int l_NodeCount = p_Graph.getAdjMatrix()[l_Source].length - 1; // another way of finding number of countries, starting from 0
+        int l_Source = 1;
+        int l_NodeCount = p_Graph.getAdjMatrix()[l_Source].length - 1;
         boolean[][] l_Matrix = p_Graph.getAdjMatrix();
         boolean l_Visited[] = new boolean[l_NodeCount + 1];
         int l_Element = l_Source;
         int l_I = l_Source;
-
-        // use stack to create a visited list
         l_Visited[l_Source] = true;
         l_Stack.push(l_Source);
         while (!l_Stack.isEmpty()) {
             l_Element = l_Stack.peek();
             l_I = l_Element;
-
             while (l_I <= l_NodeCount) {
-
                 if (l_Matrix[l_Element][l_I] == true && l_Visited[l_I] == false) {
                     l_Stack.push(l_I);
                     l_Visited[l_I] = true;
@@ -125,7 +121,6 @@ public class ValidateMap {
             l_Stack.pop();
         }
 
-        // find connectivity from visited list
         boolean l_Connected = false;
         for (int l_Node = 1; l_Node <= l_NodeCount; l_Node++) {
             if (l_Visited[l_Node] == true) {

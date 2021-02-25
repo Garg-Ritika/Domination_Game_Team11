@@ -5,8 +5,8 @@ import java.util.List;
 
 /**
  * This class contains details of the border
- * // check details : http://domination.sourceforge.net/makemaps.shtml
- * // 1 2 3 38  : the first number is the number of country and others are what country it is adjacent too
+ * //check details : http://domination.sourceforge.net/makemaps.shtml
+ *  1 2 3 38  : the first number is the number of country and others are what country it is adjacent too
  */
 public class Border {
 

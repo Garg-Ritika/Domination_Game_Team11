@@ -52,7 +52,7 @@ public class GameEngine {
 
         waitingForInput();
 
-        // after this step, the game-engine should only stop
+
     }
 
     /**
@@ -67,7 +67,6 @@ public class GameEngine {
                     "to add between 3 to 5 players");
             System.out.println("use command \"assigncountries\" to start turn based main-loop");
             System.out.println("use command \"exit\" to stop game engine");
-
             String l_Input = l_Scanner.nextLine();
             System.out.println("input: " + l_Input);
             if ("exit".equalsIgnoreCase(l_Input)) {
@@ -79,7 +78,6 @@ public class GameEngine {
                 if (l_Input.length() > 0) {
                     String[] l_CommandArray = l_Input.trim().split(" ");
                     if (processCommands(l_CommandArray)) {
-                        // true only when "assigncountries" command is successful to start main-loop
                         mainGameLoop();
                     }
                 }
@@ -133,10 +131,8 @@ public class GameEngine {
      */
     public void showMapforGame() {
         System.out.println("show game command received ");
-
         Graph l_Graph = d_CurrentMap.getAdjacencyMatrix();
         System.out.println(l_Graph.toString());
-
         for (Player l_Player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("------------------------------------------------------------------------------------------------------------------------");
             System.out.println("PLAYER: " + l_Player.getPlayerName());
@@ -163,14 +159,11 @@ public class GameEngine {
      */
 
     private void mainGameLoop() {
-
         GAME_STARTED = true;
         while (true) {
-
             assignReinforcementPhase();
             issueOrderPhase();
             executeOrderPhase();
-
             if (this.d_PlayerActions.isGameOver() || GAME_STARTED == false) {
                 System.out.println("GAME OVER");
                 GAME_STARTED = false;
@@ -190,7 +183,6 @@ public class GameEngine {
      * Assign to each player the correct number of reinforcement armies, according to Warzone rules
      */
     private void assignReinforcementPhase() {
-        //assign each player the correct number of reinforcement
         for (Player l_Player : this.d_PlayerActions.getListOfPlayers()) {
             System.out.println("----------------------------------------------------------------");
             System.out.println("ASSIGN REINFORCEMENT PHASE : " + l_Player.getPlayerName());
@@ -213,20 +205,15 @@ public class GameEngine {
             System.out.println("----------------------------------------------------------------");
             System.out.println("ISSUE ORDER PHASE : " + l_Player.getPlayerName());
             this.d_PlayerActions.issueOrdersPhase(l_Player);
-
-            //the method will wait for commands
-            // TODO: the following command input is supposed to happend inside Player's issueOrder command.
             Scanner l_Scanner = new Scanner(System.in);
             while (true) {
                 System.out.println("use command like [\"showmap\" ,  \"deploy <countryid> <num>\" , \"exit\" ");
                 String l_Input = l_Scanner.nextLine();
                 System.out.println("input: " + l_Input);
-
                 if (l_Input.length() > 0) {
                     String[] l_CommandArray = l_Input.trim().split(" ");
                     try {
                         String l_Command = l_CommandArray[0];
-                        // Issue deployment orders here to update the order list of the player .
                         if ((GameController.COMMAND_DEPLOY).equalsIgnoreCase(l_Command)) {
                             processDeployCommand(l_Player, l_CommandArray);
                             System.out.println("armies left to deply are : " + l_Player.getNoOfArmies());
@@ -269,12 +256,10 @@ public class GameEngine {
     private void processGamePlayerCommand(String[] p_Command) {
         System.out.println("gameplayer command received ..... ");
 
-        // there could be more than one "-add" and "-remove" commands
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
             String l_Tag = p_Command[l_I];
 
             if (l_Tag.toLowerCase().startsWith("-add")) {
-                // make sure the index is not increasing the size of array
                 if (l_I + 1 < p_Command.length) {
                     String l_PlayerName = p_Command[++l_I];
                     addPlayer(l_PlayerName);
@@ -283,7 +268,6 @@ public class GameEngine {
                 }
 
             } else if (l_Tag.toLowerCase().startsWith("-remove")) {
-                // make sure the index is not increasing the size of array
                 if (l_I + 1 < p_Command.length) {
                     String l_PlayerName = p_Command[++l_I];
                     removePlayer(l_PlayerName);
@@ -297,7 +281,6 @@ public class GameEngine {
     /**
      * takes player name and if there is no player with such name, it adds a new player with this name
      * in playerlist
-     *
      * @param p_PlayerName playername to add
      * @return boolean
      */
@@ -310,7 +293,6 @@ public class GameEngine {
                 return false;
             }
         }
-        // at end of loop
         Player l_NewPlayer = new Player(p_PlayerName, l_Count);
         return d_Instance.d_PlayerActions.addPlayer(l_NewPlayer);
     }
@@ -322,7 +304,6 @@ public class GameEngine {
      * @return boolean
      */
     public boolean removePlayer(String p_PlayerName) {
-
         for (Player l_Player : d_Instance.d_PlayerActions.getListOfPlayers()) {
             if (l_Player.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
                 return d_Instance.d_PlayerActions.removePlayer(l_Player);
@@ -375,7 +356,6 @@ public class GameEngine {
                 String l_CountryName = p_Command[1];
                 String l_Num = p_Command[2];
                 int l_NumInt = Integer.parseInt(l_Num);
-
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (l_ArmyCountOfPlayer >= l_NumInt) {
                     p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);

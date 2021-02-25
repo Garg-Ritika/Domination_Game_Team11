@@ -1,0 +1,14 @@
+; map:abc.map
+; created by team-11 
+
+[continents]
+Asia 1 RED 
+
+[countries]
+1 India 1 0 0 
+2 China 1 0 0 
+3 Nepal 1 0 0 
+
+[borders]
+1 3 1  
+3 1 3  

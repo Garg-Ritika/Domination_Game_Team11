@@ -7,7 +7,7 @@ package ca.concordia.model;
 public class Graph {
 
     private boolean d_AdjMatrix[][];
-    private int d_NumberOfCountries; // represent number of vertices
+    private int d_NumberOfCountries;
 
     /**
      * Constructor initializes the no of Countries associated at a given time to represent matrix representation of map

@@ -54,10 +54,7 @@ public class Order {
      * which will enact the order.
      */
     public void executeOrder() {
-        // DESIGN CHANGE: Keeping this logic outside of the order method
-        // in the player actions for now, as it is easier
-        // to process the order for this .
-        // TODO: think about this in next release
+
     }
 
 }

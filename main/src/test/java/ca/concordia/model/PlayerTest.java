@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
  * This class contains Test details about Player class
  */
 public class PlayerTest {
-    Player p;
+    Player d_P;
     int d_NoOfArmies = 4;
     private List<Country> d_ListOfCountries = new ArrayList<>();
 
@@ -21,7 +21,7 @@ public class PlayerTest {
      */
     @Before
     public void before() {
-        p = new Player("abcd", 1);
+        d_P = new Player("abcd", 1);
     }
 
     /**
@@ -30,7 +30,7 @@ public class PlayerTest {
 
     @Test
     public void getPlayerName() {
-        assertEquals("abcd", p.getPlayerName());
+        assertEquals("abcd", d_P.getPlayerName());
     }
 
     /**
@@ -39,7 +39,7 @@ public class PlayerTest {
 
     @Test
     public void getPlayerID() {
-        assertEquals(1, p.getPlayerID());
+        assertEquals(1, d_P.getPlayerID());
     }
 
     /**
@@ -48,9 +48,9 @@ public class PlayerTest {
 
     @Test
     public void getNoOfArmies() {
-        assertEquals(1, p.getPlayerID());
-        p.setNoOfArmies(d_NoOfArmies);
-        assertEquals(d_NoOfArmies, p.getNoOfArmies());
+        assertEquals(1, d_P.getPlayerID());
+        d_P.setNoOfArmies(d_NoOfArmies);
+        assertEquals(d_NoOfArmies, d_P.getNoOfArmies());
 
     }
 
@@ -61,13 +61,13 @@ public class PlayerTest {
     @Test
     public void getListOfCountries() {
 
-        Country c1 = new Country(6, 2, "Quebec-North", 430, 261);
-        Country c2 = new Country(7, 3, "abc", 200, 205);
-        d_ListOfCountries.add(c1);
-        d_ListOfCountries.add(c2);
+        Country l_C1 = new Country(6, 2, "Quebec-North", 430, 261);
+        Country l_C2 = new Country(7, 3, "abc", 200, 205);
+        d_ListOfCountries.add(l_C1);
+        d_ListOfCountries.add(l_C2);
 
-        p.setListOfCountries(d_ListOfCountries);
-        assertEquals(d_ListOfCountries, p.getListOfCountries());
+        d_P.setListOfCountries(d_ListOfCountries);
+        assertEquals(d_ListOfCountries, d_P.getListOfCountries());
 
     }
 }

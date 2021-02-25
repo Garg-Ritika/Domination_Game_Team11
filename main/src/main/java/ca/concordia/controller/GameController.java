@@ -25,8 +25,6 @@ public class GameController extends Observable {
     public static final String COMMAND_ASSIGN_COUNTRIES = "assigncountries";
     public static final String COMMAND_DEPLOY = "deploy";
 
-
-    // .map editor commands ..
     public static final String COMMAND_EDIT_CONTINENT = "editcontinent";
     public static final String COMMAND_EDIT_COUNTRY = "editcountry";
     public static final String COMMAND_EDIT_NEIGHBOUR = "editneighbor";
@@ -132,18 +130,14 @@ public class GameController extends Observable {
      */
     private void processEditContinentCommand(String[] p_Command) {
         System.out.println("editcontinent command received ..... ");
-
-        // there could be more than one "-add" and "-remove" commands
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
             String l_Tag = p_Command[l_I];
 
             if (l_Tag.toLowerCase().startsWith("-add")) {
-                // make sure the index is not increasing the size of array
                 if (l_I + 2 < p_Command.length) {
                     String l_ContinentName = p_Command[++l_I];
                     String l_ContinentArmyCount = p_Command[++l_I];
                     int l_ContinentArmyCountInteger = Integer.parseInt(l_ContinentArmyCount);
-
                     if (MapEditor.getInstance().addContinent(l_ContinentName, l_ContinentArmyCountInteger)) {
                         System.out.println("Successfully added continent name: " + l_ContinentName + " army: " + l_ContinentArmyCount + " into the map");
                     }
@@ -153,10 +147,8 @@ public class GameController extends Observable {
                 }
 
             } else if (l_Tag.toLowerCase().startsWith("-remove")) {
-                // make sure the index is not increasing the size of array
                 if (l_I + 1 < p_Command.length) {
                     String l_ContinentName = p_Command[++l_I];
-
                     if (MapEditor.getInstance().removeContinent(l_ContinentName)) {
                         System.out.println("Successfully removed continent name: " + l_ContinentName + " from the map");
                     }
@@ -175,17 +167,12 @@ public class GameController extends Observable {
      */
     private void processEditCountryCommand(String[] p_Command) {
         System.out.println("editcountry command received ..... ");
-
-        // there could be more than one "-add" and "-remove" commands
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
             String l_Tag = p_Command[l_I];
-
             if (l_Tag.toLowerCase().startsWith("-add")) {
-                // make sure the index is not increasing the size of array
                 if (l_I + 2 < p_Command.length) {
                     String l_CountryName = p_Command[++l_I];
                     String l_ContinentName = p_Command[++l_I];
-
                     if (MapEditor.getInstance().addCountry(l_CountryName, l_ContinentName)) {
                         System.out.println("Successfully added country name: " + l_CountryName + " to continent name:  " + l_ContinentName + " into the map");
                     }
@@ -195,10 +182,8 @@ public class GameController extends Observable {
                 }
 
             } else if (l_Tag.toLowerCase().startsWith("-remove")) {
-                // make sure the index is not increasing the size of array
                 if (l_I + 1 < p_Command.length) {
                     String l_CountryName = p_Command[++l_I];
-
                     if (MapEditor.getInstance().removeCountryUsingName(l_CountryName)) {
                         System.out.println("Successfully removed country name: " + l_CountryName + " from the map");
                     }
@@ -217,17 +202,12 @@ public class GameController extends Observable {
      */
     private void processEditNeighbourCommand(String[] p_Command) {
         System.out.println("editneighbor command received ..... ");
-
-        // there could be more than one "-add" and "-remove" commands
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
             String p_Tag = p_Command[l_I];
-
             if (p_Tag.toLowerCase().startsWith("-add")) {
-                // make sure the index is not increasing the size of array
                 if (l_I + 2 < p_Command.length) {
                     String l_CountryName = p_Command[++l_I];
                     String l_NeighbourCountryName = p_Command[++l_I];
-
                     if (MapEditor.getInstance().addNeighbor(l_CountryName, l_NeighbourCountryName)) {
                         System.out.println("Successfully added neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
@@ -237,11 +217,9 @@ public class GameController extends Observable {
                 }
 
             } else if (p_Tag.toLowerCase().startsWith("-remove")) {
-                // make sure the index is not increasing the size of array
                 if (l_I + 2 < p_Command.length) {
                     String l_CountryName = p_Command[++l_I];
                     String l_NeighbourCountryName = p_Command[++l_I];
-
                     if (MapEditor.getInstance().removeNeighbor(l_CountryName, l_NeighbourCountryName)) {
                         System.out.println("Successfully removed neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }

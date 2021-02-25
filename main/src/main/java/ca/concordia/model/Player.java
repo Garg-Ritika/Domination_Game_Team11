@@ -197,13 +197,6 @@ public class Player {
      * when the game engine calls it during the issue orders phase
      */
     public void issueOrder() {
-        // DESIGN CHANGE: the command input is being take by GamenEngine only in ISSUE ORDER PHASE,
-        // we did this to keep the logic out of model class
-        // and it is also allowing us to take "showmap" command during issuephase
-        // so that users can see the map
-
-        // Also, there is no point running "showmap" before main game-play loop
-        // TODO: think about this in next release
         System.out.println("Number of armies available for player " + d_PlayerName + " is " + getNoOfArmies());
         System.out.print("Countries available for player are: ");
         for (Country l_country : d_ListOfCountries) {

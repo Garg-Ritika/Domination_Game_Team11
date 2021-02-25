@@ -23,7 +23,6 @@ public class PlayerActionsTest {
      */
     @Before
     public void before() {
-        // Initialize map
         d_Map = new Map();
         d_Map.getListOfContinents().add(new Continent(1, "NorthAmerica", 20, "RED"));
         d_Map.getListOfCountries().add(new Country(1, 1, "Canada", 2, 2));
@@ -63,9 +62,7 @@ public class PlayerActionsTest {
     /**
      * test add or remove player in Player actions
      */
-    @Test
     public void testAddRemovePlayer() {
-        // test adding and removing players
         assertEquals(false, d_PlayerActions.removePlayer(d_Player1));
         assertEquals(true, d_PlayerActions.addPlayer(d_Player1));
         assertEquals(true, d_PlayerActions.addPlayer(d_Player2));
@@ -78,9 +75,7 @@ public class PlayerActionsTest {
     /**
      * Test assign countries algorithm triggered by "assigcountries" command
      */
-//    @Test
     public void testAssignCountries() {
-        // test assigning countries
         assertEquals(true, d_PlayerActions.assignCountriesToPlayers());
     }
 
@@ -90,9 +85,7 @@ public class PlayerActionsTest {
      * + 3. calculation of number of reinforcement armies;
      * + 4. player cannot deploy more armies that there is in their reinforcement pool.
      */
-    @Test
     public void testMainLoop() {
-        // test-main loop
         for (Player l_Player : d_PlayerList) {
             int l_CountryOwnedByPlayer = l_Player.getListOfCountries().size();
             int l_NetContinentValue = 0;
@@ -102,15 +95,12 @@ public class PlayerActionsTest {
                 }
             }
             int l_NewArmy = Math.max(3, l_CountryOwnedByPlayer / 3) + l_NetContinentValue;
-
-            //3.verify the number of reinforcement armies
             assertEquals(l_NewArmy, d_PlayerActions.assignReinforcementPhase(l_Player));
-
             l_Player.addNewOrder(new Order("deploy", "Canada", 5));
             d_PlayerActions.issueOrdersPhase(l_Player);
             d_PlayerActions.executeOrderPhase(l_Player);
 
-            //4. player cannot deploy more armies that there is in their reinforcement pool.
+
             assertEquals(0, l_Player.getNoOfArmies());
             int l_ArmiesAssignedToCanada = 0;
             for (Country l_country : d_Map.getListOfCountries()) {
@@ -126,9 +116,8 @@ public class PlayerActionsTest {
     /**
      * test game endphase winner ..
      */
-    @Test
+
     public void testGameEndPhase() {
-        // test winner selection and game closing phase
         d_PlayerActions.setWinner(d_Player1);
         assertEquals(d_Player1, d_PlayerActions.getWinner());
         assertEquals(false, d_PlayerActions.isGameOver());

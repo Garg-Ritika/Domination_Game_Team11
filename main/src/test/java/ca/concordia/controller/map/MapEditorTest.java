@@ -28,7 +28,6 @@ public class MapEditorTest {
      */
     @Before
     public void before() {
-        // Initialize map
         d_Map = new Map();
         d_Map.getListOfContinents().add(new Continent(1, "NorthAmerica", 20, "RED"));
         d_Map.getListOfCountries().add(new Country(1, 1, "Canada", 2, 2));
@@ -36,7 +35,6 @@ public class MapEditorTest {
         d_Map.getListOfCountries().add(new Country(3, 1, "Mexico", 0, 0));
         d_Map.getListOfCountries().add(new Country(3, 1, "Quebec", 0, 0));
 
-        //neighbours
         List<Integer> l_NeighboursOfCanada = new ArrayList<>();
         l_NeighboursOfCanada.add(2);
         l_NeighboursOfCanada.add(3);
@@ -48,10 +46,11 @@ public class MapEditorTest {
 
     /**
      * Test mapeditor functions
+     * @throws IOException
      */
     @Test
     public void testMapEditor() throws IOException {
-        // continent
+
         assertEquals(true, d_mapEditor.addContinent("Asia", 1));
         assertEquals(true, d_mapEditor.addContinent("Africa", 1));
         assertEquals(true, d_mapEditor.removeContinent("Africa"));
@@ -62,13 +61,10 @@ public class MapEditorTest {
 
         assertEquals(true, d_mapEditor.addNeighbor("India", "Nepal"));
         assertEquals(true, d_mapEditor.addNeighbor("India", "China"));
-        // it should remove neighbour entries as well
-        //assertEquals(true, d_mapEditor.removeCountryUsingName("Nepal"));
 
         assertEquals(false, d_mapEditor.validateMap());
         assertNotNull(d_mapEditor.loadMapAsGraph());
 
-        // Incase, it throws exception CI's ubuntu-latest
         try {
             d_mapEditor.saveMap(new File("abc.map"));
             d_mapEditor.readMapFile(new File("abc.map"));

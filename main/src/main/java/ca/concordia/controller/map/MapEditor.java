@@ -65,7 +65,6 @@ public class MapEditor {
         }
         if (!l_Found) {
             int l_NumberOfContinents = this.getCurrentMap().getListOfContinents().size();
-            //TODO : add a unique new color to the new continent
             Continent l_Continent = new Continent(l_NumberOfContinents + 1, p_ContinentName, p_ArmyCount, "RED");
             Map l_Map = this.getCurrentMap();
             l_Map.getListOfContinents().add(l_Continent);
@@ -86,8 +85,6 @@ public class MapEditor {
             if (l_continent.getName().equalsIgnoreCase(p_ContinentName)) {
                 int l_continentID = l_continent.getID();
                 l_Map.getListOfContinents().remove(l_continent);
-
-                // also remove country and border using continentID
                 for (Country l_country : l_Map.getListOfCountries()) {
                     if (l_country.getContinentID() == l_continentID) {
                         removeCountryUsingID(l_country.getCountryID());
@@ -108,7 +105,6 @@ public class MapEditor {
      */
     public boolean addCountry(String p_CountryName, String p_Continent_Name) {
 
-        // find continentID from continent_name
         int l_ContinentID = 0;
         for (Continent l_continent : d_CurrentMap.getListOfContinents()) {
             if (l_continent.getName().equalsIgnoreCase(p_Continent_Name)) {
@@ -127,7 +123,6 @@ public class MapEditor {
             if (!l_Found) {
                 System.out.println("Adding a new country ");
                 int l_NumberOfCountries = d_CurrentMap.getListOfCountries().size();
-                //TODO :by default x and y coordinates are 0,0 for now
                 Country l_country = new Country(l_NumberOfCountries + 1, l_ContinentID, p_CountryName, 0, 0);
                 d_CurrentMap.getListOfCountries().add(l_country);
             }
@@ -172,8 +167,6 @@ public class MapEditor {
         for (Country l_country : l_Map.getListOfCountries()) {
             if (l_country.getCountryID() == p_CountryID) {
                 l_Map.getListOfCountries().remove(l_country);
-
-                // Also remove borders
                 for (Border l_border : l_Map.getListOfBorders()) {
                     if (l_border.getCountryId() == p_CountryID) {
                         l_Map.getListOfBorders().remove(l_border);
@@ -208,14 +201,13 @@ public class MapEditor {
             System.out.println("both country exists in map: " + p_CountryName + " " + p_NeighborName);
             boolean l_BorderFound = false;
             for (Border l_Border : d_CurrentMap.getListOfBorders()) {
-                // make country1 neighbour of country2
                 if (l_Border.getCountryId() == l_CountryID) {
                     if (!l_Border.isNeighbour(l_CountryID)) {
                         l_Border.addNeighbour(l_CountryID);
                     }
                     l_BorderFound = true;
 
-                }// make country1 neighbour of country2
+                }
                 else if (l_Border.getCountryId() == l_NeighborID) {
                     if (!l_Border.isNeighbour(l_NeighborID)) {
                         l_Border.addNeighbour(l_NeighborID);
@@ -223,13 +215,11 @@ public class MapEditor {
                 }
             }
             if (!l_BorderFound) {
-                // country1's neighbour is country2
                 List<Integer> l_TempNeighbourList1 = new ArrayList<>();
                 l_TempNeighbourList1.add(l_NeighborID);
                 Border l_NewBorder1 = new Border(l_CountryID, l_TempNeighbourList1);
                 getCurrentMap().getListOfBorders().add(l_NewBorder1);
 
-                // country2's neighbour is country1
                 List<Integer> l_TempNeighbourList2 = new ArrayList<>();
                 l_TempNeighbourList2.add(l_CountryID);
                 Border l_NewBorder2 = new Border(l_NeighborID, l_TempNeighbourList2);
@@ -264,7 +254,6 @@ public class MapEditor {
             System.out.println("both country exists in map: " + p_CountryName + " " + p_NeighborName);
 
             for (Border l_Border : d_CurrentMap.getListOfBorders()) {
-                // both are neighbour's to each other, so remove two times
                 if (l_Border.getCountryId() == l_CountryID) {
                     l_Border.removeNeighbour(l_NeighborID);
 
@@ -294,8 +283,6 @@ public class MapEditor {
             for (Country l_Country : getCurrentMap().getListOfCountries()) {
                 if (l_Country.getContinentID() == l_Val.getID()) {
                     System.out.println(l_Country.getCountryID() + " " + l_Country.getName() + " " + l_Country.getContinentID() + " x: " + l_Country.getX() + " Y: " + l_Country.getY());
-
-                    // show borders
                     for (Border l_Border : getCurrentMap().getListOfBorders()) {
                         if (l_Border.getCountryId() == l_Country.getCountryID()) {
                             int l_NeighbourCount = 0;
@@ -389,7 +376,6 @@ public class MapEditor {
 
                         Continent l_Continent = new Continent(l_ContinentID, l_ContinentName, l_ContinentArmyInteger, l_ContinentColor);
                         getCurrentMap().getListOfContinents().add(l_Continent);
-                        // note: the while loop is supposed to break on blank line..
                     }
                 } else if (l_Line.equalsIgnoreCase(HEADER_COUNTRIES)) {
 

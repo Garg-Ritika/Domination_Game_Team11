@@ -116,7 +116,7 @@ public class Map {
                 }
             }
         }
-        // Now find all the borders which has this countries in the continent
+
         int l_NumberOfCountries = l_TempCountryIDList.size();
         Graph l_Graph = new Graph(l_NumberOfCountries);
         for (int l_TempCountryId : l_TempCountryIDList) {

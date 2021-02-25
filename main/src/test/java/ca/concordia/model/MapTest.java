@@ -17,16 +17,13 @@ public class MapTest {
 
     @Before
     public void before() {
-        // Initialize map
         d_Map = new Map();
-        //continents
         d_Map.getListOfContinents().add(new Continent(1, "NorthAmerica", 20, "RED"));
-        //countries
         d_Map.getListOfCountries().add(new Country(1, 1, "Canada", 2, 2));
         d_Map.getListOfCountries().add(new Country(2, 1, "America", 1, 1));
         d_Map.getListOfCountries().add(new Country(3, 1, "Mexico", 0, 0));
         d_Map.getListOfCountries().add(new Country(4, 1, "Quebec", 0, 0));
-        //neighbours
+
         List<Integer> l_NeighboursOfCanada = new ArrayList<>();
         l_NeighboursOfCanada.add(2);
         l_NeighboursOfCanada.add(3);

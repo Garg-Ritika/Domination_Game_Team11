@@ -43,7 +43,6 @@ public class PlayerActions {
      * @return "to be updated"
      */
     public boolean addPlayer(Player p_Player) {
-        //TODO: cannot add more player than number of countries check
         return this.d_ListOfPlayers.add(p_Player);
     }
 
@@ -84,8 +83,6 @@ public class PlayerActions {
         int l_PlayerCount = this.d_ListOfPlayers.size();
         int l_PlayerCountryRatio = l_CountryCount / l_PlayerCount;
         System.out.println("player-country ratio: " + l_PlayerCountryRatio);
-
-        // temporary country list that will be randomly assigned in quantity playCountryRatio to each player ..
         ArrayList<Country> l_CountriesToAssignRandomly = new ArrayList<Country>();
         for (Country l_Country : d_Map.getListOfCountries()) {
             l_CountriesToAssignRandomly.add(l_Country);
@@ -102,7 +99,6 @@ public class PlayerActions {
                     l_Player.addNewCountry(l_Country);
                     System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
                 } else {
-                    // Assign countries one-by-one, pick it randomly
                     int l_Index = new Random().nextInt(l_CountriesToAssignRandomly.size() - 1);
                     Country l_Country = l_CountriesToAssignRandomly.get(l_Index);
                     l_CountriesToAssignRandomly.remove(l_Country);
@@ -203,7 +199,6 @@ public class PlayerActions {
                 return true;
             }
         }
-        // TODO : since build-1 doesn't include attack so game will never be over as per this logic
         return false;
     }
 
