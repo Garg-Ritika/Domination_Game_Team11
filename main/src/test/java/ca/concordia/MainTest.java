@@ -20,7 +20,7 @@ import org.junit.runners.Suite;
         CountryTest.class,
         PlayerTest.class,
         GameEngineTest.class,
-//        MapEditorTest.class,
+        MapEditorTest.class,
         ValidateMapTest.class
 })
 public class MainTest extends TestCase {
