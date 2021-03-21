@@ -2,6 +2,7 @@ package ca.concordia.patterns.state.edit;
 
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.mapworks.MapEditor;
+import ca.concordia.patterns.observer.LogUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,10 +26,12 @@ public class PostLoad extends Edit {
                     String l_ContinentArmyCount = p_Command[++l_I];
                     int l_ContinentArmyCountInteger = Integer.parseInt(l_ContinentArmyCount);
                     if (MapEditor.getInstance().addContinent(l_ContinentName, l_ContinentArmyCountInteger)) {
+                        LogUtil.log("Successfully added continent name: " + l_ContinentName + " army: " + l_ContinentArmyCount + " into the map");
                         System.out.println("Successfully added continent name: " + l_ContinentName + " army: " + l_ContinentArmyCount + " into the map");
                     }
 
                 } else {
+                    LogUtil.log("INCOMPLETE COMMAND");
                     System.out.println("INCOMPLETE COMMAND ");
                 }
 
@@ -36,14 +39,15 @@ public class PostLoad extends Edit {
                 if (l_I + 1 < p_Command.length) {
                     String l_ContinentName = p_Command[++l_I];
                     if (MapEditor.getInstance().removeContinent(l_ContinentName)) {
+                        LogUtil.log("Successfully removed continent name: " + l_ContinentName + " from the map");
                         System.out.println("Successfully removed continent name: " + l_ContinentName + " from the map");
                     }
                 } else {
+                    LogUtil.log("INCOMPLETE COMMAND");
                     System.out.println("INCOMPLETE COMMAND");
                 }
             }
         }
-
     }
 
     @Override
@@ -56,10 +60,12 @@ public class PostLoad extends Edit {
                     String l_CountryName = p_Command[++l_I];
                     String l_ContinentName = p_Command[++l_I];
                     if (MapEditor.getInstance().addCountry(l_CountryName, l_ContinentName)) {
+                        LogUtil.log("Successfully added country name: " + l_CountryName + " to continent name:  " + l_ContinentName + " into the map");
                         System.out.println("Successfully added country name: " + l_CountryName + " to continent name:  " + l_ContinentName + " into the map");
                     }
 
                 } else {
+                    LogUtil.log("INCOMPLETE COMMAND");
                     System.out.println("INCOMPLETE COMMAND ");
                 }
 
@@ -67,10 +73,12 @@ public class PostLoad extends Edit {
                 if (l_I + 1 < p_Command.length) {
                     String l_CountryName = p_Command[++l_I];
                     if (MapEditor.getInstance().removeCountryUsingName(l_CountryName)) {
+                        LogUtil.log("Successfully removed country name: " + l_CountryName + " from the map");
                         System.out.println("Successfully removed country name: " + l_CountryName + " from the map");
                     }
                 } else {
                     System.out.println("INCOMPLETE COMMAND");
+                    LogUtil.log("INCOMPLETE COMMAND");
                 }
             }
         }
@@ -86,11 +94,13 @@ public class PostLoad extends Edit {
                     String l_CountryName = p_Command[++l_I];
                     String l_NeighbourCountryName = p_Command[++l_I];
                     if (MapEditor.getInstance().addNeighbor(l_CountryName, l_NeighbourCountryName)) {
+                        LogUtil.log("Successfully added neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                         System.out.println("Successfully added neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
 
                 } else {
-                    System.out.println("INCOMPLETE COMMAND ");
+                    LogUtil.log("INCOMPLETE COMMAND");
+                    System.out.println("INCOMPLETE COMMAND");
                 }
 
             } else if (p_Tag.toLowerCase().startsWith("-remove")) {
@@ -98,9 +108,11 @@ public class PostLoad extends Edit {
                     String l_CountryName = p_Command[++l_I];
                     String l_NeighbourCountryName = p_Command[++l_I];
                     if (MapEditor.getInstance().removeNeighbor(l_CountryName, l_NeighbourCountryName)) {
+                        LogUtil.log("Successfully removed neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                         System.out.println("Successfully removed neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
                 } else {
+                    LogUtil.log("INCOMPLETE COMMAND");
                     System.out.println("INCOMPLETE COMMAND");
                 }
             }
@@ -117,6 +129,7 @@ public class PostLoad extends Edit {
                 File l_MapPath = new File(l_Filename);
                 MapEditor.getInstance().saveMap(l_MapPath);
             } else {
+                LogUtil.log("INCOMPLETE COMMAND");
                 System.out.println("INCOMPLETE COMMAND");
             }
         } catch (IOException p_Io) {

@@ -3,6 +3,7 @@ package ca.concordia.patterns.state.play;
 import ca.concordia.dao.Continent;
 import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
+import ca.concordia.patterns.observer.LogUtil;
 
 public class Reinforcement extends MainPlay {
 
@@ -16,6 +17,7 @@ public class Reinforcement extends MainPlay {
         for (Player l_Player : d_ge.getListOfPlayers()) {
 
             System.out.println("----------------------------------------------------------------");
+            LogUtil.log("ASSIGN REINFORCEMENT PHASE : " + l_Player.getPlayerName());
             System.out.println("ASSIGN REINFORCEMENT PHASE : " + l_Player.getPlayerName());
             assignReinforcementPhase(l_Player);
         }
@@ -40,7 +42,8 @@ public class Reinforcement extends MainPlay {
         }
         System.out.println("#net continent value of all the continents controlled by player: " + l_NetContinentValue);
         int l_NewArmy = Math.max(3, l_CountryOwnedByPlayer / 3) + l_NetContinentValue;
-        System.out.println("#new armies being assigned to playeR: " + p_Player.getPlayerName() + " is " + l_NewArmy);
+        LogUtil.log("#new armies being assigned to player: " + p_Player.getPlayerName() + " is " + l_NewArmy);
+        System.out.println("#new armies being assigned to player: " + p_Player.getPlayerName() + " is " + l_NewArmy);
         p_Player.setNoOfArmies(l_NewArmy);
         return l_NewArmy;
     }

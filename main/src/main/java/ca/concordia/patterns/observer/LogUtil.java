@@ -1,7 +1,5 @@
 package ca.concordia.patterns.observer;
 
-import sun.rmi.runtime.Log;
-
 import java.io.File;
 
 public class LogUtil {

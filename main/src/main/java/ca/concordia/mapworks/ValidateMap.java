@@ -2,6 +2,7 @@ package ca.concordia.mapworks;
 
 import ca.concordia.dao.Graph;
 import ca.concordia.dao.Map;
+import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.Stack;
 
@@ -52,6 +53,7 @@ public class ValidateMap {
             return false;
         }
 
+        LogUtil.log("map validated successfully ");
         System.out.println("map validated successfully ");
         return true;
 

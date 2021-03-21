@@ -5,6 +5,7 @@ import ca.concordia.dao.Territory;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.command.Deploy;
 import ca.concordia.patterns.command.Order;
+import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.Scanner;
 
@@ -40,6 +41,7 @@ public class Attack extends MainPlay {
             do {
                 takeOrder(l_Player);
                 if (l_Player.getNoOfArmies() < 1) {
+                    LogUtil.log("All the reinforcement armies have been placed ..");
                     System.out.println("All the reinforcement armies have been placed ..");
                     break;
                 }
@@ -68,8 +70,8 @@ public class Attack extends MainPlay {
             System.out.println("| Any                  : showmap                                                           |");
             System.out.println("| Any                  : quit                                                              |");
             System.out.println("============================================================================================");
-
             String l_CommandInput = keyboard.nextLine();
+            LogUtil.log(l_CommandInput);
 
             if ("quit".equalsIgnoreCase(l_CommandInput)) {
                 //TODO: end the game if quit is passed during the attack ?
@@ -142,6 +144,7 @@ public class Attack extends MainPlay {
                     Order o = new Deploy(p_Player, l_Territory, l_NumInt);
                     p_Player.createOrder(o);
                 } else {
+                    LogUtil.log("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
                     System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
                 }
             }

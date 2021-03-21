@@ -1,6 +1,7 @@
 package ca.concordia.patterns.state.end;
 
 import ca.concordia.gameengine.GameEngine;
+import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.Phase;
 
 public class End extends Phase {
@@ -77,6 +78,7 @@ public class End extends Phase {
     @Override
     public void endGame() {
         System.out.println("Game has ended ! ");
+        LogUtil.log("Game has ended ! ");
         System.exit(0);
     }
 

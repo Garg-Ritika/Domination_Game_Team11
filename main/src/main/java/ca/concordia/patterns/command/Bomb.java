@@ -2,6 +2,7 @@ package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
+import ca.concordia.patterns.observer.LogUtil;
 
 public class Bomb implements Order {
     Territory target_territory;
@@ -38,5 +39,6 @@ public class Bomb implements Order {
     public void printOrder() {
         System.out.println("Deploy order issued by player " + this.initiator.getPlayerName());
         System.out.println("Deploy " + this.to_bomb + " to " + this.target_territory.getOwner());
+        LogUtil.log("");
     }
 }

@@ -2,7 +2,7 @@ package ca.concordia.gameengine;
 import ca.concordia.dao.Map;
 import ca.concordia.dao.Player;
 import ca.concordia.patterns.observer.LogEntryBuffer;
-//import ca.concordia.patterns.observer.LogUtil;
+import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.Phase;
 import ca.concordia.patterns.state.edit.Preload;
 import ca.concordia.patterns.state.play.PlaySetup;
@@ -62,8 +62,8 @@ public class GameEngine  {
     }
 
     public void start() {
-//        LogUtil.clearOldLogFiles();
-//        LogUtil.log("Game Engine started");
+        LogUtil.clearOldLogFiles();
+        LogUtil.log("Game Engine started");
         Scanner keyboard = new Scanner(System.in);
         do {
             System.out.println("========================================");
@@ -73,7 +73,7 @@ public class GameEngine  {
             System.out.println("choose one of the option from above?: ");
             System.out.println("=======================================");
             String l_Input = keyboard.nextLine();
-//            LogUtil.log(l_Input);
+            LogUtil.log(l_Input);
             switch (l_Input) {
                 case "edit":
                     // setting phase as preload
@@ -107,7 +107,7 @@ public class GameEngine  {
             System.out.println("| Any            : quit                                                                          |");
             System.out.println("===================================================================================================");
             String l_EditInput = keyboard.nextLine();
-//            LogUtil.log(l_EditInput);
+            LogUtil.log(l_EditInput);
 
             if ("quit".equalsIgnoreCase(l_EditInput)) {
                 break;
@@ -169,7 +169,7 @@ public class GameEngine  {
             System.out.println("============================================================================================");
 
             String l_GameInput = keyboard.nextLine();
-//            LogUtil.log(l_GameInput);
+            LogUtil.log(l_GameInput);
 
             if ("quit".equalsIgnoreCase(l_GameInput)) {
                 break;

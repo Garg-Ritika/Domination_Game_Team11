@@ -3,6 +3,7 @@ package ca.concordia.patterns.state.play;
 import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.command.Order;
+import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.end.End;
 
 public class Fortify extends MainPlay {
@@ -45,6 +46,8 @@ public class Fortify extends MainPlay {
                 }
             }
         } while (still_more_orders);
+        System.out.println("All orders has been executed ");
+        LogUtil.log("All orders has been executed ");
     }
 
     private void checkForEnd() {

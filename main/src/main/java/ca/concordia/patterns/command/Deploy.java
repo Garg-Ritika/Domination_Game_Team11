@@ -2,6 +2,7 @@ package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
+import ca.concordia.patterns.observer.LogUtil;
 
 //Concrete Command for Command pattern
 public class Deploy implements Order {
@@ -34,11 +35,14 @@ public class Deploy implements Order {
             return true;
         }
         System.out.println("invalid order");
+        LogUtil.log("invalid deploy order");
         return false;
     }
 
     public void printOrder() {
         System.out.println("Deploy order issued by player " + this.initiator.getPlayerName());
         System.out.println("Deploy " + this.to_deploy + " to " + this.target_territory.getOwner());
+        LogUtil.log("Deploy order issued by player " + this.initiator.getPlayerName());
+        LogUtil.log("Deploy " + this.to_deploy + " to " + this.target_territory.getOwner());
     }
 }

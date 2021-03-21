@@ -2,6 +2,7 @@ package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
+import ca.concordia.patterns.observer.LogUtil;
 
 //   ConcreteCommand of the the Command pattern.
 public class Advance implements Order {
@@ -51,5 +52,6 @@ public class Advance implements Order {
 
     public void printOrder() {
         // print the order
+        LogUtil.log("");
     }
 }

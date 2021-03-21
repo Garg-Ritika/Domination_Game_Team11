@@ -2,6 +2,7 @@ package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
+import ca.concordia.patterns.observer.LogUtil;
 
 public class Airlift implements Order {
 
@@ -50,5 +51,6 @@ public class Airlift implements Order {
 
     public void printOrder() {
         // print the order
+        LogUtil.log("");
     }
 }

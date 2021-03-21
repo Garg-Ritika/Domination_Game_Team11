@@ -24,7 +24,7 @@ public class LogWriter implements Observer {
         try {
             // configure the logger
             Logger logger = Logger.getLogger(TAG);
-            FileHandler fH = new FileHandler("risk.log", FILE_SIZE, 2, true);
+            FileHandler fH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 2, true);
 
             logger.addHandler(fH);
 

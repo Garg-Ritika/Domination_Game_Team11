@@ -5,6 +5,7 @@ import ca.concordia.dao.Map;
 import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.mapworks.MapEditor;
+import ca.concordia.patterns.observer.LogUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,9 +35,11 @@ public class PlaySetup extends Play {
 
                     // TODO : updating map in the parent .. (review this)
                     d_ge.setMap(l_Map);
+                    LogUtil.log(" map is successfully loaded and ready for gameplay ..");
                     System.out.println(" map is successfully loaded and ready for gameplay ..");
 
                 } else {
+                    LogUtil.log("The map file" + l_MapFile.getAbsolutePath() + "doesn't exists");
                     System.out.println("The map file" + l_MapFile.getAbsolutePath() + "doesn't exists");
                 }
             }
@@ -50,6 +53,7 @@ public class PlaySetup extends Play {
         System.out.println("gameplayer command received ..... ");
 
         if (d_ge.getMap() == null) {
+            LogUtil.log("map must be loaded before assigning any player");
             System.out.println("map must be loaded before assigning any player");
         }
 
@@ -61,6 +65,7 @@ public class PlaySetup extends Play {
                     String l_PlayerName = p_Command[++l_I];
                     addPlayer(l_PlayerName);
                 } else {
+                    LogUtil.log("INCOMPLETE COMMAND ");
                     System.out.println("INCOMPLETE COMMAND ");
                 }
 
@@ -69,6 +74,7 @@ public class PlaySetup extends Play {
                     String l_PlayerName = p_Command[++l_I];
                     removePlayer(l_PlayerName);
                 } else {
+                    LogUtil.log("INCOMPLETE COMMAND ");
                     System.out.println("INCOMPLETE COMMAND");
                 }
             }
@@ -88,6 +94,7 @@ public class PlaySetup extends Play {
         for (Player l_Player : d_ge.getListOfPlayers()) {
             l_Count++;
             if (l_Player.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
+                LogUtil.log("A player with name: " + p_PlayerName + " already exists!");
                 System.out.println("A player with name: " + p_PlayerName + " already exists!");
                 return false;
             }
@@ -108,6 +115,7 @@ public class PlaySetup extends Play {
                 return d_ge.getListOfPlayers().remove(l_Player);
             }
         }
+        LogUtil.log("player not found : " + p_PlayerName);
         System.out.println("player not found : " + p_PlayerName);
         return false;
     }
@@ -120,6 +128,7 @@ public class PlaySetup extends Play {
             int l_NumberOfPlayers = d_ge.getListOfPlayers().size();
             if (l_NumberOfPlayers >= 3 && l_NumberOfPlayers <= 5) {
 
+                LogUtil.log("number of countries between [3 to 5] so assign countries to player now ..");
                 System.out.println("number of countries between [3 to 5] so assign countries to player now ..");
                 if (assignCountriesToPlayers()) {
                     // start main-loop after this..
@@ -127,6 +136,7 @@ public class PlaySetup extends Play {
                     d_ge.getPhase().reinforce();
                 }
             } else {
+                LogUtil.log("number of player must be between [3 to 5] to state main-game-loop");
                 System.out.println("number of player must be between [3 to 5] to state main-game-loop");
             }
 
@@ -143,13 +153,16 @@ public class PlaySetup extends Play {
      */
     private boolean assignCountriesToPlayers() {
         if (d_ge.getListOfPlayers().size() < MINIMUM_PLAYER_COUNT) {
+            LogUtil.log("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
             System.out.println("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
             return false;
         }
         if (d_ge.getMap().getListOfCountries().size() == 0) {
+            LogUtil.log("Zero countries in the map, so unable to assign anything to players");
             System.out.println("Zero countries in the map, so unable to assign anything to players");
             return false;
         }
+        LogUtil.log("Number of countries available is : " + d_ge.getMap().getListOfCountries().size());
         System.out.println("Number of countries available is : " + d_ge.getMap().getListOfCountries().size());
 
         System.out.println("start assigning countries ");
@@ -157,6 +170,7 @@ public class PlaySetup extends Play {
         int l_CountryCount = d_ge.getMap().getListOfCountries().size();
         int l_PlayerCount = d_ge.getListOfPlayers().size();
         int l_PlayerCountryRatio = l_CountryCount / l_PlayerCount;
+        LogUtil.log("player-country ratio: " + l_PlayerCountryRatio);
         System.out.println("player-country ratio: " + l_PlayerCountryRatio);
         ArrayList<Country> l_CountriesToAssignRandomly = new ArrayList<Country>();
         for (Country l_Country : d_ge.getMap().getListOfCountries()) {
@@ -166,18 +180,21 @@ public class PlaySetup extends Play {
         while (l_CountriesToAssignRandomly.size() > 0) {
             for (Player l_Player : d_ge.getListOfPlayers()) {
                 if (l_CountriesToAssignRandomly.size() == 0) {
+                    LogUtil.log("All countries has been assigned ");
                     System.out.println("All countries has been assigned ");
                     break;
                 } else if (l_CountriesToAssignRandomly.size() == 1) {
                     Country l_Country = l_CountriesToAssignRandomly.get(0);
                     l_CountriesToAssignRandomly.remove(l_Country);
                     l_Player.addNewCountry(l_Country);
+                    LogUtil.log(l_Player.getPlayerName() + " has " + l_Country.getName());
                     System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
                 } else {
                     int l_Index = new Random().nextInt(l_CountriesToAssignRandomly.size() - 1);
                     Country l_Country = l_CountriesToAssignRandomly.get(l_Index);
                     l_CountriesToAssignRandomly.remove(l_Country);
                     l_Player.addNewCountry(l_Country);
+                    LogUtil.log(l_Player.getPlayerName() + " has " + l_Country.getName());
                     System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
                 }
 
