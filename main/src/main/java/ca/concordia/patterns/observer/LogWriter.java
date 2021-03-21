@@ -1,53 +1,37 @@
 package ca.concordia.patterns.observer;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-
 public class LogWriter implements Observer {
 
     // 10MB file size
-    public static final int FILE_SIZE = 10 * 1024 * 1024;
-    private static final String TAG = LogWriter.class.getSimpleName();
-    private static final String PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+    public final int FILE_SIZE = 10 * 1024 * 1024;
 
-    public static void log(String classname, String message) {
-        log(classname, message, "info");
+    @Override
+    public void update(Observable p_ObservableState) {
+        String l_LogString = ((LogEntryBuffer) p_ObservableState).getUpdate();
+        log(l_LogString);
     }
 
-    public static void log(String classname, String message, String type) {
-
+    public void log(String message) {
         try {
-            // configure the logger
-            Logger logger = Logger.getLogger(TAG);
-            FileHandler fH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 2, true);
+            Logger logger = Logger.getAnonymousLogger();
+            FileHandler fH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 1, true);
 
             logger.addHandler(fH);
+
+            // to avoid printing the log lines in console but only in log file.
+            logger.setUseParentHandlers(false);
 
             // configure simple format
             SimpleFormatter sf = new SimpleFormatter();
             fH.setFormatter(sf);
 
-            //prepend date into the log message
-            String datetime = new SimpleDateFormat(PATTERN).format(
-                    new Date(System.currentTimeMillis()));
-
-            //log messages into file
-            if ("error".equalsIgnoreCase(type)) {
-                logger.severe(datetime + " " + classname + " " + message);
-
-            } else if ("debug".equalsIgnoreCase(type)) {
-                // debug is for internal use only
-                logger.fine(datetime + " " + classname + " " + message);
-
-            } else {
-                // everything is info log be default
-                logger.info(datetime + " " + classname + " " + message);
-            }
+            // everything is info log be default
+            logger.info(message);
 
             fH.close();
 
@@ -55,11 +39,4 @@ public class LogWriter implements Observer {
             io.printStackTrace();
         }
     }
-
-
-    @Override
-    public void update(Observable p_ObservableState) {
-
-    }
-
 }

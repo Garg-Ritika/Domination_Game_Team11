@@ -50,7 +50,9 @@ public class Airlift implements Order {
     }
 
     public void printOrder() {
+        // TODO
         // print the order
+        System.out.println();
         LogUtil.log("");
     }
 }

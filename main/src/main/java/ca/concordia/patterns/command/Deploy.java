@@ -34,14 +34,15 @@ public class Deploy implements Order {
             // the target territory must belong to the player that created the order
             return true;
         }
-        System.out.println("invalid order");
         LogUtil.log("invalid deploy order");
+        System.out.println("invalid  deploy order");
         return false;
     }
 
     public void printOrder() {
         System.out.println("Deploy order issued by player " + this.initiator.getPlayerName());
         System.out.println("Deploy " + this.to_deploy + " to " + this.target_territory.getOwner());
+
         LogUtil.log("Deploy order issued by player " + this.initiator.getPlayerName());
         LogUtil.log("Deploy " + this.to_deploy + " to " + this.target_territory.getOwner());
     }

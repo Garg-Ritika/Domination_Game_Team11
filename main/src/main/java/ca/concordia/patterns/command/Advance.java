@@ -52,6 +52,7 @@ public class Advance implements Order {
 
     public void printOrder() {
         // print the order
+        System.out.println();
         LogUtil.log("");
     }
 }

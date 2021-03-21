@@ -38,8 +38,9 @@ public class Blockade implements Order {
     }
 
     public void printOrder() {
-        System.out.println("Deploy order issued by player " + this.initiator.getPlayerName());
-        System.out.println("Deploy " + this.to_bomb + " to " + this.target_territory.getOwner());
+        //TODO
+        System.out.println();
         LogUtil.log("");
+        ;
     }
 }

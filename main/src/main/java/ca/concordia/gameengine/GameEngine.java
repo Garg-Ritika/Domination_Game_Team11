@@ -1,22 +1,20 @@
 package ca.concordia.gameengine;
+
 import ca.concordia.dao.Map;
 import ca.concordia.dao.Player;
-import ca.concordia.patterns.observer.LogEntryBuffer;
 import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.Phase;
 import ca.concordia.patterns.state.edit.Preload;
 import ca.concordia.patterns.state.play.PlaySetup;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Scanner;
 
 /**
  * Game Engine class that starts with "loadmap" command and automatically ends after mainloop phases
  */
-public class GameEngine  {
+public class GameEngine {
 
 
     // Map editor commands
