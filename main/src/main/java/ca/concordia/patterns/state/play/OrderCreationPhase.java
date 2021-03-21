@@ -9,7 +9,7 @@ import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.Scanner;
 
-public class Attack extends MainPlay {
+public class OrderCreationPhase extends MainPlay {
 
     public static final String COMMAND_SHOW_MAP = "showmap";
     public static final String COMMAND_DEPLOY = "deploy";
@@ -20,12 +20,12 @@ public class Attack extends MainPlay {
     public static final String COMMAND_NEGOTIATE = "negotiate";
 
 
-    public Attack(GameEngine p_ge) {
+    public OrderCreationPhase(GameEngine p_ge) {
         super(p_ge);
     }
 
     public void next() {
-        d_ge.setPhase(new Fortify(d_ge));
+        d_ge.setPhase(new OrderExecutionPhase(d_ge));
         d_ge.getPhase().next();
     }
 

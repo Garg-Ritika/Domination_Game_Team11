@@ -132,7 +132,7 @@ public class PlaySetup extends Play {
                 System.out.println("number of countries between [3 to 5] so assign countries to player now ..");
                 if (assignCountriesToPlayers()) {
                     // start main-loop after this..
-                    d_ge.setPhase(new Reinforcement(d_ge));
+                    d_ge.setPhase(new ReinforcementPhase(d_ge));
                     d_ge.getPhase().reinforce();
                 }
             } else {

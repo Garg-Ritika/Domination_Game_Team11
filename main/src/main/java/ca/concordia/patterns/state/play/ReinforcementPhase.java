@@ -5,9 +5,9 @@ import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.observer.LogUtil;
 
-public class Reinforcement extends MainPlay {
+public class ReinforcementPhase extends MainPlay {
 
-    public Reinforcement(GameEngine p_ge) {
+    public ReinforcementPhase(GameEngine p_ge) {
         super(p_ge);
     }
 
@@ -57,7 +57,7 @@ public class Reinforcement extends MainPlay {
     }
 
     public void next() {
-        d_ge.setPhase(new Attack(d_ge));
+        d_ge.setPhase(new OrderCreationPhase(d_ge));
         d_ge.getPhase().attack();
     }
 

@@ -6,13 +6,13 @@ import ca.concordia.patterns.command.Order;
 import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.end.End;
 
-public class Fortify extends MainPlay {
-    public Fortify(GameEngine p_ge) {
+public class OrderExecutionPhase extends MainPlay {
+    public OrderExecutionPhase(GameEngine p_ge) {
         super(p_ge);
     }
 
     public void next() {
-        d_ge.setPhase(new Reinforcement(d_ge));
+        d_ge.setPhase(new ReinforcementPhase(d_ge));
         d_ge.getPhase().reinforce();
     }
 

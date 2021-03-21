@@ -26,6 +26,15 @@ public class Advance implements Order {
         // Here both the source and the target Territories are Receivers
         System.out.println("advance execute ");
 
+        //Advance order command:
+        // <advance countrynamefrom countynameto numarmies>
+        // what is the algorithm here ?
+        // reduce the numarimes from countrynamefrom
+        // attack the existing armies in countrynameto
+        // if winner: update owner to initiator
+        
+
+
         if (valid()) {
             if (target.getOwner().equalsIgnoreCase(initiator.getPlayerName())) {
                 // if the source and the target belong to the same player
@@ -42,6 +51,12 @@ public class Advance implements Order {
 
     public boolean valid() {
         //TODO what is the valid condition
+        // check if countrynamefrom exists
+            // check if countryname has the same owner as the initiator of this commad
+            // check if countryname from has >= numarmies being advanced..
+            // check if countrynameto is there
+        // check if countrynameto exists
+
         boolean valid_condition = true;
         if (valid_condition) {
             return true;
