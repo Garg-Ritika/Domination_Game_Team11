@@ -7,17 +7,26 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.io.File;
 import java.io.IOException;
 
-public class PostLoad extends Edit {
+/**
+ * This class extends the PostLoad class and the constructor returns the output from method super()
+ */
 
-
-    public PostLoad(GameEngine p_ge) {
+public class PostLoad extends Edit
+{
+    public PostLoad(GameEngine p_ge)
+    {
         super(p_ge);
     }
 
+    /**
+     * This method 
+      * @param p_Command
+     */
     @Override
     public void editContinent(String[] p_Command) {
         System.out.println("editcontinent command received ..... ");
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
+
             String l_Tag = p_Command[l_I];
 
             if (l_Tag.toLowerCase().startsWith("-add")) {
