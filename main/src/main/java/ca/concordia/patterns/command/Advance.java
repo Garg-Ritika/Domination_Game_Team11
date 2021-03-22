@@ -53,25 +53,25 @@ public class Advance implements Order {
             if (d_Target.getOwner().equalsIgnoreCase(d_Initiator.getPlayerName())) {
                 // if the source and the target belong to the same player
                 // then just move the armies to the target Territory
-                this.d_Target.d_ArmyCount += d_NumToAdvance;
+                this.d_Target.setArmyCount(this.d_Target.getArmyCount() + d_NumToAdvance);
             } else {
                 // implement a battle
 //                num_to_advance 25
 //                target.d_ArmyCount
-                this.d_Source.d_ArmyCount -= d_NumToAdvance;
-                int l_DefendingArmies = (int) (d_Target.d_ArmyCount*0.7); //7
+                this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
+                int l_DefendingArmies = (int) (d_Target.getArmyCount()*0.7); //7
                 int l_AttackingArmies = (int) (d_NumToAdvance *0.6); //15
                 d_NumToAdvance -= l_DefendingArmies;  //30-7=23
-                d_Target.d_ArmyCount -= l_AttackingArmies; //10-18=-8
+                d_Target.setArmyCount(d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
 
-                if (d_Target.d_ArmyCount < 0) {
+                if (d_Target.getArmyCount() < 0) {
                     // move surviving attacking armies to the target country
                     // transfer ownership of the conquered country
                     d_Target.setOwner(d_Initiator.getPlayerName());
-                    d_Target.d_ArmyCount= d_NumToAdvance;
+                    d_Target.setArmyCount(d_NumToAdvance);
                 }
                 else{
-                    this.d_Source.d_ArmyCount += d_NumToAdvance;
+                    this.d_Source.setArmyCount(d_Source.getArmyCount() + d_NumToAdvance);
                 }
             }
         }
@@ -92,7 +92,10 @@ public class Advance implements Order {
         // check if countrynameto is there
         // check if countrynameto exists
 
-        if((d_Initiator.getListOfCountries().contains(d_Source))&&(d_Source.d_ArmyCount>= d_NumToAdvance) && (d_Source !=null) && (d_Target !=null))        {
+        if((d_Initiator.getListOfCountries().contains(d_Source))
+                &&(d_Source.getArmyCount()>= d_NumToAdvance)
+                && (d_Source !=null)
+                && (d_Target !=null))        {
             valid_condition = true;
         }
 

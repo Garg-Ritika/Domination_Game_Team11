@@ -86,17 +86,22 @@ public class Map {
     }
 
     public Territory getTerritoryByName(String name) {
+        System.out.println(" --> find terrority named : " + name );
         for (Continent l_Continent : d_ListOfContinents) {
             if (name.equalsIgnoreCase(l_Continent.getName())) {
+                System.out.println("--> found continent : " + name);
                 return l_Continent;
             }
         }
 
         for (Country l_Country : d_ListOfCountries) {
+            System.out.println(l_Country);
             if (name.equalsIgnoreCase(l_Country.getName())) {
+                System.out.println("--> found continent : " + name );
                 return l_Country;
             }
         }
+        System.out.println("Error : unable to find " + name + " in the map ");
         return null;
     }
 

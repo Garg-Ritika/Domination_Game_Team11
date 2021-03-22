@@ -31,7 +31,7 @@ public class Bomb implements Order {
 
         if (valid()) {
             // behavior of the concrete command
-            this.target_territory.d_ArmyCount = this.target_territory.d_ArmyCount/2;
+            this.target_territory.setArmyCount(this.target_territory.getArmyCount()/2);
         }
     }
 

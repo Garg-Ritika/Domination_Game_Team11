@@ -31,7 +31,7 @@ public class Blockade implements Order {
 
         if (valid()) {
             // behavior of the concrete command
-            this.d_TargetTerritory.d_ArmyCount= this.d_TargetTerritory.d_ArmyCount*3;
+            this.d_TargetTerritory.setArmyCount(this.d_TargetTerritory.getArmyCount()*3);
             //how to make this territory neutral?
         }
     }

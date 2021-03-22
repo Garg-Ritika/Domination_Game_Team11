@@ -160,6 +160,7 @@ public class PlaySetup extends Play {
      * @return boolean
      */
     private boolean assignCountriesToPlayers() {
+        System.out.println("--> assign countries to players ..");
         if (d_ge.getListOfPlayers().size() < MINIMUM_PLAYER_COUNT) {
             LogUtil.log("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
             System.out.println("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
@@ -193,17 +194,19 @@ public class PlaySetup extends Play {
                     break;
                 } else if (l_CountriesToAssignRandomly.size() == 1) {
                     Country l_Country = l_CountriesToAssignRandomly.get(0);
-                    l_CountriesToAssignRandomly.remove(l_Country);
+                    l_Country.setOwner(l_Player.getPlayerName());
                     l_Player.addNewCountry(l_Country);
                     LogUtil.log(l_Player.getPlayerName() + " has " + l_Country.getName());
                     System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
+                    l_CountriesToAssignRandomly.remove(l_Country);
                 } else {
                     int l_Index = new Random().nextInt(l_CountriesToAssignRandomly.size() - 1);
                     Country l_Country = l_CountriesToAssignRandomly.get(l_Index);
-                    l_CountriesToAssignRandomly.remove(l_Country);
+                    l_Country.setOwner(l_Player.getPlayerName());
                     l_Player.addNewCountry(l_Country);
                     LogUtil.log(l_Player.getPlayerName() + " has " + l_Country.getName());
                     System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
+                    l_CountriesToAssignRandomly.remove(l_Country);
                 }
 
             }

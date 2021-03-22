@@ -35,7 +35,10 @@ public class Deploy implements Order {
 
         if (valid()) {
             // behavior of the concrete command
-            this.target_territory.d_ArmyCount += to_deploy;
+            int existingArmy = this.target_territory.getArmyCount();
+            int totalArmy = existingArmy + to_deploy;
+            this.target_territory.setArmyCount(existingArmy + totalArmy);
+            System.out.println("deploying " + to_deploy + " to " + target_territory.getName());
         }
     }
 
@@ -60,10 +63,8 @@ public class Deploy implements Order {
      * the log for which have been saved in log file
      */
     public void printOrder() {
-        System.out.println("Deploy order issued by player " + this.initiator.getPlayerName());
-        System.out.println("Deploy " + this.to_deploy + " to " + this.target_territory.getOwner());
 
         LogUtil.log("Deploy order issued by player " + this.initiator.getPlayerName());
-        LogUtil.log("Deploy " + this.to_deploy + " to " + this.target_territory.getOwner());
+        LogUtil.log("Deploy " + this.to_deploy + " to " + this.target_territory.getName());
     }
 }

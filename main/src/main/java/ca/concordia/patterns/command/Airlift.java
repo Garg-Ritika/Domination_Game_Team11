@@ -38,8 +38,8 @@ public class Airlift implements Order {
         if (valid()) {
                 // if the source and the target belong to the same player
                 // then just move the armies to the target Territory
-                d_Target.d_ArmyCount+= d_NumToAirlift;
-                d_Source.d_ArmyCount-= d_NumToAirlift;
+                d_Target.setArmyCount(d_Target.getArmyCount() + d_NumToAirlift);
+                d_Source.setArmyCount(d_Source.getArmyCount()- d_NumToAirlift);
         }
         else {
                 System.out.println("invalid order");
@@ -53,7 +53,10 @@ public class Airlift implements Order {
      */
     public boolean valid() {
         //TODO what is the valid condition
-        if((d_Source.d_ArmyCount>= d_NumToAirlift) && (d_Target.getOwner().equalsIgnoreCase(d_Initiator.getPlayerName())) &&(d_Source !=null) && (d_Target !=null) ) {
+        if((d_Source.getArmyCount()>= d_NumToAirlift)
+                && (d_Target.getOwner().equalsIgnoreCase(d_Initiator.getPlayerName()))
+                &&(d_Source !=null)
+                && (d_Target !=null) ) {
             return true;
         }
         else{

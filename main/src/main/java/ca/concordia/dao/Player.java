@@ -173,12 +173,16 @@ public class Player {
      * @return
      */
     public Order nextOrder() {
+        System.out.println("--> next order for player: " + getPlayerName());
         Order to_return = null;
         if (d_ListOfOrders.size() > 0) {
             to_return = d_ListOfOrders.get(0);
             d_ListOfOrders.remove(0);
+
+            System.out.println(getPlayerName() + " next order is : ");
             return to_return;
         }
+        System.out.println("--> there are no order for player: " + getPlayerName());
         return null;
     }
 
