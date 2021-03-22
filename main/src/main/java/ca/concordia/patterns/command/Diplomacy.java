@@ -1,20 +1,18 @@
 package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Player;
-import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
 
 public class Diplomacy implements Order {
-    Territory target_territory;
-    int to_bomb;
+
     Player initiator;
+    Player negotiatePlayerId;
 
     // TODO : Requires Diplomacy Card, revise this
-    public Diplomacy(Player initiator, Territory target_territory, int to_bomb) {
+    public Diplomacy(Player initiator, Player playerId) {
         // encapsulate all necessary data to execute the command
-        this.target_territory = target_territory;
         this.initiator = initiator;
-        this.to_bomb = to_bomb;
+        this.negotiatePlayerId = playerId;
     }
 
     public void execute() {
@@ -23,13 +21,13 @@ public class Diplomacy implements Order {
 
         if (valid()) {
             // behavior of the concrete command
-            this.target_territory.d_ArmyCount -= to_bomb;
+            // how to negotiate player id?
         }
     }
 
     public boolean valid() {
-        if (target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName())) {
-            // the target territory must belong to the player that created the order
+        if (negotiatePlayerId.getPlayerName() !=null) {
+            // target Player Id must exist
             return true;
         }
         System.out.println("invalid order");
