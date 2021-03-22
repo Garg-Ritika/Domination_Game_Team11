@@ -61,7 +61,9 @@ public class Preload extends Edit {
      */
     @Override
     public void editMap(String[] p_Command) {
-        d_ge.setPhase(new PostLoad(d_ge));
+        PostLoad postLoad= new PostLoad(d_ge);
+        d_ge.setPhase(postLoad);
+        postLoad.editMap(p_Command);
     }
 
     /**
