@@ -15,8 +15,11 @@ public class Bomb implements Order {
         this.initiator = initiator;
     }
 
+    /**
+     * execute method executes the Bomb card after validity check
+     */
     public void execute() {
-        System.out.println("deploy execute ");
+        System.out.println("bomb execute ");
         // Here, the target Territory object is the Receiver
 
         if (valid()) {
@@ -25,6 +28,11 @@ public class Bomb implements Order {
         }
     }
 
+    /**
+     * This method will check if the given inputs are a valid input for Airlift Card
+     *
+     * @return true/false
+     */
     public boolean valid() {
         if ((target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName()) !=true) && (target_territory !=null) ){
             // the target territory must not belong to the player that created the order
@@ -35,6 +43,10 @@ public class Bomb implements Order {
         return false;
     }
 
+    /**
+     * This method will print all the commands that have been executed and
+     * the log for which have been saved in log file
+     */
     public void printOrder() {
         //TODO
         System.out.println();

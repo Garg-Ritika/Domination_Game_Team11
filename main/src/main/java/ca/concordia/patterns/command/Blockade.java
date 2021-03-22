@@ -4,37 +4,56 @@ import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
 
+/**
+ * blockade: triple the number of armies on one of the current player’s territories and make it a neutral territory.
+ *
+ * Command Syntax:
+ * blockade countryID
+ */
 public class Blockade implements Order {
 
-    Territory target_territory;
-    Player initiator;
+    Territory d_TargetTerritory;
+    Player d_Initiator;
 
-    // TODO : Requires Blocake Card, revise this
-    public Blockade(Player initiator, Territory target_territory) {
+    // TODO : Requires Blockade Card, revise this
+    public Blockade(Player p_Initiator, Territory p_TargetTerritory) {
         // encapsulate all necessary data to execute the command
-        this.target_territory = target_territory;
-        this.initiator = initiator;
+        this.d_TargetTerritory = p_TargetTerritory;
+        this.d_Initiator = p_Initiator;
     }
 
+    /**
+     * execute method executes the Blockade card after validity check
+     */
     public void execute() {
-        System.out.println("deploy execute ");
+        System.out.println("blockade execute ");
         // Here, the target Territory object is the Receiver
 
         if (valid()) {
             // behavior of the concrete command
-            this.target_territory.d_ArmyCount= this.target_territory.d_ArmyCount*3;
+            this.d_TargetTerritory.d_ArmyCount= this.d_TargetTerritory.d_ArmyCount*3;
             //how to make this territory neutral?
         }
     }
 
+    /**
+     * This method will check if the given inputs are a valid input for Advance Card
+     *
+     * @return true/false
+     */
     public boolean valid() {
-        if ((target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName())) && (target_territory!=null)) {
+        if ((d_TargetTerritory.getOwner().equalsIgnoreCase(d_Initiator.getPlayerName())) && (d_TargetTerritory !=null)) {
             // the target territory must belong to the player that created the order
             return true;
         }
         System.out.println("invalid order");
         return false;
     }
+
+    /**
+     * This method will print all the commands that have been executed and
+     * the log for which have been saved in log file
+     */
 
     public void printOrder() {
         //TODO

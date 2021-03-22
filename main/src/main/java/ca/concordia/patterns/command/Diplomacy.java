@@ -15,8 +15,11 @@ public class Diplomacy implements Order {
         this.negotiatePlayerId = playerId;
     }
 
+    /**
+     * execute method executes the diplomacy card after validity check
+     */
     public void execute() {
-        System.out.println("deploy execute ");
+        System.out.println("diplomacy execute ");
         // Here, the target Territory object is the Receiver
 
         if (valid()) {
@@ -25,6 +28,11 @@ public class Diplomacy implements Order {
         }
     }
 
+    /**
+     * This method will check if the given inputs are a valid input for Airlift Card
+     *
+     * @return true/false
+     */
     public boolean valid() {
         if (negotiatePlayerId.getPlayerName() !=null) {
             // target Player Id must exist
@@ -34,6 +42,10 @@ public class Diplomacy implements Order {
         return false;
     }
 
+    /**
+     * This method will print all the commands that have been executed and
+     * the log for which have been saved in log file
+     */
     public void printOrder() {
         //TODO
         System.out.println();
