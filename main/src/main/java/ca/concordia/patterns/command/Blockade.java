@@ -1,5 +1,6 @@
 package ca.concordia.patterns.command;
 
+import ca.concordia.dao.Country;
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
@@ -32,6 +33,10 @@ public class Blockade implements Order {
         if (valid()) {
             // behavior of the concrete command
             this.d_TargetTerritory.setArmyCount(this.d_TargetTerritory.getArmyCount()*3);
+            this.d_TargetTerritory.setOwner("Neutral");
+            this.d_Initiator.getListOfCountries().remove(this.d_TargetTerritory);
+            System.out.println("------------------");
+            System.out.println(this.d_TargetTerritory.getArmyCount());
             //how to make this territory neutral?
         }
     }
