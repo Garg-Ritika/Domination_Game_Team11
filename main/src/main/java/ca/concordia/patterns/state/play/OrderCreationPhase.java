@@ -178,14 +178,14 @@ public class OrderCreationPhase extends MainPlay {
                 String l_Num = p_Command[3];
                 int l_NumInt = Integer.parseInt(l_Num);
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
-                if (l_ArmyCountOfPlayer >= l_NumInt) {
-                    p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
+                /*if (l_ArmyCountOfPlayer >= l_NumInt) {
+                    p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);*/
                     Order o = new Advance(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
                     p_Player.createOrder(o);
-                } else {
+                /*} else {
                     LogUtil.log("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
                     System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
-                }
+                }*/
             }
         } catch (Exception l_E) {
             l_E.printStackTrace();

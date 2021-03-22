@@ -3,6 +3,7 @@ package ca.concordia.patterns.command;
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
+import ca.concordia.patterns.state.play.Play;
 
 //   ConcreteCommand of the the Command pattern.
 
@@ -53,6 +54,7 @@ public class Advance implements Order {
             if (d_Target.getOwner().equalsIgnoreCase(d_Initiator.getPlayerName())) {
                 // if the source and the target belong to the same player
                 // then just move the armies to the target Territory
+
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() + d_NumToAdvance);
             } else {
                 // implement a battle
@@ -68,7 +70,9 @@ public class Advance implements Order {
                     // move surviving attacking armies to the target country
                     // transfer ownership of the conquered country
                     d_Target.setOwner(d_Initiator.getPlayerName());
+                    this.d_Initiator.getListOfCountries().remove(this.d_Target);
                     d_Target.setArmyCount(d_NumToAdvance);
+                    //removing the territory from the list and adding to the player who won it
                 }
                 else{
                     this.d_Source.setArmyCount(d_Source.getArmyCount() + d_NumToAdvance);
