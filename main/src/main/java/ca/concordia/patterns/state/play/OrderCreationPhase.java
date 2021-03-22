@@ -170,7 +170,7 @@ public class OrderCreationPhase extends MainPlay {
     private void processAdvanceCommand(Player p_Player, String[] p_Command) {
         System.out.println("advance command received ..");
         try {
-            if (p_Command.length == 3) {
+            if (p_Command.length == 4) {
                 String l_CountryNameSource = p_Command[1];
                 Territory l_TerritorySource = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
                 String l_CountryNameTarget = p_Command[2];
@@ -201,7 +201,7 @@ public class OrderCreationPhase extends MainPlay {
     private void processBombCommand(Player p_Player, String[] p_Command) {
         System.out.println("bomb command received ..");
         try {
-            if (p_Command.length == 3) {
+            if (p_Command.length == 2) {
                 String l_CountryNameSource = p_Command[1];
                 Territory l_TerritoryTarget = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
                 Order o = new Bomb(p_Player, l_TerritoryTarget);
@@ -222,7 +222,7 @@ public class OrderCreationPhase extends MainPlay {
     private void processBlockadeCommand(Player p_Player, String[] p_Command) {
         System.out.println("blockade command received ..");
         try {
-            if (p_Command.length == 3) {
+            if (p_Command.length == 2) {
                 String l_CountryNameSource = p_Command[1];
                 Territory l_TerritorySource = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
                 Order o = new Blockade(p_Player, l_TerritorySource);
@@ -243,7 +243,7 @@ public class OrderCreationPhase extends MainPlay {
     private void processAirliftCommand(Player p_Player, String[] p_Command) {
         System.out.println("airlift command received ..");
         try {
-            if (p_Command.length == 3) {
+            if (p_Command.length == 4) {
                 String l_CountryNameSource = p_Command[1];
                 Territory l_TerritorySource = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
                 String l_CountryNameTarget = p_Command[2];
@@ -269,7 +269,7 @@ public class OrderCreationPhase extends MainPlay {
     private void processDiplomacyCommand(Player p_Player, String[] p_Command) {
         System.out.println("diplomacy command received ..");
         try {
-            if (p_Command.length == 3) {
+            if (p_Command.length == 2) {
                 String l_PlayerName = p_Command[1];
                 for (Player l_GamePlayer :d_ge.getListOfPlayers()){
                     if (l_GamePlayer.getPlayerName().equalsIgnoreCase(l_PlayerName)){
