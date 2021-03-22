@@ -6,15 +6,13 @@ import ca.concordia.patterns.observer.LogUtil;
 
 public class Bomb implements Order {
     Territory target_territory;
-    int to_bomb;
     Player initiator;
 
     // TODO : Requires Bomb Card, revise this
-    public Bomb(Player initiator, Territory target_territory, int to_bomb) {
+    public Bomb(Player initiator, Territory target_territory) {
         // encapsulate all necessary data to execute the command
         this.target_territory = target_territory;
         this.initiator = initiator;
-        this.to_bomb = to_bomb;
     }
 
     public void execute() {
@@ -23,15 +21,16 @@ public class Bomb implements Order {
 
         if (valid()) {
             // behavior of the concrete command
-            this.target_territory.d_ArmyCount -= to_bomb;
+            this.target_territory.d_ArmyCount = this.target_territory.d_ArmyCount/2;
         }
     }
 
     public boolean valid() {
-        if (target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName())) {
-            // the target territory must belong to the player that created the order
+        if ((target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName()) !=true) && (target_territory !=null) ){
+            // the target territory must not belong to the player that created the order
             return true;
         }
+        //also check if target territory exists?
         System.out.println("invalid order");
         return false;
     }
