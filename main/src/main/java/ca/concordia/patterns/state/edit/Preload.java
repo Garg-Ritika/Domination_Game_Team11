@@ -65,7 +65,8 @@ public class Preload extends Edit {
     }
 
     /**
-     * This method takes validate map command and shows invalid command message to user
+     * This method takes validate map command and shows invalid command message to the user
+     * This command is executed in the PreLoad phase, because map can not be validated before loading
      * @param p_Command validateMap command
      */
     @Override

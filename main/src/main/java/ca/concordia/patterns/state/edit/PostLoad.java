@@ -150,6 +150,12 @@ public class PostLoad extends Edit
         // d_ge.setPhase(new PlaySetup(d_ge));
     }
 
+    /**
+     * This command will be loaded in PostLoad phase
+     * editMap will edit the map by checking if the map file name exists
+     * uses MapEditor class and its method getInstance
+     * @param p_Command
+     */
     @Override
     public void editMap(String[] p_Command) {
         try {
