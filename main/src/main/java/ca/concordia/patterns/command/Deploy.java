@@ -45,6 +45,7 @@ public class Deploy implements Order {
      * @return true/false
      */
     public boolean valid() {
+        System.out.println("--> deploy valid ");
         if (target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName())) {
             // the target territory must belong to the player that created the order
             return true;

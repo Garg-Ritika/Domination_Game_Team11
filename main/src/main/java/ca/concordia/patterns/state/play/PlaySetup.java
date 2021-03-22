@@ -55,6 +55,7 @@ public class PlaySetup extends Play {
         if (d_ge.getMap() == null) {
             LogUtil.log("map must be loaded before assigning any player");
             System.out.println("map must be loaded before assigning any player");
+            return;
         }
 
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
@@ -124,6 +125,13 @@ public class PlaySetup extends Play {
     @Override
     public void assignCountries() {
         System.out.println("assigncountries command received..");
+
+        if (d_ge.getMap() == null) {
+            LogUtil.log("map must be loaded before assigning any player");
+            System.out.println("map must be loaded before assigning any player");
+            return;
+        }
+
         try {
             int l_NumberOfPlayers = d_ge.getListOfPlayers().size();
             if (l_NumberOfPlayers >= 3 && l_NumberOfPlayers <= 5) {

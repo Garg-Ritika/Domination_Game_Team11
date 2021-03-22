@@ -57,6 +57,7 @@ public class ReinforcementPhase extends MainPlay {
     }
 
     public void next() {
+        System.out.println("--> setting order creation phase ");
         d_ge.setPhase(new OrderCreationPhase(d_ge));
         d_ge.getPhase().attack();
     }

@@ -6,6 +6,7 @@ import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.command.*;
 import ca.concordia.patterns.observer.LogUtil;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class OrderCreationPhase extends MainPlay {
@@ -17,6 +18,7 @@ public class OrderCreationPhase extends MainPlay {
     public static final String COMMAND_BLOCKADE = "blockade";
     public static final String COMMAND_AIRLIFT = "airlift";
     public static final String COMMAND_NEGOTIATE = "negotiate";
+    public static final String COMMAND_QUIT = "quit";
 
 
     public OrderCreationPhase(GameEngine p_ge) {
@@ -24,8 +26,9 @@ public class OrderCreationPhase extends MainPlay {
     }
 
     public void next() {
+        System.out.println("--> setting order execution phase ");
         d_ge.setPhase(new OrderExecutionPhase(d_ge));
-        d_ge.getPhase().next();
+        d_ge.getPhase().fortify();
     }
 
     public void reinforce() {
@@ -34,18 +37,19 @@ public class OrderCreationPhase extends MainPlay {
 
     @Override
     public void attack() {
-        System.out.println("attacking");
+        System.out.println("--> start of order creation");
         for (Player l_Player : d_ge.getListOfPlayers()) {
             boolean l_MaintainLoop = true;
             do {
-                takeOrder(l_Player);
+                LogUtil.log("Taking order for player: " + l_Player.getPlayerName());
+                l_MaintainLoop = takeOrder(l_Player);
                 if (l_Player.getNoOfArmies() < 1) {
                     LogUtil.log("All the reinforcement armies have been placed ..");
-                    System.out.println("All the reinforcement armies have been placed ..");
                     break;
                 }
             } while (l_MaintainLoop);
         }
+        System.out.println("--> finish of order creating ");
         next();
     }
 
@@ -54,7 +58,7 @@ public class OrderCreationPhase extends MainPlay {
     }
 
 
-    void takeOrder(Player p_Player) {
+    public boolean takeOrder(Player p_Player) {
         System.out.println("taking order ");
         Scanner keyboard = new Scanner(System.in);
         boolean l_MaintainLoop = true;
@@ -73,10 +77,13 @@ public class OrderCreationPhase extends MainPlay {
             LogUtil.log(l_CommandInput);
 
             if ("quit".equalsIgnoreCase(l_CommandInput)) {
-                //TODO: end the game if quit is passed during the attack ?
-
-                d_ge.getPhase().endGame();
-                return;
+                //If end the game if quit is passed during the order creation, move to another player..
+                if (p_Player.getNoOfArmies() >0){
+                    LogUtil.log("Cannot quit as not all armies are deployed");
+                    System.out.println("Cannot quit as not all armies are deployed");
+                }else{
+                    return false;
+                }
             }
 
             if (l_CommandInput.length() > 0) {
@@ -121,6 +128,7 @@ public class OrderCreationPhase extends MainPlay {
             }
         } while (l_MaintainLoop);
         keyboard.close();
+        return false;
     }
 
     /**
@@ -142,9 +150,10 @@ public class OrderCreationPhase extends MainPlay {
                     p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
                     Order o = new Deploy(p_Player, l_Territory, l_NumInt);
                     p_Player.createOrder(o);
+                    LogUtil.log("ORDER CREATED: " + Arrays.toString(p_Command));
                 } else {
-                    LogUtil.log("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
-                    System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
+                    LogUtil.log("ORDER FAILED: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
+                    System.out.println("ORDER FAILED: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
                 }
             }
         } catch (Exception l_E) {

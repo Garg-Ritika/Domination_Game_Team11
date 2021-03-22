@@ -12,6 +12,7 @@ public class OrderExecutionPhase extends MainPlay {
     }
 
     public void next() {
+        System.out.println("--> setting reinforcement phase");
         d_ge.setPhase(new ReinforcementPhase(d_ge));
         d_ge.getPhase().reinforce();
     }
@@ -32,17 +33,22 @@ public class OrderExecutionPhase extends MainPlay {
     }
 
     private void executeAllOrders() {
+        System.out.println("--> execute all orders ");
         Order order;
         boolean still_more_orders = false;
         do {
             still_more_orders = false;
             for (Player p : d_ge.getListOfPlayers()) {
-                order = p.nextOrder();
+                try {
+                    order = p.nextOrder();
 
-                if (order != null) {
-                    still_more_orders = true;
-                    order.printOrder();
-                    order.execute();
+                    if (order != null) {
+                        still_more_orders = true;
+                        order.printOrder();
+                        order.execute();
+                    }
+                }catch (Exception e){
+                    System.out.println("EXCEPTION: " + e.getMessage());
                 }
             }
         } while (still_more_orders);
