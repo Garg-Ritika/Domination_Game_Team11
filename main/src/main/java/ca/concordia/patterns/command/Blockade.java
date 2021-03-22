@@ -7,15 +7,13 @@ import ca.concordia.patterns.observer.LogUtil;
 public class Blockade implements Order {
 
     Territory target_territory;
-    int to_bomb;
     Player initiator;
 
     // TODO : Requires Blocake Card, revise this
-    public Blockade(Player initiator, Territory target_territory, int to_bomb) {
+    public Blockade(Player initiator, Territory target_territory) {
         // encapsulate all necessary data to execute the command
         this.target_territory = target_territory;
         this.initiator = initiator;
-        this.to_bomb = to_bomb;
     }
 
     public void execute() {
@@ -24,12 +22,13 @@ public class Blockade implements Order {
 
         if (valid()) {
             // behavior of the concrete command
-            this.target_territory.d_ArmyCount -= to_bomb;
+            this.target_territory.d_ArmyCount= this.target_territory.d_ArmyCount*3;
+            //how to make this territory neutral?
         }
     }
 
     public boolean valid() {
-        if (target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName())) {
+        if ((target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName())) && (target_territory!=null)) {
             // the target territory must belong to the player that created the order
             return true;
         }
@@ -41,6 +40,6 @@ public class Blockade implements Order {
         //TODO
         System.out.println();
         LogUtil.log("");
-        ;
+
     }
 }
