@@ -9,7 +9,7 @@ public class Airlift implements Order {
     Territory source;
     Territory target;
     Player initiator;
-    int num_to_advance;
+    int num_to_airlift;
 
     //TODO : revise this code, it requires airlift card ..
     public Airlift(Player initiator, Territory source, Territory target, int num) {
@@ -17,7 +17,7 @@ public class Airlift implements Order {
         this.initiator = initiator;
         this.source = source;
         this.target = target;
-        this.num_to_advance = num;
+        this.num_to_airlift = num;
     }
 
 
@@ -26,27 +26,26 @@ public class Airlift implements Order {
         System.out.println("advance execute ");
 
         if (valid()) {
-            if (target.getOwner().equalsIgnoreCase(initiator.getPlayerName())) {
                 // if the source and the target belong to the same player
                 // then just move the armies to the target Territory
-            } else {
-                // implement a battle
-                if (target.d_ArmyCount < 0) {
-                    // move surviving attacking armies to the target country
-                    // transfer ownership of the conquered country
-                }
-            }
+                target.d_ArmyCount+=num_to_airlift;
+                source.d_ArmyCount-=num_to_airlift;
         }
+        else {
+                System.out.println("invalid order");
+        }
+
     }
 
     public boolean valid() {
         //TODO what is the valid condition
-        boolean valid_condition = true;
-        if (valid_condition) {
+        if((source.d_ArmyCount>=num_to_airlift) && (target.getOwner().equalsIgnoreCase(initiator.getPlayerName())) &&(source!=null) && (target!=null) ) {
             return true;
         }
-        System.out.println("invalid order");
-        return false;
+        else{
+            System.out.println("invalid order");
+            return false;
+        }
     }
 
     public void printOrder() {

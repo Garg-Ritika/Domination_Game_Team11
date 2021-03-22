@@ -3,8 +3,7 @@ package ca.concordia.patterns.state.play;
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.gameengine.GameEngine;
-import ca.concordia.patterns.command.Deploy;
-import ca.concordia.patterns.command.Order;
+import ca.concordia.patterns.command.*;
 import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.Scanner;
@@ -125,8 +124,8 @@ public class OrderCreationPhase extends MainPlay {
     }
 
     /**
-     * Helper method to process deploy command
-     *
+     * Helper method to process "deploy" command
+     *  "deploy countryID numarmies"
      * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
      */
@@ -153,33 +152,126 @@ public class OrderCreationPhase extends MainPlay {
         }
     }
 
-    // TODO:
-    private void processAdvanceCommand(Player player, String[] p_Command) {
+    /**
+     * Helper method to process "advance" command
+     *  "advance countrynamefrom countynameto numarmies"
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
+    private void processAdvanceCommand(Player p_Player, String[] p_Command) {
         System.out.println("advance command received ..");
+        try {
+            if (p_Command.length == 3) {
+                String l_CountryNameSource = p_Command[1];
+                Territory l_TerritorySource = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
+                String l_CountryNameTarget = p_Command[2];
+                Territory l_TerritoryTarget = d_ge.getMap().getTerritoryByName(l_CountryNameTarget);
+                String l_Num = p_Command[3];
+                int l_NumInt = Integer.parseInt(l_Num);
+                int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
+                if (l_ArmyCountOfPlayer >= l_NumInt) {
+                    p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
+                    Order o = new Advance(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
+                    p_Player.createOrder(o);
+                } else {
+                    LogUtil.log("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
+                    System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
+                }
+            }
+        } catch (Exception l_E) {
+            l_E.printStackTrace();
+        }
     }
 
-    // TODO:
-    private void processBombCommand(Player player, String[] p_Command) {
+    /**
+     * Helper method to process "bomb" command
+     *  "bomb countryID"
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
+    private void processBombCommand(Player p_Player, String[] p_Command) {
         System.out.println("bomb command received ..");
+        try {
+            if (p_Command.length == 3) {
+                String l_CountryNameSource = p_Command[1];
+                Territory l_TerritoryTarget = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
+                Order o = new Bomb(p_Player, l_TerritoryTarget);
+                p_Player.createOrder(o);
 
+            }
+        } catch (Exception l_E) {
+            l_E.printStackTrace();
+        }
     }
 
-    // TODO:
-    private void processBlockadeCommand(Player player, String[] p_Command) {
+    /**
+     * Helper method to process "blockade" command
+     *  "blockade countryID"
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
+    private void processBlockadeCommand(Player p_Player, String[] p_Command) {
         System.out.println("blockade command received ..");
+        try {
+            if (p_Command.length == 3) {
+                String l_CountryNameSource = p_Command[1];
+                Territory l_TerritorySource = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
+                Order o = new Blockade(p_Player, l_TerritorySource);
+                p_Player.createOrder(o);
 
+            }
+        } catch (Exception l_E) {
+            l_E.printStackTrace();
+        }
     }
 
-    // TODO:
-    private void processAirliftCommand(Player player, String[] p_Command) {
+    /**
+     * Helper method to process "Airlift" command
+     *  "airlift sourcecountryID targetcountryID numarmies"
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
+    private void processAirliftCommand(Player p_Player, String[] p_Command) {
         System.out.println("airlift command received ..");
+        try {
+            if (p_Command.length == 3) {
+                String l_CountryNameSource = p_Command[1];
+                Territory l_TerritorySource = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
+                String l_CountryNameTarget = p_Command[2];
+                Territory l_TerritoryTarget = d_ge.getMap().getTerritoryByName(l_CountryNameTarget);
+                String l_Num = p_Command[3];
+                int l_NumInt = Integer.parseInt(l_Num);
 
+                Order o = new Airlift(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
+                p_Player.createOrder(o);
+
+            }
+        } catch (Exception l_E) {
+            l_E.printStackTrace();
+        }
     }
 
-    // TODO:
-    private void processDiplomacyCommand(Player player, String[] p_Command) {
+    /**
+     * Helper method to process "Diplomacy" command
+     *  "negotiate playerID"
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
+    private void processDiplomacyCommand(Player p_Player, String[] p_Command) {
         System.out.println("diplomacy command received ..");
-
+        try {
+            if (p_Command.length == 3) {
+                String l_PlayerName = p_Command[1];
+                for (Player l_GamePlayer :d_ge.getListOfPlayers()){
+                    if (l_GamePlayer.getPlayerName().equalsIgnoreCase(l_PlayerName)){
+                        Order o = new Diplomacy(p_Player,l_GamePlayer);
+                        p_Player.createOrder(o);
+                    }
+                }
+            }
+        } catch (Exception l_E) {
+            l_E.printStackTrace();
+        }
     }
 
 }
