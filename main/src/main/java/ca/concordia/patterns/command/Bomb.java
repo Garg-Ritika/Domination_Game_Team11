@@ -4,6 +4,13 @@ import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
 
+/**
+ * bomb: destroy half of the armies located on an opponent’s territory that is adjacent to one of the current
+ * player’s territories.
+ *
+ * Command Syntax:
+ * bomb countryID
+ */
 public class Bomb implements Order {
     Territory target_territory;
     Player initiator;

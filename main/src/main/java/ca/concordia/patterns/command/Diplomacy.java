@@ -3,6 +3,12 @@ package ca.concordia.patterns.command;
 import ca.concordia.dao.Player;
 import ca.concordia.patterns.observer.LogUtil;
 
+/**
+ * diplomacy: until the end of the turn, you and the target player cannot attack each other.
+ *
+ * Command Syntax:
+ * negotiate playerID
+ */
 public class Diplomacy implements Order {
 
     Player initiator;

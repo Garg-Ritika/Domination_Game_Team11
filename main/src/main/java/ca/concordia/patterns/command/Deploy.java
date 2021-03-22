@@ -5,6 +5,13 @@ import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
 
 //Concrete Command for Command pattern
+
+/**
+ * deploy: place some armies on one of the current player’s territories.
+ *
+ * Command Syntax:
+ * deploy countryID numarmies
+ */
 public class Deploy implements Order {
 
     Territory target_territory;
