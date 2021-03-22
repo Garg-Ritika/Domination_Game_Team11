@@ -8,7 +8,7 @@ import ca.concordia.gameengine.GameEngine;
 public class Main {
 
     /**
-     * main method to start the exeuction
+     * main method to start the execution
      *
      * @param args arguments to the program, the game is not expecting any argument on startup
      */
@@ -17,6 +17,4 @@ public class Main {
         System.out.println("Welcome to TEAM-11 Game");
         new GameEngine().start();
     }
-
-
 }
