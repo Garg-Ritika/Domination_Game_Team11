@@ -10,6 +10,11 @@ public class LogUtil {
     private static LogEntryBuffer d_LogEntryBuffer;
     private static LogWriter d_LogWriter;
 
+    /**
+     * this method is used to catch the exception during the start of the program
+     * if there is already existing log file then exception is handled by catch
+     * @param p_Msg
+     */
     public static void log(String p_Msg) {
         try {
             System.out.println(p_Msg);
@@ -35,6 +40,10 @@ public class LogUtil {
         }
     }
 
+    /**
+     * this method is used to clear the
+     * existing file containing logs of previous moves
+     */
     public static void clearOldLogFiles() {
         try {
             File l_LogFile = new File(LOG_FILE_NAME);
