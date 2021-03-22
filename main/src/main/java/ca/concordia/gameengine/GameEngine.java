@@ -39,30 +39,60 @@ public class GameEngine {
     private Map d_Map;
     private List<Player> d_ListOfPlayers = new ArrayList<Player>();
 
+    /**
+     * this getter method returns the current GamePhase
+     * @return d_GamePhase
+     */
     public Phase getPhase() {
         return d_GamePhase;
     }
 
+    /**
+     * This setter method is used to set the phase
+     * returned from getPhase method
+     * @param p_Phase
+     */
     public void setPhase(Phase p_Phase) {
         this.d_GamePhase = p_Phase;
     }
 
+    /**
+     * this getter method is used to return the map in PlaySetup class
+     * @return
+     */
     public Map getMap() {
         return d_Map;
     }
 
+    /**
+     * this setter method is used to return the map in PlaySetup class
+     * @param p_Map
+     */
     public void setMap(Map p_Map) {
         d_Map = p_Map;
     }
 
+    /**
+     * this method is used to store the player names in a List
+     * @return d_ListOfPlayers
+     */
     public List<Player> getListOfPlayers() {
         return d_ListOfPlayers;
     }
 
+    /**
+     * main game engine used a method to GameEngine constructor Main class
+     * It takes input from the user to enter the phase
+     * Following three phases are presented:
+     * 1. Edit
+     * 2. Play
+     * 3. Quit
+     * And from the input option phase is loaded and functions are implemented
+     */
     public void start() {
         LogUtil.clearOldLogFiles();
         LogUtil.log("Game Engine started");
-        Scanner keyboard = new Scanner(System.in);
+        Scanner l_Keyboard = new Scanner(System.in);
         do {
             System.out.println("========================================");
             System.out.println("edit");
@@ -70,26 +100,29 @@ public class GameEngine {
             System.out.println("quit");
             System.out.println("choose one of the option from above?: ");
             System.out.println("=======================================");
-            String l_Input = keyboard.nextLine();
+            String l_Input = l_Keyboard.nextLine();
             LogUtil.log(l_Input);
             switch (l_Input) {
                 case "edit":
                     // setting phase as preload
                     setPhase(new Preload(this));
-                    startMapEditor(keyboard);
+                    startMapEditor(l_Keyboard);
                     break;
                 case "play":
                     // setting phase as playsetup
                     setPhase(new PlaySetup(this));
-                    startMainPlay(keyboard);
+                    startMainPlay(l_Keyboard);
                     break;
                 case "quit":
                     return;
             }
-
         } while (true);
     }
 
+    /**
+     * This method will be called when player selected option "edit"
+     * @param keyboard
+     */
     void startMapEditor(Scanner keyboard) {
         boolean l_MaintainLoop = true;
         do {
@@ -154,6 +187,10 @@ public class GameEngine {
         } while (l_MaintainLoop);
     }
 
+    /**
+     * This method will be called when player selected option "play"
+     * @param keyboard
+     */
     void startMainPlay(Scanner keyboard) {
         boolean l_MaintainLoop = true;
         do {
@@ -203,6 +240,4 @@ public class GameEngine {
             }
         } while (l_MaintainLoop);
     }
-
-
 }
