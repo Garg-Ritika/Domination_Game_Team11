@@ -142,12 +142,19 @@ public class Country extends Territory {
         this.d_ArmyCount = p_ArmyCount;
     }
 
-
+    /**
+     * this method gets the player name of the source/target country
+     * @return d_OwnerName
+     */
     @Override
     public String getOwner() {
         return d_OwnerName;
     }
 
+    /**
+     * this method sets the passed owner name
+     * @param p_OwnerName ownerName of a target/source country is passed
+     */
     @Override
     public void setOwner(String p_OwnerName) {
         this.d_OwnerName = p_OwnerName;
