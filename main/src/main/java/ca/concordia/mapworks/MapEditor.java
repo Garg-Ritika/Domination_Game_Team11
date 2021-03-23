@@ -321,7 +321,7 @@ public class MapEditor {
      * and automatically validates map upon loading
      *
      * @param p_MapPath
-     * @throws IOException
+     * @throws IOException inputOutput exception
      */
     public void editMap(File p_MapPath) throws IOException {
         readMapFile(p_MapPath);
@@ -332,7 +332,7 @@ public class MapEditor {
      * Helper method to validate map. it is being called after reading and before writing a map
      * as well as through "validatemap" command
      *
-     * @return
+     * @return ValidateMap(getCurrentMap())
      */
     public boolean validateMap() {
         return new ValidateMap(getCurrentMap()).validate();
@@ -350,7 +350,7 @@ public class MapEditor {
      *
      * @param p_MapFile the file object of map file
      * @return map object
-     * @throws IOException
+     * @throws
      */
     public Map readMapFile(File p_MapFile) throws IOException {
         resetCurrentMap();
@@ -419,7 +419,7 @@ public class MapEditor {
     }
 
     /**
-     * private method to write the map file
+     * Private method to write the map file
      *
      * @param p_MapFile the map file object
      * @throws IOException
@@ -460,10 +460,10 @@ public class MapEditor {
     }
 
     /**
-     * method to load the map as a graph
+     * Method to load the map as a graph
      * TODO: currently this method is not being used anywhere ..
      *
-     * @return
+     * @return l_Graph
      */
     public Graph loadMapAsGraph() {
         Map l_Map = this.getCurrentMap();

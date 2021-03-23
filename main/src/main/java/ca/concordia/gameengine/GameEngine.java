@@ -16,22 +16,58 @@ import java.util.Scanner;
  */
 public class GameEngine {
 
-
-    // Map editor commands
+    /**
+     * Map Editor Commands:
+     * These are global data members corresponding to which a command is associated
+     *
+     * editcontinent: in the switch case if this command corresponds to case then the corresponding command is called from the Phase.java file
+     */
     public static final String COMMAND_EDIT_CONTINENT = "editcontinent";
+    /**
+     * editcountry: in the switch case if this command corresponds to case then the corresponding command is called from the Phase.java file
+     */
     public static final String COMMAND_EDIT_COUNTRY = "editcountry";
+    /**
+     * editneighbor: in the switch case if this command corresponds to case then the corresponding command is called from the Phase.java file
+     */
     public static final String COMMAND_EDIT_NEIGHBOUR = "editneighbor";
+    /**
+     * savemap: in the switch case if this command corresponds to case then the corresponding command is called from the Phase.java file
+     */
     public static final String COMMAND_SAVE_MAP = "savemap";
+    /**
+     * editmap: in the switch case if this command corresponds to case then the corresponding command is called from the Phase.java file
+     */
     public static final String COMMAND_EDIT_MAP = "editmap";
+    /**
+     * validatemap: in the switch case if this command corresponds to case then the corresponding command is called from the Phase.java file
+     */
     public static final String COMMAND_VALIDATE_MAP = "validatemap";
 
     //Any commands
+    /**
+     *showMap method is called which prints different attributes of the map like ID, Name etc
+     */
     public static final String COMMAND_SHOW_MAP = "showmap";
+    /**
+     *When this command is executed then "break" is performed which pulls out from the execution
+     */
     public static final String COMMAND_QUIT = "quit";
 
     // play commands
+    /**
+     * loadMap command loads the map to start the game, it checks if the map with the input name already exists then
+     * it loads that specified file otherwise it creates a new map
+     * Implementation of code can be found in PlaySetup classset
+     */
     public static final String COMMAND_LOAD_MAP = "loadmap";
+    /**
+     * This command is a gameplayer command and players are added in player list using addPlayer() method
+     */
     public static final String COMMAND_GAME_PLAYER = "gameplayer";
+    /**
+     * this method is used to assign countries to different players in the game
+     */
     public static final String COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 
     // data members
@@ -40,8 +76,8 @@ public class GameEngine {
     private List<Player> d_ListOfPlayers = new ArrayList<Player>();
 
     /**
-     * this getter method returns the current GamePhase
-     * @return d_GamePhase
+     * This getter method returns the current GamePhase
+     * @return d_GamePhase returns the current game phase
      */
     public Phase getPhase() {
         return d_GamePhase;
@@ -50,30 +86,30 @@ public class GameEngine {
     /**
      * This setter method is used to set the phase
      * returned from getPhase method
-     * @param p_Phase
+     * @param p_Phase  sets the Phase
      */
     public void setPhase(Phase p_Phase) {
         this.d_GamePhase = p_Phase;
     }
 
     /**
-     * this getter method is used to return the map in PlaySetup class
-     * @return
+     * This getter method is used to return the map in PlaySetup class
+     * @return d_Map returns the map in PlaySetup class
      */
     public Map getMap() {
         return d_Map;
     }
 
     /**
-     * this setter method is used to return the map in PlaySetup class
-     * @param p_Map
+     * This setter method is used to return the map in PlaySetup class
+     * @param p_Map object of Map class is passed as p_Map
      */
     public void setMap(Map p_Map) {
         d_Map = p_Map;
     }
 
     /**
-     * this method is used to store the player names in a List
+     * This method is used to store the player names in a List
      * @return d_ListOfPlayers
      */
     public List<Player> getListOfPlayers() {
@@ -81,7 +117,7 @@ public class GameEngine {
     }
 
     /**
-     * main game engine used a method to GameEngine constructor Main class
+     * Main game engine used a method to GameEngine constructor Main class
      * It takes input from the user to enter the phase
      * Following three phases are presented:
      * 1. Edit
