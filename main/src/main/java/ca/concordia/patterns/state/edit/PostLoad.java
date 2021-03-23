@@ -10,17 +10,22 @@ import java.io.IOException;
 /**
  * This class extends the PostLoad class and the constructor returns the output from method super()
  */
-
 public class PostLoad extends Edit
 {
+    /**
+     * This is the constructor that takes GameEngine class object as argument
+     * @param p_ge  GameEngine class objec
+     */
     public PostLoad(GameEngine p_ge)
     {
         super(p_ge);
     }
 
     /**
-     * This method
-      * @param p_Command
+     * Helper method process edit continent command
+     * format: editcontinet -add asia 1 - add africa 2
+     *
+     * @param p_Command command array
      */
     @Override
     public void editContinent(String[] p_Command) {
@@ -59,6 +64,12 @@ public class PostLoad extends Edit
         }
     }
 
+    /**
+     * Helper method to process all the country command
+     * format : editcountry india asia
+     *
+     * @param p_Command command array
+     */
     @Override
     public void editCountry(String[] p_Command) {
         System.out.println("editcountry command received ..... ");
@@ -93,6 +104,12 @@ public class PostLoad extends Edit
         }
     }
 
+    /**
+     * Helper method to process all the neighbors
+     * format : editneighbour india china
+     *
+     * @param p_Command command array
+     */
     @Override
     public void editNeighbour(String[] p_Command) {
         System.out.println("editneighbor command received ..... ");
@@ -129,6 +146,11 @@ public class PostLoad extends Edit
 
     }
 
+    /**
+     * Helper method to process "savemap" command
+     *
+     * @param p_Command command array
+     */
     @Override
     public void saveMap(String[] p_Command) {
         try {
@@ -154,7 +176,7 @@ public class PostLoad extends Edit
      * This command will be loaded in PostLoad phase
      * editMap will edit the map by checking if the map file name exists
      * uses MapEditor class and its method getInstance
-     * @param p_Command
+     * @param p_Command command array
      */
     @Override
     public void editMap(String[] p_Command) {
@@ -175,23 +197,38 @@ public class PostLoad extends Edit
         }
     }
 
+    /**
+     * Helper method to process validate map command
+     * @param p_Command command array
+     */
     @Override
     public void validateMap(String[] p_Command) {
         System.out.println("validatemap command received ...");
         MapEditor.getInstance().validateMap();
     }
 
+    /**
+     * Helper method to process validate map command
+     * @param p_Command command array
+     */
     @Override
     public void loadMap(String[] p_Command) {
         printInvalidCommandMessage();
     }
 
+    /**
+     * Helper method to set Players
+     * @param p_Command setPlayers command
+     */
     @Override
     public void setPlayers(String[] p_Command) {
         printInvalidCommandMessage();
     }
 
 
+    /**
+     * Helper method to process "savemap" command
+     */
     // TODO : review this:
     public void saveMap() {
         System.out.println("map has been  saved");
@@ -199,6 +236,9 @@ public class PostLoad extends Edit
         //ge.setPhase(new PlaySetup(ge));
     }
 
+    /**
+     * Goes to next phase after saving the map successfully
+     */
     public void next() {
         System.out.println("must save map");
     }
