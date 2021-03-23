@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  * This is the OrderCreationPhase class that extends the MainPlay class
- * This method takes the orders for players and place the reinforcement armies
+ * This class takes the orders for players and place the reinforcement armies
  * Deploy, Advance, Bomb, blockade, Airlift, Diplomacy - These commands works here,
  * for rest of the commands it throws invalid command message to the user
  */
