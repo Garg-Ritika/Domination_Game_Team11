@@ -16,15 +16,22 @@ public class Blockade implements Order {
     Territory d_TargetTerritory;
     Player d_Initiator;
 
-    // TODO : Requires Blockade Card, revise this
+    /**
+     * This is the constructor that takes player and target territory object as argument
+     * encapsulating all necessary data to execute the command
+     *
+     * @param p_Initiator player who runs the command
+     * @param p_TargetTerritory the territory which is to be neutralised
+     */
     public Blockade(Player p_Initiator, Territory p_TargetTerritory) {
-        // encapsulate all necessary data to execute the command
         this.d_TargetTerritory = p_TargetTerritory;
         this.d_Initiator = p_Initiator;
     }
 
     /**
      * execute method executes the Blockade card after validity check
+     * where the target territory’s army units count is tripled, and the territory becomes neutral
+     * Here, the target Territory object is the Receiver
      */
     public void execute() {
         System.out.println("blockade execute ");
@@ -34,11 +41,9 @@ public class Blockade implements Order {
             // behavior of the concrete command
             Player neutralPlayer= new Player("Neutral", Integer.MAX_VALUE);
             this.d_TargetTerritory.setArmyCount(this.d_TargetTerritory.getArmyCount()*3);
+            //how to make this territory neutral?
             this.d_TargetTerritory.setOwner(neutralPlayer);
             this.d_Initiator.getListOfCountries().remove(this.d_TargetTerritory);
-            System.out.println("------------------");
-            System.out.println(this.d_TargetTerritory.getArmyCount());
-            //how to make this territory neutral?
         }
     }
 
@@ -60,7 +65,6 @@ public class Blockade implements Order {
      * This method will print all the commands that have been executed and
      * the log for which have been saved in log file
      */
-
     public void printOrder() {
         //TODO
         System.out.println();
