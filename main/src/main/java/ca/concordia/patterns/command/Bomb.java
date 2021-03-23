@@ -15,7 +15,12 @@ public class Bomb implements Order {
     Territory target_territory;
     Player initiator;
 
-    // TODO : Requires Bomb Card, revise this
+    /**
+     * This is the constructor that takes player and target territory object as argument
+     * encapsulating all necessary data to execute the command
+     * @param initiator player who runs the command
+     * @param target_territory the territory whose half armies are to be destroyed
+     */
     public Bomb(Player initiator, Territory target_territory) {
         // encapsulate all necessary data to execute the command
         this.target_territory = target_territory;
@@ -24,10 +29,11 @@ public class Bomb implements Order {
 
     /**
      * execute method executes the Bomb card after validity check
+     * the target country loses half of their army units.
+     * Here, the target Territory object is the Receiver
      */
     public void execute() {
         System.out.println("bomb execute ");
-        // Here, the target Territory object is the Receiver
 
         if (valid()) {
             // behavior of the concrete command
