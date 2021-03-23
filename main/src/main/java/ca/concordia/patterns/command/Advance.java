@@ -6,8 +6,6 @@ import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.play.Play;
 
-//   ConcreteCommand of the the Command pattern.
-
 /**
  * Move some armies from one of the current player’s territories (source) to an adjacent territory
  * (target).
@@ -29,6 +27,14 @@ public class Advance implements Order {
     Player d_Initiator;
     int d_NumToAdvance;
 
+    /**
+     * This is the constructor that takes player, source and target territory object and no of armies as argument
+     * encapsulating all necessary data to execute the command
+     * @param p_Initiator player who runs the command
+     * @param p_Source Source territory form which armies are to be moved
+     * @param p_Target target territory to which armies are to be attacked
+     * @param p_Num no of armies attacking
+     */
     public Advance(Player p_Initiator, Territory p_Source, Territory p_Target, int p_Num) {
         // encapsulate all necessary data to execute the command
         this.d_Initiator = p_Initiator;
@@ -39,17 +45,15 @@ public class Advance implements Order {
 
     /**
      * execute method executes the Advance card after validity check
+     * move some armies from one of the current player’s territories (source) to an adjacent territory
+     * (target). If the target territory belongs to the current player, the armies are moved to the target
+     * territory. If the target territory belongs to another player, an attack happens between the two
+     * territories.
+     * If attack happens successfulyy, update owner to initiator
+     * Here both the source and the target Territories are Receivers
      */
     public void execute() {
-        // Here both the source and the target Territories are Receivers
         System.out.println("advance execute ");
-
-        //Advance order command:
-        // <advance countrynamefrom countynameto numarmies>
-        // what is the algorithm here ?
-        // reduce the numarimes from countrynamefrom
-        // attack the existing armies in countrynameto
-        // if winner: update owner to initiator
 
         if (valid()) {
             if (d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName())) {
@@ -59,9 +63,6 @@ public class Advance implements Order {
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() + d_NumToAdvance);
             } else {
                 // implement a battle
-//                num_to_advance 25
-//                target.d_ArmyCount
-
                 int l_DefendingArmies = (int) (this.d_Target.getArmyCount()*0.7); //7
                 int l_AttackingArmies = (int) (this.d_NumToAdvance *0.6); //15
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
@@ -85,18 +86,16 @@ public class Advance implements Order {
 
     /**
      * This method will check if the given inputs are a valid input for Advance Card
+     * check if countrynamefrom exists
+     * check if countryname has the same owner as the initiator of this commad
+     * check if countrynamefrom has >= numarmies being advanced..
+     * check if countrynameto is there
+     * check if countrynameto exists
      *
      * @return true/false
      */
     public boolean valid() {
         boolean valid_condition=false;
-
-        //TODO what is the valid condition
-        // check if countrynamefrom exists
-        // check if countryname has the same owner as the initiator of this commad
-        // check if countrynamefrom has >= numarmies being advanced..
-        // check if countrynameto is there
-        // check if countrynameto exists
 
         if((d_Initiator.getListOfCountries().contains(d_Source))
                 &&(d_Source.getArmyCount()>= d_NumToAdvance)
