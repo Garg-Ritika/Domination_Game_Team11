@@ -31,8 +31,8 @@ public class PostLoadTest {
 
         PostLoad po= new PostLoad(d_ge);
         po.saveMap(d_str1);
-        String ex="INCOMPLETE COMMAND\r\n"+
-                "INCOMPLETE COMMAND\r\n";
+        String ex="INCOMPLETE COMMAND"+ System.lineSeparator() +
+                "INCOMPLETE COMMAND" + System.lineSeparator();
         assertEquals(ex,outContent.toString());
 
     }
@@ -63,8 +63,8 @@ public class PostLoadTest {
         PostLoad po= new PostLoad(d_ge);
         po.editMap(d_str2);
 
-        String ex="INCOMPLETE COMMAND, create an in-memory map file from scratch\r\n"+
-                " No continents available in the map \r\n";
+        String ex="INCOMPLETE COMMAND, create an in-memory map file from scratch"+ System.lineSeparator() +
+                " No continents available in the map " + System.lineSeparator();
         assertEquals(ex,outContent.toString());
 
     }
@@ -80,8 +80,8 @@ public class PostLoadTest {
         PostLoad po= new PostLoad(d_ge);
         po.validateMap(d_str3);
 
-        String ex="validatemap command received ...\r\n"+
-                " No continents available in the map \r\n";
+        String ex="validatemap command received ..." + System.lineSeparator() +
+                " No continents available in the map " + System.lineSeparator();
         assertEquals(ex,outContent.toString());
     }
 
