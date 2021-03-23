@@ -95,11 +95,6 @@ public class Map {
         }
 
         for (Country l_Country : d_ListOfCountries) {
- >>>>>>> HEAD
-//            System.out.println(l_Country);
-=======
-           // System.out.println(l_Country);
->>>>>>> 81effef176f4f8f74617a807873a13229b71068b
             if (name.equalsIgnoreCase(l_Country.getName())) {
                 System.out.println("--> found continent : " + name );
                 return l_Country;
