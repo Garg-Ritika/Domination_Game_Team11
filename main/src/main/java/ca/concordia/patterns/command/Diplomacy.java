@@ -30,6 +30,8 @@ public class Diplomacy implements Order {
 
         if (valid()) {
             // behavior of the concrete command
+            initiator.setIsNegotiatedPlayer(true);
+            negotiatePlayerId.setIsNegotiatedPlayer(true);
             // how to negotiate player id?
         }
     }

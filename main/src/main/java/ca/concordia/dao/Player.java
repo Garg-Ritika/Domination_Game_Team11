@@ -17,6 +17,24 @@ public class Player {
     private List<Continent> d_ListOfContinents = new ArrayList<Continent>();
     private List<Order> d_ListOfOrders = new ArrayList<Order>();
     private List<String> d_OrderCards = new ArrayList<>();
+    private boolean d_PlayerIsNegotiated;
+
+    /**
+     * This method is used to return true if the player is negotiated
+     *
+     * @return true/false depending state of negotiation
+     */
+    public boolean getIsNegotiatedPlayer() {
+        return d_PlayerIsNegotiated;
+    }
+
+    /**
+     * his method is used to set true if the player is negotiated
+     * @param p_NegotiatedPlayer return
+     */
+    public void setIsNegotiatedPlayer(boolean p_NegotiatedPlayer) {
+        this.d_PlayerIsNegotiated = p_NegotiatedPlayer;
+    }
 
     /**
      * Constructor initializes the following below member variables of Player class

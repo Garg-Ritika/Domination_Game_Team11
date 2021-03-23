@@ -6,7 +6,9 @@ import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.command.*;
 import ca.concordia.patterns.observer.LogUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -25,6 +27,7 @@ public class OrderCreationPhase extends MainPlay {
     public static final String COMMAND_AIRLIFT = "airlift";
     public static final String COMMAND_NEGOTIATE = "negotiate";
     public static final String COMMAND_QUIT = "quit";
+
 
 
     /**
@@ -212,15 +215,20 @@ public class OrderCreationPhase extends MainPlay {
                 String l_Num = p_Command[3];
                 int l_NumInt = Integer.parseInt(l_Num);
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
+                if (p_Player.getIsNegotiatedPlayer() == false && l_TerritoryTarget.getOwner().getIsNegotiatedPlayer() == false) {
+                    System.out.println(p_Player + " cannot attack the target country");
+                }
+                else {
                 /*if (l_ArmyCountOfPlayer >= l_NumInt) {
                     p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);*/
                 Order o = new Advance(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
                 p_Player.createOrder(o);
-                System.out.println(p_Player.getOrderCards().toString() +" cards are available for player "+ p_Player.getPlayerName());
+                System.out.println(p_Player.getOrderCards().toString() + " cards are available for player " + p_Player.getPlayerName());
                 /*} else {
                     LogUtil.log("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
                     System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
                 }*/
+            }
             }
         } catch (Exception l_E) {
             l_E.printStackTrace();
@@ -239,13 +247,17 @@ public class OrderCreationPhase extends MainPlay {
             if (p_Command.length == 2) {
                 String l_CountryNameSource = p_Command[1];
                 Territory l_TerritoryTarget = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
-                if(p_Player.getOrderCards().contains("bomb")){
-                    p_Player.removeNewOrderCard("bomb");
-                    Order o = new Bomb(p_Player, l_TerritoryTarget);
-                    p_Player.createOrder(o);
+                if (p_Player.getIsNegotiatedPlayer() == false && l_TerritoryTarget.getOwner().getIsNegotiatedPlayer() == false) {
+                    System.out.println(p_Player + " cannot attack the target country");
                 }
                 else {
-                    System.out.println("bomb order card doesnot exist");
+                    if (p_Player.getOrderCards().contains("bomb")) {
+                        p_Player.removeNewOrderCard("bomb");
+                        Order o = new Bomb(p_Player, l_TerritoryTarget);
+                        p_Player.createOrder(o);
+                    } else {
+                        System.out.println("bomb order card doesnot exist");
+                    }
                 }
             }
         } catch (Exception l_E) {
