@@ -57,11 +57,13 @@ public class LogWriter implements Observer {
             // everything is info log be default
             LOGGER.info(p_Message);
 
+            fH.close();
+
+
         } catch (IOException io) {
             io.printStackTrace();
         }
     }
-
 
 
     /**

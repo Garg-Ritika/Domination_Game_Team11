@@ -1,6 +1,7 @@
 package ca.concordia.patterns.observer;
 
 import java.io.File;
+import java.io.IOException;
 
 public class LogUtil {
 
@@ -50,9 +51,26 @@ public class LogUtil {
             if (l_LogFile.exists()) {
                 l_LogFile.delete();
             }
+
+            // also delete every file starting with that name
+            String currentDirectory = System.getProperty("user.dir");
+            File directoryPath = new File(currentDirectory);
+            //List of all files and directories
+            String contents[] = directoryPath.list();
+            System.out.println("List of files and directories in the specified directory:");
+            for(int i=0; i<contents.length; i++) {
+                System.out.println(contents[i]);
+                try{
+                    if (contents[i].startsWith(LOG_FILE_NAME)){
+                        new File(contents[i]).delete();
+                    }
+                }catch (Exception io){}
+            }
         } catch (Exception e) {
 
         }
+
+
     }
 }
 
