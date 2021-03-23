@@ -31,7 +31,7 @@ public class MapEditor {
      * GetInstance method to get the single instance of the Mapeditor,
      * If there is already a instance available statically, return that otherwise create a new one
      *
-     * @return
+     * @return return the instance of the map
      */
     public static MapEditor getInstance() {
         if (d_Instance == null) {
@@ -306,8 +306,8 @@ public class MapEditor {
      * domination game map format.
      * and automatically validates map before saving ..
      *
-     * @param p_MapPath
-     * @throws IOException
+     * @param p_MapPath value which is passed as parameter is the file path and is an object of class File
+     * @throws IOException if an error is found, it will throw an error of InputOutput type
      */
     public void saveMap(File p_MapPath) throws IOException {
         validateMap();
@@ -320,7 +320,7 @@ public class MapEditor {
      * <p>
      * and automatically validates map upon loading
      *
-     * @param p_MapPath
+     * @param p_MapPath value which is passed as parameter is the file path and is an object of class File
      * @throws IOException inputOutput exception
      */
     public void editMap(File p_MapPath) throws IOException {
@@ -350,7 +350,7 @@ public class MapEditor {
      *
      * @param p_MapFile the file object of map file
      * @return map object
-     * @throws
+     * @throws IOException if an error is found, it will throw an error of InputOutput type
      */
     public Map readMapFile(File p_MapFile) throws IOException {
         resetCurrentMap();

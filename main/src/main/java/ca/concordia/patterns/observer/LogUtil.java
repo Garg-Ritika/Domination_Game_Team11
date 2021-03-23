@@ -11,9 +11,9 @@ public class LogUtil {
     private static LogWriter d_LogWriter;
 
     /**
-     * this method is used to catch the exception during the start of the program
+     * This method is used to catch the exception during the start of the program
      * if there is already existing log file then exception is handled by catch
-     * @param p_Msg
+     * @param p_Msg this is the parameter passed which contains the message
      */
     public static void log(String p_Msg) {
         try {

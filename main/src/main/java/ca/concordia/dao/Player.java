@@ -170,17 +170,17 @@ public class Player {
      * and returns the first order in the player’s list of orders,
      * then removes it from the list
      *
-     * @return
+     * @return l_ToReturn will return the list of orders
      */
     public Order nextOrder() {
         System.out.println("--> next order for player: " + getPlayerName());
-        Order to_return = null;
+        Order l_ToReturn = null;
         if (d_ListOfOrders.size() > 0) {
-            to_return = d_ListOfOrders.get(0);
+            l_ToReturn = d_ListOfOrders.get(0);
             d_ListOfOrders.remove(0);
 
             System.out.println(getPlayerName() + " next order is : ");
-            return to_return;
+            return l_ToReturn;
         }
         System.out.println("--> there are no order for player: " + getPlayerName());
         return null;
