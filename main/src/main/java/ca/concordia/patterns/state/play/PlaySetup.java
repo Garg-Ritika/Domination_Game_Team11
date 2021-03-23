@@ -194,7 +194,7 @@ public class PlaySetup extends Play {
                     break;
                 } else if (l_CountriesToAssignRandomly.size() == 1) {
                     Country l_Country = l_CountriesToAssignRandomly.get(0);
-                    l_Country.setOwner(l_Player.getPlayerName());
+                    l_Country.setOwner(l_Player);
                     l_Player.addNewCountry(l_Country);
                     LogUtil.log(l_Player.getPlayerName() + " has " + l_Country.getName());
                     System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());
@@ -202,7 +202,7 @@ public class PlaySetup extends Play {
                 } else {
                     int l_Index = new Random().nextInt(l_CountriesToAssignRandomly.size() - 1);
                     Country l_Country = l_CountriesToAssignRandomly.get(l_Index);
-                    l_Country.setOwner(l_Player.getPlayerName());
+                    l_Country.setOwner(l_Player);
                     l_Player.addNewCountry(l_Country);
                     LogUtil.log(l_Player.getPlayerName() + " has " + l_Country.getName());
                     System.out.println(l_Player.getPlayerName() + " has " + l_Country.getName());

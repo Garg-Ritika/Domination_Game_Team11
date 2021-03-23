@@ -41,7 +41,7 @@ public class Bomb implements Order {
      * @return true/false
      */
     public boolean valid() {
-        if ((target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName()) !=true) && (target_territory !=null) ){
+        if ((target_territory.getOwner().getPlayerName().equalsIgnoreCase(initiator.getPlayerName()) !=true) && (target_territory !=null) ){
             // the target territory must not belong to the player that created the order
             return true;
         }

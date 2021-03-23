@@ -9,7 +9,7 @@ public class Continent extends Territory {
     private String d_Name;
     private String d_Color;
     private int d_ArmyCount;
-    private String d_OwnerName;
+    private Player d_OwnerName;
 
     /**
      * Constructor initializes all the member variables of Continent class
@@ -104,7 +104,7 @@ public class Continent extends Territory {
      */
 
     @Override
-    public String getOwner() {
+    public Player getOwner() {
         return d_OwnerName;
     }
 
@@ -113,7 +113,7 @@ public class Continent extends Territory {
      * @param p_OwnerName ownerName of a target/source continent is passed
      */
     @Override
-    public void setOwner(String p_OwnerName) {
+    public void setOwner(Player p_OwnerName) {
         this.d_OwnerName = p_OwnerName;
     }
 }

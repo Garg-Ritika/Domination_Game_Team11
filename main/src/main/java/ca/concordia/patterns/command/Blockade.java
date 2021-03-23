@@ -32,8 +32,9 @@ public class Blockade implements Order {
 
         if (valid()) {
             // behavior of the concrete command
+            Player neutralPlayer= new Player("Neutral", Integer.MAX_VALUE);
             this.d_TargetTerritory.setArmyCount(this.d_TargetTerritory.getArmyCount()*3);
-            this.d_TargetTerritory.setOwner("Neutral");
+            this.d_TargetTerritory.setOwner(neutralPlayer);
             this.d_Initiator.getListOfCountries().remove(this.d_TargetTerritory);
             System.out.println("------------------");
             System.out.println(this.d_TargetTerritory.getArmyCount());
@@ -47,7 +48,7 @@ public class Blockade implements Order {
      * @return true/false
      */
     public boolean valid() {
-        if ((d_TargetTerritory.getOwner().equalsIgnoreCase(d_Initiator.getPlayerName())) && (d_TargetTerritory !=null)) {
+        if ((d_TargetTerritory.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName())) && (d_TargetTerritory !=null)) {
             // the target territory must belong to the player that created the order
             return true;
         }

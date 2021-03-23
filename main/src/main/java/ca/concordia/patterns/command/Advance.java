@@ -1,5 +1,6 @@
 package ca.concordia.patterns.command;
 
+import ca.concordia.dao.Country;
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
@@ -51,7 +52,7 @@ public class Advance implements Order {
         // if winner: update owner to initiator
 
         if (valid()) {
-            if (d_Target.getOwner().equalsIgnoreCase(d_Initiator.getPlayerName())) {
+            if (d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName())) {
                 // if the source and the target belong to the same player
                 // then just move the armies to the target Territory
 
@@ -60,22 +61,23 @@ public class Advance implements Order {
                 // implement a battle
 //                num_to_advance 25
 //                target.d_ArmyCount
-                this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
-                int l_DefendingArmies = (int) (d_Target.getArmyCount()*0.7); //7
-                int l_AttackingArmies = (int) (d_NumToAdvance *0.6); //15
-                d_NumToAdvance -= l_DefendingArmies;  //30-7=23
-                d_Target.setArmyCount(d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
 
-                if (d_Target.getArmyCount() < 0) {
+                int l_DefendingArmies = (int) (this.d_Target.getArmyCount()*0.7); //7
+                int l_AttackingArmies = (int) (this.d_NumToAdvance *0.6); //15
+                this.d_Target.setArmyCount(this.d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
+                if (this.d_Target.getArmyCount() < 0) {
                     // move surviving attacking armies to the target country
                     // transfer ownership of the conquered country
-                    d_Target.setOwner(d_Initiator.getPlayerName());
-                    this.d_Initiator.getListOfCountries().remove(this.d_Target);
-                    d_Target.setArmyCount(d_NumToAdvance);
+                    this.d_Target.getOwner().removeNewCountry((Country) this.d_Target);
+
+                    this.d_Target.setOwner(d_Initiator);
+                    this.d_Target.setArmyCount(this.d_Source.getArmyCount()-l_DefendingArmies);
                     //removing the territory from the list and adding to the player who won it
+                    this.d_Initiator.addNewCountry((Country)this.d_Target);
+                    this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
                 }
                 else{
-                    this.d_Source.setArmyCount(d_Source.getArmyCount() + d_NumToAdvance);
+                    this.d_Source.setArmyCount(d_Source.getArmyCount() -l_DefendingArmies);
                 }
             }
         }

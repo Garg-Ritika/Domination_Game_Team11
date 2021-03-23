@@ -6,9 +6,9 @@ public abstract class Territory {
 
     public abstract void setName(String p_Name);
 
-    public abstract String getOwner();
+    public abstract Player getOwner();
 
-    public abstract void setOwner(String p_OwnerName);
+    public abstract void setOwner(Player p_OwnerName);
 
     public abstract int getArmyCount();
 

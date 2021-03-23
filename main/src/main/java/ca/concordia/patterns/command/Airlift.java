@@ -54,7 +54,7 @@ public class Airlift implements Order {
     public boolean valid() {
         //TODO what is the valid condition
         if((d_Source.getArmyCount()>= d_NumToAirlift)
-                && (d_Target.getOwner().equalsIgnoreCase(d_Initiator.getPlayerName()))
+                && (d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName()))
                 &&(d_Source !=null)
                 && (d_Target !=null) ) {
             return true;
