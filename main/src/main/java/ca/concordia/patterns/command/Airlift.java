@@ -11,7 +11,6 @@ import ca.concordia.patterns.observer.LogUtil;
  * Command Syntax:
  * airlift sourcecountryID targetcountryID numarmies
  */
-
 public class Airlift implements Order {
 
     Territory d_Source;
@@ -19,9 +18,15 @@ public class Airlift implements Order {
     Player d_Initiator;
     int d_NumToAirlift;
 
-    //TODO : revise this code, it requires airlift card ..
+    /**
+     * This is the constructor that takes player, source and target territory object and no of armies as argument
+     * encapsulating all necessary data to execute the command
+     * @param initiator player who runs the command
+     * @param source Source territory form which armies are to be moved
+     * @param target target territory to which armies are to be moved
+     * @param num no of armies to be moved
+     */
     public Airlift(Player initiator, Territory source, Territory target, int num) {
-        // encapsulate all necessary data to execute the command
         this.d_Initiator = initiator;
         this.d_Source = source;
         this.d_Target = target;
@@ -30,19 +35,21 @@ public class Airlift implements Order {
 
     /**
      * execute method executes the Airlift card after validity check
+     * move any number of army units from one of your territories to another territory, even if they are
+     * not adjacent.
+     * Here both the source and the target Territories are Receivers
      */
     public void execute() {
-        // Here both the source and the target Territories are Receivers
         System.out.println("advance execute ");
 
         if (valid()) {
-                // if the source and the target belong to the same player
-                // then just move the armies to the target Territory
-                d_Target.setArmyCount(d_Target.getArmyCount() + d_NumToAirlift);
-                d_Source.setArmyCount(d_Source.getArmyCount()- d_NumToAirlift);
+            // if the source and the target belong to the same player
+            // then just move the armies to the target Territory
+            d_Target.setArmyCount(d_Target.getArmyCount() + d_NumToAirlift);
+            d_Source.setArmyCount(d_Source.getArmyCount()- d_NumToAirlift);
         }
         else {
-                System.out.println("invalid order");
+            System.out.println("invalid order");
         }
     }
 
@@ -69,7 +76,6 @@ public class Airlift implements Order {
      * This method will print all the commands that have been executed and
      * the log for which have been saved in log file
      */
-
     public void printOrder() {
         // TODO
         // print the order
