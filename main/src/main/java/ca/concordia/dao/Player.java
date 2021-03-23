@@ -17,7 +17,26 @@ public class Player {
     private List<Continent> d_ListOfContinents = new ArrayList<Continent>();
     private List<Order> d_ListOfOrders = new ArrayList<Order>();
     private List<String> d_OrderCards = new ArrayList<>();
-    private boolean d_PlayerIsNegotiated;
+    private boolean d_RandomCardAssigned =false;
+    private boolean d_PlayerIsNegotiated =false;
+
+    /**
+     * This method is used to return true if the random card is negotiated
+     *
+     * @return true/false depending if random card is assigned
+     */
+    public boolean getD_RandomCardAssigned() {
+        return d_RandomCardAssigned;
+    }
+
+    /**
+     * to set the boolean value if random card is assigned
+     *
+     * @param d_RandomCardAssigned value to be assigned
+     */
+    public void setD_RandomCardAssigned(boolean d_RandomCardAssigned) {
+        this.d_RandomCardAssigned = d_RandomCardAssigned;
+    }
 
     /**
      * This method is used to return true if the player is negotiated

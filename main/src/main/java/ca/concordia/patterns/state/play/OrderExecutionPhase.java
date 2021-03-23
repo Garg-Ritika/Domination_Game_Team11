@@ -14,6 +14,7 @@ public class OrderExecutionPhase extends MainPlay {
     public void next() {
         for (Player p : d_ge.getListOfPlayers()) {
             p.setIsNegotiatedPlayer(false);
+            p.setD_RandomCardAssigned(false);
         }
         System.out.println("--> setting reinforcement phase");
         d_ge.setPhase(new ReinforcementPhase(d_ge));

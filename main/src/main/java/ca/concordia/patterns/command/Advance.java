@@ -81,8 +81,11 @@ public class Advance implements Order {
                     //removing the territory from the listOfRandomCards and adding to the player who won it
                     this.d_Initiator.addNewCountry((Country)this.d_Target);
                     this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
-                    this.d_Initiator.addNewOrderCard(randomCard);
-                    System.out.println(randomCard +" assigned to player "+ d_Initiator);
+                    if(!this.d_Initiator.getD_RandomCardAssigned()){
+                        this.d_Initiator.addNewOrderCard(randomCard);
+                        System.out.println(randomCard +" assigned to player "+ d_Initiator);
+                        this.d_Initiator.setD_RandomCardAssigned(true);
+                    }
                 }
                 else{
                     this.d_Source.setArmyCount(d_Source.getArmyCount() -l_DefendingArmies);
