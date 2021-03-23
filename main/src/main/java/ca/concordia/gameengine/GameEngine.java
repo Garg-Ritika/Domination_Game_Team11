@@ -19,7 +19,7 @@ public class GameEngine {
     /**
      * Map Editor Commands:
      * These are global data members corresponding to which a command is associated
-     *
+     * <p>
      * editcontinent: in the switch case if this command corresponds to case then the corresponding command is called from the Phase.java file
      */
     public static final String COMMAND_EDIT_CONTINENT = "editcontinent";
@@ -46,11 +46,11 @@ public class GameEngine {
 
     //Any commands
     /**
-     *showMap method is called which prints different attributes of the map like ID, Name etc
+     * showMap method is called which prints different attributes of the map like ID, Name etc
      */
     public static final String COMMAND_SHOW_MAP = "showmap";
     /**
-     *When this command is executed then "break" is performed which pulls out from the execution
+     * When this command is executed then "break" is performed which pulls out from the execution
      */
     public static final String COMMAND_QUIT = "quit";
 
@@ -77,6 +77,7 @@ public class GameEngine {
 
     /**
      * This getter method returns the current GamePhase
+     *
      * @return d_GamePhase returns the current game phase
      */
     public Phase getPhase() {
@@ -86,7 +87,8 @@ public class GameEngine {
     /**
      * This setter method is used to set the phase
      * returned from getPhase method
-     * @param p_Phase  sets the Phase
+     *
+     * @param p_Phase sets the Phase
      */
     public void setPhase(Phase p_Phase) {
         this.d_GamePhase = p_Phase;
@@ -94,6 +96,7 @@ public class GameEngine {
 
     /**
      * This getter method is used to return the map in PlaySetup class
+     *
      * @return d_Map returns the map in PlaySetup class
      */
     public Map getMap() {
@@ -102,6 +105,7 @@ public class GameEngine {
 
     /**
      * This setter method is used to return the map in PlaySetup class
+     *
      * @param p_Map object of Map class is passed as p_Map
      */
     public void setMap(Map p_Map) {
@@ -110,6 +114,7 @@ public class GameEngine {
 
     /**
      * This method is used to store the player names in a List
+     *
      * @return d_ListOfPlayers
      */
     public List<Player> getListOfPlayers() {
@@ -157,6 +162,7 @@ public class GameEngine {
 
     /**
      * This method will be called when player selected option "edit"
+     *
      * @param keyboard
      */
     void startMapEditor(Scanner keyboard) {
@@ -225,6 +231,7 @@ public class GameEngine {
 
     /**
      * This method will be called when player selected option "play"
+     *
      * @param keyboard
      */
     void startMainPlay(Scanner keyboard) {

@@ -20,6 +20,7 @@ public class Play extends Phase {
 
     /**
      * Constructor that contains GameEngine object as argument
+     *
      * @param p_ge GameEngine object
      */
     public Play(GameEngine p_ge) {
@@ -28,6 +29,7 @@ public class Play extends Phase {
 
     /**
      * loadMap method takes command as input and shows invalid commadn message
+     *
      * @param p_Command loadMap command
      */
     @Override
@@ -70,6 +72,7 @@ public class Play extends Phase {
 
     /**
      * editContinent method takes command as input and shows invalid command message to user
+     *
      * @param p_Command editContinent command
      */
     @Override
@@ -79,6 +82,7 @@ public class Play extends Phase {
 
     /**
      * editCoountry method takes command as input and shows invalid command message to user
+     *
      * @param p_Command editCoountry command
      */
     @Override
@@ -88,14 +92,17 @@ public class Play extends Phase {
 
     /**
      * editNeighbour method takes command as input and shows invalid command message to user
+     *
      * @param p_Command editNeighbour command
      */
     @Override
     public void editNeighbour(String[] p_Command) {
         printInvalidCommandMessage();
     }
+
     /**
      * This method takes saveMap command as input and shows invalid command message to user
+     *
      * @param p_Command saveMap command
      */
 
@@ -106,6 +113,7 @@ public class Play extends Phase {
 
     /**
      * This method takes command as input and shows invalid command message to user
+     *
      * @param p_Command editMap command
      */
     @Override
@@ -115,6 +123,7 @@ public class Play extends Phase {
 
     /**
      * This method takes validateMap command as input and shows invalid command message to user
+     *
      * @param p_Command evalidateMap command
      */
     @Override
@@ -124,6 +133,7 @@ public class Play extends Phase {
 
     /**
      * setPlayers method takes command as input and shows invalid command message to user
+     *
      * @param p_Command setPlayers command
      */
     @Override

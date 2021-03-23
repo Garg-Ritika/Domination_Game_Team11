@@ -7,7 +7,7 @@ import ca.concordia.patterns.observer.LogUtil;
 /**
  * bomb: destroy half of the armies located on an opponent’s territory that is adjacent to one of the current
  * player’s territories.
- *
+ * <p>
  * Command Syntax:
  * bomb countryID
  */
@@ -18,7 +18,8 @@ public class Bomb implements Order {
     /**
      * This is the constructor that takes player and target territory object as argument
      * encapsulating all necessary data to execute the command
-     * @param initiator player who runs the command
+     *
+     * @param initiator        player who runs the command
      * @param target_territory the territory whose half armies are to be destroyed
      */
     public Bomb(Player initiator, Territory target_territory) {
@@ -37,7 +38,7 @@ public class Bomb implements Order {
 
         if (valid()) {
             // behavior of the concrete command
-            this.target_territory.setArmyCount(this.target_territory.getArmyCount()/2);
+            this.target_territory.setArmyCount(this.target_territory.getArmyCount() / 2);
         }
     }
 
@@ -47,7 +48,7 @@ public class Bomb implements Order {
      * @return true/false
      */
     public boolean valid() {
-        if ((target_territory.getOwner().getPlayerName().equalsIgnoreCase(initiator.getPlayerName()) !=true) && (target_territory !=null) ){
+        if ((target_territory.getOwner().getPlayerName().equalsIgnoreCase(initiator.getPlayerName()) != true) && (target_territory != null)) {
             // the target territory must not belong to the player that created the order
             return true;
         }

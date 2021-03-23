@@ -14,10 +14,10 @@ import java.util.Random;
  * territory.
  * If the target territory belongs to another player, an attack happens between the two
  * territories.
- *
+ * <p>
  * Command Syntax:
  * Advance order command: advance countrynamefrom countynameto numarmies
- *
+ * <p>
  * This class implements interface "Order", so as to use
  * execute(), valid(), printOrder() methods
  */
@@ -31,10 +31,11 @@ public class Advance implements Order {
     /**
      * This is the constructor that takes player, source and target territory object and no of armies as argument
      * encapsulating all necessary data to execute the command
+     *
      * @param p_Initiator player who runs the command
-     * @param p_Source Source territory form which armies are to be moved
-     * @param p_Target target territory to which armies are to be attacked
-     * @param p_Num no of armies attacking
+     * @param p_Source    Source territory form which armies are to be moved
+     * @param p_Target    target territory to which armies are to be attacked
+     * @param p_Num       no of armies attacking
      */
     public Advance(Player p_Initiator, Territory p_Source, Territory p_Target, int p_Num) {
         // encapsulate all necessary data to execute the command
@@ -68,8 +69,8 @@ public class Advance implements Order {
             } else {
                 // implement a battle
                 System.out.println("in implementing battle astage");
-                int l_DefendingArmies = (int) (this.d_Target.getArmyCount()*0.7); //7
-                int l_AttackingArmies = (int) (this.d_NumToAdvance *0.6); //15
+                int l_DefendingArmies = (int) (this.d_Target.getArmyCount() * 0.7); //7
+                int l_AttackingArmies = (int) (this.d_NumToAdvance * 0.6); //15
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
                 if (this.d_Target.getArmyCount() < 0) {
                     // move surviving attacking armies to the target country
@@ -77,18 +78,17 @@ public class Advance implements Order {
                     this.d_Target.getOwner().removeNewCountry((Country) this.d_Target);
 
                     this.d_Target.setOwner(d_Initiator);
-                    this.d_Target.setArmyCount(this.d_Source.getArmyCount()-l_DefendingArmies);
+                    this.d_Target.setArmyCount(this.d_Source.getArmyCount() - l_DefendingArmies);
                     //removing the territory from the listOfRandomCards and adding to the player who won it
-                    this.d_Initiator.addNewCountry((Country)this.d_Target);
+                    this.d_Initiator.addNewCountry((Country) this.d_Target);
                     this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
-                    if(!this.d_Initiator.getD_RandomCardAssigned()){
+                    if (!this.d_Initiator.getD_RandomCardAssigned()) {
                         this.d_Initiator.addNewOrderCard(randomCard);
-                        System.out.println(randomCard +" assigned to player "+ d_Initiator);
+                        System.out.println(randomCard + " assigned to player " + d_Initiator);
                         this.d_Initiator.setD_RandomCardAssigned(true);
                     }
-                }
-                else{
-                    this.d_Source.setArmyCount(d_Source.getArmyCount() -l_DefendingArmies);
+                } else {
+                    this.d_Source.setArmyCount(d_Source.getArmyCount() - l_DefendingArmies);
                 }
             }
         }
@@ -105,12 +105,12 @@ public class Advance implements Order {
      * @return true/false
      */
     public boolean valid() {
-        boolean valid_condition=false;
+        boolean valid_condition = false;
 
-        if((d_Initiator.getListOfCountries().contains(d_Source))
-                &&(d_Source.getArmyCount()>= d_NumToAdvance)
-                && (d_Source !=null)
-                && (d_Target !=null))        {
+        if ((d_Initiator.getListOfCountries().contains(d_Source))
+                && (d_Source.getArmyCount() >= d_NumToAdvance)
+                && (d_Source != null)
+                && (d_Target != null)) {
             valid_condition = true;
         }
 

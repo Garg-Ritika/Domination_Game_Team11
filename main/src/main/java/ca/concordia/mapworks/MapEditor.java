@@ -332,7 +332,7 @@ public class MapEditor {
      * Helper method to validate map. it is being called after reading and before writing a map
      * as well as through "validatemap" command
      *
-     * @return ValidateMap(getCurrentMap())
+     * @return ValidateMap(getCurrentMap ())
      */
     public boolean validateMap() {
         return new ValidateMap(getCurrentMap()).validate();

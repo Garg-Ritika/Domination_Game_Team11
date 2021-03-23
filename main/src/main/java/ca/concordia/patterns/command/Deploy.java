@@ -6,7 +6,7 @@ import ca.concordia.patterns.observer.LogUtil;
 
 /**
  * deploy: place some armies on one of the current player’s territories.
- *
+ * <p>
  * Command Syntax:
  * deploy countryID numarmies
  */
@@ -19,9 +19,10 @@ public class Deploy implements Order {
     /**
      * This is the constructor that takes player and target territory object and no of armies ot be deployed as argument
      * encapsulating all necessary data to execute the command
-     * @param initiator player who runs the command
+     *
+     * @param initiator        player who runs the command
      * @param target_territory the territory on which armies are to be deployed
-     * @param to_deploy no of armies to be deployed
+     * @param to_deploy        no of armies to be deployed
      */
     public Deploy(Player initiator, Territory target_territory, int to_deploy) {
         this.target_territory = target_territory;

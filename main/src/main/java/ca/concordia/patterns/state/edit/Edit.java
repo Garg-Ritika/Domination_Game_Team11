@@ -12,6 +12,7 @@ public abstract class Edit extends Phase {
 
     /**
      * This is the constructor that takes GameEngine class object as argument
+     *
      * @param p_ge GameEngine class object
      */
     public Edit(GameEngine p_ge) {
@@ -28,6 +29,7 @@ public abstract class Edit extends Phase {
 
     /**
      * This method prints invalid command message if user wants to set Players
+     *
      * @param p_Command setPlayers command
      */
     public void setPlayers(String[] p_Command) {

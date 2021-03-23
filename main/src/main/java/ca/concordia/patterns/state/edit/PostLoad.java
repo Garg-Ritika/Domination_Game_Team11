@@ -10,14 +10,13 @@ import java.io.IOException;
 /**
  * This class extends the PostLoad class and the constructor returns the output from method super()
  */
-public class PostLoad extends Edit
-{
+public class PostLoad extends Edit {
     /**
      * This is the constructor that takes GameEngine class object as argument
-     * @param p_ge  GameEngine class objec
+     *
+     * @param p_ge GameEngine class objec
      */
-    public PostLoad(GameEngine p_ge)
-    {
+    public PostLoad(GameEngine p_ge) {
         super(p_ge);
     }
 
@@ -176,6 +175,7 @@ public class PostLoad extends Edit
      * This command will be loaded in PostLoad phase
      * editMap will edit the map by checking if the map file name exists
      * uses MapEditor class and its method getInstance
+     *
      * @param p_Command command array
      */
     @Override
@@ -199,6 +199,7 @@ public class PostLoad extends Edit
 
     /**
      * Helper method to process validate map command
+     *
      * @param p_Command command array
      */
     @Override
@@ -209,6 +210,7 @@ public class PostLoad extends Edit
 
     /**
      * Helper method to process validate map command
+     *
      * @param p_Command command array
      */
     @Override
@@ -218,6 +220,7 @@ public class PostLoad extends Edit
 
     /**
      * Helper method to set Players
+     *
      * @param p_Command setPlayers command
      */
     @Override

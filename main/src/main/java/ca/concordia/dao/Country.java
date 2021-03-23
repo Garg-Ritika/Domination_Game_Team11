@@ -144,6 +144,7 @@ public class Country extends Territory {
 
     /**
      * this method gets the player name of the source/target country
+     *
      * @return d_OwnerName
      */
     @Override
@@ -153,6 +154,7 @@ public class Country extends Territory {
 
     /**
      * this method sets the passed owner name
+     *
      * @param p_OwnerName ownerName of a target/source country is passed
      */
     @Override

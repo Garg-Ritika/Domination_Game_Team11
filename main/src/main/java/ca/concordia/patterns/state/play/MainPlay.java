@@ -5,12 +5,12 @@ import ca.concordia.gameengine.GameEngine;
 /**
  * this class extends play class
  * State of the state pattern
- *
  */
 public abstract class MainPlay extends Play {
 
     /**
      * constructor that contains GameEngine object
+     *
      * @param p_ge GameEngine object
      */
     public MainPlay(GameEngine p_ge) {

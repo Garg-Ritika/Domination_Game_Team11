@@ -5,7 +5,7 @@ import ca.concordia.patterns.observer.LogUtil;
 
 /**
  * diplomacy: until the end of the turn, you and the target player cannot attack each other.
- *
+ * <p>
  * Command Syntax:
  * negotiate playerID
  */
@@ -42,7 +42,7 @@ public class Diplomacy implements Order {
      * @return true/false
      */
     public boolean valid() {
-        if (negotiatePlayerId.getPlayerName() !=null) {
+        if (negotiatePlayerId.getPlayerName() != null) {
             // target Player Id must exist
             return true;
         }

@@ -15,6 +15,7 @@ public class ReinforcementPhase extends MainPlay {
 
     /**
      * Constructor that takes GameEngine object as argument
+     *
      * @param p_ge GameEngine class object
      */
     public ReinforcementPhase(GameEngine p_ge) {

@@ -7,7 +7,7 @@ import ca.concordia.patterns.observer.LogUtil;
 
 /**
  * Airlift: advance some armies from one of the current player’s territories to any another territory.
- *
+ * <p>
  * Command Syntax:
  * airlift sourcecountryID targetcountryID numarmies
  */
@@ -21,10 +21,11 @@ public class Airlift implements Order {
     /**
      * This is the constructor that takes player, source and target territory object and no of armies as argument
      * encapsulating all necessary data to execute the command
+     *
      * @param initiator player who runs the command
-     * @param source Source territory form which armies are to be moved
-     * @param target target territory to which armies are to be moved
-     * @param num no of armies to be moved
+     * @param source    Source territory form which armies are to be moved
+     * @param target    target territory to which armies are to be moved
+     * @param num       no of armies to be moved
      */
     public Airlift(Player initiator, Territory source, Territory target, int num) {
         this.d_Initiator = initiator;
@@ -46,9 +47,8 @@ public class Airlift implements Order {
             // if the source and the target belong to the same player
             // then just move the armies to the target Territory
             d_Target.setArmyCount(d_Target.getArmyCount() + d_NumToAirlift);
-            d_Source.setArmyCount(d_Source.getArmyCount()- d_NumToAirlift);
-        }
-        else {
+            d_Source.setArmyCount(d_Source.getArmyCount() - d_NumToAirlift);
+        } else {
             System.out.println("invalid order");
         }
     }
@@ -60,13 +60,12 @@ public class Airlift implements Order {
      */
     public boolean valid() {
         //TODO what is the valid condition
-        if((d_Source.getArmyCount()>= d_NumToAirlift)
+        if ((d_Source.getArmyCount() >= d_NumToAirlift)
                 && (d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName()))
-                &&(d_Source !=null)
-                && (d_Target !=null) ) {
+                && (d_Source != null)
+                && (d_Target != null)) {
             return true;
-        }
-        else{
+        } else {
             System.out.println("invalid order");
             return false;
         }

@@ -10,6 +10,7 @@ public class Preload extends Edit {
 
     /**
      * This is the constructor that takes GameEngine class object as argument
+     *
      * @param p_ge GameEngine class object
      */
 
@@ -19,6 +20,7 @@ public class Preload extends Edit {
 
     /**
      * This method takes edit continent command and shows invalid command message to user
+     *
      * @param p_Command editContinent command
      */
     @Override
@@ -28,6 +30,7 @@ public class Preload extends Edit {
 
     /**
      * This method takes edit Country command and shows invalid command message to user
+     *
      * @param p_Command editCountry command
      */
     @Override
@@ -37,6 +40,7 @@ public class Preload extends Edit {
 
     /**
      * This method takes edit neighbour command and shows invalid command message to user
+     *
      * @param p_Command editNeighbour command
      */
     @Override
@@ -46,6 +50,7 @@ public class Preload extends Edit {
 
     /**
      * This method takes save map command and shows invalid command message to user
+     *
      * @param p_Command saveMap command
      */
     @Override
@@ -61,7 +66,7 @@ public class Preload extends Edit {
      */
     @Override
     public void editMap(String[] p_Command) {
-        PostLoad postLoad= new PostLoad(d_ge);
+        PostLoad postLoad = new PostLoad(d_ge);
         d_ge.setPhase(postLoad);
         postLoad.editMap(p_Command);
     }
@@ -69,6 +74,7 @@ public class Preload extends Edit {
     /**
      * This method takes validate map command and shows invalid command message to the user
      * This command is executed in the PreLoad phase, because map can not be validated before loading
+     *
      * @param p_Command validateMap command
      */
     @Override
@@ -78,6 +84,7 @@ public class Preload extends Edit {
 
     /**
      * This method takes load map command and shows invalid command message to user
+     *
      * @param p_Command loadMap command
      */
     @Override
@@ -85,8 +92,10 @@ public class Preload extends Edit {
         printInvalidCommandMessage();
 
     }
+
     /**
      * This method takes set Players command and shows invalid command message to user
+     *
      * @param p_Command setPlayers command
      */
     @Override

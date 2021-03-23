@@ -86,7 +86,7 @@ public class Map {
     }
 
     public Territory getTerritoryByName(String name) {
-        System.out.println(" --> find terrority named : " + name );
+        System.out.println(" --> find terrority named : " + name);
         for (Continent l_Continent : d_ListOfContinents) {
             if (name.equalsIgnoreCase(l_Continent.getName())) {
                 System.out.println("--> found continent : " + name);
@@ -96,7 +96,7 @@ public class Map {
 
         for (Country l_Country : d_ListOfCountries) {
             if (name.equalsIgnoreCase(l_Country.getName())) {
-                System.out.println("--> found continent : " + name );
+                System.out.println("--> found continent : " + name);
                 return l_Country;
             }
         }

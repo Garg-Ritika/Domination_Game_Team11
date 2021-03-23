@@ -52,7 +52,7 @@ public class OrderExecutionPhase extends MainPlay {
                         order.execute();
                     }
                     removePlayers(p);
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("EXCEPTION: " + e.getMessage());
                 }
             }
@@ -61,19 +61,19 @@ public class OrderExecutionPhase extends MainPlay {
         LogUtil.log("All orders has been executed ");
     }
 
-    private void removePlayers(Player p){
-        if(p.getListOfCountries().size()==0){
+    private void removePlayers(Player p) {
+        if (p.getListOfCountries().size() == 0) {
             d_ge.getListOfPlayers().remove(p);
-            System.out.println("PLayer "+p.getPlayerName()+" is out of the game");
-            LogUtil.log("PLayer "+p.getPlayerName()+" is out of the game");
+            System.out.println("PLayer " + p.getPlayerName() + " is out of the game");
+            LogUtil.log("PLayer " + p.getPlayerName() + " is out of the game");
         }
     }
 
     private void checkForEnd() {
         if (d_ge.getListOfPlayers().size() < 2) {
             d_ge.setPhase(new End(d_ge));
-            System.out.println("Game ends and the winner is "+d_ge.getListOfPlayers().get(0));
-            LogUtil.log("Game ends and the winner is "+d_ge.getListOfPlayers().get(0));
+            System.out.println("Game ends and the winner is " + d_ge.getListOfPlayers().get(0));
+            LogUtil.log("Game ends and the winner is " + d_ge.getListOfPlayers().get(0));
         } else {
             next();
         }

@@ -17,8 +17,19 @@ public class Player {
     private List<Continent> d_ListOfContinents = new ArrayList<Continent>();
     private List<Order> d_ListOfOrders = new ArrayList<Order>();
     private List<String> d_OrderCards = new ArrayList<>();
-    private boolean d_RandomCardAssigned =false;
-    private boolean d_PlayerIsNegotiated =false;
+    private boolean d_RandomCardAssigned = false;
+    private boolean d_PlayerIsNegotiated = false;
+
+    /**
+     * Constructor initializes the following below member variables of Player class
+     *
+     * @param p_PlayerName player Name
+     * @param p_PlayerID   Id of Player
+     */
+    public Player(String p_PlayerName, int p_PlayerID) {
+        this.d_PlayerName = p_PlayerName;
+        this.d_PlayerID = p_PlayerID;
+    }
 
     /**
      * This method is used to return true if the random card is negotiated
@@ -49,21 +60,11 @@ public class Player {
 
     /**
      * his method is used to set true if the player is negotiated
+     *
      * @param p_NegotiatedPlayer return
      */
     public void setIsNegotiatedPlayer(boolean p_NegotiatedPlayer) {
         this.d_PlayerIsNegotiated = p_NegotiatedPlayer;
-    }
-
-    /**
-     * Constructor initializes the following below member variables of Player class
-     *
-     * @param p_PlayerName player Name
-     * @param p_PlayerID   Id of Player
-     */
-    public Player(String p_PlayerName, int p_PlayerID) {
-        this.d_PlayerName = p_PlayerName;
-        this.d_PlayerID = p_PlayerID;
     }
 
     /**

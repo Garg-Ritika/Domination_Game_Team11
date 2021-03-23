@@ -1,7 +1,6 @@
 package ca.concordia.patterns.observer;
 
 import java.io.File;
-import java.io.IOException;
 
 public class LogUtil {
 
@@ -14,6 +13,7 @@ public class LogUtil {
     /**
      * This method is used to catch the exception during the start of the program
      * if there is already existing log file then exception is handled by catch
+     *
      * @param p_Msg this is the parameter passed which contains the message
      */
     public static void log(String p_Msg) {
@@ -58,13 +58,14 @@ public class LogUtil {
             //List of all files and directories
             String contents[] = directoryPath.list();
             System.out.println("List of files and directories in the specified directory:");
-            for(int i=0; i<contents.length; i++) {
+            for (int i = 0; i < contents.length; i++) {
                 System.out.println(contents[i]);
-                try{
-                    if (contents[i].startsWith(LOG_FILE_NAME)){
+                try {
+                    if (contents[i].startsWith(LOG_FILE_NAME)) {
                         new File(contents[i]).delete();
                     }
-                }catch (Exception io){}
+                } catch (Exception io) {
+                }
             }
         } catch (Exception e) {
 

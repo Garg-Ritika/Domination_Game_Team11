@@ -13,6 +13,7 @@ public interface Order {
 
     /**
      * This function checks that if the card which is played is valid to play before executing
+     *
      * @return T/F
      */
     boolean valid();

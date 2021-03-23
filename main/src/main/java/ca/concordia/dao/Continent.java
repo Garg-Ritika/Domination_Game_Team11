@@ -100,6 +100,7 @@ public class Continent extends Territory {
 
     /**
      * this method gets the player name of the source/target country
+     *
      * @return d_OwnerName
      */
 
@@ -110,6 +111,7 @@ public class Continent extends Territory {
 
     /**
      * this method sets the passed owner name
+     *
      * @param p_OwnerName ownerName of a target/source continent is passed
      */
     @Override
