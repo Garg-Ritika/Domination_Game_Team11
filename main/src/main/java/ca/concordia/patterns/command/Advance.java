@@ -88,7 +88,7 @@ public class Advance implements Order {
      * This method will check if the given inputs are a valid input for Advance Card
      * check if countrynamefrom exists
      * check if countryname has the same owner as the initiator of this commad
-     * check if countrynamefrom has >= numarmies being advanced..
+     * check if countrynamefrom has  greater than or equal to numarmies being advanced..
      * check if countrynameto is there
      * check if countrynameto exists
      *

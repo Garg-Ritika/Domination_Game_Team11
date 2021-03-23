@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ca.concordia"},{"l":"ca.concordia.controller"},{"l":"ca.concordia.controller.game"},{"l":"ca.concordia.controller.map"},{"l":"ca.concordia.model"},{"l":"ca.concordia.view"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ca.concordia.patterns.command"}];updateSearchResults();
