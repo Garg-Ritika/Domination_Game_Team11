@@ -39,6 +39,7 @@ public class Deploy implements Order {
         if (valid()) {
             // behavior of the concrete command
             int existingArmy = this.target_territory.getArmyCount();
+            this.initiator.setNoOfArmies(this.initiator.getNoOfArmies() - to_deploy);
             this.target_territory.setArmyCount(existingArmy + to_deploy);
             System.out.println("deploying " + to_deploy + " to " + target_territory.getName());
         }

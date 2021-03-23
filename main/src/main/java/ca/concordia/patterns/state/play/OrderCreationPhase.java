@@ -182,7 +182,6 @@ public class OrderCreationPhase extends MainPlay {
                 int l_NumInt = Integer.parseInt(l_Num);
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (l_ArmyCountOfPlayer >= l_NumInt) {
-                    p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
                     Order o = new Deploy(p_Player, l_Territory, l_NumInt);
                     p_Player.createOrder(o);
                     LogUtil.log("ORDER CREATED: " + Arrays.toString(p_Command));
