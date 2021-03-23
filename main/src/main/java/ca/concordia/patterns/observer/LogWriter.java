@@ -11,6 +11,14 @@ import java.util.logging.SimpleFormatter;
  */
 public class LogWriter implements Observer {
 
+    private static Logger LOGGER = null;
+    static {
+        System.setProperty("java.util.logging.SimpleFormatter.format",
+                "[%1$tF %1$tT] [%4$-7s] %5$s %n");
+        LOGGER = Logger.getLogger(LogWriter.class.getName());
+    }
+
+
     // 10MB file size
     public final int FILE_SIZE = 10 * 1024 * 1024;
 
@@ -28,26 +36,57 @@ public class LogWriter implements Observer {
     /**
      * This is the log method which helps user to clearly see all the actions that happened during game by looking at this file
      *
-     * @param message String message passed as an arguement to log method
+     * @param p_Message String message passed as an arguement to log method
      */
-    public void log(String message) {
+    public void log(String p_Message) {
         try {
-            Logger logger = Logger.getAnonymousLogger();
+
+
             FileHandler fH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 1, true);
 
-            logger.addHandler(fH);
+            LOGGER.addHandler(fH);
 
             // to avoid printing the log lines in console but only in log file.
-            logger.setUseParentHandlers(false);
+            LOGGER.setUseParentHandlers(false);
+
 
             // configure simple format
             SimpleFormatter sf = new SimpleFormatter();
             fH.setFormatter(sf);
 
             // everything is info log be default
-            logger.info(message);
+            LOGGER.info(p_Message);
 
-            fH.close();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
+
+
+
+    /**
+     * This is the log method which helps user to clearly see all the actions that happened during game by looking at this file
+     *
+     * @param p_Message String message passed as an arguement to log method
+     */
+    public void logError(String p_Message) {
+        try {
+
+
+            FileHandler fH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 1, true);
+
+            LOGGER.addHandler(fH);
+
+            // to avoid printing the log lines in console but only in log file.
+            LOGGER.setUseParentHandlers(false);
+
+
+            // configure simple format
+            SimpleFormatter sf = new SimpleFormatter();
+            fH.setFormatter(sf);
+
+            // everything is info log be default
+            LOGGER.info(p_Message);
 
         } catch (IOException io) {
             io.printStackTrace();
