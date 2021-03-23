@@ -16,6 +16,7 @@ public class Player {
     private List<Country> d_ListOfCountries = new ArrayList<Country>();
     private List<Continent> d_ListOfContinents = new ArrayList<Continent>();
     private List<Order> d_ListOfOrders = new ArrayList<Order>();
+    private List<String> d_OrderCards = new ArrayList<>();
 
     /**
      * Constructor initializes the following below member variables of Player class
@@ -26,6 +27,44 @@ public class Player {
     public Player(String p_PlayerName, int p_PlayerID) {
         this.d_PlayerName = p_PlayerName;
         this.d_PlayerID = p_PlayerID;
+    }
+
+    /**
+     * This method returns the list of OrderCards owned by Player
+     *
+     * @return list of OrderCards
+     */
+    public List<String> getOrderCards() {
+        return d_OrderCards;
+    }
+
+    /**
+     * This method sets the list of order cards to Players
+     *
+     * @param p_OrderCards order cards assigned to player
+     */
+    public void setOrderCards(List<String> p_OrderCards) {
+        this.d_OrderCards = p_OrderCards;
+    }
+
+    /**
+     * Setter method to add new ordercard in the list of Ordercards
+     *
+     * @param p_orderCard ordercard object
+     * @return boolean
+     */
+    public boolean addNewOrderCard(String p_orderCard) {
+        return this.d_OrderCards.add(p_orderCard);
+    }
+
+    /**
+     * Setter method to remove aew ordercard in the list of Ordercards
+     *
+     * @param p_orderCard ordercard object
+     * @return boolean
+     */
+    public boolean removeNewOrderCard(String p_orderCard) {
+        return this.d_OrderCards.remove(p_orderCard);
     }
 
     /**

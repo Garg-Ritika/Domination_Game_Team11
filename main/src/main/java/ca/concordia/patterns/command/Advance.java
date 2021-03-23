@@ -4,7 +4,8 @@ import ca.concordia.dao.Country;
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
-import ca.concordia.patterns.state.play.Play;
+
+import java.util.Random;
 
 /**
  * Move some armies from one of the current player’s territories (source) to an adjacent territory
@@ -53,6 +54,9 @@ public class Advance implements Order {
      * Here both the source and the target Territories are Receivers
      */
     public void execute() {
+        String[] listOfRandomCards = {"bomb", "blockade", "airlift", "negotiate"};
+        Random r = new Random();
+        String randomCard = listOfRandomCards[r.nextInt(listOfRandomCards.length)];
         System.out.println("advance execute ");
 
         if (valid()) {
@@ -63,6 +67,7 @@ public class Advance implements Order {
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() + d_NumToAdvance);
             } else {
                 // implement a battle
+                System.out.println("in implementing battle astage");
                 int l_DefendingArmies = (int) (this.d_Target.getArmyCount()*0.7); //7
                 int l_AttackingArmies = (int) (this.d_NumToAdvance *0.6); //15
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
@@ -73,9 +78,11 @@ public class Advance implements Order {
 
                     this.d_Target.setOwner(d_Initiator);
                     this.d_Target.setArmyCount(this.d_Source.getArmyCount()-l_DefendingArmies);
-                    //removing the territory from the list and adding to the player who won it
+                    //removing the territory from the listOfRandomCards and adding to the player who won it
                     this.d_Initiator.addNewCountry((Country)this.d_Target);
                     this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
+                    this.d_Initiator.addNewOrderCard(randomCard);
+                    System.out.println(randomCard +" assigned to player "+ d_Initiator);
                 }
                 else{
                     this.d_Source.setArmyCount(d_Source.getArmyCount() -l_DefendingArmies);

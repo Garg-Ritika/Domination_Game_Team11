@@ -104,6 +104,10 @@ public class OrderCreationPhase extends MainPlay {
             System.out.println("| Any                  : showmap                                                           |");
             System.out.println("| Any                  : quit                                                              |");
             System.out.println("============================================================================================");
+
+            System.out.println("deploy, advance, "+p_Player.getOrderCards().toString()+", quit" +" cards are available for player "+ p_Player.getPlayerName());
+
+
             String l_CommandInput = keyboard.nextLine();
             LogUtil.log(l_CommandInput);
 
@@ -211,8 +215,9 @@ public class OrderCreationPhase extends MainPlay {
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 /*if (l_ArmyCountOfPlayer >= l_NumInt) {
                     p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);*/
-                    Order o = new Advance(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
-                    p_Player.createOrder(o);
+                Order o = new Advance(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
+                p_Player.createOrder(o);
+                System.out.println(p_Player.getOrderCards().toString() +" cards are available for player "+ p_Player.getPlayerName());
                 /*} else {
                     LogUtil.log("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
                     System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
@@ -235,9 +240,14 @@ public class OrderCreationPhase extends MainPlay {
             if (p_Command.length == 2) {
                 String l_CountryNameSource = p_Command[1];
                 Territory l_TerritoryTarget = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
-                Order o = new Bomb(p_Player, l_TerritoryTarget);
-                p_Player.createOrder(o);
-
+                if(p_Player.getOrderCards().contains("bomb")){
+                    p_Player.removeNewOrderCard("bomb");
+                    Order o = new Bomb(p_Player, l_TerritoryTarget);
+                    p_Player.createOrder(o);
+                }
+                else {
+                    System.out.println("bomb order card doesnot exist");
+                }
             }
         } catch (Exception l_E) {
             l_E.printStackTrace();
@@ -256,10 +266,18 @@ public class OrderCreationPhase extends MainPlay {
             if (p_Command.length == 2) {
                 String l_CountryNameSource = p_Command[1];
                 Territory l_TerritorySource = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
-                Order o = new Blockade(p_Player, l_TerritorySource);
-                p_Player.createOrder(o);
+                if (p_Player.getOrderCards().contains("blockade")){
+                    p_Player.removeNewOrderCard("blockade");
+                    Order o = new Blockade(p_Player, l_TerritorySource);
+                    p_Player.createOrder(o);
+                }
 
+                else{
+                    System.out.println("blockade order card doesnot exist");
+                }
             }
+
+
         } catch (Exception l_E) {
             l_E.printStackTrace();
         }
@@ -281,9 +299,14 @@ public class OrderCreationPhase extends MainPlay {
                 Territory l_TerritoryTarget = d_ge.getMap().getTerritoryByName(l_CountryNameTarget);
                 String l_Num = p_Command[3];
                 int l_NumInt = Integer.parseInt(l_Num);
-
-                Order o = new Airlift(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
-                p_Player.createOrder(o);
+                if (p_Player.getOrderCards().contains("airlift")) {
+                    p_Player.removeNewOrderCard("airlift");
+                    Order o = new Airlift(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
+                    p_Player.createOrder(o);
+                }
+                else{
+                    System.out.println("airlift order card doesnot exist");
+                }
 
             }
         } catch (Exception l_E) {
@@ -304,8 +327,14 @@ public class OrderCreationPhase extends MainPlay {
                 String l_PlayerName = p_Command[1];
                 for (Player l_GamePlayer :d_ge.getListOfPlayers()){
                     if (l_GamePlayer.getPlayerName().equalsIgnoreCase(l_PlayerName)){
-                        Order o = new Diplomacy(p_Player,l_GamePlayer);
-                        p_Player.createOrder(o);
+                        if (p_Player.getOrderCards().contains("negotiate")) {
+                            p_Player.removeNewOrderCard("negotiate");
+                            Order o = new Diplomacy(p_Player, l_GamePlayer);
+                            p_Player.createOrder(o);
+                        }
+                        else{
+                            System.out.println("negotiate order card doesnot exist");
+                        }
                     }
                 }
             }
