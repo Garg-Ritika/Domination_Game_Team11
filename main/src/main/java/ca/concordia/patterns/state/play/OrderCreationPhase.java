@@ -9,6 +9,12 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * This is the OrderCreationPhase class that extends the MainPlay class
+ * This class takes the orders for players and place the reinforcement armies
+ * Deploy, Advance, Bomb, blockade, Airlift, Diplomacy - These commands works here,
+ * for rest of the commands it throws invalid command message to the user
+ */
 public class OrderCreationPhase extends MainPlay {
 
     public static final String COMMAND_SHOW_MAP = "showmap";
@@ -21,20 +27,35 @@ public class OrderCreationPhase extends MainPlay {
     public static final String COMMAND_QUIT = "quit";
 
 
+    /**
+     * Constructor that takes GameEngine object as argument
+     * @param p_ge GameEngine object
+     */
     public OrderCreationPhase(GameEngine p_ge) {
         super(p_ge);
     }
 
+    /**
+     * This method moves to next phase - OrderExecutionPhase
+     */
     public void next() {
         System.out.println("--> setting order execution phase ");
         d_ge.setPhase(new OrderExecutionPhase(d_ge));
         d_ge.getPhase().fortify();
     }
 
+    /**
+     * This method shows invalid command message to the user
+     */
     public void reinforce() {
         printInvalidCommandMessage();
     }
 
+    /**
+     * This method starts the creation of order for players
+     * takes orders for players and place all the reinforcement armies
+     * and finishes the order creation
+     */
     @Override
     public void attack() {
         System.out.println("--> start of order creation");
@@ -53,11 +74,21 @@ public class OrderCreationPhase extends MainPlay {
         next();
     }
 
+    /**
+     * This method shows invalid command message to the user
+     */
     public void fortify() {
         printInvalidCommandMessage();
     }
 
-
+    /**
+     * This method takes order from user and process the commands
+     * Player cannot quit the game unless all armies are deployed
+     * when keyboard's input is no longer needed, keyboard.close() function is called
+     *
+     * @param p_Player Player name
+     * @return false if player's number of armies is 0 or after keyboard.close() is called
+     */
     public boolean takeOrder(Player p_Player) {
         System.out.println("taking order ");
         Scanner keyboard = new Scanner(System.in);
@@ -132,7 +163,7 @@ public class OrderCreationPhase extends MainPlay {
     }
 
     /**
-     * Helper method to process "deploy" command
+     * This method process "deploy" command
      *  "deploy countryID numarmies"
      * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
@@ -162,7 +193,7 @@ public class OrderCreationPhase extends MainPlay {
     }
 
     /**
-     * Helper method to process "advance" command
+     * This method process "advance" command
      *  "advance countrynamefrom countynameto numarmies"
      * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
@@ -193,7 +224,7 @@ public class OrderCreationPhase extends MainPlay {
     }
 
     /**
-     * Helper method to process "bomb" command
+     * This method process "bomb" command
      *  "bomb countryID"
      * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
@@ -214,7 +245,7 @@ public class OrderCreationPhase extends MainPlay {
     }
 
     /**
-     * Helper method to process "blockade" command
+     * This is the helper method to process "blockade" command
      *  "blockade countryID"
      * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
@@ -235,7 +266,7 @@ public class OrderCreationPhase extends MainPlay {
     }
 
     /**
-     * Helper method to process "Airlift" command
+     * This is the helper method to process "Airlift" command
      *  "airlift sourcecountryID targetcountryID numarmies"
      * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
@@ -261,7 +292,7 @@ public class OrderCreationPhase extends MainPlay {
     }
 
     /**
-     * Helper method to process "Diplomacy" command
+     * This is the helper method to process "Diplomacy" command
      *  "negotiate playerID"
      * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
