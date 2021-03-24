@@ -36,6 +36,7 @@ public class AdvanceTest {
         d_PlayerOne = new Player("player1", 1);
         d_PlayerOne.addNewCountry((Country) d_Source);
         d_Source.setOwner(d_PlayerOne);
+        d_PlayerOne.setD_RandomCardAssigned(false);
 
         // target
         d_Target = new Country(1, 1, "China", 0, 0);
@@ -62,6 +63,7 @@ public class AdvanceTest {
 
         String ex = "assigned to player ";
         assertEquals(true, outContent.toString().contains(ex));
+        assertEquals(true, d_PlayerOne.getD_RandomCardAssigned());
     }
 
     /**
