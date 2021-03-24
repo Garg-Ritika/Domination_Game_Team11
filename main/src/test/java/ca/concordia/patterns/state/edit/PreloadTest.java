@@ -13,10 +13,10 @@ import static junit.framework.TestCase.assertEquals;
  * and tests whether expected output of these methods are equal to actual outputs or not
  */
 public class PreloadTest {
-    GameEngine d_ge= new GameEngine();
-    String[] str= {"editContinent"};
-    String[] str1= {"editNeighbour"};
-    String[] str2= {"editMap"};
+    GameEngine d_ge = new GameEngine();
+    String[] str = {"editContinent"};
+    String[] str1 = {"editNeighbour"};
+    String[] str2 = {"editMap"};
 
     /**
      * This is the test method that checks editContinent method's expected and actual output
@@ -26,10 +26,10 @@ public class PreloadTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Preload pr= new Preload(d_ge);
+        Preload pr = new Preload(d_ge);
         pr.editContinent(str);
-        String ex="Invalid command in statePreload"  + System.lineSeparator();
-        assertEquals(ex,outContent.toString());
+        String ex = "Invalid command in statePreload" + System.lineSeparator();
+        assertEquals(ex, outContent.toString());
     }
 
     /**
@@ -41,10 +41,10 @@ public class PreloadTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Preload pr= new Preload(d_ge);
+        Preload pr = new Preload(d_ge);
         pr.editNeighbour(str1);
-        String ex="Invalid command in statePreload" + System.lineSeparator();
-        assertEquals(ex,outContent.toString());
+        String ex = "Invalid command in statePreload" + System.lineSeparator();
+        assertEquals(ex, outContent.toString());
     }
 
     /**
@@ -55,10 +55,10 @@ public class PreloadTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Preload pr= new Preload(d_ge);
+        Preload pr = new Preload(d_ge);
         pr.editMap(str2);
-        String ex="INCOMPLETE COMMAND, create an in-memory map file from scratch" + System.lineSeparator() +
+        String ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" + System.lineSeparator() +
                 " No continents available in the map " + System.lineSeparator();
-        assertEquals(ex,outContent.toString());
+        assertEquals(ex, outContent.toString());
     }
 }

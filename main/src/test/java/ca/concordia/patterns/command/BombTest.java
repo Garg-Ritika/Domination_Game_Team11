@@ -32,8 +32,9 @@ public class BombTest {
         d_PlayerTwo.addNewCountry((Country) d_Target);
         d_Target.setOwner(d_PlayerTwo);
 
-        d_Bomb = new Bomb(d_PlayerOne,  d_Target);
+        d_Bomb = new Bomb(d_PlayerOne, d_Target);
     }
+
     @Test
     public void executeTest() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -48,6 +49,6 @@ public class BombTest {
 
     @Test
     public void validTest() {
-        assertEquals(true,d_Bomb.valid());
+        assertEquals(true, d_Bomb.valid());
     }
 }

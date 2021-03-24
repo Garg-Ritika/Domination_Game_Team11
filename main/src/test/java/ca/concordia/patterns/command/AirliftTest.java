@@ -69,6 +69,6 @@ public class AirliftTest {
 
     @Test
     public void validTest() {
-        assertEquals(true,d_Airlift.valid());
+        assertEquals(true, d_Airlift.valid());
     }
 }

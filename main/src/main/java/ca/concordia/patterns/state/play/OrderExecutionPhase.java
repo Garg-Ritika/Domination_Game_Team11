@@ -25,11 +25,11 @@ public class OrderExecutionPhase extends MainPlay {
         printInvalidCommandMessage();
     }
 
-    public void attack() {
+    public void createOrder() {
         printInvalidCommandMessage();
     }
 
-    public void fortify() {
+    public void executeOrder() {
         System.out.println("fortifying");
         executeAllOrders();
         showMap();

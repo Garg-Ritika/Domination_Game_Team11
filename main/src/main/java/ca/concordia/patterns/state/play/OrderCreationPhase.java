@@ -42,7 +42,7 @@ public class OrderCreationPhase extends MainPlay {
     public void next() {
         System.out.println("--> setting order execution phase ");
         d_ge.setPhase(new OrderExecutionPhase(d_ge));
-        d_ge.getPhase().fortify();
+        d_ge.getPhase().executeOrder();
     }
 
     /**
@@ -58,7 +58,7 @@ public class OrderCreationPhase extends MainPlay {
      * and finishes the order creation
      */
     @Override
-    public void attack() {
+    public void createOrder() {
         System.out.println("--> start of order creation");
         for (Player l_Player : d_ge.getListOfPlayers()) {
             boolean l_MaintainLoop = true;
@@ -78,7 +78,7 @@ public class OrderCreationPhase extends MainPlay {
     /**
      * This method shows invalid command message to the user
      */
-    public void fortify() {
+    public void executeOrder() {
         printInvalidCommandMessage();
     }
 

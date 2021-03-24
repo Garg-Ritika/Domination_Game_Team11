@@ -43,7 +43,7 @@ public class Blockade implements Order {
             //how to make this territory neutral?
             this.d_TargetTerritory.setOwner(neutralPlayer);
             this.d_Initiator.getListOfCountries().remove(this.d_TargetTerritory);
-            System.out.println(this.d_TargetTerritory+" has been neutralized");
+            System.out.println(this.d_TargetTerritory + " has been neutralized");
         }
     }
 

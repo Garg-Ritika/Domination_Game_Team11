@@ -64,14 +64,14 @@ public class ReinforcementPhase extends MainPlay {
     /**
      * This method shows invalid command message to the user
      */
-    public void attack() {
+    public void createOrder() {
         printInvalidCommandMessage();
     }
 
     /**
      * This method shows invalid command message to the user
      */
-    public void fortify() {
+    public void executeOrder() {
         printInvalidCommandMessage();
     }
 
@@ -81,7 +81,7 @@ public class ReinforcementPhase extends MainPlay {
     public void next() {
         System.out.println("--> setting order creation phase ");
         d_ge.setPhase(new OrderCreationPhase(d_ge));
-        d_ge.getPhase().attack();
+        d_ge.getPhase().createOrder();
     }
 
 }

@@ -39,7 +39,7 @@ public class Bomb implements Order {
         if (valid()) {
             // behavior of the concrete command
             this.target_territory.setArmyCount(this.target_territory.getArmyCount() / 2);
-            System.out.println(this.target_territory+ " half of the armies is destroyed");
+            System.out.println(this.target_territory + " half of the armies is destroyed");
         }
     }
 

@@ -162,7 +162,7 @@ public class Play extends Phase {
      * this method shows invalid command message to the user
      */
     @Override
-    public void attack() {
+    public void createOrder() {
         printInvalidCommandMessage();
     }
 
@@ -170,7 +170,7 @@ public class Play extends Phase {
      * fortify method shows invalid command message to the user
      */
     @Override
-    public void fortify() {
+    public void executeOrder() {
         printInvalidCommandMessage();
     }
 

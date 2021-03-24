@@ -66,12 +66,12 @@ public class End extends Phase {
     }
 
     @Override
-    public void attack() {
+    public void createOrder() {
         printInvalidCommandMessage();
     }
 
     @Override
-    public void fortify() {
+    public void executeOrder() {
         printInvalidCommandMessage();
     }
 

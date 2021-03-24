@@ -53,14 +53,14 @@ public abstract class Edit extends Phase {
     /**
      * This method prints invalid command message if user wants to attack
      */
-    public void attack() {
+    public void createOrder() {
         printInvalidCommandMessage();
     }
 
     /**
      * This method prints invalid command message if user wants to apply fortify command
      */
-    public void fortify() {
+    public void executeOrder() {
         printInvalidCommandMessage();
     }
 

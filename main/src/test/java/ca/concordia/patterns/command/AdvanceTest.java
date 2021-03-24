@@ -9,7 +9,6 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-
 import static junit.framework.TestCase.assertEquals;
 
 /**
@@ -71,7 +70,7 @@ public class AdvanceTest {
      */
     @Test
     public void validTest() {
-        assertEquals(true,d_Advance.valid());
+        assertEquals(true, d_Advance.valid());
     }
 
 }

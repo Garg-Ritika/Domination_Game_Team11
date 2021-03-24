@@ -87,6 +87,7 @@ public class Map {
 
     /**
      * This getter method is used to find the continent name corresponding to argument passed as territory
+     *
      * @param name Territory name is passed as an argument
      * @return l_Continent
      */
@@ -130,6 +131,7 @@ public class Map {
 
     /**
      * This getter method checks for the passed Continent Name in the Array List of Continents and saves the corresponding continent ID for the matching strings.
+     *
      * @param p_ContinentName It is of type string and is used to compare the Continent name from the list of Continents
      * @return l_Graph ContinentSubGraph is returned in l_Graph
      */

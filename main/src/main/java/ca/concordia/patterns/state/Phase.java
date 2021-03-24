@@ -39,10 +39,10 @@ public abstract class Phase {
     abstract public void reinforce();
 
     // attack state behavior
-    abstract public void attack();
+    abstract public void createOrder();
 
     // fortify state behavior
-    abstract public void fortify();
+    abstract public void executeOrder();
 
     // end state behavior
     abstract public void endGame();

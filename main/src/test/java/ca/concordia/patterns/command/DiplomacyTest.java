@@ -1,6 +1,5 @@
 package ca.concordia.patterns.command;
 
-import ca.concordia.dao.Country;
 import ca.concordia.dao.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +25,7 @@ public class DiplomacyTest {
         d_PlayerTwo = new Player("player2", 2);
         d_PlayerOne.setIsNegotiatedPlayer(false);
 
-        d_Diplomacy = new Diplomacy(d_PlayerOne,d_PlayerTwo);
+        d_Diplomacy = new Diplomacy(d_PlayerOne, d_PlayerTwo);
     }
 
     /**
@@ -50,7 +49,7 @@ public class DiplomacyTest {
      */
     @Test
     public void validTest() {
-        assertEquals(true,d_Diplomacy.valid());
+        assertEquals(true, d_Diplomacy.valid());
     }
 
 

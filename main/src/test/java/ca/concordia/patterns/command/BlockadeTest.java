@@ -63,7 +63,7 @@ public class BlockadeTest {
      */
     @Test
     public void validTest() {
-        assertEquals(true,d_Blockade.valid());
+        assertEquals(true, d_Blockade.valid());
     }
 
 
