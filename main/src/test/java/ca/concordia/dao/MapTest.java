@@ -15,6 +15,9 @@ public class MapTest {
 
     Map d_Map;
 
+    /**
+     * This is the method to be run before test method. It initializes the Map class objects
+     */
     @Before
     public void before() {
         d_Map = new Map();
@@ -32,6 +35,13 @@ public class MapTest {
 
     }
 
+    /**
+     * This  test method contains assert statement that matches expected and actual size of:
+     * ListOfCountries
+     * ListOfContinents
+     * ListOfBorders
+     * And AdjacencyMatrix.
+     */
     @Test
     public void testMap() {
         assertEquals(4, d_Map.getListOfCountries().size());
