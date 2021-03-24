@@ -274,12 +274,15 @@ public class MapEditor {
     public void showMap() {
         LogUtil.log("showing map..");
         for (Continent l_Val : getCurrentMap().getListOfContinents()) {
-            System.out.print(" ID: " + l_Val.getID());
-            System.out.print(" Continent Name : " + l_Val.getName());
-            System.out.print(" Army Count: " + l_Val.getArmyCount());
-            System.out.print(" Color : " + l_Val.getColor());
+            StringBuilder builder = new StringBuilder();
+            builder.append(" ID: " + l_Val.getID());
+            builder.append(" Continent Name : " + l_Val.getName());
+            builder.append(" Army Count: " + l_Val.getArmyCount());
+            builder.append(" Color: " + l_Val.getColor());
+            LogUtil.log(builder.toString());
 
-            LogUtil.log(" \ncountries in this continent : ");
+
+            LogUtil.log("countries in this continent : ");
             for (Country l_Country : getCurrentMap().getListOfCountries()) {
                 if (l_Country.getContinentID() == l_Val.getID()) {
                     LogUtil.log(l_Country.getCountryID() + " " + l_Country.getName() + " " + l_Country.getContinentID() + " x: " + l_Country.getX() + " Y: " + l_Country.getY());

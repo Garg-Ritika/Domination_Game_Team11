@@ -12,11 +12,11 @@ public class OrderExecutionPhase extends MainPlay {
     }
 
     public void next() {
+        LogUtil.log("setting reinforcement phase");
         for (Player p : d_ge.getListOfPlayers()) {
             p.setIsNegotiatedPlayer(false);
             p.setD_RandomCardAssigned(false);
         }
-        LogUtil.log("setting reinforcement phase");
         d_ge.setPhase(new ReinforcementPhase(d_ge));
         d_ge.getPhase().reinforce();
     }
@@ -70,7 +70,11 @@ public class OrderExecutionPhase extends MainPlay {
     private void checkForEnd() {
         if (d_ge.getListOfPlayers().size() < 2) {
             d_ge.setPhase(new End(d_ge));
-            LogUtil.log("Game ends and the winner is " + d_ge.getListOfPlayers().get(0));
+            if (d_ge.getListOfPlayers().size() > 0) {
+                LogUtil.log("Game ends and the winner is " + d_ge.getListOfPlayers().get(0));
+            } else {
+                LogUtil.log("Game ends");
+            }
         } else {
             next();
         }

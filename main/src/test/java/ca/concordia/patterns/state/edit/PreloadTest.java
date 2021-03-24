@@ -61,4 +61,5 @@ public class PreloadTest {
                 " No continents available in the map " + System.lineSeparator();
         assertEquals(ex, outContent.toString());
     }
+
 }
