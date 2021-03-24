@@ -32,6 +32,7 @@ public class Diplomacy implements Order {
             // behavior of the concrete command
             initiator.setIsNegotiatedPlayer(true);
             negotiatePlayerId.setIsNegotiatedPlayer(true);
+            System.out.println(initiator + " and "+negotiatePlayerId+ " are refrained from attack until next turn");
             // how to negotiate player id?
         }
     }
