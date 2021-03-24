@@ -5,6 +5,7 @@ import ca.concordia.dao.Graph;
 import ca.concordia.dao.Map;
 import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
+import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.Phase;
 import ca.concordia.patterns.state.end.End;
 
@@ -12,7 +13,7 @@ import ca.concordia.patterns.state.end.End;
  * This class extends phase class
  * It executes showMap command
  * and for loadMap, editContinent, editCountry, editNeighbour,saveMap, editMap, validateMap, setPlayers, assignCountries,
- * reinforce, attack, fortify it shows invalid command message
+ * reinforce, createorder, executeorder it shows invalid command message
  */
 public class Play extends Phase {
 
@@ -48,20 +49,20 @@ public class Play extends Phase {
      */
     @Override
     public void showMap() {
-        System.out.println("show game command received ");
+        LogUtil.log("show game command received ");
         Map l_Map = d_ge.getMap();
         if (l_Map != null) {
             Graph l_Graph = l_Map.getAdjacencyMatrix();
-            System.out.println(l_Graph.toString());
+            LogUtil.log(l_Graph.toString());
         }
         for (Player l_Player : d_ge.getListOfPlayers()) {
-            System.out.println("------------------------------------------------------------------------------------------------------------------------");
-            System.out.println("PLAYER: " + l_Player.getPlayerName());
-            System.out.println("with total army count of : " + l_Player.getNoOfArmies());
-            System.out.println("has ownership of these countries: ");
+            LogUtil.log("------------------------------------------------------------------------------------------------------------------------");
+            LogUtil.log("PLAYER: " + l_Player.getPlayerName());
+            LogUtil.log("with total army count of : " + l_Player.getNoOfArmies());
+            LogUtil.log("has ownership of these countries: ");
             if (l_Player.getListOfCountries() != null) {
                 for (Country l_Country : l_Player.getListOfCountries()) {
-                    System.out.println("id: " + l_Country.getCountryID()
+                    LogUtil.log("id: " + l_Country.getCountryID()
                             + " name: " + l_Country.getName()
                             + " army count: " + l_Country.getArmyCount()
                             + " belongs to continent " + l_Country.getContinentID());
@@ -190,6 +191,5 @@ public class Play extends Phase {
     public void next() {
 
     }
-
 
 }

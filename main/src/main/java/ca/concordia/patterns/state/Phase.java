@@ -1,6 +1,7 @@
 package ca.concordia.patterns.state;
 
 import ca.concordia.gameengine.GameEngine;
+import ca.concordia.patterns.observer.LogUtil;
 
 //State in the State pattern
 public abstract class Phase {
@@ -52,6 +53,6 @@ public abstract class Phase {
 
     // methods common to all states
     public void printInvalidCommandMessage() {
-        System.out.println("Invalid command in state" + this.getClass().getSimpleName());
+        LogUtil.log("Invalid command in state" + this.getClass().getSimpleName());
     }
 }

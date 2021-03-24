@@ -31,9 +31,8 @@ public class PostLoadTest {
 
         PostLoad po = new PostLoad(d_ge);
         po.saveMap(d_str1);
-        String ex = "INCOMPLETE COMMAND" + System.lineSeparator() +
-                "INCOMPLETE COMMAND" + System.lineSeparator();
-        assertEquals(ex, outContent.toString());
+        String ex = "INCOMPLETE COMMAND";
+        assertEquals(true, outContent.toString().contains(ex));
 
     }
 
@@ -47,8 +46,7 @@ public class PostLoadTest {
 
         PostLoad po = new PostLoad(d_ge);
         po.saveMap(d_str);
-        String ex = "INCOMPLETE COMMAND" + System.lineSeparator() +
-                "INCOMPLETE COMMAND" + System.lineSeparator();
+        String ex = "INCOMPLETE COMMAND" + System.lineSeparator();
         assertEquals(ex, outContent.toString());
     }
 

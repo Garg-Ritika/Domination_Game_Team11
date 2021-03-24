@@ -1,6 +1,7 @@
 package ca.concordia.patterns.state.edit;
 
 import ca.concordia.gameengine.GameEngine;
+import ca.concordia.patterns.observer.LogUtil;
 
 /**
  * This is the preload class that extends Edit Class
@@ -107,7 +108,7 @@ public class Preload extends Edit {
      * This method prints out message to user
      */
     public void next() {
-        System.out.println("must load map");
+        LogUtil.log("must load map");
     }
 
 }

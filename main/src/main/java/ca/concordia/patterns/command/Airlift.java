@@ -41,16 +41,16 @@ public class Airlift implements Order {
      * Here both the source and the target Territories are Receivers
      */
     public void execute() {
-        System.out.println("advance execute ");
+        LogUtil.log("advance execute ");
 
         if (valid()) {
             // if the source and the target belong to the same player
             // then just move the armies to the target Territory
             d_Target.setArmyCount(d_Target.getArmyCount() + d_NumToAirlift);
             d_Source.setArmyCount(d_Source.getArmyCount() - d_NumToAirlift);
-            System.out.println(d_NumToAirlift + " has been moved");
+            LogUtil.log(d_NumToAirlift + " has been moved");
         } else {
-            System.out.println("invalid order");
+            LogUtil.log("invalid order");
         }
     }
 
@@ -67,7 +67,7 @@ public class Airlift implements Order {
                 && (d_Target != null)) {
             return true;
         } else {
-            System.out.println("invalid order");
+            LogUtil.log("invalid order");
             return false;
         }
     }
@@ -77,9 +77,10 @@ public class Airlift implements Order {
      * the log for which have been saved in log file
      */
     public void printOrder() {
-        // TODO
-        // print the order
-        System.out.println();
-        LogUtil.log("");
+
+        LogUtil.log("Airlift: initiator: " + this.d_Initiator
+                + " source: " + this.d_Source
+                + " target: " + this.d_Target
+                + " number to airlift: " + d_NumToAirlift);
     }
 }

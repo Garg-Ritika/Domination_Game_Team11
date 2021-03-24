@@ -25,14 +25,14 @@ public class Diplomacy implements Order {
      * execute method executes the diplomacy card after validity check
      */
     public void execute() {
-        System.out.println("diplomacy execute ");
+        LogUtil.log("diplomacy execute ");
         // Here, the target Territory object is the Receiver
 
         if (valid()) {
             // behavior of the concrete command
             initiator.setIsNegotiatedPlayer(true);
             negotiatePlayerId.setIsNegotiatedPlayer(true);
-            System.out.println(initiator + " and " + negotiatePlayerId + " are refrained from attack until next turn");
+            LogUtil.log(initiator + " and " + negotiatePlayerId + " are refrained from attack until next turn");
             // how to negotiate player id?
         }
     }
@@ -47,7 +47,7 @@ public class Diplomacy implements Order {
             // target Player Id must exist
             return true;
         }
-        System.out.println("invalid order");
+        LogUtil.log("invalid order");
         return false;
     }
 
@@ -56,8 +56,7 @@ public class Diplomacy implements Order {
      * the log for which have been saved in log file
      */
     public void printOrder() {
-        //TODO
-        System.out.println();
-        LogUtil.log("");
+        LogUtil.log("Airlift: initiator: " + this.initiator
+                + " negotiater-player: " + this.negotiatePlayerId);
     }
 }

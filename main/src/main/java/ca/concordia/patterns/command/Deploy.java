@@ -36,13 +36,13 @@ public class Deploy implements Order {
      * Here, the target Territory object is the Receiver
      */
     public void execute() {
-        System.out.println("deploy execute ");
+        LogUtil.log("deploy execute ");
         if (valid()) {
             // behavior of the concrete command
             int existingArmy = this.target_territory.getArmyCount();
             this.initiator.setNoOfArmies(this.initiator.getNoOfArmies() - to_deploy);
             this.target_territory.setArmyCount(existingArmy + to_deploy);
-            System.out.println("deploying " + to_deploy + " to " + target_territory.getName());
+            LogUtil.log("deploying " + to_deploy + " to " + target_territory.getName());
         }
     }
 
@@ -52,14 +52,13 @@ public class Deploy implements Order {
      * @return true/false
      */
     public boolean valid() {
-        System.out.println("--> deploy valid ");
+        LogUtil.log("--> deploy valid ");
 
         if (target_territory.getOwner().getPlayerName().equalsIgnoreCase(initiator.getPlayerName())) {
             // the target territory must belong to the player that created the order
             return true;
         }
         LogUtil.log("invalid deploy order");
-        System.out.println("invalid  deploy order");
         return false;
     }
 

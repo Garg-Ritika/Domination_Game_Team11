@@ -34,12 +34,12 @@ public class Bomb implements Order {
      * Here, the target Territory object is the Receiver
      */
     public void execute() {
-        System.out.println("bomb execute ");
+        LogUtil.log("bomb execute ");
 
         if (valid()) {
             // behavior of the concrete command
             this.target_territory.setArmyCount(this.target_territory.getArmyCount() / 2);
-            System.out.println(this.target_territory + " half of the armies is destroyed");
+            LogUtil.log(this.target_territory + " half of the armies is destroyed");
         }
     }
 
@@ -54,7 +54,7 @@ public class Bomb implements Order {
             return true;
         }
         //also check if target territory exists?
-        System.out.println("invalid order");
+        LogUtil.log("invalid order");
         return false;
     }
 
@@ -63,8 +63,6 @@ public class Bomb implements Order {
      * the log for which have been saved in log file
      */
     public void printOrder() {
-        //TODO
-        System.out.println();
-        LogUtil.log("");
+        LogUtil.log("Bomb : initiator : " + this.initiator + " target " + this.target_territory);
     }
 }

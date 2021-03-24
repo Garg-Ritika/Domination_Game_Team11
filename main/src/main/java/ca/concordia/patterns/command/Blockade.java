@@ -33,7 +33,7 @@ public class Blockade implements Order {
      * Here, the target Territory object is the Receiver
      */
     public void execute() {
-        System.out.println("blockade execute ");
+        LogUtil.log("blockade execute ");
         // Here, the target Territory object is the Receiver
 
         if (valid()) {
@@ -43,7 +43,7 @@ public class Blockade implements Order {
             //how to make this territory neutral?
             this.d_TargetTerritory.setOwner(neutralPlayer);
             this.d_Initiator.getListOfCountries().remove(this.d_TargetTerritory);
-            System.out.println(this.d_TargetTerritory + " has been neutralized");
+            LogUtil.log(this.d_TargetTerritory + " has been neutralized");
         }
     }
 
@@ -57,7 +57,7 @@ public class Blockade implements Order {
             // the target territory must belong to the player that created the order
             return true;
         }
-        System.out.println("invalid order");
+        LogUtil.log("invalid order");
         return false;
     }
 
@@ -66,9 +66,8 @@ public class Blockade implements Order {
      * the log for which have been saved in log file
      */
     public void printOrder() {
-        //TODO
-        System.out.println();
-        LogUtil.log("");
+        LogUtil.log("Airlift: initiator: " + this.d_Initiator
+                + " target: " + this.d_TargetTerritory);
 
     }
 }

@@ -36,12 +36,12 @@ public class ValidateMap {
     public boolean validate() {
 
         if (d_Map.getListOfContinents().size() <= 0) {
-            System.out.println(" No continents available in the map ");
+            LogUtil.log(" No continents available in the map ");
             return false;
         }
 
         if (d_Map.getListOfCountries().size() <= 0) {
-            System.out.println(" No countries available in the map ");
+            LogUtil.log(" No countries available in the map ");
             return false;
         }
 
@@ -54,7 +54,7 @@ public class ValidateMap {
         }
 
         LogUtil.log("map validated successfully ");
-        System.out.println("map validated successfully ");
+        LogUtil.log("map validated successfully ");
         return true;
 
     }
@@ -69,7 +69,7 @@ public class ValidateMap {
             for (int l_J = l_I + 1; l_J < d_Map.getListOfContinents().size(); l_J++) {
 
                 if (d_Map.getListOfContinents().get(l_I).getName().equals(d_Map.getListOfContinents().get(l_J).getName())) {
-                    System.out.println("duplicate continent found: " + d_Map.getListOfContinents().get(l_I).getID());
+                    LogUtil.log("duplicate continent found: " + d_Map.getListOfContinents().get(l_I).getID());
                     return false;
                 }
             }
@@ -79,7 +79,7 @@ public class ValidateMap {
             for (int l_J = l_I + 1; l_J < d_Map.getListOfCountries().size(); l_J++) {
 
                 if (d_Map.getListOfCountries().get(l_I).getName().equals(d_Map.getListOfCountries().get(l_J).getName())) {
-                    System.out.println("duplicate country found : " + d_Map.getListOfCountries().get(l_I).getCountryID());
+                    LogUtil.log("duplicate country found : " + d_Map.getListOfCountries().get(l_I).getCountryID());
                     return false;
                 }
             }
@@ -135,9 +135,9 @@ public class ValidateMap {
         }
 
         if (l_Connected) {
-            System.out.println("it is a connected graph");
+            LogUtil.log("it is a connected graph");
         } else {
-            System.out.println("It is NOT a connected graph");
+            LogUtil.log("It is NOT a connected graph");
         }
         return l_Connected;
     }

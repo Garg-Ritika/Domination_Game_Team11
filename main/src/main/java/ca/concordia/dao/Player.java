@@ -1,6 +1,7 @@
 package ca.concordia.dao;
 
 import ca.concordia.patterns.command.Order;
+import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -254,16 +255,16 @@ public class Player {
      * @return l_ToReturn will return the list of orders
      */
     public Order nextOrder() {
-        System.out.println("--> next order for player: " + getPlayerName());
+        LogUtil.log("--> next order for player: " + getPlayerName());
         Order l_ToReturn = null;
         if (d_ListOfOrders.size() > 0) {
             l_ToReturn = d_ListOfOrders.get(0);
             d_ListOfOrders.remove(0);
 
-            System.out.println(getPlayerName() + " next order is : ");
+            LogUtil.log(getPlayerName() + " next order is : ");
             return l_ToReturn;
         }
-        System.out.println("--> there are no order for player: " + getPlayerName());
+        LogUtil.log("--> there are no order for player: " + getPlayerName());
         return null;
     }
 }

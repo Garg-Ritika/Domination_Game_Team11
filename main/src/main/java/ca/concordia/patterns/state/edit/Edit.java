@@ -2,6 +2,7 @@ package ca.concordia.patterns.state.edit;
 
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.mapworks.MapEditor;
+import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.Phase;
 
 /**
@@ -23,7 +24,7 @@ public abstract class Edit extends Phase {
      * This method shows Map(that contains all the details of countries, continents) to the user
      */
     public void showMap() {
-        System.out.println("showmap command received ...");
+        LogUtil.log("showmap command received ...");
         MapEditor.getInstance().showMap();
     }
 

@@ -69,7 +69,7 @@ public class MapEditor {
             Continent l_Continent = new Continent(l_NumberOfContinents + 1, p_ContinentName, p_ArmyCount, "RED");
             Map l_Map = this.getCurrentMap();
             l_Map.getListOfContinents().add(l_Continent);
-            System.out.println(l_Map.getListOfContinents().size());
+            LogUtil.log("number of continents: " + l_Map.getListOfContinents().size());
         }
         return true;
     }
@@ -122,13 +122,13 @@ public class MapEditor {
                 }
             }
             if (!l_Found) {
-                System.out.println("Adding a new country ");
+                LogUtil.log("Adding a new country ");
                 int l_NumberOfCountries = d_CurrentMap.getListOfCountries().size();
                 Country l_country = new Country(l_NumberOfCountries + 1, l_ContinentID, p_CountryName, 0, 0);
                 d_CurrentMap.getListOfCountries().add(l_country);
             }
         } else {
-            System.out.println("Continent with name: " + p_Continent_Name + " doesn't exists");
+            LogUtil.log("Continent with name: " + p_Continent_Name + " doesn't exists");
             return false;
         }
         return true;
@@ -196,10 +196,10 @@ public class MapEditor {
                 l_NeighborID = l_country.getCountryID();
             }
         }
-        System.out.println("--> " + l_CountryID + " to " + l_NeighborID);
+        LogUtil.log("--> " + l_CountryID + " to " + l_NeighborID);
 
         if (l_CountryID > 0 && l_NeighborID > 0) {
-            System.out.println("both country exists in map: " + p_CountryName + " " + p_NeighborName);
+            LogUtil.log("both country exists in map: " + p_CountryName + " " + p_NeighborName);
             boolean l_BorderFound = false;
             for (Border l_Border : d_CurrentMap.getListOfBorders()) {
                 if (l_Border.getCountryId() == l_CountryID) {
@@ -226,7 +226,7 @@ public class MapEditor {
                 getCurrentMap().getListOfBorders().add(l_NewBorder2);
             }
         } else {
-            System.out.println("not both country exists in map so unable to add it as neighbours");
+            LogUtil.log("not both country exists in map so unable to add it as neighbours");
             return false;
         }
         return true;
@@ -251,7 +251,7 @@ public class MapEditor {
         }
 
         if (l_CountryID > 0 && l_NeighborID > 0) {
-            System.out.println("both country exists in map: " + p_CountryName + " " + p_NeighborName);
+            LogUtil.log("both country exists in map: " + p_CountryName + " " + p_NeighborName);
 
             for (Border l_Border : d_CurrentMap.getListOfBorders()) {
                 if (l_Border.getCountryId() == l_CountryID) {
@@ -262,7 +262,7 @@ public class MapEditor {
                 }
             }
         } else {
-            System.out.println("not both country exists in map so unable to remove it as neighbours");
+            LogUtil.log("not both country exists in map so unable to remove it as neighbours");
             return false;
         }
         return true;
@@ -272,17 +272,17 @@ public class MapEditor {
      * Helper method to show the map
      */
     public void showMap() {
-        System.out.println("showing map..");
+        LogUtil.log("showing map..");
         for (Continent l_Val : getCurrentMap().getListOfContinents()) {
             System.out.print(" ID: " + l_Val.getID());
             System.out.print(" Continent Name : " + l_Val.getName());
             System.out.print(" Army Count: " + l_Val.getArmyCount());
             System.out.print(" Color : " + l_Val.getColor());
 
-            System.out.println(" \ncountries in this continent : ");
+            LogUtil.log(" \ncountries in this continent : ");
             for (Country l_Country : getCurrentMap().getListOfCountries()) {
                 if (l_Country.getContinentID() == l_Val.getID()) {
-                    System.out.println(l_Country.getCountryID() + " " + l_Country.getName() + " " + l_Country.getContinentID() + " x: " + l_Country.getX() + " Y: " + l_Country.getY());
+                    LogUtil.log(l_Country.getCountryID() + " " + l_Country.getName() + " " + l_Country.getContinentID() + " x: " + l_Country.getX() + " Y: " + l_Country.getY());
                     for (Border l_Border : getCurrentMap().getListOfBorders()) {
                         if (l_Border.getCountryId() == l_Country.getCountryID()) {
                             int l_NeighbourCount = 0;
@@ -290,7 +290,7 @@ public class MapEditor {
                                 for (Country lCountry2 : getCurrentMap().getListOfCountries()) {
                                     if (l_NeighbourCountryID == lCountry2.getCountryID()) {
                                         l_NeighbourCount++;
-                                        System.out.println("neighbour " + l_NeighbourCount + " is " + lCountry2.getName());
+                                        LogUtil.log("neighbour " + l_NeighbourCount + " is " + lCountry2.getName());
                                     }
                                 }
                             }
@@ -356,7 +356,7 @@ public class MapEditor {
         resetCurrentMap();
         if (p_MapFile != null && p_MapFile.exists()) {
             LogUtil.log("reading .map file from path: " + p_MapFile.getAbsolutePath());
-            System.out.println("reading .map file from path: " + p_MapFile.getAbsolutePath());
+            LogUtil.log("reading .map file from path: " + p_MapFile.getAbsolutePath());
             FileReader l_Fr = new FileReader(p_MapFile);
             BufferedReader l_Br = new BufferedReader(l_Fr);
 
@@ -366,7 +366,7 @@ public class MapEditor {
 
                     int l_ContinentID = 1;
                     while ((l_Line = l_Br.readLine()).length() > 0) {
-                        System.out.println("continent : " + l_Line);
+                        LogUtil.log("continent : " + l_Line);
 
                         String[] l_ContinentArray = l_Line.trim().split(" ");
                         String l_ContinentName = l_ContinentArray[0];
@@ -380,7 +380,7 @@ public class MapEditor {
                 } else if (l_Line.equalsIgnoreCase(HEADER_COUNTRIES)) {
 
                     while ((l_Line = l_Br.readLine()).length() > 0) {
-                        System.out.println("country : " + l_Line);
+                        LogUtil.log("country : " + l_Line);
 
                         String[] l_CountryArray = l_Line.trim().split(" ");
                         String l_CountryId = l_CountryArray[0];
@@ -400,7 +400,7 @@ public class MapEditor {
                 } else if (l_Line.equalsIgnoreCase(HEADER_BORDERS)) {
                     l_Line = l_Br.readLine();
                     while (l_Line != null && l_Line.length() > 0) {
-                        System.out.println("border : " + l_Line);
+                        LogUtil.log("border : " + l_Line);
 
                         String[] l_BorderArray = l_Line.trim().split(" ");
                         int l_CountryIdInteger = Integer.parseInt(l_BorderArray[0]);
@@ -425,7 +425,7 @@ public class MapEditor {
      * @throws IOException
      */
     private void writeMapFile(File p_MapFile) throws IOException {
-        System.out.println("writing .map file to path " + p_MapFile.getAbsolutePath());
+        LogUtil.log("writing .map file to path " + p_MapFile.getAbsolutePath());
         FileWriter l_FileWriter = new FileWriter(p_MapFile);
         BufferedWriter l_BufferedWriter = new BufferedWriter(l_FileWriter);
 
@@ -456,7 +456,7 @@ public class MapEditor {
         l_FileWriter.close();
 
         LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
-        System.out.println("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
+        LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
     }
 
     /**

@@ -1,5 +1,7 @@
 package ca.concordia.dao;
 
+import ca.concordia.patterns.observer.LogUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,21 +94,21 @@ public class Map {
      * @return l_Continent
      */
     public Territory getTerritoryByName(String name) {
-        System.out.println(" --> find terrority named : " + name);
+        LogUtil.log(" --> find terrority named : " + name);
         for (Continent l_Continent : d_ListOfContinents) {
             if (name.equalsIgnoreCase(l_Continent.getName())) {
-                System.out.println("--> found continent : " + name);
+                LogUtil.log("--> found continent : " + name);
                 return l_Continent;
             }
         }
 
         for (Country l_Country : d_ListOfCountries) {
             if (name.equalsIgnoreCase(l_Country.getName())) {
-                System.out.println("--> found continent : " + name);
+                LogUtil.log("--> found continent : " + name);
                 return l_Country;
             }
         }
-        System.out.println("Error : unable to find " + name + " in the map ");
+        LogUtil.log("Error : unable to find " + name + " in the map ");
         return null;
     }
 

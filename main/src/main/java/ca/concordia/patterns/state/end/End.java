@@ -12,52 +12,52 @@ public class End extends Phase {
 
     @Override
     public void loadMap(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void showMap() {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void editContinent(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void editCountry(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void editNeighbour(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void saveMap(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void editMap(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void validateMap(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void setPlayers(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void assignCountries() {
-
+        printInvalidCommandMessage();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class End extends Phase {
 
     @Override
     public void endGame() {
-        System.out.println("Game has ended ! ");
+        LogUtil.log("Game has ended ! ");
         LogUtil.log("Game has ended ! ");
         System.exit(0);
     }

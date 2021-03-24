@@ -1,6 +1,7 @@
 package ca.concordia;
 
 import ca.concordia.gameengine.GameEngine;
+import ca.concordia.patterns.observer.LogUtil;
 
 /**
  * GameDriver
@@ -14,7 +15,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        System.out.println("Welcome to TEAM-11 Game");
+        LogUtil.log("Welcome to TEAM-11 Game");
         new GameEngine().start();
     }
 }

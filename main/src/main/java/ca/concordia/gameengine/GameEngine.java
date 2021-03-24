@@ -135,12 +135,12 @@ public class GameEngine {
         LogUtil.log("Game Engine started");
         Scanner l_Keyboard = new Scanner(System.in);
         do {
-            System.out.println("========================================");
-            System.out.println("edit");
-            System.out.println("play");
-            System.out.println("quit");
-            System.out.println("choose one of the option from above?: ");
-            System.out.println("=======================================");
+            LogUtil.log("========================================");
+            LogUtil.log("edit");
+            LogUtil.log("play");
+            LogUtil.log("quit");
+            LogUtil.log("choose one of the option from above?: ");
+            LogUtil.log("=======================================");
             String l_Input = l_Keyboard.nextLine();
             LogUtil.log(l_Input);
             switch (l_Input) {
@@ -168,17 +168,17 @@ public class GameEngine {
     void startMapEditor(Scanner keyboard) {
         boolean l_MaintainLoop = true;
         do {
-            System.out.println("===================================================================================================");
-            System.out.println("| PHASE          : command         command arguments                                             |");
-            System.out.println("| Any            : showmap                                                                       |");
-            System.out.println("| Edit:          : editmap        <filepath>                                                     |");
-            System.out.println("| Edit:PostLoad  : editcontinent  -add <continent-name> <continent-id> -remove <continent-name>  |");
-            System.out.println("| Edit:PostLoad  : editcountry    -add <country-name> <continent-name> -remove <country-name>    |");
-            System.out.println("| Edit:PostLoad  : editneighbor  -add <country-name> <neigbor> -remove <country-name> <neighbor> |");
-            System.out.println("| Edit:PostLoad  : savemap        <filepath>                                                     |");
-            System.out.println("| Edit:PostLoad  : validatemap                                                                   |");
-            System.out.println("| Any            : quit                                                                          |");
-            System.out.println("===================================================================================================");
+            LogUtil.log("===================================================================================================");
+            LogUtil.log("| PHASE          : command         command arguments                                             |");
+            LogUtil.log("| Any            : showmap                                                                       |");
+            LogUtil.log("| Edit:          : editmap        <filepath>                                                     |");
+            LogUtil.log("| Edit:PostLoad  : editcontinent  -add <continent-name> <continent-id> -remove <continent-name>  |");
+            LogUtil.log("| Edit:PostLoad  : editcountry    -add <country-name> <continent-name> -remove <country-name>    |");
+            LogUtil.log("| Edit:PostLoad  : editneighbor  -add <country-name> <neigbor> -remove <country-name> <neighbor> |");
+            LogUtil.log("| Edit:PostLoad  : savemap        <filepath>                                                     |");
+            LogUtil.log("| Edit:PostLoad  : validatemap                                                                   |");
+            LogUtil.log("| Any            : quit                                                                          |");
+            LogUtil.log("===================================================================================================");
             String l_EditInput = keyboard.nextLine();
             LogUtil.log(l_EditInput);
 
@@ -190,7 +190,7 @@ public class GameEngine {
                 String[] l_CommandArray = l_EditInput.trim().split(" ");
                 if (l_CommandArray.length > 0) {
                     String l_FirstCommand = l_CommandArray[0].toLowerCase();
-                    System.out.println("firstCommand : " + l_FirstCommand);
+                    LogUtil.log("firstCommand : " + l_FirstCommand);
 
                     switch (l_FirstCommand) {
                         case COMMAND_EDIT_CONTINENT:
@@ -222,7 +222,7 @@ public class GameEngine {
                             break;
 
                         default:
-                            System.out.println("INVALID COMMAND in edit phase");
+                            LogUtil.log("INVALID COMMAND in edit phase");
                     }
                 }
             }
@@ -237,14 +237,14 @@ public class GameEngine {
     void startMainPlay(Scanner keyboard) {
         boolean l_MaintainLoop = true;
         do {
-            System.out.println("============================================================================================");
-            System.out.println("| PHASE                : command         command arguments                                 |");
-            System.out.println("| Any                  : showmap                                                           |");
-            System.out.println("| Play:PlaySetup       : loadmap         <filepath>                                        |");
-            System.out.println("| Play:PlaySetup       : gameplayer      -add <player-name>                                |");
-            System.out.println("| Play:PlaySetup       : assigncountries                                                   |");
-            System.out.println("| Any                  : quit                                                              |");
-            System.out.println("============================================================================================");
+            LogUtil.log("============================================================================================");
+            LogUtil.log("| PHASE                : command         command arguments                                 |");
+            LogUtil.log("| Any                  : showmap                                                           |");
+            LogUtil.log("| Play:PlaySetup       : loadmap         <filepath>                                        |");
+            LogUtil.log("| Play:PlaySetup       : gameplayer      -add <player-name>                                |");
+            LogUtil.log("| Play:PlaySetup       : assigncountries                                                   |");
+            LogUtil.log("| Any                  : quit                                                              |");
+            LogUtil.log("============================================================================================");
 
             String l_GameInput = keyboard.nextLine();
             LogUtil.log(l_GameInput);
@@ -257,7 +257,7 @@ public class GameEngine {
                 String[] l_CommandArray = l_GameInput.trim().split(" ");
                 if (l_CommandArray.length > 0) {
                     String l_FirstCommand = l_CommandArray[0].toLowerCase();
-                    System.out.println("firstCommand : " + l_FirstCommand);
+                    LogUtil.log("firstCommand : " + l_FirstCommand);
 
                     switch (l_FirstCommand) {
                         case COMMAND_LOAD_MAP:
@@ -277,7 +277,7 @@ public class GameEngine {
                             break;
 
                         default:
-                            System.out.println("INVALID COMMAND in PlaySetup phase");
+                            LogUtil.log("INVALID COMMAND in PlaySetup phase");
                     }
                 }
             }

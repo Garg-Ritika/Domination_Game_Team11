@@ -28,7 +28,7 @@ public class PostLoad extends Edit {
      */
     @Override
     public void editContinent(String[] p_Command) {
-        System.out.println("editcontinent command received ..... ");
+        LogUtil.log("editcontinent command received ..... ");
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
 
             String l_Tag = p_Command[l_I];
@@ -40,12 +40,10 @@ public class PostLoad extends Edit {
                     int l_ContinentArmyCountInteger = Integer.parseInt(l_ContinentArmyCount);
                     if (MapEditor.getInstance().addContinent(l_ContinentName, l_ContinentArmyCountInteger)) {
                         LogUtil.log("Successfully added continent name: " + l_ContinentName + " army: " + l_ContinentArmyCount + " into the map");
-                        System.out.println("Successfully added continent name: " + l_ContinentName + " army: " + l_ContinentArmyCount + " into the map");
                     }
 
                 } else {
                     LogUtil.log("INCOMPLETE COMMAND");
-                    System.out.println("INCOMPLETE COMMAND ");
                 }
 
             } else if (l_Tag.toLowerCase().startsWith("-remove")) {
@@ -53,11 +51,9 @@ public class PostLoad extends Edit {
                     String l_ContinentName = p_Command[++l_I];
                     if (MapEditor.getInstance().removeContinent(l_ContinentName)) {
                         LogUtil.log("Successfully removed continent name: " + l_ContinentName + " from the map");
-                        System.out.println("Successfully removed continent name: " + l_ContinentName + " from the map");
                     }
                 } else {
                     LogUtil.log("INCOMPLETE COMMAND");
-                    System.out.println("INCOMPLETE COMMAND");
                 }
             }
         }
@@ -71,7 +67,7 @@ public class PostLoad extends Edit {
      */
     @Override
     public void editCountry(String[] p_Command) {
-        System.out.println("editcountry command received ..... ");
+        LogUtil.log("editcountry command received ..... ");
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
             String l_Tag = p_Command[l_I];
             if (l_Tag.toLowerCase().startsWith("-add")) {
@@ -80,12 +76,10 @@ public class PostLoad extends Edit {
                     String l_ContinentName = p_Command[++l_I];
                     if (MapEditor.getInstance().addCountry(l_CountryName, l_ContinentName)) {
                         LogUtil.log("Successfully added country name: " + l_CountryName + " to continent name:  " + l_ContinentName + " into the map");
-                        System.out.println("Successfully added country name: " + l_CountryName + " to continent name:  " + l_ContinentName + " into the map");
                     }
 
                 } else {
                     LogUtil.log("INCOMPLETE COMMAND");
-                    System.out.println("INCOMPLETE COMMAND ");
                 }
 
             } else if (l_Tag.toLowerCase().startsWith("-remove")) {
@@ -93,10 +87,8 @@ public class PostLoad extends Edit {
                     String l_CountryName = p_Command[++l_I];
                     if (MapEditor.getInstance().removeCountryUsingName(l_CountryName)) {
                         LogUtil.log("Successfully removed country name: " + l_CountryName + " from the map");
-                        System.out.println("Successfully removed country name: " + l_CountryName + " from the map");
                     }
                 } else {
-                    System.out.println("INCOMPLETE COMMAND");
                     LogUtil.log("INCOMPLETE COMMAND");
                 }
             }
@@ -111,7 +103,7 @@ public class PostLoad extends Edit {
      */
     @Override
     public void editNeighbour(String[] p_Command) {
-        System.out.println("editneighbor command received ..... ");
+        LogUtil.log("editneighbor command received ..... ");
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
             String p_Tag = p_Command[l_I];
             if (p_Tag.toLowerCase().startsWith("-add")) {
@@ -120,12 +112,10 @@ public class PostLoad extends Edit {
                     String l_NeighbourCountryName = p_Command[++l_I];
                     if (MapEditor.getInstance().addNeighbor(l_CountryName, l_NeighbourCountryName)) {
                         LogUtil.log("Successfully added neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
-                        System.out.println("Successfully added neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
 
                 } else {
                     LogUtil.log("INCOMPLETE COMMAND");
-                    System.out.println("INCOMPLETE COMMAND");
                 }
 
             } else if (p_Tag.toLowerCase().startsWith("-remove")) {
@@ -134,11 +124,9 @@ public class PostLoad extends Edit {
                     String l_NeighbourCountryName = p_Command[++l_I];
                     if (MapEditor.getInstance().removeNeighbor(l_CountryName, l_NeighbourCountryName)) {
                         LogUtil.log("Successfully removed neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
-                        System.out.println("Successfully removed neighbour name " + l_CountryName + " to " + l_NeighbourCountryName + " into the map");
                     }
                 } else {
                     LogUtil.log("INCOMPLETE COMMAND");
-                    System.out.println("INCOMPLETE COMMAND");
                 }
             }
         }
@@ -154,13 +142,12 @@ public class PostLoad extends Edit {
     public void saveMap(String[] p_Command) {
         try {
             if (p_Command.length == 2) {
-                System.out.println("savemap command received ..");
+                LogUtil.log("savemap command received ..");
                 String l_Filename = p_Command[1];
                 File l_MapPath = new File(l_Filename);
                 MapEditor.getInstance().saveMap(l_MapPath);
             } else {
                 LogUtil.log("INCOMPLETE COMMAND");
-                System.out.println("INCOMPLETE COMMAND");
             }
         } catch (IOException p_Io) {
             p_Io.printStackTrace();
@@ -184,12 +171,12 @@ public class PostLoad extends Edit {
             if (p_Command.length == 2) {
                 String l_Filename = p_Command[1];
                 if (!l_Filename.isEmpty()) {
-                    System.out.println("editmap command received ..");
+                    LogUtil.log("editmap command received ..");
                     File l_MapFile = new File(l_Filename);
                     MapEditor.getInstance().editMap(l_MapFile);
                 }
             } else {
-                System.out.println("INCOMPLETE COMMAND, create an in-memory map file from scratch");
+                LogUtil.log("INCOMPLETE COMMAND, create an in-memory map file from scratch");
                 MapEditor.getInstance().editMap(null);
             }
         } catch (IOException p_Io) {
@@ -204,7 +191,7 @@ public class PostLoad extends Edit {
      */
     @Override
     public void validateMap(String[] p_Command) {
-        System.out.println("validatemap command received ...");
+        LogUtil.log("validatemap command received ...");
         MapEditor.getInstance().validateMap();
     }
 
@@ -230,20 +217,10 @@ public class PostLoad extends Edit {
 
 
     /**
-     * Helper method to process "savemap" command
-     */
-    // TODO : review this:
-    public void saveMap() {
-        System.out.println("map has been  saved");
-        //TODO
-        //ge.setPhase(new PlaySetup(ge));
-    }
-
-    /**
      * Goes to next phase after saving the map successfully
      */
     public void next() {
-        System.out.println("must save map");
+        LogUtil.log("must save map");
     }
 
 }

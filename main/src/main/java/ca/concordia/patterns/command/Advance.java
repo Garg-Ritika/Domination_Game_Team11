@@ -58,7 +58,7 @@ public class Advance implements Order {
         String[] listOfRandomCards = {"bomb", "blockade", "airlift", "negotiate"};
         Random r = new Random();
         String randomCard = listOfRandomCards[r.nextInt(listOfRandomCards.length)];
-        System.out.println("advance execute ");
+        LogUtil.log("advance execute ");
 
         if (valid()) {
             if (d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName())) {
@@ -68,7 +68,7 @@ public class Advance implements Order {
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() + d_NumToAdvance);
             } else {
                 // implement a battle
-                System.out.println("in implementing battle astage");
+                LogUtil.log("in implementing battle astage");
                 int l_DefendingArmies = (int) (this.d_Target.getArmyCount() * 0.7); //7
                 int l_AttackingArmies = (int) (this.d_NumToAdvance * 0.6); //15
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
@@ -84,7 +84,7 @@ public class Advance implements Order {
                     this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
                     if (!this.d_Initiator.getD_RandomCardAssigned()) {
                         this.d_Initiator.addNewOrderCard(randomCard);
-                        System.out.println(randomCard + " assigned to player " + d_Initiator);
+                        LogUtil.log(randomCard + " assigned to player " + d_Initiator);
                         this.d_Initiator.setD_RandomCardAssigned(true);
                     }
                 } else {
@@ -117,7 +117,7 @@ public class Advance implements Order {
         if (valid_condition) {
             return true;
         }
-        System.out.println("invalid order");
+        LogUtil.log("invalid order");
         return false;
     }
 
@@ -126,8 +126,9 @@ public class Advance implements Order {
      * the log for which have been saved in log file
      */
     public void printOrder() {
-        // print the order
-        System.out.println();
-        LogUtil.log("");
+        LogUtil.log("Airlift: initiator: " + this.d_Initiator
+                + " source: " + this.d_Source
+                + " target: " + this.d_Target
+                + " number to advance: " + this.d_NumToAdvance);
     }
 }

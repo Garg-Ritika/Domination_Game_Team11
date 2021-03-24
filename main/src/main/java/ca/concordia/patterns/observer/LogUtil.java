@@ -31,7 +31,7 @@ public class LogUtil {
 
             d_LogEntryBuffer.setUpdate(p_Msg);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LogUtil.log(e.getMessage());
         }
     }
 
@@ -57,9 +57,9 @@ public class LogUtil {
             File directoryPath = new File(currentDirectory);
             //List of all files and directories
             String contents[] = directoryPath.list();
-            System.out.println("List of files and directories in the specified directory:");
+            LogUtil.log("List of files and directories in the specified directory:");
             for (int i = 0; i < contents.length; i++) {
-                System.out.println(contents[i]);
+                LogUtil.log(contents[i]);
                 try {
                     if (contents[i].startsWith(LOG_FILE_NAME)) {
                         new File(contents[i]).delete();

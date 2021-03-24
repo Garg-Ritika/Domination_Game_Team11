@@ -40,7 +40,7 @@ public class OrderCreationPhase extends MainPlay {
      * This method moves to next phase - OrderExecutionPhase
      */
     public void next() {
-        System.out.println("--> setting order execution phase ");
+        LogUtil.log("setting order execution phase ");
         d_ge.setPhase(new OrderExecutionPhase(d_ge));
         d_ge.getPhase().executeOrder();
     }
@@ -59,7 +59,7 @@ public class OrderCreationPhase extends MainPlay {
      */
     @Override
     public void createOrder() {
-        System.out.println("--> start of order creation");
+        LogUtil.log("start of order creation");
         for (Player l_Player : d_ge.getListOfPlayers()) {
             boolean l_MaintainLoop = true;
             do {
@@ -71,7 +71,7 @@ public class OrderCreationPhase extends MainPlay {
                 }
             } while (l_MaintainLoop);
         }
-        System.out.println("--> finish of order creating ");
+        LogUtil.log("finish of order creating ");
         next();
     }
 
@@ -91,22 +91,22 @@ public class OrderCreationPhase extends MainPlay {
      * @return false if player's number of armies is 0 or after keyboard.close() is called
      */
     public boolean takeOrder(Player p_Player) {
-        System.out.println("taking order ");
+        LogUtil.log("taking order ");
         Scanner keyboard = new Scanner(System.in);
         boolean l_MaintainLoop = true;
         do {
-            System.out.println("============================================================================================");
-            System.out.println("| Play:MainPlay:Order  : deploy          <country-name> <num-of-armies>                    |");
-            System.out.println("| Play:MainPlay:Order  : advance         <country-from> <country-to> <num-of-armies>       |");
-            System.out.println("| Play:MainPlay:Order  : bomb            <country-name>                                    |");
-            System.out.println("| Play:MainPlay:Order  : blockade        <country-name>                                    |");
-            System.out.println("| Play:MainPlay:Order  : airlift         <source-country> <target-country> <num-of-armies> |");
-            System.out.println("| Play:MainPlay:Order  : negotiate       <player-name>                                     |");
-            System.out.println("| Any                  : showmap                                                           |");
-            System.out.println("| Any                  : quit                                                              |");
-            System.out.println("============================================================================================");
+            LogUtil.log("============================================================================================");
+            LogUtil.log("| Play:MainPlay:Order  : deploy          <country-name> <num-of-armies>                    |");
+            LogUtil.log("| Play:MainPlay:Order  : advance         <country-from> <country-to> <num-of-armies>       |");
+            LogUtil.log("| Play:MainPlay:Order  : bomb            <country-name>                                    |");
+            LogUtil.log("| Play:MainPlay:Order  : blockade        <country-name>                                    |");
+            LogUtil.log("| Play:MainPlay:Order  : airlift         <source-country> <target-country> <num-of-armies> |");
+            LogUtil.log("| Play:MainPlay:Order  : negotiate       <player-name>                                     |");
+            LogUtil.log("| Any                  : showmap                                                           |");
+            LogUtil.log("| Any                  : quit                                                              |");
+            LogUtil.log("============================================================================================");
 
-            System.out.println("deploy, advance, " + p_Player.getOrderCards().toString() + ", quit" + " cards are available for player " + p_Player.getPlayerName());
+            LogUtil.log("deploy, advance, " + p_Player.getOrderCards().toString() + ", quit" + " cards are available for player " + p_Player.getPlayerName());
 
 
             String l_CommandInput = keyboard.nextLine();
@@ -116,7 +116,7 @@ public class OrderCreationPhase extends MainPlay {
                 //If end the game if quit is passed during the order creation, move to another player..
                 if (p_Player.getNoOfArmies() > 0) {
                     LogUtil.log("Cannot quit as not all armies are deployed");
-                    System.out.println("Cannot quit as not all armies are deployed");
+                    LogUtil.log("Cannot quit as not all armies are deployed");
                 } else {
                     return false;
                 }
@@ -126,7 +126,7 @@ public class OrderCreationPhase extends MainPlay {
                 String[] l_CommandArray = l_CommandInput.trim().split(" ");
                 if (l_CommandArray.length > 0) {
                     String l_FirstCommand = l_CommandArray[0].toLowerCase();
-                    System.out.println("firstCommand : " + l_FirstCommand);
+                    LogUtil.log("firstCommand : " + l_FirstCommand);
 
                     switch (l_FirstCommand) {
                         case COMMAND_DEPLOY:
@@ -158,7 +158,7 @@ public class OrderCreationPhase extends MainPlay {
                             break;
 
                         default:
-                            System.out.println("INVALID COMMAND in MainPlay:Order phase");
+                            LogUtil.log("INVALID COMMAND in MainPlay:Order phase");
                     }
                 }
             }
@@ -175,7 +175,7 @@ public class OrderCreationPhase extends MainPlay {
      * @param p_Command actions for the player e.g. deploy
      */
     private void processDeployCommand(Player p_Player, String[] p_Command) {
-        System.out.println("deploy  command received ..... ");
+        LogUtil.log("deploy  command received ..... ");
         try {
             if (p_Command.length == 3) {
                 String l_CountryName = p_Command[1];
@@ -189,7 +189,6 @@ public class OrderCreationPhase extends MainPlay {
                     LogUtil.log("ORDER CREATED: " + Arrays.toString(p_Command));
                 } else {
                     LogUtil.log("ORDER FAILED: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
-                    System.out.println("ORDER FAILED: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
                 }
             }
         } catch (Exception l_E) {
@@ -205,7 +204,7 @@ public class OrderCreationPhase extends MainPlay {
      * @param p_Command actions for the player e.g. deploy
      */
     private void processAdvanceCommand(Player p_Player, String[] p_Command) {
-        System.out.println("advance command received ..");
+        LogUtil.log("advance command received ..");
         try {
             if (p_Command.length == 4) {
                 String l_CountryNameSource = p_Command[1];
@@ -217,17 +216,12 @@ public class OrderCreationPhase extends MainPlay {
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (p_Player.getIsNegotiatedPlayer() == true
                         && l_TerritoryTarget.getOwner().getIsNegotiatedPlayer() == true) {
-                    System.out.println(p_Player + " cannot attack the target country");
+                    LogUtil.log(p_Player + " cannot attack the target country");
                 } else {
-                /*if (l_ArmyCountOfPlayer >= l_NumInt) {
-                    p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);*/
                     Order o = new Advance(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
                     p_Player.createOrder(o);
-                    System.out.println(p_Player.getOrderCards().toString() + " cards are available for player " + p_Player.getPlayerName());
-                /*} else {
-                    LogUtil.log("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
-                    System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to advance!");
-                }*/
+                    LogUtil.log(p_Player.getOrderCards().toString() + " cards are available for player " + p_Player.getPlayerName());
+
                 }
             }
         } catch (Exception l_E) {
@@ -243,21 +237,21 @@ public class OrderCreationPhase extends MainPlay {
      * @param p_Command actions for the player e.g. deploy
      */
     private void processBombCommand(Player p_Player, String[] p_Command) {
-        System.out.println("bomb command received ..");
+        LogUtil.log("bomb command received ..");
         try {
             if (p_Command.length == 2) {
                 String l_CountryNameSource = p_Command[1];
                 Territory l_TerritoryTarget = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
                 if (p_Player.getIsNegotiatedPlayer() == true
                         && l_TerritoryTarget.getOwner().getIsNegotiatedPlayer() == true) {
-                    System.out.println(p_Player + " cannot attack the target country");
+                    LogUtil.log(p_Player + " cannot attack the target country");
                 } else {
                     if (p_Player.getOrderCards().contains("bomb")) {
                         p_Player.removeNewOrderCard("bomb");
                         Order o = new Bomb(p_Player, l_TerritoryTarget);
                         p_Player.createOrder(o);
                     } else {
-                        System.out.println("bomb order card doesnot exist");
+                        LogUtil.log("bomb order card doesnot exist");
                     }
                 }
             }
@@ -274,7 +268,7 @@ public class OrderCreationPhase extends MainPlay {
      * @param p_Command actions for the player e.g. deploy
      */
     private void processBlockadeCommand(Player p_Player, String[] p_Command) {
-        System.out.println("blockade command received ..");
+        LogUtil.log("blockade command received ..");
         try {
             if (p_Command.length == 2) {
                 String l_CountryNameSource = p_Command[1];
@@ -284,7 +278,7 @@ public class OrderCreationPhase extends MainPlay {
                     Order o = new Blockade(p_Player, l_TerritorySource);
                     p_Player.createOrder(o);
                 } else {
-                    System.out.println("blockade order card doesnot exist");
+                    LogUtil.log("blockade order card doesnot exist");
                 }
             }
 
@@ -302,7 +296,7 @@ public class OrderCreationPhase extends MainPlay {
      * @param p_Command actions for the player e.g. deploy
      */
     private void processAirliftCommand(Player p_Player, String[] p_Command) {
-        System.out.println("airlift command received ..");
+        LogUtil.log("airlift command received ..");
         try {
             if (p_Command.length == 4) {
                 String l_CountryNameSource = p_Command[1];
@@ -316,7 +310,7 @@ public class OrderCreationPhase extends MainPlay {
                     Order o = new Airlift(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt);
                     p_Player.createOrder(o);
                 } else {
-                    System.out.println("airlift order card doesnot exist");
+                    LogUtil.log("airlift order card doesnot exist");
                 }
 
             }
@@ -333,7 +327,7 @@ public class OrderCreationPhase extends MainPlay {
      * @param p_Command actions for the player e.g. deploy
      */
     private void processDiplomacyCommand(Player p_Player, String[] p_Command) {
-        System.out.println("diplomacy command received ..");
+        LogUtil.log("diplomacy command received ..");
         try {
             if (p_Command.length == 2) {
                 String l_PlayerName = p_Command[1];
@@ -344,7 +338,7 @@ public class OrderCreationPhase extends MainPlay {
                             Order o = new Diplomacy(p_Player, l_GamePlayer);
                             p_Player.createOrder(o);
                         } else {
-                            System.out.println("negotiate order card doesnot exist");
+                            LogUtil.log("negotiate order card doesnot exist");
                         }
                     }
                 }
