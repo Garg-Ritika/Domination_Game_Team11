@@ -17,7 +17,7 @@ public class ValidateMapTest {
     ValidateMap d_ValidateMap;
 
     /**
-     * This is the method to be run before test method. It initializes the ValidateMap lass object
+     * This is the method to be run before test method. It initializes the ValidateMap class object
      */
     @Before
     public void before() {

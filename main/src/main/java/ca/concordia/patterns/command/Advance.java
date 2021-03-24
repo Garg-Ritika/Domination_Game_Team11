@@ -51,7 +51,7 @@ public class Advance implements Order {
      * (target). If the target territory belongs to the current player, the armies are moved to the target
      * territory. If the target territory belongs to another player, an attack happens between the two
      * territories.
-     * If attack happens successfulyy, update owner to initiator
+     * If attack happens successfully, update owner to initiator
      * Here both the source and the target Territories are Receivers
      */
     public void execute() {
