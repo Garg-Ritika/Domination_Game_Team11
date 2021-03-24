@@ -48,6 +48,7 @@ public class Airlift implements Order {
             // then just move the armies to the target Territory
             d_Target.setArmyCount(d_Target.getArmyCount() + d_NumToAirlift);
             d_Source.setArmyCount(d_Source.getArmyCount() - d_NumToAirlift);
+            System.out.println(d_NumToAirlift+" has been moved");
         } else {
             System.out.println("invalid order");
         }
