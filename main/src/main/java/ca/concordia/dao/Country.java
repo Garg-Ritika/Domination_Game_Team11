@@ -4,7 +4,7 @@ package ca.concordia.dao;
 /**
  * This class contains details of the country
  * <p>
- * Details of maps can be found at : http://domination.sourceforge.net/makemaps.shtml
+ * Details of maps can be found at : <a href = "http://domination.sourceforge.net/makemaps.shtml">http://domination.sourceforge.net/makemaps.shtml</a>
  */
 public class Country extends Territory {
 
@@ -31,7 +31,6 @@ public class Country extends Territory {
         this.d_Name = p_Name;
         this.d_X = p_X;
         this.d_Y = p_Y;
-
     }
 
     /**

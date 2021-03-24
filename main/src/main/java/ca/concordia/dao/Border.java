@@ -4,8 +4,8 @@ package ca.concordia.dao;
 import java.util.List;
 
 /**
- * This class contains details of the border
- * //check details : http://domination.sourceforge.net/makemaps.shtml
+ * This class contains details of the border <br>
+ * Details: <a href = "http://domination.sourceforge.net/makemaps.shtml"> Make Maps</a> <br>
  * 1 2 3 38  : the first number is the number of country and others are what country it is adjacent too
  */
 public class Border {
@@ -30,7 +30,6 @@ public class Border {
      * @return CountryId
      */
     public int getCountryId() {
-
         return d_CountryId;
     }
 
@@ -65,7 +64,7 @@ public class Border {
      * This method adds the NeighbourCountryID to the Neighbours list of the country
      *
      * @param p_NeighbourCountryId Neighbours Country ID
-     * @return true if neighbourCountryId is succesfully added to lit of Neighbours
+     * @return true if neighbourCountryId is successfully added to lit of Neighbours
      */
     public boolean addNeighbour(int p_NeighbourCountryId) {
         getNeighbours().add(p_NeighbourCountryId);

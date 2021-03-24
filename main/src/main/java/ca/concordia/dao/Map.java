@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Map class contains the details of the:
- * 1.list of continents in a map.
- * 2.list of countries in a map.
- * 3.list of borders in a map
+ * Map class contains the details of the: <br>
+ * 1.list of continents in a map. <br>
+ * 2.list of countries in a map. <br>
+ * 3.list of borders in a map. <br>
  * The main feature of this class in that it checks the adjacency between the countries which is required in Graph class
  */
 public class Map {
@@ -17,9 +17,9 @@ public class Map {
     private List<Border> d_ListOfBorders;
 
     /**
-     * Constructor generates  an empty list with an initial capacity of ten for storing :
-     * 1.Continents
-     * 2.Countries
+     * Constructor generates  an empty list with an initial capacity of ten for storing: <br>
+     * 1.Continents. <br>
+     * 2.Countries. <br>
      * 3.Borders.
      */
     public Map() {
@@ -29,8 +29,8 @@ public class Map {
     }
 
     /**
-     * This method shows the details of continents present in a map.
-     * additionally, returns the list of continents present in a map.
+     * This method shows the details of continents present in a map. <br>
+     * Additionally, returns the list of continents present in a map.
      *
      * @return d_ListOfContinents the list of continents
      */
@@ -48,7 +48,7 @@ public class Map {
     }
 
     /**
-     * This method shows the details of countries present in a map.
+     * This method shows the details of countries present in a map. <br>
      * Also, returns the list of countries present in a map.
      *
      * @return d_ListOfCountries the list of continents
@@ -67,7 +67,7 @@ public class Map {
     }
 
     /**
-     * This method shows the details of borders present in a map.
+     * This method shows the details of borders present in a map. <br>
      * It returns the list of borders present in a map.
      *
      * @return d_ListOfBorders the list of borders.
@@ -85,6 +85,11 @@ public class Map {
         this.d_ListOfBorders = p_ListOfBorders;
     }
 
+    /**
+     * This getter method is used to find the continent name corresponding to argument passed as territory
+     * @param name Territory name is passed as an argument
+     * @return l_Continent
+     */
     public Territory getTerritoryByName(String name) {
         System.out.println(" --> find terrority named : " + name);
         for (Continent l_Continent : d_ListOfContinents) {
@@ -123,6 +128,11 @@ public class Map {
         return l_Graph;
     }
 
+    /**
+     * This getter method checks for the passed Continent Name in the Array List of Continents and saves the corresponding continent ID for the matching strings.
+     * @param p_ContinentName It is of type string and is used to compare the Continent name from the list of Continents
+     * @return l_Graph ContinentSubGraph is returned in l_Graph
+     */
     public Graph getContinentSubGraph(String p_ContinentName) {
         List<Integer> l_TempCountryIDList = new ArrayList<>();
         for (Continent l_Continent : this.getListOfContinents()) {

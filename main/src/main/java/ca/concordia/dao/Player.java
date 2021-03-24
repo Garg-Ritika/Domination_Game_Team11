@@ -236,7 +236,10 @@ public class Player {
         return d_ListOfContinents.remove(p_Continent);
     }
 
-
+    /**
+     * This method is used to create the order of the commands by adding target, source and number of armies in the list
+     * @param o An object of class Order is passed as an argument which will be used to add a specific passed order in the list.
+     */
     public void createOrder(Order o) {
         d_ListOfOrders.add(o);
     }
@@ -262,26 +265,4 @@ public class Player {
         System.out.println("--> there are no order for player: " + getPlayerName());
         return null;
     }
-
-    /*
-     public boolean createOrder(List<Territory> map, List<Player> players) {
-        //…
-        orders_list.add(new Deploy(this, target, num));
-        orders_list.add(new command.Advance(this, source, target, num));
-        orders_list.add(new Pacify(this, player));
-        //…
-        return  false;
-    }
-
-    public Order getNextOrder() {
-        if (this.orders_list.isEmpty()){
-            to_return = this.orders_list.get(0);
-            this.orders_list.remove(0);
-            return to_return;
-        }else
-        return null;
-    }
-     */
-
-
 }
