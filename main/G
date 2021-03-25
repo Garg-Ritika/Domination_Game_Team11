@@ -1,0 +1,11 @@
+; map:G
+; created by team-11 
+
+[continents]
+asia 1 RED 
+africa 2 RED 
+
+[countries]
+1 india 1 0 0 
+
+[borders]

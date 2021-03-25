@@ -9,11 +9,19 @@ import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * this class tests the methods of diplomacy class
+ * using assert method
+ */
 public class DiplomacyTest {
     Diplomacy d_Diplomacy;
     Player d_PlayerOne;
     Player d_PlayerTwo;
 
+    /**
+     * This is the method that runs before every test method in this class
+     * and initializes the objects
+     */
     @Before
     public void init() {
 
