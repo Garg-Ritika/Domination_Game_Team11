@@ -12,22 +12,21 @@ import ca.concordia.patterns.observer.LogUtil;
  */
 public class Deploy implements Order {
 
-    Territory target_territory;
-    int to_deploy;
-    Player initiator;
+    Territory d_Target_territory;
+    int d_To_deploy;
+    Player d_Initiator;
 
     /**
      * This is the constructor that takes player and target territory object and no of armies ot be deployed as argument
      * encapsulating all necessary data to execute the command
-     *
-     * @param initiator        player who runs the command
-     * @param target_territory the territory on which armies are to be deployed
-     * @param to_deploy        no of armies to be deployed
+     *  @param p_Initiator        player who runs the command
+     * @param p_Target_territory the territory on which armies are to be deployed
+     * @param p_To_deploy        no of armies to be deployed
      */
-    public Deploy(Player initiator, Territory target_territory, int to_deploy) {
-        this.target_territory = target_territory;
-        this.initiator = initiator;
-        this.to_deploy = to_deploy;
+    public Deploy(Player p_Initiator, Territory p_Target_territory, int p_To_deploy) {
+        this.d_Target_territory = p_Target_territory;
+        this.d_Initiator = p_Initiator;
+        this.d_To_deploy = p_To_deploy;
     }
 
     /**
@@ -39,10 +38,10 @@ public class Deploy implements Order {
         LogUtil.log("deploy execute ");
         if (valid()) {
             // behavior of the concrete command
-            int existingArmy = this.target_territory.getArmyCount();
-            this.initiator.setNoOfArmies(this.initiator.getNoOfArmies() - to_deploy);
-            this.target_territory.setArmyCount(existingArmy + to_deploy);
-            LogUtil.log("deploying " + to_deploy + " to " + target_territory.getName());
+            int l_ExistingArmy = this.d_Target_territory.getArmyCount();
+            this.d_Initiator.setNoOfArmies(this.d_Initiator.getNoOfArmies() - d_To_deploy);
+            this.d_Target_territory.setArmyCount(l_ExistingArmy + d_To_deploy);
+            LogUtil.log("deploying " + d_To_deploy + " to " + d_Target_territory.getName());
         }
     }
 
@@ -54,7 +53,7 @@ public class Deploy implements Order {
     public boolean valid() {
         LogUtil.log("--> deploy valid ");
 
-        if (target_territory.getOwner().getPlayerName().equalsIgnoreCase(initiator.getPlayerName())) {
+        if (d_Target_territory.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName())) {
             // the target territory must belong to the player that created the order
             return true;
         }
@@ -68,7 +67,7 @@ public class Deploy implements Order {
      */
     public void printOrder() {
 
-        LogUtil.log("Deploy order issued by player " + this.initiator.getPlayerName());
-        LogUtil.log("Deploy " + this.to_deploy + " to " + this.target_territory.getName());
+        LogUtil.log("Deploy order issued by player " + this.d_Initiator.getPlayerName());
+        LogUtil.log("Deploy " + this.d_To_deploy + " to " + this.d_Target_territory.getName());
     }
 }

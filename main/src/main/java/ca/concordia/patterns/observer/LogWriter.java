@@ -42,23 +42,21 @@ public class LogWriter implements Observer {
     public void log(String p_Message) {
         try {
 
+            FileHandler l_FH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 1, true);
 
-            FileHandler fH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 1, true);
-
-            LOGGER.addHandler(fH);
+            LOGGER.addHandler(l_FH);
 
             // to avoid printing the log lines in console but only in log file.
             LOGGER.setUseParentHandlers(false);
 
-
             // configure simple format
-            SimpleFormatter sf = new SimpleFormatter();
-            fH.setFormatter(sf);
+            SimpleFormatter l_Sf = new SimpleFormatter();
+            l_FH.setFormatter(l_Sf);
 
             // everything is info log be default
             LOGGER.info(p_Message);
 
-            fH.close();
+            l_FH.close();
 
 
         } catch (IOException io) {
@@ -76,17 +74,17 @@ public class LogWriter implements Observer {
         try {
 
 
-            FileHandler fH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 1, true);
+            FileHandler l_FH = new FileHandler(LogUtil.LOG_FILE_NAME, FILE_SIZE, 1, true);
 
-            LOGGER.addHandler(fH);
+            LOGGER.addHandler(l_FH);
 
             // to avoid printing the log lines in console but only in log file.
             LOGGER.setUseParentHandlers(false);
 
 
             // configure simple format
-            SimpleFormatter sf = new SimpleFormatter();
-            fH.setFormatter(sf);
+            SimpleFormatter l_Sf = new SimpleFormatter();
+            l_FH.setFormatter(l_Sf);
 
             // everything is info log be default
             LOGGER.info(p_Message);

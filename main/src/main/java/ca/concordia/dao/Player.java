@@ -44,10 +44,10 @@ public class Player {
     /**
      * to set the boolean value if random card is assigned
      *
-     * @param d_RandomCardAssigned value to be assigned
+     * @param p_RandomCardAssigned value to be assigned
      */
-    public void setD_RandomCardAssigned(boolean d_RandomCardAssigned) {
-        this.d_RandomCardAssigned = d_RandomCardAssigned;
+    public void setD_RandomCardAssigned(boolean p_RandomCardAssigned) {
+        this.d_RandomCardAssigned = p_RandomCardAssigned;
     }
 
     /**
@@ -240,10 +240,10 @@ public class Player {
     /**
      * This method is used to create the order of the commands by adding target, source and number of armies in the list
      *
-     * @param o An object of class Order is passed as an argument which will be used to add a specific passed order in the list.
+     * @param p_O An object of class Order is passed as an argument which will be used to add a specific passed order in the list.
      */
-    public void createOrder(Order o) {
-        d_ListOfOrders.add(o);
+    public void createOrder(Order p_O) {
+        d_ListOfOrders.add(p_O);
     }
 
     /**

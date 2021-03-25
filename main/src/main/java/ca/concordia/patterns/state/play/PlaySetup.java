@@ -11,8 +11,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class is used to set the game play by loading the map, creating the players and assigning respective
+ * countries and adding and removing players as and when required
+ *
+ */
 public class PlaySetup extends Play {
 
+    /**
+     * Constructor that takes GameEngine object as argument
+     *
+     * @param p_ge GameEngine object
+     */
     public PlaySetup(GameEngine p_ge) {
         //super(p_ge,p_map);
         super(p_ge);
@@ -46,6 +56,10 @@ public class PlaySetup extends Play {
         }
     }
 
+    /**
+     * This method is used to set the players that is add the players to move to game play commands
+     * @param p_Command setPlayers command
+     */
     @Override
     public void setPlayers(String[] p_Command) {
         LogUtil.log("gameplayer command received ..... ");
@@ -117,6 +131,11 @@ public class PlaySetup extends Play {
     }
 
 
+    /**
+     * This method checks if the map is loaded successfully and if the no of players added is between 3 to 5
+     * then move to assigning countries to players
+     *
+     */
     @Override
     public void assignCountries() {
         LogUtil.log("assigncountries command received..");
@@ -147,9 +166,10 @@ public class PlaySetup extends Play {
 
 
     /**
-     * This method assigns countries to players
+     * This method assigns countries to players After the map is loaded and the players are created based on the no of players and
+     * the countries in the map, countries are assigned to each player
      *
-     * @return boolean
+     * @return boolean if the countries are assigned successfully
      */
     private boolean assignCountriesToPlayers() {
         LogUtil.log("assign countries to players ..");

@@ -4,8 +4,15 @@ import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.Phase;
 
+/**
+ * This class is used to give output when the game has ended
+ */
 public class End extends Phase {
 
+    /**
+     * This constructor takes Game Engine object as parameter
+     * @param p_ge game Engine object
+     */
     public End(GameEngine p_ge) {
         super(p_ge);
     }
@@ -75,6 +82,9 @@ public class End extends Phase {
         printInvalidCommandMessage();
     }
 
+    /**
+     * This method prints the message once the game has ended and exits
+     */
     @Override
     public void endGame() {
         LogUtil.log("Game has ended ! ");

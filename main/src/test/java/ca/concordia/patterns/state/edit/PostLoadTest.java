@@ -26,13 +26,13 @@ public class PostLoadTest {
      */
     @Test
     public void editContinent() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
-        PostLoad po = new PostLoad(d_ge);
-        po.saveMap(d_str1);
-        String ex = "INCOMPLETE COMMAND";
-        assertEquals(true, outContent.toString().contains(ex));
+        PostLoad l_Po = new PostLoad(d_ge);
+        l_Po.saveMap(d_str1);
+        String l_Ex = "INCOMPLETE COMMAND";
+        assertEquals(true, l_OutContent.toString().contains(l_Ex));
 
     }
 
@@ -44,10 +44,10 @@ public class PostLoadTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        PostLoad po = new PostLoad(d_ge);
-        po.saveMap(d_str);
-        String ex = "INCOMPLETE COMMAND" + System.lineSeparator();
-        assertEquals(ex, outContent.toString());
+        PostLoad l_Po = new PostLoad(d_ge);
+        l_Po.saveMap(d_str);
+        String l_Ex = "INCOMPLETE COMMAND" + System.lineSeparator();
+        assertEquals(l_Ex, outContent.toString());
     }
 
     /**
@@ -55,15 +55,15 @@ public class PostLoadTest {
      */
     @Test
     public void editMap() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
-        PostLoad po = new PostLoad(d_ge);
-        po.editMap(d_str2);
+        PostLoad l_Po = new PostLoad(d_ge);
+        l_Po.editMap(d_str2);
 
-        String ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" + System.lineSeparator() +
+        String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" + System.lineSeparator() +
                 " No continents available in the map " + System.lineSeparator();
-        assertEquals(ex, outContent.toString());
+        assertEquals(l_Ex, l_OutContent.toString());
 
     }
 
@@ -72,15 +72,15 @@ public class PostLoadTest {
      */
     @Test
     public void validateMap() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
-        PostLoad po = new PostLoad(d_ge);
-        po.validateMap(d_str3);
+        PostLoad l_Po = new PostLoad(d_ge);
+        l_Po.validateMap(d_str3);
 
-        String ex = "validatemap command received ..." + System.lineSeparator() +
+        String l_Ex = "validatemap command received ..." + System.lineSeparator() +
                 " No continents available in the map " + System.lineSeparator();
-        assertEquals(ex, outContent.toString());
+        assertEquals(l_Ex, l_OutContent.toString());
     }
 
 

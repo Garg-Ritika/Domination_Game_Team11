@@ -39,10 +39,4 @@ public class GameEngineTest {
     }
 
 
-    /*
-     TODO: merge any test from playeractions by looking at old commits
-
-     */
-
-
 }

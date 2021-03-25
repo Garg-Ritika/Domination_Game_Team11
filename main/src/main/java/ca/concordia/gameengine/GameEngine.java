@@ -232,9 +232,9 @@ public class GameEngine {
     /**
      * This method will be called when player selected option "play"
      *
-     * @param keyboard
+     * @param p_Keyboard
      */
-    void startMainPlay(Scanner keyboard) {
+    void startMainPlay(Scanner p_Keyboard) {
         boolean l_MaintainLoop = true;
         do {
             LogUtil.log("============================================================================================");
@@ -246,7 +246,7 @@ public class GameEngine {
             LogUtil.log("| Any                  : quit                                                              |");
             LogUtil.log("============================================================================================");
 
-            String l_GameInput = keyboard.nextLine();
+            String l_GameInput = p_Keyboard.nextLine();
             LogUtil.log(l_GameInput);
 
             if ("quit".equalsIgnoreCase(l_GameInput)) {

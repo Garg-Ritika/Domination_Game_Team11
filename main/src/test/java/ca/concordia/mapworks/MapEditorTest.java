@@ -47,7 +47,7 @@ public class MapEditorTest {
     /**
      * Test mapeditor functions
      *
-     * @throws IOException
+     * @throws IOException throws IO exception
      */
     @Test
     public void testMapEditor() throws IOException {

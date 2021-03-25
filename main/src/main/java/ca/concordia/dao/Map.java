@@ -88,27 +88,27 @@ public class Map {
     }
 
     /**
-     * This getter method is used to find the continent name corresponding to argument passed as territory
+     * This getter method is used to find the continent p_Name corresponding to argument passed as territory
      *
-     * @param name Territory name is passed as an argument
+     * @param p_Name Territory p_Name is passed as an argument
      * @return l_Continent
      */
-    public Territory getTerritoryByName(String name) {
-        LogUtil.log(" --> find terrority named : " + name);
+    public Territory getTerritoryByName(String p_Name) {
+        LogUtil.log(" --> find terrority named : " + p_Name);
         for (Continent l_Continent : d_ListOfContinents) {
-            if (name.equalsIgnoreCase(l_Continent.getName())) {
-                LogUtil.log("--> found continent : " + name);
+            if (p_Name.equalsIgnoreCase(l_Continent.getName())) {
+                LogUtil.log("--> found continent : " + p_Name);
                 return l_Continent;
             }
         }
 
         for (Country l_Country : d_ListOfCountries) {
-            if (name.equalsIgnoreCase(l_Country.getName())) {
-                LogUtil.log("--> found continent : " + name);
+            if (p_Name.equalsIgnoreCase(l_Country.getName())) {
+                LogUtil.log("--> found continent : " + p_Name);
                 return l_Country;
             }
         }
-        LogUtil.log("Error : unable to find " + name + " in the map ");
+        LogUtil.log("Error : unable to find " + p_Name + " in the map ");
         return null;
     }
 

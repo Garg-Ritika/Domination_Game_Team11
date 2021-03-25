@@ -92,7 +92,7 @@ public class OrderCreationPhase extends MainPlay {
      */
     public boolean takeOrder(Player p_Player) {
         LogUtil.log("taking order ");
-        Scanner keyboard = new Scanner(System.in);
+        Scanner l_Keyboard = new Scanner(System.in);
         boolean l_MaintainLoop = true;
         do {
             LogUtil.log("============================================================================================");
@@ -109,7 +109,7 @@ public class OrderCreationPhase extends MainPlay {
             LogUtil.log("deploy, advance, " + p_Player.getOrderCards().toString() + ", quit" + " cards are available for player " + p_Player.getPlayerName());
 
 
-            String l_CommandInput = keyboard.nextLine();
+            String l_CommandInput = l_Keyboard.nextLine();
             LogUtil.log(l_CommandInput);
 
             if ("quit".equalsIgnoreCase(l_CommandInput)) {
@@ -163,7 +163,7 @@ public class OrderCreationPhase extends MainPlay {
                 }
             }
         } while (l_MaintainLoop);
-        keyboard.close();
+        l_Keyboard.close();
         return false;
     }
 

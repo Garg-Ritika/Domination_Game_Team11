@@ -14,22 +14,22 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class PreloadTest {
     GameEngine d_ge = new GameEngine();
-    String[] str = {"editContinent"};
-    String[] str1 = {"editNeighbour"};
-    String[] str2 = {"editMap"};
+    String[] d_Str = {"editContinent"};
+    String[] d_Str1 = {"editNeighbour"};
+    String[] d_Str2 = {"editMap"};
 
     /**
      * This is the test method that checks editContinent method's expected and actual output
      */
     @Test
     public void editContinent() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
-        Preload pr = new Preload(d_ge);
-        pr.editContinent(str);
-        String ex = "Invalid command in statePreload" + System.lineSeparator();
-        assertEquals(ex, outContent.toString());
+        Preload l_Pr = new Preload(d_ge);
+        l_Pr.editContinent(d_Str);
+        String l_Ex = "Invalid command in statePreload" + System.lineSeparator();
+        assertEquals(l_Ex, l_OutContent.toString());
     }
 
     /**
@@ -38,13 +38,13 @@ public class PreloadTest {
 
     @Test
     public void editNeighbour() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
-        Preload pr = new Preload(d_ge);
-        pr.editNeighbour(str1);
-        String ex = "Invalid command in statePreload" + System.lineSeparator();
-        assertEquals(ex, outContent.toString());
+        Preload l_Pr = new Preload(d_ge);
+        l_Pr.editNeighbour(d_Str1);
+        String l_Ex = "Invalid command in statePreload" + System.lineSeparator();
+        assertEquals(l_Ex, l_OutContent.toString());
     }
 
     /**
@@ -52,14 +52,14 @@ public class PreloadTest {
      */
     @Test
     public void editMap() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
-        Preload pr = new Preload(d_ge);
-        pr.editMap(str2);
-        String ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" + System.lineSeparator() +
+        Preload l_Pr = new Preload(d_ge);
+        l_Pr.editMap(d_Str2);
+        String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" + System.lineSeparator() +
                 " No continents available in the map " + System.lineSeparator();
-        assertEquals(ex, outContent.toString());
+        assertEquals(l_Ex, l_OutContent.toString());
     }
 
 }

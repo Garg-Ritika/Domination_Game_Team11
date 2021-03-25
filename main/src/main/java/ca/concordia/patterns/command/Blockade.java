@@ -38,10 +38,10 @@ public class Blockade implements Order {
 
         if (valid()) {
             // behavior of the concrete command
-            Player neutralPlayer = new Player("Neutral", Integer.MAX_VALUE);
+            Player l_NeutralPlayer = new Player("Neutral", Integer.MAX_VALUE);
             this.d_TargetTerritory.setArmyCount(this.d_TargetTerritory.getArmyCount() * 3);
             //how to make this territory neutral?
-            this.d_TargetTerritory.setOwner(neutralPlayer);
+            this.d_TargetTerritory.setOwner(l_NeutralPlayer);
             this.d_Initiator.getListOfCountries().remove(this.d_TargetTerritory);
             LogUtil.log(this.d_TargetTerritory + " has been neutralized");
         }
@@ -66,7 +66,7 @@ public class Blockade implements Order {
      * the log for which have been saved in log file
      */
     public void printOrder() {
-        LogUtil.log("Airlift: initiator: " + this.d_Initiator
+        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
                 + " target: " + this.d_TargetTerritory);
 
     }

@@ -51,13 +51,13 @@ public class Advance implements Order {
      * (target). If the target territory belongs to the current player, the armies are moved to the target
      * territory. If the target territory belongs to another player, an attack happens between the two
      * territories.
-     * If attack happens successfully, update owner to initiator
+     * If attack happens successfully, update owner to d_Initiator
      * Here both the source and the target Territories are Receivers
      */
     public void execute() {
-        String[] listOfRandomCards = {"bomb", "blockade", "airlift", "negotiate"};
-        Random r = new Random();
-        String randomCard = listOfRandomCards[r.nextInt(listOfRandomCards.length)];
+        String[] l_ListOfRandomCards = {"bomb", "blockade", "airlift", "negotiate"};
+        Random l_R = new Random();
+        String randomCard = l_ListOfRandomCards[l_R.nextInt(l_ListOfRandomCards.length)];
         LogUtil.log("advance execute ");
 
         if (valid()) {
@@ -79,7 +79,7 @@ public class Advance implements Order {
 
                     this.d_Target.setOwner(d_Initiator);
                     this.d_Target.setArmyCount(this.d_Source.getArmyCount() - l_DefendingArmies);
-                    //removing the territory from the listOfRandomCards and adding to the player who won it
+                    //removing the territory from the l_ListOfRandomCards and adding to the player who won it
                     this.d_Initiator.addNewCountry((Country) this.d_Target);
                     this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
                     if (!this.d_Initiator.getD_RandomCardAssigned()) {
@@ -97,7 +97,7 @@ public class Advance implements Order {
     /**
      * This method will check if the given inputs are a valid input for Advance Card
      * check if countrynamefrom exists
-     * check if countryname has the same owner as the initiator of this commad
+     * check if countryname has the same owner as the d_Initiator of this commad
      * check if countrynamefrom has  greater than or equal to numarmies being advanced..
      * check if countrynameto is there
      * check if countrynameto exists
@@ -105,16 +105,16 @@ public class Advance implements Order {
      * @return true/false
      */
     public boolean valid() {
-        boolean valid_condition = false;
+        boolean L_Valid_condition = false;
 
         if ((d_Initiator.getListOfCountries().contains(d_Source))
                 && (d_Source.getArmyCount() >= d_NumToAdvance)
                 && (d_Source != null)
                 && (d_Target != null)) {
-            valid_condition = true;
+            L_Valid_condition = true;
         }
 
-        if (valid_condition) {
+        if (L_Valid_condition) {
             return true;
         }
         LogUtil.log("invalid order");
@@ -126,7 +126,7 @@ public class Advance implements Order {
      * the log for which have been saved in log file
      */
     public void printOrder() {
-        LogUtil.log("Airlift: initiator: " + this.d_Initiator
+        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
                 + " source: " + this.d_Source
                 + " target: " + this.d_Target
                 + " number to advance: " + this.d_NumToAdvance);

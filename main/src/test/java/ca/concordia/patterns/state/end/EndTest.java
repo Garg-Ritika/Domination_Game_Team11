@@ -8,6 +8,9 @@ import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * This class checks the method implementation of End class
+ */
 public class EndTest {
 
     GameEngine d_ge = new GameEngine();
@@ -18,13 +21,13 @@ public class EndTest {
      */
     @Test
     public void editContinent() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
-        End et = new End(d_ge);
-        et.editContinent(d_str);
-        String ex = "Invalid command in state";
-        assertEquals(true, outContent.toString().contains(ex));
+        End l_Et = new End(d_ge);
+        l_Et.editContinent(d_str);
+        String l_Ex = "Invalid command in state";
+        assertEquals(true, l_OutContent.toString().contains(l_Ex));
 
     }
 
@@ -33,13 +36,13 @@ public class EndTest {
      */
     @Test
     public void endGame() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
         End et = new End(d_ge);
         // TODO: hard to test the endgame when the process itlsef is being self-killed using System.exit()
         //et.endGame();
         String ex = "Game has ended !";
-        //assertEquals(true, outContent.toString().contains(ex));
+        //assertEquals(true, l_OutContent.toString().contains(ex));
     }
 }

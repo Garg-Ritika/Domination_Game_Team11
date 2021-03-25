@@ -8,11 +8,17 @@ import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * This class checks the method implementation of Play setup class
+ */
 public class PlaySetupTest {
     GameEngine d_ge = new GameEngine();
     String[] d_str = {"loadmap", "abc "};
     String[] d_str1 = {"gameplayer", "-add", "player1"};
 
+    /**
+     * This method is used to test if map is loaded successfully before starting the game play
+     */
     @Test
     public void loadMap() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -25,6 +31,9 @@ public class PlaySetupTest {
 
     }
 
+    /**
+     * This method is used to test if payers are set successfully
+     */
     @Test
     public void setPlayers() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -37,6 +46,9 @@ public class PlaySetupTest {
 
     }
 
+    /**
+     * This method is used to test if countries are assigned successfully
+     */
     @Test
     public void assignCountries() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();

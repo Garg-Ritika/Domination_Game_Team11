@@ -8,6 +8,9 @@ import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * This class checks the method implementation of Play class
+ */
 public class PlayTest {
 
     GameEngine d_ge = new GameEngine();
@@ -18,22 +21,25 @@ public class PlayTest {
      */
     @Test
     public void saveMap() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(l_OutContent));
 
-        Play p = new Play(d_ge);
-        p.saveMap(d_str);
-        String ex = "Invalid command in state";
-        assertEquals(true, outContent.toString().contains(ex));
+        Play l_P = new Play(d_ge);
+        l_P.saveMap(d_str);
+        String l_Ex = "Invalid command in state";
+        assertEquals(true, l_OutContent.toString().contains(l_Ex));
     }
 
+    /**
+     * This method is used to test if map is shown successfully
+     */
     @Test
     public void showMap() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Play p = new Play(d_ge);
-        p.showMap();
+        Play l_P = new Play(d_ge);
+        l_P.showMap();
         String ex = "show game command received ";
         assertEquals(true, outContent.toString().contains(ex));
     }

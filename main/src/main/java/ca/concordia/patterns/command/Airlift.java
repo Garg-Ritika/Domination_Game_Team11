@@ -21,17 +21,16 @@ public class Airlift implements Order {
     /**
      * This is the constructor that takes player, source and target territory object and no of armies as argument
      * encapsulating all necessary data to execute the command
-     *
-     * @param initiator player who runs the command
-     * @param source    Source territory form which armies are to be moved
-     * @param target    target territory to which armies are to be moved
-     * @param num       no of armies to be moved
+     *  @param p_Initiator player who runs the command
+     * @param p_Source    Source territory form which armies are to be moved
+     * @param p_Target    target territory to which armies are to be moved
+     * @param p_Num       no of armies to be moved
      */
-    public Airlift(Player initiator, Territory source, Territory target, int num) {
-        this.d_Initiator = initiator;
-        this.d_Source = source;
-        this.d_Target = target;
-        this.d_NumToAirlift = num;
+    public Airlift(Player p_Initiator, Territory p_Source, Territory p_Target, int p_Num) {
+        this.d_Initiator = p_Initiator;
+        this.d_Source = p_Source;
+        this.d_Target = p_Target;
+        this.d_NumToAirlift = p_Num;
     }
 
     /**
@@ -78,7 +77,7 @@ public class Airlift implements Order {
      */
     public void printOrder() {
 
-        LogUtil.log("Airlift: initiator: " + this.d_Initiator
+        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
                 + " source: " + this.d_Source
                 + " target: " + this.d_Target
                 + " number to airlift: " + d_NumToAirlift);
