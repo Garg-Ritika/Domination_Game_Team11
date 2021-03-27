@@ -59,7 +59,7 @@ public class LogUtil {
             String contents[] = directoryPath.list();
             LogUtil.log("List of files and directories in the specified directory:");
             for (int i = 0; i < contents.length; i++) {
-                LogUtil.log(contents[i]);
+
                 try {
                     if (contents[i].startsWith(LOG_FILE_NAME)) {
                         new File(contents[i]).delete();
@@ -70,7 +70,6 @@ public class LogUtil {
         } catch (Exception e) {
 
         }
-
 
     }
 }

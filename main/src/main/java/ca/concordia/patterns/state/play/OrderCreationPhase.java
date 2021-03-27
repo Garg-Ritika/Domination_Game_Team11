@@ -94,6 +94,7 @@ public class OrderCreationPhase extends MainPlay {
         LogUtil.log("taking order ");
         Scanner l_Keyboard = new Scanner(System.in);
         boolean l_MaintainLoop = true;
+        int l_Army = p_Player.getNoOfArmies();
         do {
             LogUtil.log("============================================================================================");
             LogUtil.log("| Play:MainPlay:Order  : deploy          <country-name> <num-of-armies>                    |");
@@ -114,7 +115,7 @@ public class OrderCreationPhase extends MainPlay {
 
             if ("quit".equalsIgnoreCase(l_CommandInput)) {
                 //If end the game if quit is passed during the order creation, move to another player..
-                if (p_Player.getNoOfArmies() > 0) {
+                if (l_Army > 0) {
                     LogUtil.log("Cannot quit as not all armies are deployed");
                     LogUtil.log("Cannot quit as not all armies are deployed");
                 } else {
@@ -130,7 +131,7 @@ public class OrderCreationPhase extends MainPlay {
 
                     switch (l_FirstCommand) {
                         case COMMAND_DEPLOY:
-                            processDeployCommand(p_Player, l_CommandArray);
+                            l_Army = processDeployCommand(p_Player, l_CommandArray, l_Army);
                             break;
 
                         case COMMAND_ADVANCE:
@@ -174,7 +175,7 @@ public class OrderCreationPhase extends MainPlay {
      * @param p_Player  playername
      * @param p_Command actions for the player e.g. deploy
      */
-    private void processDeployCommand(Player p_Player, String[] p_Command) {
+    private int processDeployCommand(Player p_Player, String[] p_Command, int p_Army) {
         LogUtil.log("deploy  command received ..... ");
         try {
             if (p_Command.length == 3) {
@@ -185,6 +186,7 @@ public class OrderCreationPhase extends MainPlay {
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (l_ArmyCountOfPlayer >= l_NumInt) {
                     Order o = new Deploy(p_Player, l_Territory, l_NumInt);
+                    p_Army = p_Army- l_NumInt;
                     p_Player.createOrder(o);
                     LogUtil.log("ORDER CREATED: " + Arrays.toString(p_Command));
                 } else {
@@ -194,6 +196,7 @@ public class OrderCreationPhase extends MainPlay {
         } catch (Exception l_E) {
             l_E.printStackTrace();
         }
+        return p_Army;
     }
 
     /**
