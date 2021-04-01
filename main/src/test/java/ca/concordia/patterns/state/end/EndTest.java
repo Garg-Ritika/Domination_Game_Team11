@@ -41,8 +41,8 @@ public class EndTest {
 
         End et = new End(d_ge);
         // TODO: hard to test the endgame when the process itlsef is being self-killed using System.exit()
-        //et.endGame();
+
         String ex = "Game has ended !";
-        //assertEquals(true, l_OutContent.toString().contains(ex));
+        
     }
 }
