@@ -9,7 +9,7 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.io.*;
 import java.util.ArrayList;
 
-public class DominationFileHandler {
+public class DominationMapHandler {
 
     public static final String HEADER_CONTINENT = "[continents]";
     public static final String HEADER_COUNTRIES = "[countries]";
@@ -17,7 +17,11 @@ public class DominationFileHandler {
 
     private Map d_Map;
 
-    public DominationFileHandler(Map p_Map){
+    public DominationMapHandler(){
+        d_Map = new Map();
+    }
+
+    public DominationMapHandler(Map p_Map){
         d_Map = p_Map;
     }
 

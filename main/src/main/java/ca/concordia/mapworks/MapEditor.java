@@ -1,18 +1,25 @@
 package ca.concordia.mapworks;
 
 import ca.concordia.dao.*;
-import ca.concordia.patterns.adapter.DominationFileHandler;
+import ca.concordia.patterns.adapter.ConquestMapHandler;
+import ca.concordia.patterns.adapter.DominationMapHandler;
 import ca.concordia.patterns.observer.LogUtil;
+import ca.concordia.patterns.state.edit.Preload;
+import ca.concordia.patterns.state.play.PlaySetup;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * A singleton class to do all the things required for map-editing.
  * Since this is a singleton design pattern, only one instance of this class would be running at a time.
  */
 public class MapEditor {
+
+    public static final String DOMINATION_MAP_TYPE = "DOMINATION_MAP";
+    public static final String CONQUEST_MAP_TYPE = "CONQUEST_MAP";
 
     private static MapEditor d_Instance = null;
     private static Map d_CurrentMap;
@@ -315,8 +322,26 @@ public class MapEditor {
      * @throws IOException if an error is found, it will throw an error of InputOutput type
      */
     public void saveMap(File p_MapPath) throws IOException {
+        String l_MapType = DOMINATION_MAP_TYPE;
+        Scanner l_Keyboard = new Scanner(System.in);
+
+        LogUtil.log("========================================");
+        LogUtil.log("1. Domination Map");
+        LogUtil.log("2. Conquest Map ");
+        LogUtil.log("Press 1 for Domination map 2 for Conquest map ");
+        LogUtil.log("=======================================");
+        int l_Input = l_Keyboard.nextInt();
+        LogUtil.log(Integer.toString(l_Input));
+        switch (l_Input) {
+            case 1:
+                l_MapType = DOMINATION_MAP_TYPE;
+                break;
+            case 2:
+                l_MapType = CONQUEST_MAP_TYPE;
+                break;
+        }
         validateMap();
-        writeMapFile(p_MapPath);
+        writeMapFile(p_MapPath,l_MapType);
     }
 
     /**
@@ -329,7 +354,26 @@ public class MapEditor {
      * @throws IOException inputOutput exception
      */
     public void editMap(File p_MapPath) throws IOException {
-        readMapFile(p_MapPath);
+        String l_MapType = DOMINATION_MAP_TYPE;
+        Scanner l_Keyboard = new Scanner(System.in);
+
+        LogUtil.log("========================================");
+        LogUtil.log("1. Domination Map");
+        LogUtil.log("2. Conquest Map ");
+        LogUtil.log("Press 1 for Domination map 2 for Conquest map ");
+        LogUtil.log("=======================================");
+        int l_Input = l_Keyboard.nextInt();
+        LogUtil.log(Integer.toString(l_Input));
+        switch (l_Input) {
+            case 1:
+                    l_MapType = DOMINATION_MAP_TYPE;
+                break;
+            case 2:
+                    l_MapType = CONQUEST_MAP_TYPE;
+                break;
+        }
+
+        readMapFile(p_MapPath,l_MapType);
         validateMap();
     }
 
@@ -357,10 +401,13 @@ public class MapEditor {
      * @return map object
      * @throws IOException if an error is found, it will throw an error of InputOutput type
      */
-    public Map readMapFile(File p_MapFile) throws IOException {
+    public Map readMapFile(File p_MapFile, String p_MapType) throws IOException {
         resetCurrentMap();
-        this.d_CurrentMap = new DominationFileHandler(d_CurrentMap).readMapFile(p_MapFile);
-
+        if (p_MapType.equalsIgnoreCase(DOMINATION_MAP_TYPE)) {
+            this.d_CurrentMap = new DominationMapHandler(d_CurrentMap).readMapFile(p_MapFile);
+        }else if(p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)){
+            this.d_CurrentMap = new ConquestMapHandler(d_CurrentMap).readMapFile(p_MapFile);
+        }
         return getCurrentMap();
     }
 
@@ -369,9 +416,15 @@ public class MapEditor {
      * @param p_MapFile the map file object
      *
      */
-    private void writeMapFile(File p_MapFile)  {
+    private void writeMapFile(File p_MapFile, String p_MapType)  {
         LogUtil.log("writing .map file to path " + p_MapFile.getAbsolutePath());
-        new DominationFileHandler(d_CurrentMap).writeMapFile(p_MapFile);
+
+        if (p_MapType.equalsIgnoreCase(DOMINATION_MAP_TYPE)) {
+            new DominationMapHandler(d_CurrentMap).writeMapFile(p_MapFile);
+        }else if(p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)){
+            new ConquestMapHandler(d_CurrentMap).writeMapFile(p_MapFile);
+        }
+
         LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
     }
 

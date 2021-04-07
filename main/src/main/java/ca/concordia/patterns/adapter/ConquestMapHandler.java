@@ -9,7 +9,7 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.io.*;
 import java.util.ArrayList;
 
-public class ConquestFileHandler {
+public class ConquestMapHandler {
 
     public static final String HEADER_CONTINENTS = "[Continents]";
     public static final String HEADER_TERRITORIES = "[Territories]";
@@ -17,7 +17,11 @@ public class ConquestFileHandler {
 
     private Map d_Map;
 
-    public ConquestFileHandler(Map p_Map){
+    public ConquestMapHandler(){
+        d_Map = new Map();
+    }
+
+    public ConquestMapHandler(Map p_Map){
         d_Map = p_Map;
     }
 
@@ -31,7 +35,7 @@ public class ConquestFileHandler {
     public Map readMapFile(File p_MapFile) throws IOException {
 
         if (p_MapFile != null && p_MapFile.exists()) {
-            LogUtil.log("reading .map file from path: " + p_MapFile.getAbsolutePath());
+            LogUtil.log(">reading .map file from path: " + p_MapFile.getAbsolutePath());
             FileReader l_Fr = new FileReader(p_MapFile);
             BufferedReader l_Br = new BufferedReader(l_Fr);
 
@@ -40,9 +44,9 @@ public class ConquestFileHandler {
                 if (l_Line.equalsIgnoreCase(HEADER_CONTINENTS)) {
 
                     // default continent id
-                    int l_ContinentID = 1;
+                    int l_ContinentID = 0;
                     while ((l_Line = l_Br.readLine()).length() > 0) {
-
+                        l_ContinentID++;
                         LogUtil.log("continent : " + l_Line);
 
                         String[] l_ContinentArray = l_Line.trim().split("=");
@@ -57,11 +61,10 @@ public class ConquestFileHandler {
                     }
                 } else if (l_Line.equalsIgnoreCase(HEADER_TERRITORIES)) {
 
-
+                    int l_CountryId =0;
                     while ((l_Line = l_Br.readLine()) != null) {
                         LogUtil.log("country : " + l_Line);
 
-                        int l_CountryId =0;
                         if (l_Line.length() >0)  {
 
                             String[] l_CountryArray = l_Line.trim().split(",");
@@ -73,8 +76,14 @@ public class ConquestFileHandler {
                             int l_XCoordinateInteger = Integer.parseInt(l_XCoordinate);
                             String l_YCoordinate = l_CountryArray[2];
                             int l_YCoordinateInteger = Integer.parseInt(l_YCoordinate);
-                            String l_ContinentId = l_CountryArray[3];
-                            int l_ContinentIdInteger = Integer.parseInt(l_ContinentId);
+                            String l_ContinentName = l_CountryArray[3];
+
+                            int l_ContinentIdInteger = 0;
+                            for (Continent continent: d_Map.getListOfContinents()){
+                                if (continent.getName().equalsIgnoreCase(l_ContinentName)){
+                                    l_ContinentIdInteger = continent.getID();
+                                }
+                            }
 
                             Country l_Country = new Country(l_CountryIdInteger, l_ContinentIdInteger, l_CountryName, l_XCoordinateInteger, l_YCoordinateInteger);
                             d_Map.getListOfCountries().add(l_Country);
@@ -97,19 +106,20 @@ public class ConquestFileHandler {
      * @throws IOException
      */
     public void readBordersFile(File p_MapFile) throws IOException {
+        System.out.println("--> read borders file ");
         if (p_MapFile != null && p_MapFile.exists()) {
-            LogUtil.log("reading .map file from path: " + p_MapFile.getAbsolutePath());
+            LogUtil.log(">reading .map file from path: " + p_MapFile.getAbsolutePath());
             FileReader l_Fr = new FileReader(p_MapFile);
             BufferedReader l_Br = new BufferedReader(l_Fr);
 
             String l_Line;
+            int l_CountryId =0;
             while ((l_Line = l_Br.readLine()) != null) {
                 if (l_Line.equalsIgnoreCase(HEADER_TERRITORIES)) {
 
                     while ((l_Line = l_Br.readLine()) != null) {
                         LogUtil.log("country : " + l_Line);
 
-                        int l_CountryId =0;
                         if (l_Line.length() >0)  {
 
                             String[] l_CountryArray = l_Line.trim().split(",");

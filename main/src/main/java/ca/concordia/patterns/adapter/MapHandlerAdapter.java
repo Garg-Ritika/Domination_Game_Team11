@@ -1,17 +1,18 @@
 package ca.concordia.patterns.adapter;
 
 import ca.concordia.dao.Map;
-import ca.concordia.mapworks.MapEditor;
 import ca.concordia.patterns.observer.LogUtil;
 
 import java.io.File;
 import java.io.IOException;
 
-public class MapFileAdapter extends MapEditor {
+public class MapHandlerAdapter extends DominationMapHandler {
 
-    public Map d_Map;
+    ConquestMapHandler d_CMH = new ConquestMapHandler();
+    Map d_Map ;
 
-    public MapFileAdapter(Map p_Map){
+    public MapHandlerAdapter(ConquestMapHandler p_CMH, Map p_Map){
+        d_CMH = p_CMH;
         d_Map = p_Map;
     }
 
@@ -22,10 +23,9 @@ public class MapFileAdapter extends MapEditor {
      * @return map object
      * @throws IOException if an error is found, it will throw an error of InputOutput type
      */
+    @Override
     public Map readMapFile(File p_MapFile) throws IOException {
-        super.resetCurrentMap();
-        d_Map = new ConquestFileHandler(d_Map).readMapFile(p_MapFile);
-        return d_Map;
+        return new ConquestMapHandler().readMapFile(p_MapFile);
     }
 
     /**
@@ -33,9 +33,10 @@ public class MapFileAdapter extends MapEditor {
      * @param p_MapFile the map file object
      *
      */
-    private void writeMapFile(File p_MapFile)  {
+    @Override
+    public void writeMapFile(File p_MapFile)  {
         LogUtil.log("writing .map file to path " + p_MapFile.getAbsolutePath());
-        new ConquestFileHandler(d_Map).writeMapFile(p_MapFile);
+        new ConquestMapHandler().writeMapFile(p_MapFile);
         LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
     }
 

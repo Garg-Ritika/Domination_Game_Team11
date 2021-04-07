@@ -10,6 +10,7 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * This class is used to set the game play by loading the map, creating the players and assigning respective
@@ -41,7 +42,29 @@ public class PlaySetup extends Play {
                 LogUtil.log("loadmap command received ..");
                 File l_MapFile = new File(l_Filename);
                 if (l_MapFile.exists()) {
-                    Map l_Map = MapEditor.getInstance().readMapFile(l_MapFile);
+
+                    // decide which type of map is it :
+                    String l_MapType = MapEditor.DOMINATION_MAP_TYPE;
+                    Scanner l_Keyboard = new Scanner(System.in);
+
+                    LogUtil.log("========================================");
+                    LogUtil.log("1. Domination Map");
+                    LogUtil.log("2. Conquest Map ");
+                    LogUtil.log("Press 1 for Domination map 2 for Conquest map ");
+                    LogUtil.log("=======================================");
+                    int l_Input = l_Keyboard.nextInt();
+                    LogUtil.log(Integer.toString(l_Input));
+                    switch (l_Input) {
+                        case 1:
+                            l_MapType = MapEditor.DOMINATION_MAP_TYPE;
+                            break;
+                        case 2:
+                            l_MapType = MapEditor.CONQUEST_MAP_TYPE;
+                            break;
+                    }
+
+                    // read the map file
+                    Map l_Map = MapEditor.getInstance().readMapFile(l_MapFile,l_MapType);
 
                     // TODO : updating map in the parent .. (review this)
                     d_ge.setMap(l_Map);
