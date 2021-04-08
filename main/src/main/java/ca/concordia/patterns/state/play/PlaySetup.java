@@ -169,7 +169,7 @@ public class PlaySetup extends Play {
 
         try {
             int l_NumberOfPlayers = d_ge.getListOfPlayers().size();
-            if (l_NumberOfPlayers >= 3 && l_NumberOfPlayers <= 5) {
+            if (l_NumberOfPlayers >= 1 && l_NumberOfPlayers <= 5) {
 
                 LogUtil.log("number of countries between [3 to 5] so assign countries to player now ..");
                 if (assignCountriesToPlayers()) {

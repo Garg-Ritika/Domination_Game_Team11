@@ -1,3 +1,4 @@
+/*
 package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Player;
@@ -5,12 +6,14 @@ import ca.concordia.dao.Territory;
 import ca.concordia.patterns.observer.LogUtil;
 
 
+*/
 /**
  * Airlift: advance some armies from one of the current player’s territories to any another territory.
  * <p>
  * Command Syntax:
  * airlift sourcecountryID targetcountryID numarmies
- */
+ *//*
+
 public class Airlift implements Order {
 
     Territory d_Source;
@@ -18,7 +21,8 @@ public class Airlift implements Order {
     Player d_Initiator;
     int d_NumToAirlift;
 
-    /**
+    */
+/**
      * This is the constructor that takes player, source and target territory object and no of armies as argument
      * encapsulating all necessary data to execute the command
      *
@@ -26,7 +30,8 @@ public class Airlift implements Order {
      * @param p_Source    Source territory form which armies are to be moved
      * @param p_Target    target territory to which armies are to be moved
      * @param p_Num       no of armies to be moved
-     */
+     *//*
+
     public Airlift(Player p_Initiator, Territory p_Source, Territory p_Target, int p_Num) {
         this.d_Initiator = p_Initiator;
         this.d_Source = p_Source;
@@ -34,12 +39,14 @@ public class Airlift implements Order {
         this.d_NumToAirlift = p_Num;
     }
 
-    /**
+    */
+/**
      * execute method executes the Airlift card after validity check
      * move any number of army units from one of your territories to another territory, even if they are
      * not adjacent.
      * Here both the source and the target Territories are Receivers
-     */
+     *//*
+
     public void execute() {
         LogUtil.log("advance execute ");
 
@@ -54,11 +61,13 @@ public class Airlift implements Order {
         }
     }
 
-    /**
+    */
+/**
      * This method will check if the given inputs are a valid input for Airlift Card
      *
      * @return true/false
-     */
+     *//*
+
     public boolean valid() {
         //TODO what is the valid condition
         if ((d_Source.getArmyCount() >= d_NumToAirlift)
@@ -72,10 +81,12 @@ public class Airlift implements Order {
         }
     }
 
-    /**
+    */
+/**
      * This method will print all the commands that have been executed and
      * the log for which have been saved in log file
-     */
+     *//*
+
     public void printOrder() {
 
         LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
@@ -84,3 +95,4 @@ public class Airlift implements Order {
                 + " number to airlift: " + d_NumToAirlift);
     }
 }
+*/

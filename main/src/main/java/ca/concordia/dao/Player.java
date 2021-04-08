@@ -1,7 +1,7 @@
 package ca.concordia.dao;
 
-import ca.concordia.patterns.command.Order;
 import ca.concordia.patterns.observer.LogUtil;
+import ca.concordia.patterns.strategy.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +16,11 @@ public class Player {
     private int d_NoOfArmies;
     private List<Country> d_ListOfCountries = new ArrayList<Country>();
     private List<Continent> d_ListOfContinents = new ArrayList<Continent>();
-    private List<Order> d_ListOfOrders = new ArrayList<Order>();
+    private List<String> d_ListOfOrders = new ArrayList<String>();
     private List<String> d_OrderCards = new ArrayList<>();
     private boolean d_RandomCardAssigned = false;
     private boolean d_PlayerIsNegotiated = false;
+    private Order d_PlayerBehavior;
 
     /**
      * Constructor initializes the following below member variables of Player class
@@ -30,6 +31,14 @@ public class Player {
     public Player(String p_PlayerName, int p_PlayerID) {
         this.d_PlayerName = p_PlayerName;
         this.d_PlayerID = p_PlayerID;
+    }
+
+    public Order getD_PlayerBehavior() {
+        return d_PlayerBehavior;
+    }
+
+    public void setD_PlayerBehavior(Order d_PlayerBehavior) {
+        this.d_PlayerBehavior = d_PlayerBehavior;
     }
 
     /**
@@ -242,7 +251,7 @@ public class Player {
      *
      * @param p_O An object of class Order is passed as an argument which will be used to add a specific passed order in the list.
      */
-    public void createOrder(Order p_O) {
+    public void createOrder(String p_O) {
         d_ListOfOrders.add(p_O);
     }
 
@@ -254,9 +263,9 @@ public class Player {
      *
      * @return l_ToReturn will return the list of orders
      */
-    public Order nextOrder() {
+    public String nextOrder() {
         LogUtil.log("--> next order for player: " + getPlayerName());
-        Order l_ToReturn = null;
+        String l_ToReturn = null;
         if (d_ListOfOrders.size() > 0) {
             l_ToReturn = d_ListOfOrders.get(0);
             d_ListOfOrders.remove(0);
@@ -267,4 +276,28 @@ public class Player {
         LogUtil.log("--> there are no order for player: " + getPlayerName());
         return null;
     }
+
+    public void executeOrder(String order) {
+        System.out.println(order);
+        System.out.println(d_PlayerBehavior);
+        if (order == "deploy") {
+            d_PlayerBehavior.deploy();
+        }
+        else if(order=="advance"){
+            d_PlayerBehavior.advance();
+        }
+        else if (order == "airlift") {
+            d_PlayerBehavior.airlift();
+        }
+        else if(order=="blockade"){
+            d_PlayerBehavior.blockade();
+        }
+        else if (order == "bomb") {
+            d_PlayerBehavior.bomb();
+        }
+        else if(order=="diplomacy"){
+            d_PlayerBehavior.diplomacy();
+        }
+    }
+
 }

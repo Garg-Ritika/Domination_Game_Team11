@@ -1,3 +1,4 @@
+/*
 package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Player;
@@ -9,19 +10,23 @@ import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
+*/
 /**
  * this class tests the methods of diplomacy class
  * using assert method
- */
+ *//*
+
 public class DiplomacyTest {
     Diplomacy d_Diplomacy;
     Player d_PlayerOne;
     Player d_PlayerTwo;
 
-    /**
+    */
+/**
      * This is the method that runs before every test method in this class
      * and initializes the objects
-     */
+     *//*
+
     @Before
     public void init() {
 
@@ -36,9 +41,11 @@ public class DiplomacyTest {
         d_Diplomacy = new Diplomacy(d_PlayerOne, d_PlayerTwo);
     }
 
-    /**
+    */
+/**
      * This method verify that when the attack is executed the army is assigned to correct player.
-     */
+     *//*
+
     @Test
     public void executeTest() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -52,13 +59,15 @@ public class DiplomacyTest {
         assertEquals(true, d_PlayerTwo.getIsNegotiatedPlayer());
     }
 
-    /**
+    */
+/**
      * This method check whether the advance order is valid or not.
-     */
+     *//*
+
     @Test
     public void validTest() {
         assertEquals(true, d_Diplomacy.valid());
     }
 
 
-}
+}*/

@@ -1,3 +1,4 @@
+/*
 package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Country;
@@ -11,19 +12,23 @@ import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
+*/
 /**
  * This is the test class that checks the methods of Airlift class
  * and asserts if the actual value equals to expected or not
- */
+ *//*
+
 public class AirliftTest {
     Airlift d_Airlift;
     Player d_PlayerOne;
     Territory d_Source;
     Territory d_Target;
 
-    /**
+    */
+/**
      * This is the before method that automatically runs before every test method
-     */
+     *//*
+
     @Before
     public void init() {
         //source
@@ -46,10 +51,12 @@ public class AirliftTest {
         d_Airlift = new Airlift(d_PlayerOne, d_Source, d_Target, l_NumberOfArmiesAttacking);
     }
 
-    /**
+    */
+/**
      * This test method checks if execute method of Airlift class works properly or not
      * using assertEquals()
-     */
+     *//*
+
     @Test
     public void executeTest() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -63,12 +70,15 @@ public class AirliftTest {
         assertEquals(10, d_Source.getArmyCount());
     }
 
-    /**
+    */
+/**
      * This test method asserts the valid method of Airlift class
-     */
+     *//*
+
 
     @Test
     public void validTest() {
         assertEquals(true, d_Airlift.valid());
     }
 }
+*/

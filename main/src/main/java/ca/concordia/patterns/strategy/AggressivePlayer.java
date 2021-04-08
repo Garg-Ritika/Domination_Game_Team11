@@ -3,7 +3,7 @@ package ca.concordia.patterns.strategy;
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 
-public class AggressivePlayer implements OrderInterface {
+public class AggressivePlayer implements Order {
 
     Territory d_Source;
     Territory d_Target;

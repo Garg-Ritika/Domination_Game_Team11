@@ -7,7 +7,7 @@ import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.Random;
 
-public class HumanPlayer implements OrderInterface {
+public class HumanPlayer implements Order {
 
     Territory d_Source;
     Territory d_Target;

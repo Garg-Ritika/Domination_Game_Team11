@@ -2,9 +2,9 @@ package ca.concordia.patterns.state.play;
 
 import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
-import ca.concordia.patterns.command.Order;
 import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.end.End;
+import ca.concordia.patterns.strategy.Order;
 
 /**
  * This classs is used to exexute all the order once the orders have been created by the players in round robin fashion
@@ -68,7 +68,7 @@ public class OrderExecutionPhase extends MainPlay {
      */
     private void executeAllOrders() {
         LogUtil.log(" execute all orders ");
-        Order order;
+        String order;
         boolean still_more_orders = false;
         do {
             still_more_orders = false;
@@ -78,8 +78,26 @@ public class OrderExecutionPhase extends MainPlay {
 
                     if (order != null) {
                         still_more_orders = true;
-                        order.printOrder();
-                        order.execute();
+//                        order.printOrder();
+                        p.executeOrder(order);
+                        /*if(p_orderName=="deploy"){
+                            order.deploy();
+                        }
+                        else if(p_orderName=="advance"){
+                            order.advance();
+                        }
+                        else if (p_orderName=="airlift"){
+                            order.airlift();
+                        }
+                        else if (p_orderName=="blockade"){
+                            order.blockade();
+                        }
+                        else if(p_orderName=="diplomacy"){
+                            order.diplomacy();
+                        }
+                        else if(p_orderName=="bomb"){
+                            order.bomb();
+                        }*/
                     }
                     removePlayers(p);
                 } catch (Exception e) {
