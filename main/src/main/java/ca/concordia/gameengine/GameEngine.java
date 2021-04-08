@@ -70,6 +70,8 @@ public class GameEngine {
      */
     public static final String COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 
+    public static final String COMMAND_TOURNAMENT = "tournament";
+
     // data members
     private Phase d_GamePhase;
     private Map d_Map;
@@ -243,6 +245,7 @@ public class GameEngine {
             LogUtil.log("| Play:PlaySetup       : loadmap         <filepath>                                        |");
             LogUtil.log("| Play:PlaySetup       : gameplayer      -add <player-name>                                |");
             LogUtil.log("| Play:PlaySetup       : assigncountries                                                   |");
+            LogUtil.log("| Play:PlaySetup       : tournament -M <mapfiles> -P <players> -G<games> -D<turns>         |");
             LogUtil.log("| Any                  : quit                                                              |");
             LogUtil.log("============================================================================================");
 
@@ -271,6 +274,9 @@ public class GameEngine {
                         case COMMAND_ASSIGN_COUNTRIES:
                             d_GamePhase.assignCountries();
                             break;
+
+                        case COMMAND_TOURNAMENT:
+                            new TournamentCreator(l_CommandArray).startTournament();
 
                         case COMMAND_SHOW_MAP:
                             d_GamePhase.showMap();
