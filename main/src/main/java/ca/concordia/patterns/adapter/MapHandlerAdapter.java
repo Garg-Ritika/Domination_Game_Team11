@@ -9,9 +9,9 @@ import java.io.IOException;
 public class MapHandlerAdapter extends DominationMapHandler {
 
     ConquestMapHandler d_CMH = new ConquestMapHandler();
-    Map d_Map ;
+    Map d_Map;
 
-    public MapHandlerAdapter(ConquestMapHandler p_CMH, Map p_Map){
+    public MapHandlerAdapter(ConquestMapHandler p_CMH, Map p_Map) {
         d_CMH = p_CMH;
         d_Map = p_Map;
     }
@@ -30,11 +30,11 @@ public class MapHandlerAdapter extends DominationMapHandler {
 
     /**
      * Private method to write the map file
-     * @param p_MapFile the map file object
      *
+     * @param p_MapFile the map file object
      */
     @Override
-    public void writeMapFile(File p_MapFile)  {
+    public void writeMapFile(File p_MapFile) {
         LogUtil.log("writing .map file to path " + p_MapFile.getAbsolutePath());
         new ConquestMapHandler().writeMapFile(p_MapFile);
         LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());

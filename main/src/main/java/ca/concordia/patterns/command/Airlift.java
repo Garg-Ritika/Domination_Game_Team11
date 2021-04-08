@@ -21,7 +21,8 @@ public class Airlift implements Order {
     /**
      * This is the constructor that takes player, source and target territory object and no of armies as argument
      * encapsulating all necessary data to execute the command
-     *  @param p_Initiator player who runs the command
+     *
+     * @param p_Initiator player who runs the command
      * @param p_Source    Source territory form which armies are to be moved
      * @param p_Target    target territory to which armies are to be moved
      * @param p_Num       no of armies to be moved

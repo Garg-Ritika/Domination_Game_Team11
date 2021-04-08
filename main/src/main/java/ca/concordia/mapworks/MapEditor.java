@@ -4,10 +4,9 @@ import ca.concordia.dao.*;
 import ca.concordia.patterns.adapter.ConquestMapHandler;
 import ca.concordia.patterns.adapter.DominationMapHandler;
 import ca.concordia.patterns.observer.LogUtil;
-import ca.concordia.patterns.state.edit.Preload;
-import ca.concordia.patterns.state.play.PlaySetup;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -53,7 +52,7 @@ public class MapEditor {
         return this.d_CurrentMap;
     }
 
-    private void setCurrentMap(Map p_Map){
+    private void setCurrentMap(Map p_Map) {
         d_CurrentMap = p_Map;
     }
 
@@ -341,7 +340,7 @@ public class MapEditor {
                 break;
         }
         validateMap();
-        writeMapFile(p_MapPath,l_MapType);
+        writeMapFile(p_MapPath, l_MapType);
     }
 
     /**
@@ -366,14 +365,14 @@ public class MapEditor {
         LogUtil.log(Integer.toString(l_Input));
         switch (l_Input) {
             case 1:
-                    l_MapType = DOMINATION_MAP_TYPE;
+                l_MapType = DOMINATION_MAP_TYPE;
                 break;
             case 2:
-                    l_MapType = CONQUEST_MAP_TYPE;
+                l_MapType = CONQUEST_MAP_TYPE;
                 break;
         }
 
-        readMapFile(p_MapPath,l_MapType);
+        readMapFile(p_MapPath, l_MapType);
         validateMap();
     }
 
@@ -405,7 +404,7 @@ public class MapEditor {
         resetCurrentMap();
         if (p_MapType.equalsIgnoreCase(DOMINATION_MAP_TYPE)) {
             this.d_CurrentMap = new DominationMapHandler(d_CurrentMap).readMapFile(p_MapFile);
-        }else if(p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)){
+        } else if (p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)) {
             this.d_CurrentMap = new ConquestMapHandler(d_CurrentMap).readMapFile(p_MapFile);
         }
         return getCurrentMap();
@@ -413,15 +412,15 @@ public class MapEditor {
 
     /**
      * Private method to write the map file
-     * @param p_MapFile the map file object
      *
+     * @param p_MapFile the map file object
      */
-    private void writeMapFile(File p_MapFile, String p_MapType)  {
+    public void writeMapFile(File p_MapFile, String p_MapType) {
         LogUtil.log("writing .map file to path " + p_MapFile.getAbsolutePath());
 
         if (p_MapType.equalsIgnoreCase(DOMINATION_MAP_TYPE)) {
             new DominationMapHandler(d_CurrentMap).writeMapFile(p_MapFile);
-        }else if(p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)){
+        } else if (p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)) {
             new ConquestMapHandler(d_CurrentMap).writeMapFile(p_MapFile);
         }
 

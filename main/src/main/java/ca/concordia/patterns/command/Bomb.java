@@ -18,7 +18,8 @@ public class Bomb implements Order {
     /**
      * This is the constructor that takes player and target territory object as argument
      * encapsulating all necessary data to execute the command
-     *  @param p_Initiator        player who runs the command
+     *
+     * @param p_Initiator        player who runs the command
      * @param p_Target_territory the territory whose half armies are to be destroyed
      */
     public Bomb(Player p_Initiator, Territory p_Target_territory) {

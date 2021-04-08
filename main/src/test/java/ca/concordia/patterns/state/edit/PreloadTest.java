@@ -3,8 +3,9 @@ package ca.concordia.patterns.state.edit;
 import ca.concordia.gameengine.GameEngine;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -23,6 +24,7 @@ public class PreloadTest {
      */
     @Test
     public void editContinent() {
+        System.out.println("PreloadTest : editContinent ");
         ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(l_OutContent));
 
@@ -38,6 +40,7 @@ public class PreloadTest {
 
     @Test
     public void editNeighbour() {
+        System.out.println("PreloadTest : editNeighbour ");
         ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(l_OutContent));
 
@@ -52,14 +55,26 @@ public class PreloadTest {
      */
     @Test
     public void editMap() {
+        System.out.println("PreloadTest : editMap ");
         ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(l_OutContent));
 
         Preload l_Pr = new Preload(d_ge);
-        l_Pr.editMap(d_Str2);
-        String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" + System.lineSeparator() +
-                " No continents available in the map " + System.lineSeparator();
-        assertEquals(l_Ex, l_OutContent.toString());
+
+        InputStream stdin = System.in;
+        try {
+            ByteArrayInputStream bin = new ByteArrayInputStream("1".getBytes());
+            System.setIn(bin);
+            l_Pr.editMap(d_Str2);
+
+        } finally {
+            System.setIn(stdin);
+            System.out.println("finally ");
+        }
+        String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" ;
+        assertEquals(true, l_OutContent.toString().startsWith(l_Ex));
+
+
     }
 
 }

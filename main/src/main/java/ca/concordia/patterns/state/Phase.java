@@ -11,6 +11,7 @@ public abstract class Phase {
 
     /**
      * This method is used to store the Game Engine object to run the game commands and process
+     *
      * @param p_ge Game engine object
      */
     public Phase(GameEngine p_ge) {
@@ -24,48 +25,56 @@ public abstract class Phase {
 
     /**
      * Abstract method def  to edit continent map state behavior
+     *
      * @param p_Command edit continent command
      */
     abstract public void editContinent(String[] p_Command);
 
     /**
-     *  Abstract method def  to edit country map state behavior
+     * Abstract method def  to edit country map state behavior
+     *
      * @param p_Command edit country command
      */
     abstract public void editCountry(String[] p_Command);
 
     /**
      * Abstract method def  to edit neighbour map state behavior
+     *
      * @param p_Command edit neighbour command
      */
     abstract public void editNeighbour(String[] p_Command);
 
     /**
      * Save map abstract method
+     *
      * @param p_Command save map command
      */
     abstract public void saveMap(String[] p_Command);
 
     /**
      * Abstract method def  to edit map
+     *
      * @param p_Command editmap command
      */
     abstract public void editMap(String[] p_Command);
 
     /**
      * Abstract method def to validate map
+     *
      * @param p_Command validate map command
      */
     abstract public void validateMap(String[] p_Command);
 
     /**
      * Abstract method def to loadmap
+     *
      * @param p_Command loadmap command
      */
     abstract public void loadMap(String[] p_Command);
 
     /**
      * Abstract method def to set players in game setup state behaviour
+     *
      * @param p_Command setplayers command
      */
     abstract public void setPlayers(String[] p_Command);

@@ -21,6 +21,7 @@ public class PlaySetupTest {
      */
     @Test
     public void loadMap() {
+        System.out.println("PlaySetupTest : loadmap ");
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -29,6 +30,8 @@ public class PlaySetupTest {
         String l_ex = "load map to start game .";
         assertEquals(true, outContent.toString().contains(l_ex));
 
+
+
     }
 
     /**
@@ -36,6 +39,7 @@ public class PlaySetupTest {
      */
     @Test
     public void setPlayers() {
+        System.out.println("PlaySetupTest : setplayers");
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -51,6 +55,7 @@ public class PlaySetupTest {
      */
     @Test
     public void assignCountries() {
+        System.out.println("PlaySetupTest : assigncountries ");
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 

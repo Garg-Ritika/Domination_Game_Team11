@@ -51,6 +51,7 @@ public class MapEditorTest {
      */
     @Test
     public void testMapEditor() throws IOException {
+        System.out.println("MapEditor test ");
 
         assertEquals(true, d_mapEditor.addContinent("Asia", 1));
         assertEquals(true, d_mapEditor.addContinent("Africa", 1));
@@ -67,9 +68,10 @@ public class MapEditorTest {
         assertNotNull(d_mapEditor.loadMapAsGraph());
 
         try {
-            d_mapEditor.saveMap(new File("abc.map"));
-            d_mapEditor.readMapFile(new File("abc.map"),MapEditor.DOMINATION_MAP_TYPE);
-            d_mapEditor.editMap(new File("abc.map"));
+            //d_mapEditor.saveMap(new File("abc.map"));
+            d_mapEditor.writeMapFile(new File("abc.map"), MapEditor.DOMINATION_MAP_TYPE);
+            d_mapEditor.readMapFile(new File("abc.map"), MapEditor.DOMINATION_MAP_TYPE);
+            //d_mapEditor.editMap(new File("abc.map"));
             d_mapEditor.showMap();
         } catch (IOException io) {
             io.printStackTrace();

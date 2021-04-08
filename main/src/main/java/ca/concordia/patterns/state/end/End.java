@@ -11,6 +11,7 @@ public class End extends Phase {
 
     /**
      * This constructor takes Game Engine object as parameter
+     *
      * @param p_ge game Engine object
      */
     public End(GameEngine p_ge) {

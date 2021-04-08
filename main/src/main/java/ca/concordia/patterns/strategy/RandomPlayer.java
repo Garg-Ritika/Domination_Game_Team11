@@ -32,7 +32,7 @@ public class RandomPlayer implements OrderInterface {
 
     public RandomPlayer(Player p_Initiator, Player p_Negotiate_PlayerId) {
         this.d_Initiator = p_Initiator;
-        this.d_NegotiatePlayerId= p_Negotiate_PlayerId;
+        this.d_NegotiatePlayerId = p_Negotiate_PlayerId;
     }
 
     public void advance() {

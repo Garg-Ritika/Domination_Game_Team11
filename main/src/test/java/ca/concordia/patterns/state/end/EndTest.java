@@ -43,6 +43,6 @@ public class EndTest {
         // TODO: hard to test the endgame when the process itlsef is being self-killed using System.exit()
 
         String ex = "Game has ended !";
-        
+
     }
 }

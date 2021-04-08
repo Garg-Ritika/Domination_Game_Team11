@@ -3,8 +3,9 @@ package ca.concordia.patterns.state.edit;
 import ca.concordia.gameengine.GameEngine;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -26,6 +27,7 @@ public class PostLoadTest {
      */
     @Test
     public void editContinent() {
+        System.out.println("PostLoad Test : editcontinent");
         ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(l_OutContent));
 
@@ -41,13 +43,15 @@ public class PostLoadTest {
      */
     @Test
     public void saveMap() {
+        System.out.println("PostLoad Test : savemap");
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
         PostLoad l_Po = new PostLoad(d_ge);
         l_Po.saveMap(d_str);
         String l_Ex = "INCOMPLETE COMMAND" + System.lineSeparator();
-        assertEquals(l_Ex, outContent.toString());
+        assertEquals(true, outContent.toString().startsWith(l_Ex));
+
     }
 
     /**
@@ -55,15 +59,25 @@ public class PostLoadTest {
      */
     @Test
     public void editMap() {
+        System.out.println("PostLoad Test : editmap");
         ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(l_OutContent));
 
         PostLoad l_Po = new PostLoad(d_ge);
-        l_Po.editMap(d_str2);
 
-        String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" + System.lineSeparator() +
-                " No continents available in the map " + System.lineSeparator();
-        assertEquals(l_Ex, l_OutContent.toString());
+        InputStream stdin = System.in;
+        try {
+            ByteArrayInputStream bin = new ByteArrayInputStream("1".getBytes());
+            System.setIn(bin);
+
+            l_Po.editMap(d_str2);
+        } finally {
+            System.setIn(stdin);
+            System.out.println("finally ");
+        }
+
+        String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch";
+        assertEquals(true, l_OutContent.toString().startsWith(l_Ex));
 
     }
 
@@ -72,16 +86,16 @@ public class PostLoadTest {
      */
     @Test
     public void validateMap() {
+        System.out.println("PostLoad Test : validatemap");
         ByteArrayOutputStream l_OutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(l_OutContent));
 
         PostLoad l_Po = new PostLoad(d_ge);
         l_Po.validateMap(d_str3);
 
-        String l_Ex = "validatemap command received ..." + System.lineSeparator() +
-                " No continents available in the map " + System.lineSeparator();
-        assertEquals(l_Ex, l_OutContent.toString());
-    }
+        String l_Ex = "validatemap command received ...";
 
+        assertEquals(true, l_OutContent.toString().startsWith(l_Ex));
+    }
 
 }

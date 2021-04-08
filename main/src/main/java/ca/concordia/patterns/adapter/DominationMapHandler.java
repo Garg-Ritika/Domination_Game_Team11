@@ -17,11 +17,11 @@ public class DominationMapHandler {
 
     private Map d_Map;
 
-    public DominationMapHandler(){
+    public DominationMapHandler() {
         d_Map = new Map();
     }
 
-    public DominationMapHandler(Map p_Map){
+    public DominationMapHandler(Map p_Map) {
         d_Map = p_Map;
     }
 
@@ -102,9 +102,8 @@ public class DominationMapHandler {
      * Private method to write the map file
      *
      * @param p_MapFile the map file object
-     *
      */
-    public void writeMapFile(File p_MapFile)  {
+    public void writeMapFile(File p_MapFile) {
         try {
 
             FileWriter l_FileWriter = new FileWriter(p_MapFile);
@@ -135,7 +134,7 @@ public class DominationMapHandler {
             l_BufferedWriter.write(l_Content);
             l_BufferedWriter.close();
             l_FileWriter.close();
-        }catch (IOException io){
+        } catch (IOException io) {
 
         }
     }

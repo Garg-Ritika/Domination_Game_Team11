@@ -15,6 +15,7 @@ public class OrderExecutionPhase extends MainPlay {
 
     /**
      * Constructor that contains GameEngine object as argument
+     *
      * @param p_ge Game Engine Object
      */
     public OrderExecutionPhase(GameEngine p_ge) {
@@ -105,7 +106,6 @@ public class OrderExecutionPhase extends MainPlay {
     /**
      * This method is used to check if the game has ended by checking if there is only one available
      * player in the list of players
-     *
      */
     private void checkForEnd() {
         if (d_ge.getListOfPlayers().size() < 2) {

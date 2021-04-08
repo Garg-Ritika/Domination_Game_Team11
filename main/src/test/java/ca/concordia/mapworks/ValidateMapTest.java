@@ -43,6 +43,7 @@ public class ValidateMapTest {
      */
     @Test
     public void testValidateMap() {
+        System.out.println("ValidateMap test");
         assertEquals(true, d_ValidateMap.validate());
         Graph continentGraph = d_Map.getContinentSubGraph("NorthAmerica");
         assertEquals(true, d_ValidateMap.validate());

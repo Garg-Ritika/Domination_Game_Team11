@@ -15,7 +15,6 @@ import java.util.Scanner;
 /**
  * This class is used to set the game play by loading the map, creating the players and assigning respective
  * countries and adding and removing players as and when required
- *
  */
 public class PlaySetup extends Play {
 
@@ -64,7 +63,7 @@ public class PlaySetup extends Play {
                     }
 
                     // read the map file
-                    Map l_Map = MapEditor.getInstance().readMapFile(l_MapFile,l_MapType);
+                    Map l_Map = MapEditor.getInstance().readMapFile(l_MapFile, l_MapType);
 
                     // TODO : updating map in the parent .. (review this)
                     d_ge.setMap(l_Map);
@@ -81,6 +80,7 @@ public class PlaySetup extends Play {
 
     /**
      * This method is used to set the players that is add the players to move to game play commands
+     *
      * @param p_Command setPlayers command
      */
     @Override
@@ -157,7 +157,6 @@ public class PlaySetup extends Play {
     /**
      * This method checks if the map is loaded successfully and if the no of players added is between 3 to 5
      * then move to assigning countries to players
-     *
      */
     @Override
     public void assignCountries() {

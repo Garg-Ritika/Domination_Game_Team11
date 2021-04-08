@@ -17,8 +17,9 @@ public class Diplomacy implements Order {
     /**
      * this is the constructor that takes player and target player id as arguments
      * encapsulating all necessary data to execute the command
+     *
      * @param p_Initiator player running the command
-     * @param p_PlayerId plauer with which negotiation needs to be done
+     * @param p_PlayerId  plauer with which negotiation needs to be done
      */
     public Diplomacy(Player p_Initiator, Player p_PlayerId) {
         this.d_Initiator = p_Initiator;

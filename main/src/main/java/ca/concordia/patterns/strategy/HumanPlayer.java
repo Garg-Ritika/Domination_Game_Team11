@@ -36,7 +36,7 @@ public class HumanPlayer implements OrderInterface {
 
     public HumanPlayer(Player p_Initiator, Player p_Negotiate_PlayerId) {
         this.d_Initiator = p_Initiator;
-        this.d_NegotiatePlayerId= p_Negotiate_PlayerId;
+        this.d_NegotiatePlayerId = p_Negotiate_PlayerId;
     }
 
     public void advance() {
@@ -50,8 +50,7 @@ public class HumanPlayer implements OrderInterface {
                 && (d_Source != null)
                 && (d_Target != null)) {
             L_Valid_condition = true;
-        }
-        else {
+        } else {
             LogUtil.log("invalid order");
         }
 
@@ -97,7 +96,7 @@ public class HumanPlayer implements OrderInterface {
                 && (d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName()))
                 && (d_Source != null)
                 && (d_Target != null)) {
-            L_Valid_condition=true;
+            L_Valid_condition = true;
         } else {
             LogUtil.log("invalid order");
         }
@@ -120,9 +119,8 @@ public class HumanPlayer implements OrderInterface {
 
         if ((d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName())) && (d_Target != null)) {
             // the target territory must belong to the player that created the order
-            L_Valid_condition= true;
-        }
-        else{
+            L_Valid_condition = true;
+        } else {
             LogUtil.log("invalid order");
 
         }
@@ -144,9 +142,8 @@ public class HumanPlayer implements OrderInterface {
 
         if ((d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName()) != true) && (d_Target != null)) {
             // the target territory must not belong to the player that created the order
-            L_Valid_condition= true;
-        }
-        else {
+            L_Valid_condition = true;
+        } else {
             LogUtil.log("invalid order");
 
         }
@@ -166,9 +163,8 @@ public class HumanPlayer implements OrderInterface {
 
         if (d_Target.getOwner().getPlayerName().equalsIgnoreCase(d_Initiator.getPlayerName())) {
             // the target territory must belong to the player that created the order
-            L_Valid_condition= true;
-        }
-        else{
+            L_Valid_condition = true;
+        } else {
             LogUtil.log("invalid deploy order");
         }
 
@@ -188,9 +184,8 @@ public class HumanPlayer implements OrderInterface {
 
         if (d_NegotiatePlayerId.getPlayerName() != null) {
             // target Player Id must exist
-            L_Valid_condition= true;
-        }
-        else {
+            L_Valid_condition = true;
+        } else {
             LogUtil.log("invalid order");
         }
 

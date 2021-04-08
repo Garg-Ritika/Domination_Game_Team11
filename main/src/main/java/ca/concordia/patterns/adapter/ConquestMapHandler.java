@@ -17,11 +17,11 @@ public class ConquestMapHandler {
 
     private Map d_Map;
 
-    public ConquestMapHandler(){
+    public ConquestMapHandler() {
         d_Map = new Map();
     }
 
-    public ConquestMapHandler(Map p_Map){
+    public ConquestMapHandler(Map p_Map) {
         d_Map = p_Map;
     }
 
@@ -61,11 +61,11 @@ public class ConquestMapHandler {
                     }
                 } else if (l_Line.equalsIgnoreCase(HEADER_TERRITORIES)) {
 
-                    int l_CountryId =0;
+                    int l_CountryId = 0;
                     while ((l_Line = l_Br.readLine()) != null) {
                         LogUtil.log("country : " + l_Line);
 
-                        if (l_Line.length() >0)  {
+                        if (l_Line.length() > 0) {
 
                             String[] l_CountryArray = l_Line.trim().split(",");
                             // create the country id as per order;
@@ -79,8 +79,8 @@ public class ConquestMapHandler {
                             String l_ContinentName = l_CountryArray[3];
 
                             int l_ContinentIdInteger = 0;
-                            for (Continent continent: d_Map.getListOfContinents()){
-                                if (continent.getName().equalsIgnoreCase(l_ContinentName)){
+                            for (Continent continent : d_Map.getListOfContinents()) {
+                                if (continent.getName().equalsIgnoreCase(l_ContinentName)) {
                                     l_ContinentIdInteger = continent.getID();
                                 }
                             }
@@ -101,7 +101,8 @@ public class ConquestMapHandler {
     }
 
     /**
-     *  Read borders in second pass such that the country id should already be in the map
+     * Read borders in second pass such that the country id should already be in the map
+     *
      * @param p_MapFile
      * @throws IOException
      */
@@ -113,14 +114,14 @@ public class ConquestMapHandler {
             BufferedReader l_Br = new BufferedReader(l_Fr);
 
             String l_Line;
-            int l_CountryId =0;
+            int l_CountryId = 0;
             while ((l_Line = l_Br.readLine()) != null) {
                 if (l_Line.equalsIgnoreCase(HEADER_TERRITORIES)) {
 
                     while ((l_Line = l_Br.readLine()) != null) {
                         LogUtil.log("country : " + l_Line);
 
-                        if (l_Line.length() >0)  {
+                        if (l_Line.length() > 0) {
 
                             String[] l_CountryArray = l_Line.trim().split(",");
                             // create the country id as per order;
@@ -134,8 +135,8 @@ public class ConquestMapHandler {
                                 String l_BorderCountryName = (l_CountryArray[l_I]);
                                 // find id from the map
                                 int l_BorderCountryId = 0;
-                                for (Country l_Country : d_Map.getListOfCountries()){
-                                    if (l_Country.getName().equalsIgnoreCase(l_BorderCountryName)){
+                                for (Country l_Country : d_Map.getListOfCountries()) {
+                                    if (l_Country.getName().equalsIgnoreCase(l_BorderCountryName)) {
                                         l_BorderCountryId = l_Country.getCountryID();
                                         break;
                                     }
@@ -158,26 +159,25 @@ public class ConquestMapHandler {
      * Private method to write the map file
      *
      * @param p_MapFile the map file object
-     *
      */
-    public void writeMapFile(File p_MapFile)  {
+    public void writeMapFile(File p_MapFile) {
         try {
 
             FileWriter l_FileWriter = new FileWriter(p_MapFile);
             BufferedWriter l_BufferedWriter = new BufferedWriter(l_FileWriter);
 
-            String l_Content = "[Map]"+ "\r\n";
+            String l_Content = "[Map]" + "\r\n";
             l_Content += "author=Team11 \r\n";
 
-            l_Content += "\r\n"+ HEADER_CONTINENTS +"\r\n";
+            l_Content += "\r\n" + HEADER_CONTINENTS + "\r\n";
             for (Continent l_Continent : d_Map.getListOfContinents()) {
                 l_Content += l_Continent.getName() + "=" + l_Continent.getArmyCount() + "\r\n";
             }
 
-            l_Content += "\r\n"+HEADER_TERRITORIES+"\r\n";
+            l_Content += "\r\n" + HEADER_TERRITORIES + "\r\n";
             for (Country l_Country : d_Map.getListOfCountries()) {
                 String l_BorderCountries = getBorderCountryNames(l_Country);
-                l_Content += l_Country.getName() + l_Country.getX() + " " + l_Country.getY() + "," + l_Country.getName() + l_BorderCountries  + " \r\n";
+                l_Content += l_Country.getName() + l_Country.getX() + " " + l_Country.getY() + "," + l_Country.getName() + l_BorderCountries + " \r\n";
             }
 
 
@@ -185,24 +185,25 @@ public class ConquestMapHandler {
             l_BufferedWriter.write(l_Content);
             l_BufferedWriter.close();
             l_FileWriter.close();
-        }catch (IOException io){
+        } catch (IOException io) {
 
         }
     }
 
     /**
-     *  Helper class to find the border country names that can be used to append to the territory line
+     * Helper class to find the border country names that can be used to append to the territory line
+     *
      * @param p_Country
      * @return
      */
-    private String getBorderCountryNames(Country p_Country){
+    private String getBorderCountryNames(Country p_Country) {
         StringBuilder borderString = new StringBuilder();
-        for (Border l_Border: d_Map.getListOfBorders()){
-            if (l_Border.getCountryId() == p_Country.getCountryID()){
+        for (Border l_Border : d_Map.getListOfBorders()) {
+            if (l_Border.getCountryId() == p_Country.getCountryID()) {
                 //found, now create string
-                for(int l_BorderCountryID: l_Border.getNeighbours()){
-                    for (Country l_Country: d_Map.getListOfCountries()){
-                        borderString.append(","+l_Country.getName());
+                for (int l_BorderCountryID : l_Border.getNeighbours()) {
+                    for (Country l_Country : d_Map.getListOfCountries()) {
+                        borderString.append("," + l_Country.getName());
                     }
                 }
                 break;
