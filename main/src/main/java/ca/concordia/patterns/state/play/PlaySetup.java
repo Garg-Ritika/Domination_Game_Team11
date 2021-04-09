@@ -6,6 +6,7 @@ import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.mapworks.MapEditor;
 import ca.concordia.patterns.observer.LogUtil;
+import ca.concordia.patterns.strategy.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ public class PlaySetup extends Play {
      * @param p_ge GameEngine object
      */
     public PlaySetup(GameEngine p_ge) {
-        //super(p_ge,p_map);
         super(p_ge);
     }
 
@@ -150,6 +150,9 @@ public class PlaySetup extends Play {
             int l_NumberOfPlayers = d_ge.getListOfPlayers().size();
             if (l_NumberOfPlayers >= 3 && l_NumberOfPlayers <= 5) {
 
+                LogUtil.log("assigning strategy to players as per name");
+                assignStrategyToPlayers();
+
                 LogUtil.log("number of countries between [3 to 5] so assign countries to player now ..");
                 if (assignCountriesToPlayers()) {
                     // start main-loop after this..
@@ -218,5 +221,24 @@ public class PlaySetup extends Play {
             }
         }
         return true;
+    }
+
+    private void assignStrategyToPlayers() {
+        LogUtil.log("Assigning strategies to player according to name");
+        for (Player l_Player : d_ge.getListOfPlayers()) {
+            String l_Name = l_Player.getPlayerName();
+            if (l_Name.equalsIgnoreCase("aggressive")) {
+                l_Player.setStrategy(new Aggressive(d_ge));
+            } else if (l_Name.equalsIgnoreCase("benevolent")) {
+                l_Player.setStrategy(new Benevolent(d_ge));
+            } else if (l_Name.equalsIgnoreCase("cheater")) {
+                l_Player.setStrategy(new Cheater(d_ge));
+            } else if (l_Name.equalsIgnoreCase("random")) {
+                l_Player.setStrategy(new Odd(d_ge));
+            } else {
+                l_Player.setStrategy(new Human(d_ge));
+            }
+        }
+
     }
 }

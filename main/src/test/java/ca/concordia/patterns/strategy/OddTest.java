@@ -1,4 +1,4 @@
 package ca.concordia.patterns.strategy;
 
-public class RandomTest {
+public class OddTest {
 }

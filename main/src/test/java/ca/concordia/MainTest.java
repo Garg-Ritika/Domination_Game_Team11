@@ -2,7 +2,6 @@ package ca.concordia;
 
 import ca.concordia.dao.*;
 import ca.concordia.gameengine.GameEngineTest;
-import ca.concordia.gameengine.TournamentCreatorTest;
 import ca.concordia.mapworks.MapEditorTest;
 import ca.concordia.mapworks.ValidateMapTest;
 import ca.concordia.patterns.command.*;
@@ -11,7 +10,6 @@ import ca.concordia.patterns.state.edit.PostLoadTest;
 import ca.concordia.patterns.state.edit.PreloadTest;
 import ca.concordia.patterns.state.end.EndTest;
 import ca.concordia.patterns.state.play.*;
-import ca.concordia.patterns.strategy.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -49,7 +47,7 @@ import org.junit.runners.Suite;
         //BenevolentTest.class,
         //CheaterTest.class,
         //HumanTest.class,
-        //RandomTest.class
+        //OddTest.class
 })
 public class MainTest extends TestCase {
 
@@ -68,6 +66,5 @@ public class MainTest extends TestCase {
 
         assertTrue(true);
     }
-
 
 }

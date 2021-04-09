@@ -1,17 +1,19 @@
 package ca.concordia.patterns.strategy;
 
-public interface Strategy {
+import ca.concordia.dao.Player;
+import ca.concordia.gameengine.GameEngine;
+import ca.concordia.patterns.command.Order;
 
-    void advance();
+import java.util.LinkedList;
 
-    void airlift();
+public abstract class Strategy {
 
-    void blockade();
+    public GameEngine d_Ge;
 
-    void bomb();
+    public Strategy(GameEngine p_Ge) {
+        d_Ge = p_Ge;
+    }
 
-    void deploy();
-
-    void diplomacy();
+    abstract public LinkedList<Order> create(Player p_Player);
 
 }

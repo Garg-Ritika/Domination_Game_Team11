@@ -5,6 +5,7 @@ import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.strategy.Strategy;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -260,11 +261,14 @@ public class Player {
 
     /**
      * This method is used to create the order of the commands by adding target, source and number of armies in the list
-     *
-     * @param p_O An object of class Order is passed as an argument which will be used to add a specific passed order in the list.
      */
-    public void createOrder(Order p_O) {
-        d_ListOfOrders.add(p_O);
+    public void createOrder() {
+        LinkedList<Order> l_OrderList = this.d_Strategy.create(this);
+        if (l_OrderList != null) {
+            for (Order l_O : l_OrderList) {
+                d_ListOfOrders.add(l_O);
+            }
+        }
     }
 
     /**
