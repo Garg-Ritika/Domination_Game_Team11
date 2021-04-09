@@ -15,21 +15,10 @@ public class MapHandlerAdapter extends DominationMapHandler {
     /**
      * ConquestMapHandler class's object is initialized
      */
-    ConquestMapHandler d_CMH = new ConquestMapHandler();
-    /**
-     * Declaration of Map object
-     */
-    Map d_Map;
+    ConquestMapHandler d_CMH ;
 
-    /**
-     * This is the constructor that initializes ConquestMapHandler object and
-     * Map oject
-     *  @param p_CMH ConquestMapHandler object
-     * @param p_Map Map object
-     */
-    public MapHandlerAdapter(ConquestMapHandler p_CMH, Map p_Map) {
+    public MapHandlerAdapter(ConquestMapHandler p_CMH) {
         d_CMH = p_CMH;
-        d_Map = p_Map;
     }
 
     /**
@@ -46,6 +35,7 @@ public class MapHandlerAdapter extends DominationMapHandler {
 
     /**
      * Private method to write the map file
+     *
      * @param p_MapFile the map file object
      */
     @Override

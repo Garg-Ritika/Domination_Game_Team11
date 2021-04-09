@@ -3,9 +3,12 @@ package ca.concordia.mapworks;
 import ca.concordia.dao.*;
 import ca.concordia.patterns.adapter.ConquestMapHandler;
 import ca.concordia.patterns.adapter.DominationMapHandler;
+import ca.concordia.patterns.adapter.MapHandlerAdapter;
 import ca.concordia.patterns.observer.LogUtil;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -353,26 +356,7 @@ public class MapEditor {
      * @throws IOException inputOutput exception
      */
     public void editMap(File p_MapPath) throws IOException {
-        String l_MapType = DOMINATION_MAP_TYPE;
-        Scanner l_Keyboard = new Scanner(System.in);
-
-        LogUtil.log("========================================");
-        LogUtil.log("1. Domination Map");
-        LogUtil.log("2. Conquest Map ");
-        LogUtil.log("Press 1 for Domination map 2 for Conquest map ");
-        LogUtil.log("=======================================");
-        int l_Input = l_Keyboard.nextInt();
-        LogUtil.log(Integer.toString(l_Input));
-        switch (l_Input) {
-            case 1:
-                l_MapType = DOMINATION_MAP_TYPE;
-                break;
-            case 2:
-                l_MapType = CONQUEST_MAP_TYPE;
-                break;
-        }
-
-        readMapFile(p_MapPath, l_MapType);
+        readMapFile(p_MapPath);
         validateMap();
     }
 
@@ -400,12 +384,19 @@ public class MapEditor {
      * @return map object
      * @throws IOException if an error is found, it will throw an error of InputOutput type
      */
-    public Map readMapFile(File p_MapFile, String p_MapType) throws IOException {
+    public Map readMapFile(File p_MapFile) throws IOException {
         resetCurrentMap();
-        if (p_MapType.equalsIgnoreCase(DOMINATION_MAP_TYPE)) {
-            this.d_CurrentMap = new DominationMapHandler(d_CurrentMap).readMapFile(p_MapFile);
-        } else if (p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)) {
-            this.d_CurrentMap = new ConquestMapHandler(d_CurrentMap).readMapFile(p_MapFile);
+
+        if (p_MapFile!= null) {
+            BufferedReader bufferReaderForFile = new BufferedReader(new FileReader(p_MapFile));
+            String firstLine = bufferReaderForFile.readLine();
+            DominationMapHandler dmh = new DominationMapHandler(d_CurrentMap);
+            ConquestMapHandler cmh = new ConquestMapHandler(d_CurrentMap);
+
+            if (!firstLine.startsWith(";")) {
+                dmh = new MapHandlerAdapter(cmh);
+            }
+            d_CurrentMap = dmh.readMapFile(p_MapFile);
         }
         return getCurrentMap();
     }
@@ -446,4 +437,5 @@ public class MapEditor {
         }
         return l_Graph;
     }
+
 }

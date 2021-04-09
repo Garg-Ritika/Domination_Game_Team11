@@ -70,7 +70,7 @@ public class MapEditorTest {
         try {
             //d_mapEditor.saveMap(new File("abc.map"));
             d_mapEditor.writeMapFile(new File("abc.map"), MapEditor.DOMINATION_MAP_TYPE);
-            d_mapEditor.readMapFile(new File("abc.map"), MapEditor.DOMINATION_MAP_TYPE);
+            d_mapEditor.readMapFile(new File("abc.map"));
             //d_mapEditor.editMap(new File("abc.map"));
             d_mapEditor.showMap();
         } catch (IOException io) {

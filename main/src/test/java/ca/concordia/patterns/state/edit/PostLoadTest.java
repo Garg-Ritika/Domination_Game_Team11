@@ -64,17 +64,7 @@ public class PostLoadTest {
         System.setOut(new PrintStream(l_OutContent));
 
         PostLoad l_Po = new PostLoad(d_ge);
-
-        InputStream stdin = System.in;
-        try {
-            ByteArrayInputStream bin = new ByteArrayInputStream("1".getBytes());
-            System.setIn(bin);
-
-            l_Po.editMap(d_str2);
-        } finally {
-            System.setIn(stdin);
-            System.out.println("finally ");
-        }
+        l_Po.editMap(d_str2);
 
         String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch";
         assertEquals(true, l_OutContent.toString().startsWith(l_Ex));

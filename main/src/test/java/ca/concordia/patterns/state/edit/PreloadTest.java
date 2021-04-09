@@ -60,17 +60,8 @@ public class PreloadTest {
         System.setOut(new PrintStream(l_OutContent));
 
         Preload l_Pr = new Preload(d_ge);
+        l_Pr.editMap(d_Str2);
 
-        InputStream stdin = System.in;
-        try {
-            ByteArrayInputStream bin = new ByteArrayInputStream("1".getBytes());
-            System.setIn(bin);
-            l_Pr.editMap(d_Str2);
-
-        } finally {
-            System.setIn(stdin);
-            System.out.println("finally ");
-        }
         String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" ;
         assertEquals(true, l_OutContent.toString().startsWith(l_Ex));
 
