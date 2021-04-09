@@ -15,7 +15,7 @@ public class MapHandlerAdapter extends DominationMapHandler {
     /**
      * ConquestMapHandler class's object is initialized
      */
-    ConquestMapHandler d_CMH ;
+    ConquestMapHandler d_CMH;
 
     public MapHandlerAdapter(ConquestMapHandler p_CMH) {
         d_CMH = p_CMH;

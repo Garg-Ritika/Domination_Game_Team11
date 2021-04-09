@@ -387,7 +387,7 @@ public class MapEditor {
     public Map readMapFile(File p_MapFile) throws IOException {
         resetCurrentMap();
 
-        if (p_MapFile!= null) {
+        if (p_MapFile != null) {
             BufferedReader bufferReaderForFile = new BufferedReader(new FileReader(p_MapFile));
             String firstLine = bufferReaderForFile.readLine();
             DominationMapHandler dmh = new DominationMapHandler(d_CurrentMap);
@@ -408,13 +408,14 @@ public class MapEditor {
      */
     public void writeMapFile(File p_MapFile, String p_MapType) {
         LogUtil.log("writing .map file to path " + p_MapFile.getAbsolutePath());
-
+        DominationMapHandler dmh = new DominationMapHandler(d_CurrentMap);
         if (p_MapType.equalsIgnoreCase(DOMINATION_MAP_TYPE)) {
-            new DominationMapHandler(d_CurrentMap).writeMapFile(p_MapFile);
+            dmh.writeMapFile(p_MapFile);
         } else if (p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)) {
-            new ConquestMapHandler(d_CurrentMap).writeMapFile(p_MapFile);
+            ConquestMapHandler cmh = new ConquestMapHandler(d_CurrentMap);
+            dmh = new MapHandlerAdapter(cmh);
+            dmh.writeMapFile(p_MapFile);
         }
-
         LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
     }
 

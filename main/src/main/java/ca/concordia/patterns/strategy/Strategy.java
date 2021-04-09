@@ -1,6 +1,6 @@
 package ca.concordia.patterns.strategy;
 
-public interface Order {
+public interface Strategy {
 
     void advance();
 

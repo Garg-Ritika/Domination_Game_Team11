@@ -3,9 +3,8 @@ package ca.concordia.patterns.state.edit;
 import ca.concordia.gameengine.GameEngine;
 import org.junit.Test;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -62,7 +61,7 @@ public class PreloadTest {
         Preload l_Pr = new Preload(d_ge);
         l_Pr.editMap(d_Str2);
 
-        String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch" ;
+        String l_Ex = "INCOMPLETE COMMAND, create an in-memory map file from scratch";
         assertEquals(true, l_OutContent.toString().startsWith(l_Ex));
 
 

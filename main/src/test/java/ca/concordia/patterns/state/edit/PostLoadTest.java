@@ -3,9 +3,8 @@ package ca.concordia.patterns.state.edit;
 import ca.concordia.gameengine.GameEngine;
 import org.junit.Test;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 

@@ -1,4 +1,3 @@
-/*
 package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Country;
@@ -12,10 +11,10 @@ import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
-*/
+
 /**
  * Test class for Advance Class
- *//*
+ */
 
 public class AdvanceTest {
 
@@ -25,10 +24,10 @@ public class AdvanceTest {
     Territory d_Source;
     Territory d_Target;
 
-    */
-/**
+
+    /**
      * This is the method to be run before test method. It initializes the Advance class objects
-     *//*
+     */
 
     @Before
     public void init() {
@@ -55,10 +54,10 @@ public class AdvanceTest {
         d_Advance = new Advance(d_PlayerOne, d_Source, d_Target, l_NumberOfArmiesAttacking);
     }
 
-    */
-/**
+
+    /**
      * This method verify that when the attack is executed the army is assigned to correct player.
-     *//*
+     */
 
     @Test
     public void executeTest() {
@@ -72,10 +71,10 @@ public class AdvanceTest {
         assertEquals(true, d_PlayerOne.getD_RandomCardAssigned());
     }
 
-    */
-/**
+
+    /**
      * This method check whether the advance order is valid or not.
-     *//*
+     */
 
     @Test
     public void validTest() {
@@ -83,4 +82,4 @@ public class AdvanceTest {
     }
 
 }
-*/
+

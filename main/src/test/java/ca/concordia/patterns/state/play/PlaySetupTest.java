@@ -31,7 +31,6 @@ public class PlaySetupTest {
         assertEquals(true, outContent.toString().contains(l_ex));
 
 
-
     }
 
     /**

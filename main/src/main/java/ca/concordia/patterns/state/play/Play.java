@@ -17,7 +17,7 @@ import ca.concordia.patterns.state.end.End;
  */
 public class Play extends Phase {
 
-    final int MINIMUM_PLAYER_COUNT = 1;
+    final int MINIMUM_PLAYER_COUNT = 3;
 
     /**
      * Constructor that contains GameEngine object as argument

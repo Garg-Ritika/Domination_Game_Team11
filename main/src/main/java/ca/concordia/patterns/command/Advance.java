@@ -1,4 +1,3 @@
-/*
 package ca.concordia.patterns.command;
 
 import ca.concordia.dao.Country;
@@ -8,7 +7,7 @@ import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.Random;
 
-*/
+
 /**
  * Move some armies from one of the current player’s territories (source) to an adjacent territory
  * (target).
@@ -22,7 +21,7 @@ import java.util.Random;
  * <p>
  * This class implements interface "Order", so as to use
  * execute(), valid(), printOrder() methods
- *//*
+ */
 
 public class Advance implements Order {
 
@@ -31,8 +30,7 @@ public class Advance implements Order {
     Player d_Initiator;
     int d_NumToAdvance;
 
-    */
-/**
+    /**
      * This is the constructor that takes player, source and target territory object and no of armies as argument
      * encapsulating all necessary data to execute the command
      *
@@ -40,7 +38,7 @@ public class Advance implements Order {
      * @param p_Source    Source territory form which armies are to be moved
      * @param p_Target    target territory to which armies are to be attacked
      * @param p_Num       no of armies attacking
-     *//*
+     */
 
     public Advance(Player p_Initiator, Territory p_Source, Territory p_Target, int p_Num) {
         // encapsulate all necessary data to execute the command
@@ -50,8 +48,8 @@ public class Advance implements Order {
         this.d_NumToAdvance = p_Num;
     }
 
-    */
-/**
+
+    /**
      * execute method executes the Advance card after validity check
      * move some armies from one of the current player’s territories (source) to an adjacent territory
      * (target). If the target territory belongs to the current player, the armies are moved to the target
@@ -59,7 +57,7 @@ public class Advance implements Order {
      * territories.
      * If attack happens successfully, update owner to d_Initiator
      * Here both the source and the target Territories are Receivers
-     *//*
+     */
 
     public void execute() {
         String[] l_ListOfRandomCards = {"bomb", "blockade", "airlift", "negotiate"};
@@ -101,8 +99,8 @@ public class Advance implements Order {
         }
     }
 
-    */
-/**
+
+    /**
      * This method will check if the given inputs are a valid input for Advance Card
      * check if countrynamefrom exists
      * check if countryname has the same owner as the d_Initiator of this commad
@@ -111,7 +109,7 @@ public class Advance implements Order {
      * check if countrynameto exists
      *
      * @return true/false
-     *//*
+     */
 
     public boolean valid() {
         boolean L_Valid_condition = false;
@@ -130,11 +128,11 @@ public class Advance implements Order {
         return false;
     }
 
-    */
-/**
+
+    /**
      * This method will print all the commands that have been executed and
      * the log for which have been saved in log file
-     *//*
+     */
 
     public void printOrder() {
         LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
@@ -143,4 +141,4 @@ public class Advance implements Order {
                 + " number to advance: " + this.d_NumToAdvance);
     }
 }
-*/
+

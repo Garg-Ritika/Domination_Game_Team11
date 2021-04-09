@@ -10,7 +10,6 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * This class is used to set the game play by loading the map, creating the players and assigning respective
@@ -149,7 +148,7 @@ public class PlaySetup extends Play {
 
         try {
             int l_NumberOfPlayers = d_ge.getListOfPlayers().size();
-            if (l_NumberOfPlayers >= 1 && l_NumberOfPlayers <= 5) {
+            if (l_NumberOfPlayers >= 3 && l_NumberOfPlayers <= 5) {
 
                 LogUtil.log("number of countries between [3 to 5] so assign countries to player now ..");
                 if (assignCountriesToPlayers()) {
