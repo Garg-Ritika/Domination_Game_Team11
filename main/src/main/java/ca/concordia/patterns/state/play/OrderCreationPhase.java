@@ -1,13 +1,13 @@
 package ca.concordia.patterns.state.play;
 
+import ca.concordia.dao.Country;
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.strategy.*;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * This is the OrderCreationPhase class that extends the MainPlay class
@@ -25,6 +25,7 @@ public class OrderCreationPhase extends MainPlay {
     public static final String COMMAND_AIRLIFT = "airlift";
     public static final String COMMAND_NEGOTIATE = "negotiate";
     public static final String COMMAND_QUIT = "quit";
+    List<String> l_Order_Names = new ArrayList<>();
 
 
     /**
@@ -93,6 +94,7 @@ public class OrderCreationPhase extends MainPlay {
     public boolean takeOrder(Player p_Player) {
         LogUtil.log("taking order ");
         Scanner l_Keyboard = new Scanner(System.in);
+        l_Order_Names.clear();
         boolean l_MaintainLoop = true;
         int l_Army = p_Player.getNoOfArmies();
         do {
@@ -109,16 +111,82 @@ public class OrderCreationPhase extends MainPlay {
 
             LogUtil.log("deploy, advance, " + p_Player.getOrderCards().toString() + ", quit" + " cards are available for player " + p_Player.getPlayerName());
 
+            String l_CommandInput = null;
 
-            String l_CommandInput = l_Keyboard.nextLine();
-            LogUtil.log(l_CommandInput);
+            if(p_Player.getPlayerName().equalsIgnoreCase("HumanPlayer")){
+                l_CommandInput = l_Keyboard.nextLine();
+                LogUtil.log(l_CommandInput);
+                if ("quit".equalsIgnoreCase(l_CommandInput)) {
+                    //If end the game if quit is passed during the order creation, move to another player..
+                    if (l_Army > 0) {
+                        LogUtil.log("Cannot quit as not all armies are deployed");
+                        LogUtil.log("Cannot quit as not all armies are deployed");
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            else if(p_Player.getPlayerName().equalsIgnoreCase("AggressivePlayer")){
+                Country maxArmyCountry= p_Player.getListOfCountries().get(0);
+                Country minArmyCountry = maxArmyCountry;
+                for (int i=0; i<p_Player.getListOfCountries().size(); i++) {
+                    if(p_Player.getListOfCountries().get(i).getArmyCount()> maxArmyCountry.getArmyCount()){
+                        maxArmyCountry= p_Player.getListOfCountries().get(i);
+                    }
+                    if(p_Player.getListOfCountries().get(i).getArmyCount()< minArmyCountry.getArmyCount()){
+                        minArmyCountry= p_Player.getListOfCountries().get(i);
+                    }
+                }
 
-            if ("quit".equalsIgnoreCase(l_CommandInput)) {
-                //If end the game if quit is passed during the order creation, move to another player..
-                if (l_Army > 0) {
-                    LogUtil.log("Cannot quit as not all armies are deployed");
-                    LogUtil.log("Cannot quit as not all armies are deployed");
-                } else {
+                String targetCountryName = maxArmyCountry.getName();
+                String source_country = targetCountryName;
+
+                Random rand = new Random();
+                Country opponentCountry = null;
+                for (int i = 0; i < d_ge.getMap().getListOfCountries().size(); i++) {
+                    int randomIndex = rand.nextInt(d_ge.getMap().getListOfCountries().size());
+                    if(!p_Player.getListOfCountries().contains(d_ge.getMap().getListOfCountries().get(randomIndex))) {
+                        opponentCountry= d_ge.getMap().getListOfCountries().get(randomIndex);
+                    }
+                }
+                System.out.println(l_Order_Names.toString());
+                System.out.println(l_Order_Names.isEmpty());
+                if(l_Order_Names.isEmpty()) {
+                    l_CommandInput = "deploy " + targetCountryName + " " + p_Player.getNoOfArmies();
+                    l_Order_Names.add("deploy");
+                }
+                else if(l_Order_Names.contains("deploy") && (!l_Order_Names.contains("advance"))){
+                    l_CommandInput= "advance "+ source_country+" "+ opponentCountry.getName() +" "+p_Player.getNoOfArmies();
+                    l_Order_Names.add("advance");
+                }
+                else if (l_Order_Names.contains("deploy")&& l_Order_Names.contains("advance") && p_Player.getD_RandomCardAssigned()){
+                    for (String card: p_Player.getOrderCards()) {
+                        if (card.equals("airlift")){
+                            l_CommandInput= card+" "+ minArmyCountry.getName() +" "+ maxArmyCountry.getName() +" "+p_Player.getNoOfArmies();
+                        }
+                        else if(card.equals("blockade")){
+                            l_CommandInput= card+" "+ maxArmyCountry.getName() +" "+p_Player.getNoOfArmies();
+                        }
+                        else if(card.equals("bomb")){
+                            l_CommandInput= card+" "+ opponentCountry.getName() +" "+p_Player.getNoOfArmies();
+                        }
+                        else if(card.equals("diplomacy")){
+                            Player NegotiatePlayer = null;
+                            for (int i = 0; i < d_ge.getListOfPlayers().size(); i++) {
+                                int randomIndex = rand.nextInt(d_ge.getListOfPlayers().size());
+                                if(!p_Player.equals(d_ge.getListOfPlayers().get(randomIndex))) {
+                                    NegotiatePlayer = d_ge.getListOfPlayers().get(randomIndex);
+                                }
+                            }
+                            l_CommandInput= card+" "+ NegotiatePlayer;
+                        }
+                        else {
+                            LogUtil.log("Quitting here");
+                            return false;
+                        }
+                    }
+                }
+                else {
                     return false;
                 }
             }
@@ -181,24 +249,25 @@ public class OrderCreationPhase extends MainPlay {
             if (p_Command.length == 3) {
                 String l_CountryName = p_Command[1];
                 Territory l_Territory = d_ge.getMap().getTerritoryByName(l_CountryName);
+                System.out.println(l_Territory.getOwner().getPlayerName() +" of "+p_Player.getPlayerName());
                 String l_Num = p_Command[2];
                 int l_NumInt = Integer.parseInt(l_Num);
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (l_ArmyCountOfPlayer >= l_NumInt) {
                     String order_name= "deploy";
-                    if(p_Player.getPlayerName()=="HumanPlayer"){
+                    if(p_Player.getPlayerName().equals("HumanPlayer")){
                         p_Player.setD_PlayerBehavior(new HumanPlayer(p_Player, l_Territory, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="AggressivePlayer"){
+                    else if(p_Player.getPlayerName().equals("AggressivePlayer")){
                         p_Player.setD_PlayerBehavior(new AggressivePlayer(p_Player, l_Territory, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="Cheaterplayer"){
+                    else if(p_Player.getPlayerName().equals("Cheaterplayer")){
                         p_Player.setD_PlayerBehavior(new CheaterPlayer(p_Player, l_Territory, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="RandomPlayer"){
+                    else if(p_Player.getPlayerName().equals("RandomPlayer")){
                         p_Player.setD_PlayerBehavior(new RandomPlayer(p_Player, l_Territory, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="BenevolentPlayer"){
+                    else if(p_Player.getPlayerName().equals("BenevolentPlayer")){
                         p_Player.setD_PlayerBehavior(new BenevolentPlayer(p_Player, l_Territory, l_NumInt));
                     }
 //                    Order o= new HumanPlayer(p_Player, l_Territory, l_NumInt);
@@ -239,19 +308,19 @@ public class OrderCreationPhase extends MainPlay {
                         && l_TerritoryTarget.getOwner().getIsNegotiatedPlayer() == true) {
                     LogUtil.log(p_Player + " cannot attack the target country");
                 } else {
-                    if(p_Player.getPlayerName()=="HumanPlayer") {
+                    if(p_Player.getPlayerName().equals("HumanPlayer")) {
                         p_Player.setD_PlayerBehavior(new HumanPlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="RandomPlayer") {
+                    else if(p_Player.getPlayerName().equals("RandomPlayer")) {
                         p_Player.setD_PlayerBehavior(new RandomPlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="CheaterPlayer") {
+                    else if(p_Player.getPlayerName().equals("CheaterPlayer")) {
                         p_Player.setD_PlayerBehavior(new CheaterPlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="AggressivePlayer") {
+                    else if(p_Player.getPlayerName().equals("AggressivePlayer")) {
                         p_Player.setD_PlayerBehavior(new AggressivePlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="BenevolentPlayer") {
+                    else if(p_Player.getPlayerName().equals("BenevolentPlayer") ){
                         p_Player.setD_PlayerBehavior(new BenevolentPlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
                     String order_name= "advance";
@@ -286,19 +355,19 @@ public class OrderCreationPhase extends MainPlay {
                 } else {
                     if (p_Player.getOrderCards().contains("bomb")) {
                         p_Player.removeNewOrderCard("bomb");
-                        if(p_Player.getPlayerName()=="HumanPlayer") {
+                        if(p_Player.getPlayerName().equals("HumanPlayer")) {
                             p_Player.setD_PlayerBehavior(new HumanPlayer(p_Player, l_TerritoryTarget));
                         }
-                        else if(p_Player.getPlayerName()=="AggressivePlayer") {
+                        else if(p_Player.getPlayerName().equals("AggressivePlayer") ){
                             p_Player.setD_PlayerBehavior(new AggressivePlayer(p_Player, l_TerritoryTarget));
                         }
-                        else if(p_Player.getPlayerName()=="RandomPlayer") {
+                        else if(p_Player.getPlayerName().equals("RandomPlayer")) {
                             p_Player.setD_PlayerBehavior(new RandomPlayer(p_Player, l_TerritoryTarget));
                         }
-                        else if(p_Player.getPlayerName()=="CheaterPlayer") {
+                        else if(p_Player.getPlayerName().equals("CheaterPlayer")) {
                             p_Player.setD_PlayerBehavior(new CheaterPlayer(p_Player, l_TerritoryTarget));
                         }
-                        else if(p_Player.getPlayerName()=="BenevolentPlayer") {
+                        else if(p_Player.getPlayerName().equals("BenevolentPlayer") ){
                             p_Player.setD_PlayerBehavior(new BenevolentPlayer(p_Player, l_TerritoryTarget));
                         }
                         String order_name= "bomb";
@@ -330,19 +399,19 @@ public class OrderCreationPhase extends MainPlay {
                 Territory l_TerritorySource = d_ge.getMap().getTerritoryByName(l_CountryNameSource);
                 if (p_Player.getOrderCards().contains("blockade")) {
                     p_Player.removeNewOrderCard("blockade");
-                    if(p_Player.getPlayerName()=="HumanPlayer") {
+                    if(p_Player.getPlayerName().equals("HumanPlayer") ){
                         p_Player.setD_PlayerBehavior(new HumanPlayer(p_Player, l_TerritorySource));
                     }
-                    else if(p_Player.getPlayerName()=="RandomPlayer") {
+                    else if(p_Player.getPlayerName().equals("RandomPlayer")) {
                         p_Player.setD_PlayerBehavior(new RandomPlayer(p_Player, l_TerritorySource));
                     }
-                    else if(p_Player.getPlayerName()=="BenevolentPlayer") {
+                    else if(p_Player.getPlayerName().equals("BenevolentPlayer")) {
                         p_Player.setD_PlayerBehavior(new BenevolentPlayer(p_Player, l_TerritorySource));
                     }
-                    else if(p_Player.getPlayerName()=="CheaterPlayer") {
+                    else if(p_Player.getPlayerName().equals("CheaterPlayer")) {
                         p_Player.setD_PlayerBehavior(new CheaterPlayer(p_Player, l_TerritorySource));
                     }
-                    else if(p_Player.getPlayerName()=="AggressivePlayer") {
+                    else if(p_Player.getPlayerName().equals("AggressivePlayer")) {
                         p_Player.setD_PlayerBehavior(new AggressivePlayer(p_Player, l_TerritorySource));
                     }
                     String order_name= "blockade";
@@ -378,19 +447,19 @@ public class OrderCreationPhase extends MainPlay {
                 int l_NumInt = Integer.parseInt(l_Num);
                 if (p_Player.getOrderCards().contains("airlift")) {
                     p_Player.removeNewOrderCard("airlift");
-                    if(p_Player.getPlayerName()=="HumanPlayer") {
+                    if(p_Player.getPlayerName().equals("HumanPlayer")) {
                         p_Player.setD_PlayerBehavior(new HumanPlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="RandomPlayer") {
+                    else if(p_Player.getPlayerName().equals("RandomPlayer")) {
                         p_Player.setD_PlayerBehavior(new RandomPlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="AggressivePlayer") {
+                    else if(p_Player.getPlayerName().equals("AggressivePlayer")) {
                         p_Player.setD_PlayerBehavior(new AggressivePlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="CheaterPlayer") {
+                    else if(p_Player.getPlayerName().equals("CheaterPlayer")) {
                         p_Player.setD_PlayerBehavior(new CheaterPlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
-                    else if(p_Player.getPlayerName()=="BenevolentPlayer") {
+                    else if(p_Player.getPlayerName().equals("BenevolentPlayer")) {
                         p_Player.setD_PlayerBehavior(new BenevolentPlayer(p_Player, l_TerritorySource, l_TerritoryTarget, l_NumInt));
                     }
                     String order_name= "airlift";
@@ -423,19 +492,19 @@ public class OrderCreationPhase extends MainPlay {
                     if (l_GamePlayer.getPlayerName().equalsIgnoreCase(l_PlayerName)) {
                         if (p_Player.getOrderCards().contains("negotiate")) {
                             p_Player.removeNewOrderCard("negotiate");
-                            if(p_Player.getPlayerName()=="HumanPlayer") {
+                            if(p_Player.getPlayerName().equals("HumanPlayer")) {
                                 p_Player.setD_PlayerBehavior(new HumanPlayer(p_Player, l_GamePlayer));
                             }
-                            else if(p_Player.getPlayerName()=="AggressivePlayer") {
+                            else if(p_Player.getPlayerName().equals("AggressivePlayer")) {
                                 p_Player.setD_PlayerBehavior(new AggressivePlayer(p_Player, l_GamePlayer));
                             }
-                            else if(p_Player.getPlayerName()=="RandomPlayer") {
+                            else if(p_Player.getPlayerName().equals("RandomPlayer")) {
                                 p_Player.setD_PlayerBehavior(new RandomPlayer(p_Player, l_GamePlayer));
                             }
-                            else if(p_Player.getPlayerName()=="CheaterPlayer") {
+                            else if(p_Player.getPlayerName().equals("CheaterPlayer")) {
                                 p_Player.setD_PlayerBehavior(new CheaterPlayer(p_Player, l_GamePlayer));
                             }
-                            else if(p_Player.getPlayerName()=="BenevolentPlayer") {
+                            else if(p_Player.getPlayerName().equals("BenevolentPlayer")) {
                                 p_Player.setD_PlayerBehavior(new BenevolentPlayer(p_Player, l_GamePlayer));
                             }
                             String order_name= "diplomacy";
