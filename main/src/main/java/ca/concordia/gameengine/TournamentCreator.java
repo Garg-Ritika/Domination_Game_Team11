@@ -4,13 +4,14 @@ import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.ArrayList;
 
-/** command format: tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
- *  Things we are doing here:
+/**
+ *  This class will:
  *  1. check number of maps is between 1 to 5
  *  2. check number of players is between 2 to 4
  *  3. check number of games is between 1 to 5
- *  4. check number of between 10 t0 15
+ *  4. check number of turns between 10 t0 50
  *  Now, for each map, start game, find winner and save the results.
+ *  (command format: tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns)
  *
  **/
 
@@ -22,6 +23,10 @@ public class TournamentCreator {
     private int d_NumberOfGames = 1; // 1 to 5
     private int d_NumberOfTurns = 10;     // 10 to 15
 
+    /**
+     * These are global data members corresponding to which, Player's behaviour strategies are associated
+     */
+
     public static final String HUMAN_PLAYER = "human";
     public static final String AGGRESSIVE_PLAYER = "aggressive";
     public static final String BENEVOLENT_PLAYER = "benevolent";
@@ -30,6 +35,11 @@ public class TournamentCreator {
 
     public static ArrayList<Result> finalResult = new ArrayList<Result>();
 
+    /**
+     * This is the TournamentCreator constructor with command as its parameter
+     * and it includes various methods associated with this class
+     * @param p_CommandArray array of commands
+     */
     public TournamentCreator(String[] p_CommandArray){
         d_CommandArray = p_CommandArray;
         findMapFiles();
@@ -38,6 +48,11 @@ public class TournamentCreator {
         findNumberOfTurns();
     }
 
+    /**
+     * This method starts the tournament
+     * Tournament starts with the user choosing different maps, computer player strategies,
+     * games to be played on each map and maximum number of turns for each game
+     */
     public void startTournament(){
         boolean l_GoodToStart = false;
         if (d_mapFiles.size() >=1 && d_mapFiles.size() <=5){
@@ -75,6 +90,9 @@ public class TournamentCreator {
         }
     }
 
+    /**
+     * This method finds the different map files
+     */
     private void findMapFiles(){
         boolean foundM = false;
         for (String val : d_CommandArray){
@@ -90,6 +108,9 @@ public class TournamentCreator {
         }
     }
 
+    /**
+     * This method finds the computer player' behaviour strategies
+     */
     private void findPlayerStrategies(){
         boolean foundP = false;
         for (String val: d_CommandArray){
@@ -112,6 +133,10 @@ public class TournamentCreator {
         }
     }
 
+    /**
+     * This method finds the number of games to be played on each map
+     * using try-catch block
+     */
     private void findNumberOfGames(){
         try{
             boolean foundG = false;
@@ -130,6 +155,10 @@ public class TournamentCreator {
         }
     }
 
+    /**
+     * This method finds the maximum number of turns
+     * for each game
+     */
     private void findNumberOfTurns() {
         try {
             boolean foundD = false;
@@ -148,25 +177,48 @@ public class TournamentCreator {
         }
     }
 
+    /**
+     * At the end of tournament report of result should be displayed
+     * So this class stores the result of the game
+     * It declares map, Game number and winner player's name
+     */
     class Result{
         String d_Map;
         String d_GameNo;
         String d_WinnerPlayer;
 
+        /**
+         * This is the constructor that initializes Map, Game number and winner player's name
+         * @param p_Map map used
+         * @param p_GameNo games to be played
+         * @param p_WinnerPlayer name of winner player
+         */
         public Result(String p_Map,String p_GameNo, String p_WinnerPlayer){
             d_Map = p_Map;
             d_GameNo = p_GameNo;
             d_WinnerPlayer = p_WinnerPlayer;
         }
 
+        /**
+         * This is the getter method which returns the map file
+         * @return d_Map Map object
+         */
         public String getMap(){
             return d_Map;
         }
 
+        /**
+         * This is the String getter method that returns Game number
+         * @return d_GameNo Game played on each map
+         */
         public String getGameNo(){
             return d_GameNo;
         }
 
+        /**
+         * This method returns the name of winner player
+         * @return d_WinnerPlayer name of the player who wins the game
+         */
         public String getWinnerPlayer() {
             return d_WinnerPlayer;
         }
