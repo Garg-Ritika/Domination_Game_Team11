@@ -10,6 +10,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Human Player: <br>
+ * A human player that requires user interaction to make decisions.
+ */
+
 public class Human extends Strategy {
 
     public static final String COMMAND_SHOW_MAP = "showmap";

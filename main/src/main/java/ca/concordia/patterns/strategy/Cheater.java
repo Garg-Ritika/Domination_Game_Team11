@@ -6,6 +6,12 @@ import ca.concordia.patterns.command.Order;
 
 import java.util.LinkedList;
 
+/**
+ * Cheater Player: <br>
+ * A cheater computer player strategy whose issueOrder() method conquers all the immediate neighboring enemy countries, and
+ * then doubles the number of armies on its countries that have enemy neighbors.
+ */
+
 public class Cheater extends Strategy {
 
     private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
