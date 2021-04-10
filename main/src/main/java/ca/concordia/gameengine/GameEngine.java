@@ -8,6 +8,7 @@ import ca.concordia.patterns.state.edit.Preload;
 import ca.concordia.patterns.state.play.PlaySetup;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -74,8 +75,11 @@ public class GameEngine {
 
     // data members
     private Phase d_GamePhase;
-    private Map d_Map;
+    private Map d_Map = new Map();
     private List<Player> d_ListOfPlayers = new ArrayList<Player>();
+    private int d_NumberOfTurnsAllowed = 50;
+    private int d_CurrentTurnCount = 0;
+    private LinkedList<GameStats> d_OverallResult = new LinkedList<GameStats>();
 
     /**
      * This getter method returns the current GamePhase
@@ -123,6 +127,48 @@ public class GameEngine {
         return d_ListOfPlayers;
     }
 
+    public int getNumberOfTurnsAllowed() {
+        return d_NumberOfTurnsAllowed;
+    }
+
+    public void setNumberOfTurnsAllowed(int p_NumberOfTurnsAllowed) {
+        d_NumberOfTurnsAllowed = p_NumberOfTurnsAllowed;
+    }
+
+    public void resetNumberOfTurnsAllowed() {
+        d_NumberOfTurnsAllowed = 50;
+    }
+
+    public int getCurrentTurnCount() {
+        return d_CurrentTurnCount;
+    }
+
+    public void setCurrentTurnCount(int p_CurrentTurnCount) {
+        d_CurrentTurnCount = p_CurrentTurnCount;
+    }
+
+    public void resetCurrentTurnCount() {
+        d_CurrentTurnCount = 0;
+    }
+
+    public void addGameStats(String p_Winner) {
+        int l_size = d_OverallResult.size();
+        String l_GameNumber = "Game" + l_size + 1;
+        String l_MapName = getMap().getName();
+        String l_Result = p_Winner;
+        GameStats l_GameStats = new GameStats(l_MapName, l_GameNumber, l_Result);
+        d_OverallResult.add(l_GameStats);
+    }
+
+    public void resetOverallResults() {
+        d_OverallResult.clear();
+    }
+
+    public LinkedList<GameStats> getOverallResults() {
+        return d_OverallResult;
+    }
+
+
     /**
      * Main game engine used a method to GameEngine constructor Main class
      * It takes input from the user to enter the phase
@@ -137,12 +183,14 @@ public class GameEngine {
         LogUtil.log("Game Engine started");
         Scanner l_Keyboard = new Scanner(System.in);
         do {
-            LogUtil.log("========================================");
-            LogUtil.log("edit");
-            LogUtil.log("play");
-            LogUtil.log("quit");
-            LogUtil.log("choose one of the option from above?: ");
-            LogUtil.log("=======================================");
+            LogUtil.log("=================================================================================|");
+            LogUtil.log("| PURPOSE             COMMAND STRUCTURE                                          |");
+            LogUtil.log("| Map Editing     :   edit                                                       |");
+            LogUtil.log("| Single Mode     :   play                                                       |");
+            LogUtil.log("| Tournament Mode :   tournament -M <mapfiles> -P <players> -G<games> -D<turns>  |");
+            LogUtil.log("| Close All       :   quit                                                       |");
+            LogUtil.log("> choose one of the option from above?: ");
+            LogUtil.log("==================================================================================");
             String l_Input = l_Keyboard.nextLine();
             LogUtil.log(l_Input);
             switch (l_Input) {
@@ -155,6 +203,11 @@ public class GameEngine {
                     // setting phase as playsetup
                     setPhase(new PlaySetup(this));
                     startMainPlay(l_Keyboard);
+                    break;
+                case COMMAND_TOURNAMENT:
+                    // start tournament
+                    TournamentCreator l_TC = new TournamentCreator(this, l_Input);
+                    l_TC.startTournament();
                     break;
                 case "quit":
                     return;
@@ -245,7 +298,6 @@ public class GameEngine {
             LogUtil.log("| Play:PlaySetup       : loadmap         <filepath>                                        |");
             LogUtil.log("| Play:PlaySetup       : gameplayer      -add <player-name>                                |");
             LogUtil.log("| Play:PlaySetup       : assigncountries                                                   |");
-            LogUtil.log("| Play:PlaySetup       : tournament -M <mapfiles> -P <players> -G<games> -D<turns>         |");
             LogUtil.log("| Any                  : quit                                                              |");
             LogUtil.log("============================================================================================");
 
@@ -272,11 +324,11 @@ public class GameEngine {
                             break;
 
                         case COMMAND_ASSIGN_COUNTRIES:
+                            resetNumberOfTurnsAllowed();
+                            resetCurrentTurnCount();
+                            resetOverallResults();
                             d_GamePhase.assignCountries();
                             break;
-
-                        case COMMAND_TOURNAMENT:
-                            new TournamentCreator(l_CommandArray).startTournament();
 
                         case COMMAND_SHOW_MAP:
                             d_GamePhase.showMap();

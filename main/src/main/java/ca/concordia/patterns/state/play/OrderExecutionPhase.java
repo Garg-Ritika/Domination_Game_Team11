@@ -105,20 +105,31 @@ public class OrderExecutionPhase extends MainPlay {
 
     /**
      * This method is used to check if the game has ended by checking if there is only one available
-     * player in the list of players
+     * player in the list of players.
+     * <p>
+     * Also it is checking for number of turns allowed, if it increases, the result would be DRAW
      */
     private void checkForEnd() {
-        if (d_ge.getListOfPlayers().size() < 2) {
-            d_ge.setPhase(new End(d_ge));
-            if (d_ge.getListOfPlayers().size() > 0) {
-                LogUtil.log("Game ends and the winner is " + d_ge.getListOfPlayers().get(0));
+        d_ge.setCurrentTurnCount(d_ge.getCurrentTurnCount() + 1);
+        if (d_ge.getCurrentTurnCount() < d_ge.getNumberOfTurnsAllowed()) {
+            if (d_ge.getListOfPlayers().size() < 2) {
+                d_ge.setPhase(new End(d_ge));
+                if (d_ge.getListOfPlayers().size() > 0) {
+                    String l_Winner = d_ge.getListOfPlayers().get(0).getPlayerName();
+                    LogUtil.log("Game ends and the winner is " + l_Winner);
+                    d_ge.addGameStats(l_Winner);
+                } else {
+                    LogUtil.log("Game ends and the result is DRAW");
+                    d_ge.addGameStats("DRAW");
+                }
             } else {
-                LogUtil.log("Game ends");
+                next();
             }
         } else {
-            next();
+            d_ge.setPhase(new End(d_ge));
+            LogUtil.log("Game ends and result is DRAW");
+            d_ge.addGameStats("DRAW");
         }
     }
-
 }
 

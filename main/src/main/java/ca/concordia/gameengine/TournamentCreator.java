@@ -1,6 +1,8 @@
 package ca.concordia.gameengine;
 
 import ca.concordia.patterns.observer.LogUtil;
+import ca.concordia.patterns.state.Phase;
+import ca.concordia.patterns.state.play.PlaySetup;
 
 import java.util.ArrayList;
 
@@ -26,32 +28,85 @@ public class TournamentCreator {
     public static final String RANDOM_PLAYER = "random";
     public static final String CHEATER_PLAYER = "cheater";
     public static ArrayList<Result> finalResult = new ArrayList<Result>();
+    private String d_Input;
     private String[] d_CommandArray;
     private ArrayList<String> d_mapFiles = new ArrayList<String>();
     private ArrayList<String> d_playerStrategies = new ArrayList<String>();
     private int d_NumberOfGames = 1; // 1 to 5
     private int d_NumberOfTurns = 10;     // 10 to 15
+    private GameEngine d_Ge;
+    private Phase d_GamePhase;
 
     /**
      * This is the TournamentCreator constructor with command as its parameter
      * and it includes various methods associated with this class
      *
-     * @param p_CommandArray array of commands
+     * @param p_Input array of commands
      */
-    public TournamentCreator(String[] p_CommandArray) {
-        d_CommandArray = p_CommandArray;
+    public TournamentCreator(GameEngine p_Ge, String p_Input) {
+        d_Ge = p_Ge;
+        d_GamePhase = d_Ge.getPhase();
+        d_Input = p_Input;
+        if (d_Input != null) {
+            d_CommandArray = d_Input.trim().split(" ");
+        }
         findMapFiles();
         findPlayerStrategies();
         findNumberOfGames();
         findNumberOfTurns();
     }
 
+    public void startTournament() {
+        boolean l_GoodToStart = isCommandValid();
+        if (l_GoodToStart) {
+            // set turns allowed
+            d_Ge.resetCurrentTurnCount();
+            d_Ge.setNumberOfTurnsAllowed(d_NumberOfTurns);
+
+            // set playsetup phase
+            d_Ge.setPhase(new PlaySetup(d_Ge));
+            for (String l_MapFile : d_mapFiles) {
+
+                // loadmap command - to load map
+                String[] l_LoadCommand = {"loadmap ", l_MapFile};
+
+                d_GamePhase.loadMap(l_LoadCommand);
+
+                // gameplayer command - to add players
+                int l_PlayersCount = d_playerStrategies.size();
+                String l_GamePlayerCommand = "gameplayer";
+                for (String l_Type : d_playerStrategies) {
+                    l_GamePlayerCommand += " -add " + l_Type;
+                }
+                String[] l_GamePlayerCommandArray = l_GamePlayerCommand.trim().split(" ");
+                d_GamePhase.setPlayers(l_GamePlayerCommandArray);
+
+                for (int i = 0; i <= d_NumberOfGames; i++) {
+                    // assigncountries command - to assign countries to players
+                    d_GamePhase.assignCountries();
+                }
+            }
+            // print tournament report
+
+            LogUtil.log("==============================================================================");
+            for (GameStats l_Stats : d_Ge.getOverallResults()) {
+                LogUtil.log(l_Stats.getMapName() + "   " + l_Stats.getGameNumber() + "   " + l_Stats.getResult());
+            }
+            LogUtil.log("==============================================================================");
+
+        } else {
+            LogUtil.log("Unable to start tournament because of wrong command");
+        }
+    }
+
     /**
      * This method starts the tournament
      * Tournament starts with the user choosing different maps, computer player strategies,
      * games to be played on each map and maximum number of turns for each game
+     *
+     * @return boolean
      */
-    public void startTournament() {
+    private boolean isCommandValid() {
         boolean l_GoodToStart = false;
         if (d_mapFiles.size() >= 1 && d_mapFiles.size() <= 5) {
 
@@ -74,18 +129,7 @@ public class TournamentCreator {
         } else {
             LogUtil.log("Number of maps is not between 1 to 5");
         }
-
-        if (l_GoodToStart) {
-            for (String l_MapFile : d_mapFiles) {
-                // TODO:
-                // PlaySetup: loadmap: do we need to automatically identify which type of map is it ? I think YES
-                // PlaySetup: game-player, integrate it with strategy ..
-                for (int i = 0; i <= d_NumberOfGames; i++) {
-                    // PlaySetup: assigncountries --> pass number of turn as arugment, so that it can decide before that..
-                    // Save result.
-                }
-            }
-        }
+        return l_GoodToStart;
     }
 
     /**

@@ -262,7 +262,7 @@ public class Player {
     /**
      * This method is used to create the order of the commands by adding target, source and number of armies in the list
      */
-    public void createOrder() {
+    public void issueOrder() {
         LinkedList<Order> l_OrderList = this.d_Strategy.create(this);
         if (l_OrderList != null) {
             for (Order l_O : l_OrderList) {

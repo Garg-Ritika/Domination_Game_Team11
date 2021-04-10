@@ -397,6 +397,7 @@ public class MapEditor {
                 dmh = new MapHandlerAdapter(cmh);
             }
             d_CurrentMap = dmh.readMapFile(p_MapFile);
+            d_CurrentMap.setName(p_MapFile.toString());
         }
         return getCurrentMap();
     }

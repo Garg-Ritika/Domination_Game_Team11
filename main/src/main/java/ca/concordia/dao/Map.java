@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Map {
 
+    private String d_Name;
     private List<Continent> d_ListOfContinents;
     private List<Country> d_ListOfCountries;
     private List<Border> d_ListOfBorders;
@@ -28,6 +29,14 @@ public class Map {
         this.d_ListOfContinents = new ArrayList<Continent>();
         this.d_ListOfCountries = new ArrayList<Country>();
         this.d_ListOfBorders = new ArrayList<Border>();
+    }
+
+    public String getName() {
+        return d_Name;
+    }
+
+    public void setName(String p_Name) {
+        d_Name = p_Name;
     }
 
     /**
