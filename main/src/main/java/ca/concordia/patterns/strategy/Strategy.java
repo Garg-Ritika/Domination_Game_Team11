@@ -6,6 +6,9 @@ import ca.concordia.patterns.command.Order;
 
 import java.util.LinkedList;
 
+/**
+ * Strategy class to process the type of player.
+ */
 public abstract class Strategy {
 
     public GameEngine d_Ge;

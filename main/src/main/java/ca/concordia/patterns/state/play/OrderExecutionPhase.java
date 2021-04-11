@@ -7,7 +7,7 @@ import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.end.End;
 
 /**
- * This classs is used to exexute all the order once the orders have been created by the players in round robin fashion
+ * This class is used to execute all the order once the orders have been created by the players in round robin fashion
  * It also removes the player from the existing list of it has no country owned to it and
  * eventually checks if the game has ended
  */
@@ -23,7 +23,7 @@ public class OrderExecutionPhase extends MainPlay {
     }
 
     /**
-     * This method is used to go to the reinforcement phase afer one turn has been complated and all the order
+     * This method is used to go to the reinforcement phase after one turn has been completed and all the order
      * have been executed for the same
      * it also resets the random card assigned and is negotiated player boolean values to False
      */

@@ -82,9 +82,9 @@ public class Play extends Phase {
     }
 
     /**
-     * editCoountry method takes command as input and shows invalid command message to user
+     * editCountry method takes command as input and shows invalid command message to user
      *
-     * @param p_Command editCoountry command
+     * @param p_Command editCountry command
      */
     @Override
     public void editCountry(String[] p_Command) {

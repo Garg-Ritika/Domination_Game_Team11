@@ -223,6 +223,11 @@ public class PlaySetup extends Play {
         return true;
     }
 
+    /**
+     * Type of strategy is taken as input in string type "l_Name" variable and then if this
+     * variable name matches to the type of strategy behavior i.e Aggressive, Benevolent etc
+     * then Player is set to that behavior
+     */
     private void assignStrategyToPlayers() {
         LogUtil.log("Assigning strategies to player according to name");
         for (Player l_Player : d_ge.getListOfPlayers()) {
