@@ -13,6 +13,7 @@ import static junit.framework.TestCase.assertEquals;
 public class MapHandlerAdapterTest {
     MapHandlerAdapter d_mha;
     ConquestMapHandler d_cmh;
+
     File p_MapFile= new File("sample1");
     File p_MapFile2= new File("sample2");
 
