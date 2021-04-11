@@ -11,7 +11,7 @@ import java.io.PrintStream;
 import static junit.framework.TestCase.assertEquals;
 
 public class MapHandlerAdapterTest {
-    
+
     MapHandlerAdapter d_mha;
     ConquestMapHandler d_cmh;
 
@@ -33,8 +33,7 @@ public class MapHandlerAdapterTest {
         System.setOut(new PrintStream(outContent));
 
         d_mha.readMapFile(p_MapFile);
-        String l_Ex = ">reading .map file from path: G:\\Domination_Game_Team11\\main\\sample1" + System.lineSeparator()+
-                "--> read borders file "+System.lineSeparator()+">reading .map file from path: G:\\Domination_Game_Team11\\main\\sample1";
+        String l_Ex = ">reading .map file from ";
         assertEquals(true, outContent.toString().startsWith(l_Ex));
 
     }
@@ -46,8 +45,7 @@ public class MapHandlerAdapterTest {
         System.setOut(new PrintStream(outContent));
 
         d_mha.writeMapFile(p_MapFile2);
-        String l_Ex = "writing .map file to path G:\\Domination_Game_Team11\\main\\sample2" + System.lineSeparator()+
-                "Successfully written map to .map file at: G:\\Domination_Game_Team11\\main\\sample2";
+        String l_Ex = "writing .map file to ";
         assertEquals(true, outContent.toString().startsWith(l_Ex));
 
     }
