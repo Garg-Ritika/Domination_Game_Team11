@@ -30,6 +30,7 @@ public class MapHandlerAdapter extends DominationMapHandler {
      */
     @Override
     public Map readMapFile(File p_MapFile) throws IOException {
+        LogUtil.log(">reading .map file from path: " + p_MapFile.getAbsolutePath());
         return new ConquestMapHandler().readMapFile(p_MapFile);
     }
 

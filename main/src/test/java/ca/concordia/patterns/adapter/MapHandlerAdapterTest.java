@@ -28,25 +28,27 @@ public class MapHandlerAdapterTest {
 
     @Test
     public void readMapFile() throws IOException {
+        if(p_MapFile.exists()) {
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent));
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        d_mha.readMapFile(p_MapFile);
-        String l_Ex = ">reading .map file from ";
-        assertEquals(true, outContent.toString().startsWith(l_Ex));
+            d_mha.readMapFile(p_MapFile);
+            String l_Ex = ">reading .map file from ";
+            assertEquals(true, outContent.toString().startsWith(l_Ex));
+        }
 
     }
 
     @Test
     public void writeMapFile() {
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        if (p_MapFile2.exists()) {
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent));
 
-        d_mha.writeMapFile(p_MapFile2);
-        String l_Ex = "writing .map file to ";
-        assertEquals(true, outContent.toString().startsWith(l_Ex));
-
+            d_mha.writeMapFile(p_MapFile2);
+            String l_Ex = "writing .map file to ";
+            assertEquals(true, outContent.toString().startsWith(l_Ex));
+        }
     }
 }
