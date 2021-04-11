@@ -11,6 +11,7 @@ import java.io.PrintStream;
 import static junit.framework.TestCase.assertEquals;
 
 public class MapHandlerAdapterTest {
+    
     MapHandlerAdapter d_mha;
     ConquestMapHandler d_cmh;
 
