@@ -81,6 +81,7 @@ public class OrderExecutionPhase extends MainPlay {
                         order.printOrder();
                         order.execute();
                     }
+                    p.setNoOfArmies(0);
                     removePlayers(p);
                 } catch (Exception e) {
                     LogUtil.log("EXCEPTION: " + e.getMessage());
