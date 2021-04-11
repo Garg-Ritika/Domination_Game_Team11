@@ -33,6 +33,7 @@ public class Human extends Strategy {
 
     @Override
     public LinkedList<Order> create(Player p_Player) {
+        d_ListOfOrders.clear();
         takeOrder(p_Player);
         return d_ListOfOrders;
     }

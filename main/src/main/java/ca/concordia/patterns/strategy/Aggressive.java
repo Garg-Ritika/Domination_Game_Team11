@@ -32,13 +32,13 @@ public class Aggressive extends Strategy {
     GameEngine d_ge;
 
     public Aggressive(GameEngine p_Ge) {
-
         super(p_Ge);
         this.d_ge= p_Ge;
     }
 
     @Override
     public LinkedList<Order> create(Player p_Player) {
+        d_ListOfOrders.clear();
         takeOrder(p_Player);
         return d_ListOfOrders;
     }
