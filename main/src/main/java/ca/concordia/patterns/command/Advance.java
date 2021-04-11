@@ -135,7 +135,7 @@ public class Advance implements Order {
      */
 
     public void printOrder() {
-        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
+        LogUtil.log("Advance: d_Initiator: " + this.d_Initiator
                 + " source: " + this.d_Source
                 + " target: " + this.d_Target
                 + " number to advance: " + this.d_NumToAdvance);
