@@ -9,17 +9,28 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This class includes methods to read and write map files
+ * readMapFile also throws IOException
+ */
 public class DominationMapHandler {
 
     public static final String HEADER_CONTINENT = "[continents]";
     public static final String HEADER_COUNTRIES = "[countries]";
     public static final String HEADER_BORDERS = "[borders]";
 
+    /**
+     * declaring Map object
+     */
     private Map d_Map;
 
+    /**
+     * Constructor that initializes map
+     */
     public DominationMapHandler() {
         d_Map = new Map();
     }
+
 
     public DominationMapHandler(Map p_Map) {
         d_Map = p_Map;
