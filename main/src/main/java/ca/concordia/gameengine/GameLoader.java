@@ -25,7 +25,8 @@ public class GameLoader {
         d_Ge = p_Ge;
     }
 
-    public void loadGameFile() {
+    public void loadGameFile(File p_SavedGameFile) {
+        readGameFile(p_SavedGameFile);
         if (d_MapPath.isEmpty() && !d_Phase.isEmpty() && d_ListOfPlayer.size() > 0) {
             // set playsetup phase
             d_Ge.setPhase(new PlaySetup(d_Ge));

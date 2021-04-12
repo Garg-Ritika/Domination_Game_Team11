@@ -7,6 +7,7 @@ import ca.concordia.patterns.state.Phase;
 import ca.concordia.patterns.state.edit.Preload;
 import ca.concordia.patterns.state.play.PlaySetup;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -72,6 +73,8 @@ public class GameEngine {
     public static final String COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 
     public static final String COMMAND_TOURNAMENT = "tournament";
+    public static final String COMMAND_LOAD_GAME = "loadgame";
+
 
     // data members
     private Phase d_GamePhase;
@@ -187,7 +190,8 @@ public class GameEngine {
             LogUtil.log("| PURPOSE             COMMAND STRUCTURE                                          |");
             LogUtil.log("| Map Editing     :   edit                                                       |");
             LogUtil.log("| Single Mode     :   play                                                       |");
-            LogUtil.log("| Tournament Mode :   tournament -M <mapfiles> -P <players> -G <games> -D <turns>  |");
+            LogUtil.log("| Tournament Mode :   tournament -M <maps> -P <players> -G <games> -D <turns>    |");
+            LogUtil.log("| Load saved-game :   loadgame <filename>                                        |");
             LogUtil.log("| Close All       :   quit                                                       |");
             LogUtil.log("> choose one of the option from above?: ");
             LogUtil.log("==================================================================================");
@@ -209,6 +213,18 @@ public class GameEngine {
                     // start tournament
                     TournamentCreator l_TC = new TournamentCreator(this, l_Input);
                     l_TC.startTournament();
+                    break;
+                case COMMAND_LOAD_GAME:
+                    // load game
+                    LogUtil.log("loadgame command received ..");
+                    try{
+                        if (arr.length == 2) {
+                            String l_FileName =  arr[1];
+                            new GameLoader(this).loadGameFile(new File(l_FileName));
+                        }
+                    }catch (Exception l_E){
+                        l_E.printStackTrace();
+                    }
                     break;
                 case "quit":
                     return;

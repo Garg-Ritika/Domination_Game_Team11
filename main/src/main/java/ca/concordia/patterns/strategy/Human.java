@@ -3,9 +3,11 @@ package ca.concordia.patterns.strategy;
 import ca.concordia.dao.Player;
 import ca.concordia.dao.Territory;
 import ca.concordia.gameengine.GameEngine;
+import ca.concordia.gameengine.GameSaver;
 import ca.concordia.patterns.command.*;
 import ca.concordia.patterns.observer.LogUtil;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -18,6 +20,7 @@ import java.util.Scanner;
 public class Human extends Strategy {
 
     public static final String COMMAND_SHOW_MAP = "showmap";
+    public static final String COMMAND_SAVE_GAME = "savegame";
     public static final String COMMAND_DEPLOY = "deploy";
     public static final String COMMAND_ADVANCE = "advance";
     public static final String COMMAND_BOMB = "bomb";
@@ -60,6 +63,7 @@ public class Human extends Strategy {
             LogUtil.log("| Play:MainPlay:Order  : airlift         <source-country> <target-country> <num-of-armies> |");
             LogUtil.log("| Play:MainPlay:Order  : negotiate       <player-name>                                     |");
             LogUtil.log("| Any                  : showmap                                                           |");
+            LogUtil.log("| Any                  : savegame        <filename>                                        |");
             LogUtil.log("| Any                  : quit                                                              |");
             LogUtil.log("============================================================================================");
 
@@ -111,6 +115,10 @@ public class Human extends Strategy {
 
                         case COMMAND_SHOW_MAP:
                             d_Ge.getPhase().showMap();
+                            break;
+
+                        case COMMAND_SAVE_GAME:
+                            processSaveGameCommand(l_CommandArray);
                             break;
 
                         default:
@@ -302,6 +310,25 @@ public class Human extends Strategy {
                 }
             }
         } catch (Exception l_E) {
+            l_E.printStackTrace();
+        }
+    }
+
+    /**
+     * This is the helper method to process "savegame" command
+     * "savegame filename"
+     *
+     *
+     * @param p_Command actions for the player e.g. deploy
+     */
+    private void processSaveGameCommand(String[] p_Command){
+        LogUtil.log("savegame command received ..");
+        try{
+            if (p_Command.length == 2) {
+                String l_FileName =  p_Command[1];
+                new GameSaver(d_Ge).saveFile(new File(l_FileName));
+            }
+        }catch (Exception l_E){
             l_E.printStackTrace();
         }
     }
