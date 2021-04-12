@@ -8,7 +8,9 @@ import ca.concordia.patterns.command.*;
 import ca.concordia.patterns.observer.LogUtil;
 
 import java.util.*;
-
+/**
+ * Random strategy,
+ */
 
 public class Odd extends Strategy {
 
@@ -35,6 +37,14 @@ public class Odd extends Strategy {
         takeOrder(p_Player);
         return d_ListOfOrders;
     }
+    /**
+     * This method takes order from user and process the commands
+     * Player cannot quit the game unless all armies are deployed
+     * when keyboard's input is no longer needed, keyboard.close() function is called
+     *
+     * @param p_Player Player name
+     * @return false if player's number of armies is 0 or after keyboard.close() is called
+     */
 
     public boolean takeOrder(Player p_Player) {
         LogUtil.log("taking order ");
@@ -166,6 +176,13 @@ public class Odd extends Strategy {
         l_Keyboard.close();
         return false;
     }
+    /**
+     * This method process "deploy" command
+     * "deploy countryID numarmies"
+     *
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
 
     private int processDeployCommand(Player p_Player, String[] p_Command, int p_Army) {
         LogUtil.log("deploy  command received ..... ");
@@ -190,7 +207,13 @@ public class Odd extends Strategy {
         }
         return p_Army;
     }
-
+    /**
+     * This method process "advance" command
+     * "advance countrynamefrom countynameto numarmies"
+     *
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
 
     private void processAdvanceCommand(Player p_Player, String[] p_Command) {
         LogUtil.log("advance command received ..");
@@ -217,7 +240,13 @@ public class Odd extends Strategy {
             l_E.printStackTrace();
         }
     }
-
+    /**
+     * This method process "bomb" command
+     * "bomb countryID"
+     *
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
 
     private void processBombCommand(Player p_Player, String[] p_Command) {
         LogUtil.log("bomb command received ..");
@@ -243,6 +272,13 @@ public class Odd extends Strategy {
         }
     }
 
+    /**
+     * This is the helper method to process "blockade" command
+     * "blockade countryID"
+     *
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
     private void processBlockadeCommand(Player p_Player, String[] p_Command) {
         LogUtil.log("blockade command received ..");
         try {
@@ -264,7 +300,13 @@ public class Odd extends Strategy {
         }
     }
 
-
+    /**
+     * This is the helper method to process "Airlift" command
+     * "airlift sourcecountryID targetcountryID numarmies"
+     *
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
     private void processAirliftCommand(Player p_Player, String[] p_Command) {
         LogUtil.log("airlift command received ..");
         try {
@@ -288,8 +330,14 @@ public class Odd extends Strategy {
             l_E.printStackTrace();
         }
     }
+    /**
+     * This is the helper method to process "Diplomacy" command
+     * "negotiate playerID"
+     *
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
 
-   
     private void processDiplomacyCommand(Player p_Player, String[] p_Command) {
         LogUtil.log("diplomacy command received ..");
         try {
