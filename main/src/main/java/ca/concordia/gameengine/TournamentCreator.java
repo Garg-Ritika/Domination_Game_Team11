@@ -45,9 +45,8 @@ public class TournamentCreator {
      */
     public TournamentCreator(GameEngine p_Ge, String p_Input) {
         d_Ge = p_Ge;
-        System.out.println(p_Ge);
+        d_Ge.setPhase(new PlaySetup(d_Ge));
         d_GamePhase = d_Ge.getPhase();
-        System.out.println(d_GamePhase);
         d_Input = p_Input;
         if (d_Input != null) {
             d_CommandArray = d_Input.trim().split(" ");
@@ -152,7 +151,7 @@ public class TournamentCreator {
                 d_mapFiles.add(val);
             }
         }
-        System.out.println("mapfiles "+d_mapFiles.toString());
+        System.out.println("mapfiles " + d_mapFiles.toString());
     }
 
     /**
@@ -179,7 +178,7 @@ public class TournamentCreator {
                 }
             }
         }
-        System.out.println("players "+d_playerStrategies.toString());
+        System.out.println("players " + d_playerStrategies.toString());
     }
 
     /**
@@ -193,7 +192,7 @@ public class TournamentCreator {
                 if ("-g".equalsIgnoreCase(val)) {
                     foundG = true;
                     continue;
-                }else if ("-d".equalsIgnoreCase(val)) {
+                } else if ("-d".equalsIgnoreCase(val)) {
                     break;
                 }
 
@@ -202,7 +201,7 @@ public class TournamentCreator {
                     break;
                 }
             }
-            System.out.println("games "+d_NumberOfGames);
+            System.out.println("games " + d_NumberOfGames);
         } catch (Exception e) {
             LogUtil.log(e.getMessage());
         }
@@ -226,7 +225,7 @@ public class TournamentCreator {
                     break;
                 }
             }
-            System.out.println("turns "+d_NumberOfTurns);
+            System.out.println("turns " + d_NumberOfTurns);
         } catch (Exception e) {
             LogUtil.log(e.getMessage());
         }

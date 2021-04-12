@@ -6,21 +6,28 @@ package ca.concordia.gameengine;
  */
 public class GameStats {
 
-    /** This variable name indicates the name of Map used */
+    /**
+     * This variable name indicates the name of Map used
+     */
     String d_MapName;
 
-    /** This variable string indicates the game number */
+    /**
+     * This variable string indicates the game number
+     */
     String d_GameNumber;
 
-    /** This is the String variable that will store result */
+    /**
+     * This is the String variable that will store result
+     */
     String d_Result;
 
     /**
      * This is the GameStats constructor
      * that initializes Map name, Game number and result
-     * @param p_Map Name of map
+     *
+     * @param p_Map        Name of map
      * @param p_GameNumber Game number
-     * @param p_Result result of game
+     * @param p_Result     result of game
      */
     public GameStats(String p_Map, String p_GameNumber, String p_Result) {
         d_MapName = p_Map;
@@ -30,6 +37,7 @@ public class GameStats {
 
     /**
      * This is the getter method that will return name of map
+     *
      * @return d_MapName Map name
      */
     public String getMapName() {
@@ -38,6 +46,7 @@ public class GameStats {
 
     /**
      * This is the getter method that will return Game number
+     *
      * @return d_GameNumber Game number
      */
     public String getGameNumber() {
@@ -46,6 +55,7 @@ public class GameStats {
 
     /**
      * This getter method returns the result
+     *
      * @return d_Result result of the game played
      */
     public String getResult() {

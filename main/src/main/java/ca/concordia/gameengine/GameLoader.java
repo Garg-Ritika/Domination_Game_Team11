@@ -17,16 +17,16 @@ import java.util.List;
 public class GameLoader {
     private GameEngine d_Ge;
 
-    private String d_MapPath ;
-    private String d_Phase ;
+    private String d_MapPath;
+    private String d_Phase;
     private List<Player> d_ListOfPlayer = new ArrayList<Player>();
 
-    public GameLoader(GameEngine p_Ge){
+    public GameLoader(GameEngine p_Ge) {
         d_Ge = p_Ge;
     }
 
-    public void loadGameFile(){
-        if (d_MapPath.isEmpty() && !d_Phase.isEmpty() && d_ListOfPlayer.size()>0){
+    public void loadGameFile() {
+        if (d_MapPath.isEmpty() && !d_Phase.isEmpty() && d_ListOfPlayer.size() > 0) {
             // set playsetup phase
             d_Ge.setPhase(new PlaySetup(d_Ge));
 
@@ -37,7 +37,7 @@ public class GameLoader {
             // gameplayer command - to add players
             int l_PlayersCount = d_ListOfPlayer.size();
             String l_GamePlayerCommand = "gameplayer";
-            for (Player l_Player: d_ListOfPlayer) {
+            for (Player l_Player : d_ListOfPlayer) {
                 l_GamePlayerCommand += " -add " + l_Player.getPlayerName();
             }
             String[] l_GamePlayerCommandArray = l_GamePlayerCommand.trim().split(" ");
@@ -49,8 +49,8 @@ public class GameLoader {
         }
     }
 
-    private void readGameFile(File p_SavedGameFile){
-        try{
+    private void readGameFile(File p_SavedGameFile) {
+        try {
             FileReader l_Fr = new FileReader(p_SavedGameFile);
             BufferedReader l_Br = new BufferedReader(l_Fr);
 
@@ -60,21 +60,21 @@ public class GameLoader {
                     l_CurrentLine = l_Br.readLine();
                     d_MapPath = l_CurrentLine;
                 }
-                if (l_CurrentLine.contains("[CurrentPhase]")){
+                if (l_CurrentLine.contains("[CurrentPhase]")) {
                     l_CurrentLine = l_Br.readLine();
                     d_Phase = l_CurrentLine;
                 }
 
-                if (l_CurrentLine.contains("[Players]")){
-                    int count =0;
+                if (l_CurrentLine.contains("[Players]")) {
+                    int count = 0;
                     while (l_CurrentLine != null) {
                         l_CurrentLine = l_Br.readLine();
-                        Player l_P = new Player(l_CurrentLine,count++);
+                        Player l_P = new Player(l_CurrentLine, count++);
                         d_ListOfPlayer.add(l_P);
                     }
                 }
             }
-        }catch(IOException io){
+        } catch (IOException io) {
             LogUtil.log(io.getMessage());
         }
     }

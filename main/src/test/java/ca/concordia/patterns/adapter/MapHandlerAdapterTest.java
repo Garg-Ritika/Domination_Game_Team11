@@ -15,20 +15,19 @@ public class MapHandlerAdapterTest {
     MapHandlerAdapter d_mha;
     ConquestMapHandler d_cmh;
 
-    File p_MapFile= new File("sample1");
-    File p_MapFile2= new File("sample2");
-
+    File p_MapFile = new File("sample1");
+    File p_MapFile2 = new File("sample2");
 
 
     @Before
-    public void before(){
-        d_mha= new MapHandlerAdapter(d_cmh);
+    public void before() {
+        d_mha = new MapHandlerAdapter(d_cmh);
     }
 
 
     @Test
     public void readMapFile() throws IOException {
-        if(p_MapFile.exists()) {
+        if (p_MapFile.exists()) {
             ByteArrayOutputStream outContent = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outContent));
 

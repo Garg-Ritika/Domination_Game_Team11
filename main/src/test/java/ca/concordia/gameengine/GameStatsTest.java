@@ -9,8 +9,8 @@ public class GameStatsTest {
     GameStats gs;
 
     @Before
-    public void before(){
-        gs= new GameStats("abc","12","def");
+    public void before() {
+        gs = new GameStats("abc", "12", "def");
     }
 
     @Test

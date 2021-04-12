@@ -3,12 +3,14 @@ package ca.concordia.patterns.strategy;
 import ca.concordia.dao.Border;
 import ca.concordia.dao.Country;
 import ca.concordia.dao.Player;
-import ca.concordia.dao.Territory;
 import ca.concordia.gameengine.GameEngine;
-import ca.concordia.patterns.command.*;
+import ca.concordia.patterns.command.Order;
 import ca.concordia.patterns.observer.LogUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Cheater Player: <br>
@@ -18,14 +20,15 @@ import java.util.*;
 
 public class Cheater extends Strategy {
 
-    private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
-//    List<String> l_Order_Names = new ArrayList<>();
+    //    List<String> l_Order_Names = new ArrayList<>();
     GameEngine d_ge;
+    private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
 
     public Cheater(GameEngine p_Ge) {
         super(p_Ge);
-        this.d_ge= p_Ge;
+        this.d_ge = p_Ge;
     }
+
     @Override
     public LinkedList<Order> create(Player p_Player) {
 //        d_ListOfOrders.clear();
@@ -47,27 +50,29 @@ public class Cheater extends Strategy {
 //        l_Order_Names.clear();
 
 
-        LogUtil.log( " Turn for player " + p_Player.getPlayerName());
+        LogUtil.log(" Turn for player " + p_Player.getPlayerName());
 
         Random rand = new Random();
         Country randomCountry = null;
         for (int i = 0; i < p_Player.getListOfCountries().size(); i++) {
-            int randomIndex = rand.nextInt(p_Player.getListOfCountries().size()); {
-                randomCountry= p_Player.getListOfCountries().get(randomIndex);                }
+            int randomIndex = rand.nextInt(p_Player.getListOfCountries().size());
+            {
+                randomCountry = p_Player.getListOfCountries().get(randomIndex);
+            }
         }
         List<Integer> neighbourCountry = new ArrayList<>();
         for (Border l_Border : d_ge.getMap().getListOfBorders()) {
-            if(randomCountry.getCountryID()== l_Border.getCountryId()){
-                 neighbourCountry = l_Border.getNeighbours();
+            if (randomCountry.getCountryID() == l_Border.getCountryId()) {
+                neighbourCountry = l_Border.getNeighbours();
             }
         }
         System.out.println("--------------for conquering  neighbpr countries------");
-        for (Country country: d_ge.getMap().getListOfCountries()) {
-            for(int i=0; i<neighbourCountry.size(); i++){
-                if(country.getCountryID()== neighbourCountry.get(i)) {
-                    if(!country.getName().equals(randomCountry.getName())){
+        for (Country country : d_ge.getMap().getListOfCountries()) {
+            for (int i = 0; i < neighbourCountry.size(); i++) {
+                if (country.getCountryID() == neighbourCountry.get(i)) {
+                    if (!country.getName().equals(randomCountry.getName())) {
                         p_Player.addNewCountry(country);
-                        Player opponent =country.getOwner();
+                        Player opponent = country.getOwner();
                         opponent.removeNewCountry(country);
                     }
                 }
@@ -75,18 +80,17 @@ public class Cheater extends Strategy {
         }
 
         System.out.println("----- doubling the armies of own countries-------");
-        for (Country country: p_Player.getListOfCountries()) {
+        for (Country country : p_Player.getListOfCountries()) {
             for (Border l_Border : d_ge.getMap().getListOfBorders()) {
-                if(country.getCountryID()== l_Border.getCountryId()){
-                    for (int i: l_Border.getNeighbours()) {
-                        if(country.getCountryID()!=i){
-                            if(country.getArmyCount()>0){
-                                country.setArmyCount(country.getArmyCount()*2 );
+                if (country.getCountryID() == l_Border.getCountryId()) {
+                    for (int i : l_Border.getNeighbours()) {
+                        if (country.getCountryID() != i) {
+                            if (country.getArmyCount() > 0) {
+                                country.setArmyCount(country.getArmyCount() * 2);
                                 break;
-                            }
-                            else {
+                            } else {
                                 country.setArmyCount(2);
-                                 break;
+                                break;
                             }
                         }
                     }
