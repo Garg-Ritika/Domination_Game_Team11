@@ -45,7 +45,9 @@ public class TournamentCreator {
      */
     public TournamentCreator(GameEngine p_Ge, String p_Input) {
         d_Ge = p_Ge;
+        System.out.println(p_Ge);
         d_GamePhase = d_Ge.getPhase();
+        System.out.println(d_GamePhase);
         d_Input = p_Input;
         if (d_Input != null) {
             d_CommandArray = d_Input.trim().split(" ");
@@ -70,6 +72,7 @@ public class TournamentCreator {
                 // loadmap command - to load map
                 String[] l_LoadCommand = {"loadmap ", l_MapFile};
 
+                System.out.println(l_LoadCommand[1]);
                 d_GamePhase.loadMap(l_LoadCommand);
 
                 // gameplayer command - to add players
@@ -140,6 +143,7 @@ public class TournamentCreator {
         for (String val : d_CommandArray) {
             if ("-m".equalsIgnoreCase(val)) {
                 foundM = true;
+                continue;
             } else if ("-p".equalsIgnoreCase(val)) {
                 break;
             }
@@ -148,6 +152,7 @@ public class TournamentCreator {
                 d_mapFiles.add(val);
             }
         }
+        System.out.println("mapfiles "+d_mapFiles.toString());
     }
 
     /**
@@ -158,6 +163,7 @@ public class TournamentCreator {
         for (String val : d_CommandArray) {
             if ("-p".equalsIgnoreCase(val)) {
                 foundP = true;
+                continue;
             } else if ("-g".equalsIgnoreCase(val)) {
                 break;
             }
@@ -173,6 +179,7 @@ public class TournamentCreator {
                 }
             }
         }
+        System.out.println("players "+d_playerStrategies.toString());
     }
 
     /**
@@ -185,6 +192,9 @@ public class TournamentCreator {
             for (String val : d_CommandArray) {
                 if ("-g".equalsIgnoreCase(val)) {
                     foundG = true;
+                    continue;
+                }else if ("-d".equalsIgnoreCase(val)) {
+                    break;
                 }
 
                 if (foundG) {
@@ -192,6 +202,7 @@ public class TournamentCreator {
                     break;
                 }
             }
+            System.out.println("games "+d_NumberOfGames);
         } catch (Exception e) {
             LogUtil.log(e.getMessage());
         }
@@ -207,6 +218,7 @@ public class TournamentCreator {
             for (String val : d_CommandArray) {
                 if ("-d".equalsIgnoreCase(val)) {
                     foundD = true;
+                    continue;
                 }
 
                 if (foundD) {
@@ -214,6 +226,7 @@ public class TournamentCreator {
                     break;
                 }
             }
+            System.out.println("turns "+d_NumberOfTurns);
         } catch (Exception e) {
             LogUtil.log(e.getMessage());
         }

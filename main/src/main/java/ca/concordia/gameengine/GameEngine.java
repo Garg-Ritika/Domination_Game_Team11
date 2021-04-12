@@ -187,13 +187,14 @@ public class GameEngine {
             LogUtil.log("| PURPOSE             COMMAND STRUCTURE                                          |");
             LogUtil.log("| Map Editing     :   edit                                                       |");
             LogUtil.log("| Single Mode     :   play                                                       |");
-            LogUtil.log("| Tournament Mode :   tournament -M <mapfiles> -P <players> -G<games> -D<turns>  |");
+            LogUtil.log("| Tournament Mode :   tournament -M <mapfiles> -P <players> -G <games> -D <turns>  |");
             LogUtil.log("| Close All       :   quit                                                       |");
             LogUtil.log("> choose one of the option from above?: ");
             LogUtil.log("==================================================================================");
             String l_Input = l_Keyboard.nextLine();
             LogUtil.log(l_Input);
-            switch (l_Input) {
+            String arr[] = l_Input.split(" ", 2);
+            switch (arr[0]) {
                 case "edit":
                     // setting phase as preload
                     setPhase(new Preload(this));
