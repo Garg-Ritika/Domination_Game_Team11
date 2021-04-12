@@ -87,9 +87,9 @@ public class Airlift implements Order {
 
     public void printOrder() {
 
-        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
-                + " source: " + this.d_Source
-                + " target: " + this.d_Target
+        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator.getPlayerName()
+                + " source: " + this.d_Source.getName()
+                + " target: " + this.d_Target.getName()
                 + " number to airlift: " + d_NumToAirlift);
     }
 }

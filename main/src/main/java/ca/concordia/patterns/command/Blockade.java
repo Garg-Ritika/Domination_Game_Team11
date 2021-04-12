@@ -76,8 +76,8 @@ public class Blockade implements Order {
      */
 
     public void printOrder() {
-        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
-                + " target: " + this.d_TargetTerritory);
+        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator.getPlayerName()
+                + " target: " + this.d_TargetTerritory.getName());
 
     }
 }

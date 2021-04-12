@@ -73,7 +73,7 @@ public class Advance implements Order {
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() + d_NumToAdvance);
             } else {
                 // implement a battle
-                LogUtil.log("in implementing battle astage");
+                LogUtil.log("in implementing battle stage");
                 int l_DefendingArmies = (int) (this.d_Target.getArmyCount() * 0.7); //7
                 int l_AttackingArmies = (int) (this.d_NumToAdvance * 0.6); //15
                 this.d_Target.setArmyCount(this.d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
@@ -89,7 +89,7 @@ public class Advance implements Order {
                     this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
                     if (!this.d_Initiator.getD_RandomCardAssigned()) {
                         this.d_Initiator.addNewOrderCard(randomCard);
-                        LogUtil.log(randomCard + " assigned to player " + d_Initiator);
+                        LogUtil.log(randomCard + " assigned to player " + d_Initiator.getPlayerName());
                         this.d_Initiator.setD_RandomCardAssigned(true);
                     }
                 } else {
@@ -135,9 +135,9 @@ public class Advance implements Order {
      */
 
     public void printOrder() {
-        LogUtil.log("Advance: d_Initiator: " + this.d_Initiator
-                + " source: " + this.d_Source
-                + " target: " + this.d_Target
+        LogUtil.log("Advance: d_Initiator: " + this.d_Initiator.getPlayerName()
+                + " source: " + this.d_Source.getName()
+                + " target: " + this.d_Target.getName()
                 + " number to advance: " + this.d_NumToAdvance);
     }
 }

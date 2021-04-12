@@ -72,6 +72,6 @@ public class Bomb implements Order {
      */
 
     public void printOrder() {
-        LogUtil.log("Bomb : d_Initiator : " + this.d_Initiator + " target " + this.d_Target_territory);
+        LogUtil.log("Bomb : d_Initiator : " + this.d_Initiator.getPlayerName() + " target " + this.d_Target_territory.getName());
     }
 }

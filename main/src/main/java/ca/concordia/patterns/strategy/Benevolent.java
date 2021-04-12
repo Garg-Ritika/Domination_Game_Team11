@@ -90,16 +90,22 @@ public class Benevolent extends Strategy {
                 l_CommandInput = "deploy " + targetCountryName + " " + p_Player.getNoOfArmies();
                 l_Order_Names.add("deploy");
             }
-            else if (l_Order_Names.contains("deploy") && p_Player.getD_RandomCardAssigned()){
+            else if (l_Order_Names.contains("deploy") && !l_Order_Names.contains("airlift") && !l_Order_Names.contains("bomb") && !l_Order_Names.contains("blockade") && !l_Order_Names.contains("diplomacy")){
+                if(p_Player.getOrderCards().isEmpty()){
+                    return false;
+                }
                 for (String card: p_Player.getOrderCards()) {
                     if (card.equals("airlift")){
                         l_CommandInput= card+" "+ maxArmyCountry.getName() +" "+ minArmyCountry.getName() +" "+p_Player.getNoOfArmies();
+                        l_Order_Names.add("airlift");
                     }
                     else if(card.equals("blockade")){
                         l_CommandInput= card+" "+ minArmyCountry.getName() +" "+p_Player.getNoOfArmies();
+                        l_Order_Names.add("blockade");
                     }
                     else if(card.equals("bomb")){
                         LogUtil.log("Does not execute bomb card");
+                        l_Order_Names.add("bomb");
                         return false;
                     }
                     else if(card.equals("diplomacy")){
@@ -111,6 +117,7 @@ public class Benevolent extends Strategy {
                             }
                         }
                         l_CommandInput= card+" "+ NegotiatePlayer;
+                        l_Order_Names.add("diplomacy");
                     }
                     else {
                         LogUtil.log("Quitting here");

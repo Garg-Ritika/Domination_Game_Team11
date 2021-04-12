@@ -106,16 +106,26 @@ public class Aggressive extends Strategy {
                 l_CommandInput= "advance "+ source_country+" "+ opponentCountry.getName() +" "+p_Player.getNoOfArmies();
                 l_Order_Names.add("advance");
             }
-            else if (l_Order_Names.contains("deploy")&& l_Order_Names.contains("advance") && p_Player.getD_RandomCardAssigned()){
+            else if (l_Order_Names.contains("deploy")&& l_Order_Names.contains("advance") && !l_Order_Names.contains("airlift") && !l_Order_Names.contains("bomb") && !l_Order_Names.contains("blockade") && !l_Order_Names.contains("diplomacy")){
+                if(p_Player.getOrderCards().isEmpty()){
+                    return false;
+                }
                 for (String card: p_Player.getOrderCards()) {
+                    System.out.println("card available is "+card);
                     if (card.equals("airlift")){
                         l_CommandInput= card+" "+ minArmyCountry.getName() +" "+ maxArmyCountry.getName() +" "+p_Player.getNoOfArmies();
+                        l_Order_Names.add("airlift");
+                        break;
                     }
                     else if(card.equals("blockade")){
                         l_CommandInput= card+" "+ maxArmyCountry.getName() +" "+p_Player.getNoOfArmies();
+                        l_Order_Names.add("blockade");
+                        break;
                     }
                     else if(card.equals("bomb")){
                         l_CommandInput= card+" "+ opponentCountry.getName() +" "+p_Player.getNoOfArmies();
+                        l_Order_Names.add("bomb");
+                        break;
                     }
                     else if(card.equals("diplomacy")){
                         Player NegotiatePlayer = null;
@@ -126,6 +136,8 @@ public class Aggressive extends Strategy {
                             }
                         }
                         l_CommandInput= card+" "+ NegotiatePlayer;
+                        l_Order_Names.add("diplomacy");
+                        break;
                     }
                     else {
                         LogUtil.log("Quitting here");
@@ -134,6 +146,7 @@ public class Aggressive extends Strategy {
                 }
             }
             else {
+                System.out.println("quitting here");
                 return false;
             }
 

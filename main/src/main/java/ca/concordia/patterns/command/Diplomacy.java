@@ -67,7 +67,7 @@ public class Diplomacy implements Order {
      */
 
     public void printOrder() {
-        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator
+        LogUtil.log("Airlift: d_Initiator: " + this.d_Initiator.getPlayerName()
                 + " negotiater-player: " + this.d_NegotiatePlayerId);
     }
 }
