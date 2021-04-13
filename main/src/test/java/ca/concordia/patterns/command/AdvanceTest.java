@@ -50,7 +50,7 @@ public class AdvanceTest {
         d_PlayerTwo.addNewCountry((Country) d_Target);
         d_Target.setOwner(d_PlayerTwo);
 
-        int l_NumberOfArmiesAttacking = 20;
+        int l_NumberOfArmiesAttacking = 30;
         d_Advance = new Advance(d_PlayerOne, d_Source, d_Target, l_NumberOfArmiesAttacking);
     }
 
@@ -67,8 +67,8 @@ public class AdvanceTest {
         d_Advance.execute();
 
         String ex = "assigned to player ";
-        assertEquals(false, outContent.toString().contains(ex));
-        assertEquals(false, d_PlayerOne.getD_RandomCardAssigned());
+        assertEquals(true, outContent.toString().contains(ex));
+        assertEquals(true, d_PlayerOne.getD_RandomCardAssigned());
     }
 
 

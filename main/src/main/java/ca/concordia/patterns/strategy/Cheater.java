@@ -71,29 +71,29 @@ public class Cheater extends Strategy {
             for (int i = 0; i < neighbourCountry.size(); i++) {
                 if (country.getCountryID() == neighbourCountry.get(i)) {
                     if (!country.getName().equals(randomCountry.getName())) {
-                        System.out.println("player countries "+p_Player.getListOfCountries().toString());
                         if(!p_Player.getListOfCountries().contains(country)){
                             p_Player.addNewCountry(country);
                         }
-                        System.out.println("player countries "+p_Player.getListOfCountries().toString());
                         Player opponent = country.getOwner();
-                        System.out.println("player countries "+opponent.getListOfCountries().toString());
                         opponent.removeNewCountry(country);
-                        System.out.println("player countries "+opponent.getListOfCountries().toString());
 
                     }
                 }
             }
         }
 
+        ArrayList<Country> countriesDoubled = new ArrayList<>();
         System.out.println("----- doubling the armies of own countries-------");
         for (Country country : p_Player.getListOfCountries()) {
             for (Border l_Border : d_ge.getMap().getListOfBorders()) {
                 if (country.getCountryID() == l_Border.getCountryId()) {
                     for (int i : l_Border.getNeighbours()) {
                         if (country.getCountryID() != i) {
-                            if (country.getArmyCount() > 0) {
-                                country.setArmyCount(country.getArmyCount() * 2);
+                            if (country.getArmyCount() > 0 ) {
+                                if(!countriesDoubled.contains(country)) {
+                                    country.setArmyCount(country.getArmyCount() * 2);
+                                    countriesDoubled.add(country);
+                                }
                                 break;
                             } else {
                                 country.setArmyCount(2);
@@ -104,6 +104,7 @@ public class Cheater extends Strategy {
                 }
             }
         }
+        countriesDoubled.clear();
 
         return false;
     }
