@@ -76,34 +76,26 @@ public class Advance implements Order {
                 LogUtil.log("in implementing battle stage");
                 int l_DefendingArmies = (int) (this.d_Target.getArmyCount() * 0.7); //7
                 int l_AttackingArmies = (int) (this.d_NumToAdvance * 0.6); //15
-                if(this.d_Target.getArmyCount() >= l_AttackingArmies) {
-                    this.d_Target.setArmyCount(this.d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
-                }
+                this.d_Target.setArmyCount(this.d_Target.getArmyCount() - l_AttackingArmies); //10-18=-8
                 if (this.d_Target.getArmyCount() < 0) {
                     // move surviving attacking armies to the target country
                     // transfer ownership of the conquered country
                     this.d_Target.getOwner().removeNewCountry((Country) this.d_Target);
 
                     this.d_Target.setOwner(d_Initiator);
-                    if(this.d_Source.getArmyCount()>= l_DefendingArmies) {
-                        this.d_Target.setArmyCount(this.d_Source.getArmyCount() - l_DefendingArmies);
-                    }
+                    this.d_Target.setArmyCount(this.d_Source.getArmyCount() - l_DefendingArmies);
                     //removing the territory from the l_ListOfRandomCards and adding to the player who won it
                     if(!this.d_Initiator.getListOfCountries().contains((Country) this.d_Target)) {
                         this.d_Initiator.addNewCountry((Country) this.d_Target);
                     }
-                    if(this.d_Source.getArmyCount()>= d_NumToAdvance) {
-                        this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
-                    }
+                    this.d_Source.setArmyCount(this.d_Source.getArmyCount() - d_NumToAdvance);
                     if (!this.d_Initiator.getD_RandomCardAssigned()) {
                         this.d_Initiator.addNewOrderCard(randomCard);
                         LogUtil.log(randomCard + " assigned to player " + d_Initiator.getPlayerName());
                         this.d_Initiator.setD_RandomCardAssigned(true);
                     }
                 } else {
-                    if(d_Source.getArmyCount()>= l_DefendingArmies) {
-                        this.d_Source.setArmyCount(d_Source.getArmyCount() - l_DefendingArmies);
-                    }
+                    this.d_Source.setArmyCount(d_Source.getArmyCount() - l_DefendingArmies);
                 }
             }
         }
@@ -151,3 +143,4 @@ public class Advance implements Order {
                 + " number to advance: " + this.d_NumToAdvance);
     }
 }
+
