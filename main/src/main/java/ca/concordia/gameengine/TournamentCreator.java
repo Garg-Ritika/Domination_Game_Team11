@@ -87,6 +87,9 @@ public class TournamentCreator {
                 for (int i = 0; i < d_NumberOfGames; i++) {
                     // assigncountries command - to assign countries to players
                     d_GamePhase.assignCountries();
+                    if(i==d_NumberOfGames-1){
+                        break;
+                    }
                     d_GamePhase.setPlayers(l_GamePlayerCommandArray);
                 }
             }
