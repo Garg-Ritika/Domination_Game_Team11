@@ -47,8 +47,10 @@ public class OrderCreationPhase extends MainPlay {
     public void createOrder() {
         LogUtil.log("start of order creation");
         for (Player l_Player : d_ge.getListOfPlayers()) {
-            LogUtil.log("Taking order for player: " + l_Player.getPlayerName());
-            l_Player.issueOrder();
+            if(l_Player.getListOfCountries().size()!=0){
+                LogUtil.log("Taking order for player: " + l_Player.getPlayerName());
+                l_Player.issueOrder();
+            }
         }
         LogUtil.log("finish of order creation ");
         next();

@@ -5,6 +5,7 @@ import ca.concordia.patterns.state.Phase;
 import ca.concordia.patterns.state.play.PlaySetup;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This class will:
@@ -32,8 +33,8 @@ public class TournamentCreator {
     private String[] d_CommandArray;
     private ArrayList<String> d_mapFiles = new ArrayList<String>();
     private ArrayList<String> d_playerStrategies = new ArrayList<String>();
-    private int d_NumberOfGames = 1; // 1 to 5
-    private int d_NumberOfTurns = 10;     // 10 to 15
+    private int d_NumberOfGames ; // 1 to 5
+    private int d_NumberOfTurns;     // 10 to 15
     private GameEngine d_Ge;
     private Phase d_GamePhase;
 
@@ -83,9 +84,10 @@ public class TournamentCreator {
                 String[] l_GamePlayerCommandArray = l_GamePlayerCommand.trim().split(" ");
                 d_GamePhase.setPlayers(l_GamePlayerCommandArray);
 
-                for (int i = 0; i <= d_NumberOfGames; i++) {
+                for (int i = 0; i < d_NumberOfGames; i++) {
                     // assigncountries command - to assign countries to players
                     d_GamePhase.assignCountries();
+                    d_GamePhase.setPlayers(l_GamePlayerCommandArray);
                 }
             }
             // print tournament report
@@ -95,7 +97,9 @@ public class TournamentCreator {
                 LogUtil.log(l_Stats.getMapName() + "   " + l_Stats.getGameNumber() + "   " + l_Stats.getResult());
             }
             LogUtil.log("==============================================================================");
-
+            d_Ge.getOverallResults().clear();
+            d_playerStrategies.clear();
+            d_mapFiles.clear();
         } else {
             LogUtil.log("Unable to start tournament because of wrong command");
         }

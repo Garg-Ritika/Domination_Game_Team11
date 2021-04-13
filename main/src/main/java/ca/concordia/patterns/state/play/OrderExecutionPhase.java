@@ -59,6 +59,9 @@ public class OrderExecutionPhase extends MainPlay {
         LogUtil.log("execute order");
         executeAllOrders();
         showMap();
+        for(int i=0; i<d_ge.getListOfPlayers().size(); i++){
+            removePlayers(d_ge.getListOfPlayers().get(i));
+        }
         checkForEnd();
     }
 
@@ -82,7 +85,6 @@ public class OrderExecutionPhase extends MainPlay {
                         order.execute();
                     }
                     p.setNoOfArmies(0);
-                    removePlayers(p);
                 } catch (Exception e) {
                     LogUtil.log("EXCEPTION: " + e.getMessage());
                 }
@@ -114,23 +116,35 @@ public class OrderExecutionPhase extends MainPlay {
         d_ge.setCurrentTurnCount(d_ge.getCurrentTurnCount() + 1);
         if (d_ge.getCurrentTurnCount() < d_ge.getNumberOfTurnsAllowed()) {
             if (d_ge.getListOfPlayers().size() < 2) {
+                System.out.println("Players left in game is "+d_ge.getListOfPlayers().toString());
                 d_ge.setPhase(new End(d_ge));
                 if (d_ge.getListOfPlayers().size() > 0) {
                     String l_Winner = d_ge.getListOfPlayers().get(0).getPlayerName();
                     LogUtil.log("Game ends and the winner is " + l_Winner);
                     d_ge.addGameStats(l_Winner);
+                    clearListOOfCountries(d_ge);
                 } else {
                     LogUtil.log("Game ends and the result is DRAW");
                     d_ge.addGameStats("DRAW");
+                    clearListOOfCountries(d_ge);
                 }
             } else {
                 next();
             }
         } else {
+            System.out.println("Players left in game is "+d_ge.getListOfPlayers().toString());
             d_ge.setPhase(new End(d_ge));
             LogUtil.log("Game ends and result is DRAW");
             d_ge.addGameStats("DRAW");
+            clearListOOfCountries(d_ge);
         }
     }
+
+    private void clearListOOfCountries(GameEngine d_ge) {
+        for(int i=0; i<d_ge.getListOfPlayers().size(); i++){
+            d_ge.getListOfPlayers().get(i).getListOfCountries().clear();
+        }
+    }
+
 }
 

@@ -66,14 +66,21 @@ public class Cheater extends Strategy {
                 neighbourCountry = l_Border.getNeighbours();
             }
         }
-        System.out.println("--------------for conquering  neighbpr countries------");
+        System.out.println("--------------for conquering  neighbour countries------");
         for (Country country : d_ge.getMap().getListOfCountries()) {
             for (int i = 0; i < neighbourCountry.size(); i++) {
                 if (country.getCountryID() == neighbourCountry.get(i)) {
                     if (!country.getName().equals(randomCountry.getName())) {
-                        p_Player.addNewCountry(country);
+                        System.out.println("player countries "+p_Player.getListOfCountries().toString());
+                        if(!p_Player.getListOfCountries().contains(country)){
+                            p_Player.addNewCountry(country);
+                        }
+                        System.out.println("player countries "+p_Player.getListOfCountries().toString());
                         Player opponent = country.getOwner();
+                        System.out.println("player countries "+opponent.getListOfCountries().toString());
                         opponent.removeNewCountry(country);
+                        System.out.println("player countries "+opponent.getListOfCountries().toString());
+
                     }
                 }
             }
