@@ -116,7 +116,11 @@ public class OrderExecutionPhase extends MainPlay {
         d_ge.setCurrentTurnCount(d_ge.getCurrentTurnCount() + 1);
         if (d_ge.getCurrentTurnCount() < d_ge.getNumberOfTurnsAllowed()) {
             if (d_ge.getListOfPlayers().size() < 2) {
-                System.out.println("Players left in game is "+d_ge.getListOfPlayers().toString());
+                System.out.print("Players left in game is ");
+                for(Player player: d_ge.getListOfPlayers()){
+                    System.out.print(player.getPlayerName()+" ");
+                }
+                System.out.println(" ");
                 d_ge.setPhase(new End(d_ge));
                 if (d_ge.getListOfPlayers().size() > 0) {
                     String l_Winner = d_ge.getListOfPlayers().get(0).getPlayerName();
@@ -132,7 +136,11 @@ public class OrderExecutionPhase extends MainPlay {
                 next();
             }
         } else {
-            System.out.println("Players left in game is "+d_ge.getListOfPlayers().toString());
+            System.out.print("Players left in game is ");
+            for(Player player: d_ge.getListOfPlayers()){
+                System.out.print(player.getPlayerName()+" ");
+            }
+            System.out.println(" ");
             d_ge.setPhase(new End(d_ge));
             LogUtil.log("Game ends and result is DRAW");
             d_ge.addGameStats("DRAW");
@@ -147,4 +155,3 @@ public class OrderExecutionPhase extends MainPlay {
     }
 
 }
-
