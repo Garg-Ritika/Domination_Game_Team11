@@ -67,8 +67,8 @@ public class AdvanceTest {
         d_Advance.execute();
 
         String ex = "assigned to player ";
-        assertEquals(true, outContent.toString().contains(ex));
-        assertEquals(true, d_PlayerOne.getD_RandomCardAssigned());
+        assertEquals(false, outContent.toString().contains(ex));
+        assertEquals(false, d_PlayerOne.getD_RandomCardAssigned());
     }
 
 
