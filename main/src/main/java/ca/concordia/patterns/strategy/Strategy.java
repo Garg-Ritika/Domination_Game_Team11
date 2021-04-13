@@ -17,6 +17,11 @@ public abstract class Strategy {
         d_Ge = p_Ge;
     }
 
+    /**
+     * Abstract class for LinkedList
+     * @param p_Player
+     * @return
+     */
     abstract public LinkedList<Order> create(Player p_Player);
 
 }

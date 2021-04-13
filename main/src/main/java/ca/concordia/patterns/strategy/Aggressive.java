@@ -30,6 +30,10 @@ public class Aggressive extends Strategy {
     GameEngine d_ge;
     private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
 
+    /**
+     * Constructor to override the method depending on the input parameters
+     * @param p_Ge GameEngine object
+     */
     public Aggressive(GameEngine p_Ge) {
         super(p_Ge);
         this.d_ge = p_Ge;
