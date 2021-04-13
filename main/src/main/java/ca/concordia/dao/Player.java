@@ -72,6 +72,25 @@ public class Player {
     }
 
     /**
+     * This method sets the list of Order owned by Player
+     *
+     * @return none
+     */
+    public void setListOfOrder(List<Order> p_ListOfOrders) {
+        this.d_ListOfOrders = p_ListOfOrders;
+    }
+
+    /**
+     * This method returns the list of Order owned by Player
+     *
+     * @return list of Order
+     */
+    public List<Order> getListOfOrder() {
+        return d_ListOfOrders;
+    }
+
+
+    /**
      * This method returns the list of OrderCards owned by Player
      *
      * @return list of OrderCards
