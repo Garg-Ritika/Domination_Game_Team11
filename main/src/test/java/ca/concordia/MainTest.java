@@ -47,7 +47,7 @@ import org.junit.runners.Suite;
         OrderExecutionPhaseTest.class,
         EndTest.class,
         AggressiveTest.class,
-        //BenevolentTest.class,
+        BenevolentTest.class,
         CheaterTest.class,
         HumanTest.class,
         //OddTest.class,
