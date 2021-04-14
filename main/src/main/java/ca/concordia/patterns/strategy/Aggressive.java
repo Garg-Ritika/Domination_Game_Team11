@@ -229,9 +229,9 @@ public class Aggressive extends Strategy {
 
     /**
      * This method process "advance" command
-     * "advance countrynamefrom countynameto numarmies"
+     * "advance country name from countyname to numarmies"
      *
-     * @param p_Player  playername
+     * @param p_Player  player name
      * @param p_Command actions for the player e.g. deploy
      */
     private void processAdvanceCommand(Player p_Player, String[] p_Command) {
