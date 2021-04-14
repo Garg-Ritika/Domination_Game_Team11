@@ -50,7 +50,7 @@ import org.junit.runners.Suite;
         BenevolentTest.class,
         CheaterTest.class,
         HumanTest.class,
-        //OddTest.class,
+        OddTest.class,
         GameSaverTest.class,
         GameLoaderTest.class
 })
