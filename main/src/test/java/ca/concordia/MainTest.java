@@ -12,6 +12,7 @@ import ca.concordia.patterns.state.edit.PostLoadTest;
 import ca.concordia.patterns.state.edit.PreloadTest;
 import ca.concordia.patterns.state.end.EndTest;
 import ca.concordia.patterns.state.play.*;
+import ca.concordia.patterns.strategy.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -45,11 +46,11 @@ import org.junit.runners.Suite;
         OrderCreationPhaseTest.class,
         OrderExecutionPhaseTest.class,
         EndTest.class,
-        //AggressiveTest.class,
+        AggressiveTest.class,
         //BenevolentTest.class,
-        //CheaterTest.class,
-        //HumanTest.class,
-        //OddTest.class
+        CheaterTest.class,
+        HumanTest.class,
+        //OddTest.class,
         GameSaverTest.class,
         GameLoaderTest.class
 })

@@ -15,6 +15,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Test class file for Game Saver class
+ */
 public class GameSaverTest {
 
     GameEngine d_GameEngine;
@@ -24,6 +27,9 @@ public class GameSaverTest {
     List<Player> d_ListOfPlayer;
     Phase d_Phase;
 
+    /**
+     * This is the method to be run before test method. It initializes the Game Saver class object
+     */
     @Before
     public void before() {
         d_GameEngine = new GameEngine();
@@ -55,6 +61,10 @@ public class GameSaverTest {
 
     }
 
+    /**
+     * This method is used to test if the current game status is being successfully saved in text file
+     * using assertTrue
+     */
     @Test
     public void saveFile() {
         String currentPath = System.getProperty("user.dir");
