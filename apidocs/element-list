@@ -1,12 +1,1 @@
-ca.concordia
-ca.concordia.dao
 ca.concordia.gameengine
-ca.concordia.mapworks
-ca.concordia.patterns.adapter
-ca.concordia.patterns.command
-ca.concordia.patterns.observer
-ca.concordia.patterns.state
-ca.concordia.patterns.state.edit
-ca.concordia.patterns.state.end
-ca.concordia.patterns.state.play
-ca.concordia.patterns.strategy

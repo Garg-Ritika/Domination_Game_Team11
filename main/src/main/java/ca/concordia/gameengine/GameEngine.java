@@ -194,14 +194,20 @@ public class GameEngine {
         d_OverallResult.add(l_GameStats);
     }
 
+    /**
+     * This method when called implements the clear method using the private data member d_OverallResult
+     */
     public void resetOverallResults() {
         d_OverallResult.clear();
     }
 
+    /**
+     * This method returns the overall result of the game.
+     * @return d_OverallResult
+     */
     public LinkedList<GameStats> getOverallResults() {
         return d_OverallResult;
     }
-
 
     /**
      * Main game engine used a method to GameEngine constructor Main class
@@ -339,7 +345,8 @@ public class GameEngine {
      */
     void startMainPlay(Scanner p_Keyboard) {
         boolean l_MaintainLoop = true;
-        do {
+        do
+            {
             LogUtil.log("============================================================================================");
             LogUtil.log("| PHASE                : command         command arguments                                 |");
             LogUtil.log("| Any                  : showmap                                                           |");
@@ -389,6 +396,4 @@ public class GameEngine {
             }
         } while (l_MaintainLoop);
     }
-
-
 }
