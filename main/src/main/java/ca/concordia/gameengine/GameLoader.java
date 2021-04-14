@@ -3,7 +3,6 @@ package ca.concordia.gameengine;
 import ca.concordia.dao.Continent;
 import ca.concordia.dao.Country;
 import ca.concordia.dao.Player;
-import ca.concordia.patterns.command.Advance;
 import ca.concordia.patterns.command.Order;
 import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.play.OrderCreationPhase;
@@ -12,28 +11,48 @@ import ca.concordia.patterns.strategy.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- *
+ *This is the GameLoader class that loads the game file and
+ * read the file
  */
 public class GameLoader {
+
+    /**
+     * Game Engine object d_Ge
+     */
     private GameEngine d_Ge;
 
+    /**
+     * String variable for MapPath
+     */
     private String d_MapPath;
+    /**
+     * Phase variable
+     */
     private String d_Phase;
+    /**
+     * ArrayList of players
+     */
     private List<Player> d_ListOfPlayer = new ArrayList<Player>();
 
+    /**
+     * Constructor that initializes GameEngine object
+     * @param p_Ge GameEngine object
+     */
     public GameLoader(GameEngine p_Ge) {
         d_Ge = p_Ge;
     }
 
+    /**
+     * Method to load the game file
+     * This is wrapped in Try Catch block
+     * @param p_SavedGameFile Already SavedGameFile
+     */
     public void loadGameFile(File p_SavedGameFile) {
         readGameFile(p_SavedGameFile);
 
@@ -69,6 +88,10 @@ public class GameLoader {
         }
     }
 
+    /**
+     * This is the private method to read game file
+     * @param p_SavedGameFile Already saved game file
+     */
     private void readGameFile(File p_SavedGameFile) {
         try (FileReader l_Fr = new FileReader(p_SavedGameFile))
         {
@@ -182,7 +205,7 @@ public class GameLoader {
             }
 
         }
-        catch (IOException e) {
+        catch (Exception e) {
             LogUtil.log(e.getMessage());
         }
     }
