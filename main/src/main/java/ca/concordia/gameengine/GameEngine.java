@@ -122,42 +122,72 @@ public class GameEngine {
     }
 
     /**
-     * This method is used to store the player names in a List
+     * This method is used to return the player names in a List
      *
-     * @return d_ListOfPlayers
+     * @return d_ListOfPlayers list of players
      */
     public List<Player> getListOfPlayers() {
         return d_ListOfPlayers;
     }
 
+    /**
+     * This setter method is used to store the list of players passed as a parameter to the function
+     * @param p_ListOfPlayers list of players
+     */
     public void setListOfPlayers(List<Player> p_ListOfPlayers){
         d_ListOfPlayers = p_ListOfPlayers;
     }
 
+    /**
+     * This getter method is used to return the number of turns
+     * @return d_NumberOfTurnsAllowed
+     */
     public int getNumberOfTurnsAllowed() {
         return d_NumberOfTurnsAllowed;
     }
 
+    /**
+     * This setter method is used to store the number of turns in the private data member
+     * @param p_NumberOfTurnsAllowed
+     */
     public void setNumberOfTurnsAllowed(int p_NumberOfTurnsAllowed) {
         d_NumberOfTurnsAllowed = p_NumberOfTurnsAllowed;
     }
 
+    /**
+     * This method is used to reset the number of turns
+     */
     public void resetNumberOfTurnsAllowed() {
         d_NumberOfTurnsAllowed = 50;
     }
 
+    /**
+     * This getter method is used to return the current count of turns played
+     * @return
+     */
     public int getCurrentTurnCount() {
         return d_CurrentTurnCount;
     }
 
+    /**
+     * This setter method is used to set a passed argument turn in the private data member
+     * @param p_CurrentTurnCount private data member
+     */
     public void setCurrentTurnCount(int p_CurrentTurnCount) {
         d_CurrentTurnCount = p_CurrentTurnCount;
     }
 
+    /**
+     * This method is used to reset the current turn count to zero
+     */
     public void resetCurrentTurnCount() {
         d_CurrentTurnCount = 0;
     }
 
+    /**
+     * Game stats method is used to return the overall result and display the winner name
+     * @param p_Winner
+     */
     public void addGameStats(String p_Winner) {
         int l_size = d_OverallResult.size();
         String l_GameNumber = "Game" + l_size + 1;
