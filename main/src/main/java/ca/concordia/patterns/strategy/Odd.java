@@ -10,9 +10,8 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.util.*;
 
 /**
- * Random strategy,
+ * Random strategy
  */
-
 public class Odd extends Strategy {
 
     public static final String COMMAND_SHOW_MAP = "showmap";
@@ -31,6 +30,11 @@ public class Odd extends Strategy {
         this.d_ge = p_Ge;
     }
 
+    /**
+     * Abstract class for LinkedList
+     * @param p_Player player object for whose Order is created
+     * @return list of orders
+     */
     @Override
     public LinkedList<Order> create(Player p_Player) {
         d_ListOfOrders.clear();

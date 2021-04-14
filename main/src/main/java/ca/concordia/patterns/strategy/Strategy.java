@@ -19,8 +19,8 @@ public abstract class Strategy {
 
     /**
      * Abstract class for LinkedList
-     * @param p_Player
-     * @return
+     * @param p_Player player object for whose Order is created
+     * @return list of orders
      */
     abstract public LinkedList<Order> create(Player p_Player);
 

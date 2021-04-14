@@ -272,7 +272,7 @@ public class Player {
      * Setter method to set strategy of the player, it could be one of these
      * human, aggresive, benevolent, random, cheater
      *
-     * @param p_Strategy
+     * @param p_Strategy strategy pf player object
      */
     public void setStrategy(Strategy p_Strategy) {
         d_Strategy = p_Strategy;

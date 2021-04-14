@@ -30,10 +30,16 @@ public class Human extends Strategy {
     public static final String COMMAND_QUIT = "quit";
     private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
 
+
     public Human(GameEngine p_Ge) {
         super(p_Ge);
     }
 
+    /**
+     * Abstract class for LinkedList
+     * @param p_Player player object for whose Order is created
+     * @return list of orders
+     */
     @Override
     public LinkedList<Order> create(Player p_Player) {
         d_ListOfOrders.clear();

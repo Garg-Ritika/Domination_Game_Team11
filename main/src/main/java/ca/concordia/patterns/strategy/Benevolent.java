@@ -26,11 +26,20 @@ public class Benevolent extends Strategy {
     GameEngine d_ge;
     private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
 
+    /**
+     * Constructor to override the method depending on the input parameters
+     * @param p_Ge GameEngine object
+     */
     public Benevolent(GameEngine p_Ge) {
         super(p_Ge);
         this.d_ge = p_Ge;
     }
 
+    /**
+     * Abstract class for LinkedList
+     * @param p_Player player object for whose Order is created
+     * @return list of orders
+     */
     @Override
     public LinkedList<Order> create(Player p_Player) {
         d_ListOfOrders.clear();

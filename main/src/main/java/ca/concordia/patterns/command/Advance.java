@@ -146,7 +146,6 @@ public class Advance implements Order {
      * This method will print all the commands that have been executed and
      * the log for which have been saved in log file
      */
-
     public void printOrder() {
         LogUtil.log("Advance: d_Initiator: " + this.d_Initiator.getPlayerName()
                 + " source: " + this.d_Source.getName()

@@ -43,6 +43,7 @@ public class TournamentCreator {
      * and it includes various methods associated with this class
      *
      * @param p_Input array of commands
+     * @param p_Ge game Engine object
      */
     public TournamentCreator(GameEngine p_Ge, String p_Input) {
         d_Ge = p_Ge;
@@ -58,6 +59,10 @@ public class TournamentCreator {
         findNumberOfTurns();
     }
 
+    /**
+     * Start the tournament when tournament phase command is passed from Game Engine
+     * Runs the whole tournament and prints the output report at end
+     */
     public void startTournament() {
         boolean l_GoodToStart = isCommandValid();
         if (l_GoodToStart) {

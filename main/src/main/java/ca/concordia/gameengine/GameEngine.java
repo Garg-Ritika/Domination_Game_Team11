@@ -74,9 +74,6 @@ public class GameEngine {
 
     public static final String COMMAND_TOURNAMENT = "tournament";
     public static final String COMMAND_LOAD_GAME = "loadgame";
-
-
-    // data members
     private Phase d_GamePhase;
     private Map d_Map = new Map();
     private List<Player> d_ListOfPlayers = new ArrayList<Player>();
@@ -148,7 +145,7 @@ public class GameEngine {
 
     /**
      * This setter method is used to store the number of turns in the private data member
-     * @param p_NumberOfTurnsAllowed
+     * @param p_NumberOfTurnsAllowed no of turns allowed
      */
     public void setNumberOfTurnsAllowed(int p_NumberOfTurnsAllowed) {
         d_NumberOfTurnsAllowed = p_NumberOfTurnsAllowed;
@@ -163,7 +160,7 @@ public class GameEngine {
 
     /**
      * This getter method is used to return the current count of turns played
-     * @return
+     * @return turn count
      */
     public int getCurrentTurnCount() {
         return d_CurrentTurnCount;
@@ -186,7 +183,7 @@ public class GameEngine {
 
     /**
      * Game stats method is used to return the overall result and display the winner name
-     * @param p_Winner
+     * @param p_Winner winner of the game
      */
     public void addGameStats(String p_Winner) {
         int l_size = d_OverallResult.size();
@@ -336,9 +333,9 @@ public class GameEngine {
     }
 
     /**
-     * This method will be called when player selected option "play"
+     * This method will be called when player selected option "play" to play the game further
      *
-     * @param p_Keyboard
+     * @param p_Keyboard Scanner keyword
      */
     void startMainPlay(Scanner p_Keyboard) {
         boolean l_MaintainLoop = true;

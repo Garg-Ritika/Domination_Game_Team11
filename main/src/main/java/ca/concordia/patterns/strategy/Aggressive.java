@@ -39,6 +39,11 @@ public class Aggressive extends Strategy {
         this.d_ge = p_Ge;
     }
 
+    /**
+     * Abstract class for LinkedList
+     * @param p_Player player object for whose Order is created
+     * @return list of orders
+     */
     @Override
     public LinkedList<Order> create(Player p_Player) {
         d_ListOfOrders.clear();

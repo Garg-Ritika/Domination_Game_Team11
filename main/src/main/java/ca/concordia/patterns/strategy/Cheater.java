@@ -20,18 +20,25 @@ import java.util.Random;
 
 public class Cheater extends Strategy {
 
-    //    List<String> l_Order_Names = new ArrayList<>();
     GameEngine d_ge;
     private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
 
+    /**
+     * Constructor to override the method depending on the input parameters
+     * @param p_Ge GameEngine object
+     */
     public Cheater(GameEngine p_Ge) {
         super(p_Ge);
         this.d_ge = p_Ge;
     }
 
+    /**
+     * Abstract class for LinkedList
+     * @param p_Player player object for whose Order is created
+     * @return list of orders
+     */
     @Override
     public LinkedList<Order> create(Player p_Player) {
-//        d_ListOfOrders.clear();
         takeOrder(p_Player);
         return null;
     }
@@ -46,9 +53,6 @@ public class Cheater extends Strategy {
      */
     public boolean takeOrder(Player p_Player) {
         LogUtil.log("taking order ");
-//        int l_Army = p_Player.getNoOfArmies();
-//        l_Order_Names.clear();
-
 
         LogUtil.log(" Turn for player " + p_Player.getPlayerName());
 

@@ -148,6 +148,10 @@ public class OrderExecutionPhase extends MainPlay {
         }
     }
 
+    /**
+     * Clear the list of countries for players
+     * @param d_ge Game engine object
+     */
     private void clearListOOfCountries(GameEngine d_ge) {
         for(int i=0; i<d_ge.getListOfPlayers().size(); i++){
             d_ge.getListOfPlayers().get(i).getListOfCountries().clear();

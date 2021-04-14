@@ -9,6 +9,10 @@ import ca.concordia.patterns.observer.LogUtil;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This class includes methods to read and write map files
+ * readMapFile also throws IOException
+ */
 public class ConquestMapHandler {
 
     public static final String HEADER_CONTINENTS = "[Continents]";
@@ -103,8 +107,8 @@ public class ConquestMapHandler {
     /**
      * Read borders in second pass such that the country id should already be in the map
      *
-     * @param p_MapFile
-     * @throws IOException
+     * @param p_MapFile map file
+     * @throws IOException throws exception if map file foes not exist
      */
     public void readBordersFile(File p_MapFile) throws IOException {
         System.out.println("--> read borders file ");
@@ -193,8 +197,8 @@ public class ConquestMapHandler {
     /**
      * Helper class to find the border country names that can be used to append to the territory line
      *
-     * @param p_Country
-     * @return
+     * @param p_Country country object
+     * @return borders for the country provided
      */
     private String getBorderCountryNames(Country p_Country) {
         StringBuilder borderString = new StringBuilder();

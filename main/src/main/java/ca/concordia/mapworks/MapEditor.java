@@ -404,8 +404,8 @@ public class MapEditor {
 
     /**
      * Private method to write the map file
-     *
      * @param p_MapFile the map file object
+     * @param p_MapType what is the type of map
      */
     public void writeMapFile(File p_MapFile, String p_MapType) {
         LogUtil.log("writing .map file to path " + p_MapFile.getAbsolutePath());
