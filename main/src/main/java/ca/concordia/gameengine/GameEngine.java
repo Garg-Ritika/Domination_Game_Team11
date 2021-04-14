@@ -130,6 +130,10 @@ public class GameEngine {
         return d_ListOfPlayers;
     }
 
+    public void setListOfPlayers(List<Player> p_ListOfPlayers){
+        d_ListOfPlayers = p_ListOfPlayers;
+    }
+
     public int getNumberOfTurnsAllowed() {
         return d_NumberOfTurnsAllowed;
     }

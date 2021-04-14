@@ -46,15 +46,9 @@ public class GameLoader {
                 String[] l_LoadCommand = {"loadmap ", d_MapPath};
                 d_Ge.getPhase().loadMap(l_LoadCommand);
 
-                // gameplayer command - to add players
-                int l_PlayersCount = d_ListOfPlayer.size();
-                String l_GamePlayerCommand = "gameplayer";
-                for (Player l_Player : d_ListOfPlayer) {
-                    l_GamePlayerCommand += " -add " + l_Player.getPlayerName();
-                }
-                LogUtil.log(l_GamePlayerCommand);
-                String[] l_GamePlayerCommandArray = l_GamePlayerCommand.trim().split(" ");
-                d_Ge.getPhase().setPlayers(l_GamePlayerCommandArray);
+                LogUtil.log("players added in game-engine " );
+                // Instead of "gameplayer" in playsetup, add the players in GameEngine directly
+                d_Ge.setListOfPlayers(d_ListOfPlayer);
 
                 //Instead of "assigncountries" in playsetup,
                 // move it to the phase taken for saved gamefile i.e. always be OrderCreationPhase of human player
