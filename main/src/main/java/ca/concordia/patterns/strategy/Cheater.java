@@ -104,6 +104,7 @@ public class Cheater extends Strategy {
                 }
             }
         }
+        LogUtil.log("Executed commands for " + p_Player.getPlayerName());
         countriesDoubled.clear();
 
         return false;
