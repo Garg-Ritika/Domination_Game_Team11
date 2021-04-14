@@ -4,8 +4,12 @@ import ca.concordia.dao.*;
 import ca.concordia.gameengine.GameEngineTest;
 import ca.concordia.gameengine.GameLoaderTest;
 import ca.concordia.gameengine.GameSaverTest;
+import ca.concordia.gameengine.TournamentCreatorTest;
 import ca.concordia.mapworks.MapEditorTest;
 import ca.concordia.mapworks.ValidateMapTest;
+import ca.concordia.patterns.adapter.ConquestMapHandlerTest;
+import ca.concordia.patterns.adapter.DominationMapHandlerTest;
+import ca.concordia.patterns.adapter.MapHandlerAdapterTest;
 import ca.concordia.patterns.command.*;
 import ca.concordia.patterns.observer.LogEntryBufferTest;
 import ca.concordia.patterns.state.edit.PostLoadTest;
@@ -28,9 +32,12 @@ import org.junit.runners.Suite;
         MapTest.class,
         PlayerTest.class,
         GameEngineTest.class,
-        //TournamentCreatorTest.class,
+        TournamentCreatorTest.class,
         MapEditorTest.class,
         ValidateMapTest.class,
+        ConquestMapHandlerTest.class,
+        DominationMapHandlerTest.class,
+        MapHandlerAdapterTest.class,
         AdvanceTest.class,
         AirliftTest.class,
         BlockadeTest.class,
