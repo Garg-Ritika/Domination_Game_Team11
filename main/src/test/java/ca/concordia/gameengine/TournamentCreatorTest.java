@@ -44,7 +44,6 @@ public class TournamentCreatorTest {
      * It checks if number of maps are between 1 to 5 or not
      * it uses assert Statement
      */
-
     @Test
     public void startTournament() {
 
@@ -78,7 +77,7 @@ public class TournamentCreatorTest {
 
     /**
      * This test method shows that no of games should be between 1 to 5
-     * using aassertEquals
+     * using assertEquals
      */
     @Test
     public void startTournament2() {
