@@ -13,6 +13,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * This test class is for Odd CLass
+ */
 public class OddTest {
 
     Player d_PlayerOne;
@@ -22,6 +25,10 @@ public class OddTest {
     GameEngine d_ge = new GameEngine();
     Map d_Map;
 
+    /**
+     *This method runs before every test method
+     * it initializes the objects
+     */
     @Before
     public void init() {
         d_PlayerOne = new Player("player1", 1);
@@ -46,6 +53,10 @@ public class OddTest {
 
     }
 
+    /**
+     * This method is used to test if the issueOrder method is working and if the commands are being executed successfully
+     * using assertTrue
+     */
     @Test
     public void takeOrderCommandTest(){
 
