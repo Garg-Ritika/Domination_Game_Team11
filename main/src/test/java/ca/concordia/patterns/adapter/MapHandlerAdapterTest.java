@@ -10,6 +10,9 @@ import java.io.PrintStream;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ * This test class is for MapHandlerAdapter CLass
+ */
 public class MapHandlerAdapterTest {
 
     MapHandlerAdapter d_mha;
@@ -18,13 +21,19 @@ public class MapHandlerAdapterTest {
     File p_MapFile = new File("sample1");
     File p_MapFile2 = new File("sample2");
 
-
+    /**
+     * This method runs before every test method
+     * and it initializes the objects
+     */
     @Before
     public void before() {
         d_mha = new MapHandlerAdapter(d_cmh);
     }
 
-
+    /**
+     * This method is used to test if the map file is being read successfully
+     * @throws IOException if map files does not exist
+     */
     @Test
     public void readMapFile() throws IOException {
         if (p_MapFile.exists()) {
@@ -38,6 +47,9 @@ public class MapHandlerAdapterTest {
 
     }
 
+    /**
+     * This method is used to test if the map file is being created successfully
+     */
     @Test
     public void writeMapFile() {
 
