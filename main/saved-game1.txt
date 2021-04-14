@@ -1,0 +1,29 @@
+{
+    "players": [
+        {
+            "random-card-assigned": false,
+            "cards": [],
+            "armies": 0,
+            "negotiated": false,
+            "name": "Aggressive",
+            "orders": [],
+            "id": 1,
+            "strategy-class": "Cheater",
+            "countries": [],
+            "continents": []
+        },
+        {
+            "random-card-assigned": false,
+            "cards": [],
+            "armies": 0,
+            "negotiated": false,
+            "name": "Cheater",
+            "orders": [],
+            "id": 2,
+            "countries": [],
+            "continents": []
+        }
+    ],
+    "phase-class": "PlaySetup",
+    "map": "D:\\Domination_Game_Team11\\main\\maps\\domination\\canada\\canada.map"
+}

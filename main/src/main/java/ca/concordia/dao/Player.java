@@ -74,7 +74,7 @@ public class Player {
     /**
      * This method sets the list of Order owned by Player
      *
-     * @param p_ListOfOrders  list of orders 
+     * @param p_ListOfOrders  list of orders
      */
     public void setListOfOrder(List<Order> p_ListOfOrders) {
         this.d_ListOfOrders = p_ListOfOrders;

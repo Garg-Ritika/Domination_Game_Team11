@@ -2,6 +2,8 @@ package ca.concordia;
 
 import ca.concordia.dao.*;
 import ca.concordia.gameengine.GameEngineTest;
+import ca.concordia.gameengine.GameLoaderTest;
+import ca.concordia.gameengine.GameSaverTest;
 import ca.concordia.mapworks.MapEditorTest;
 import ca.concordia.mapworks.ValidateMapTest;
 import ca.concordia.patterns.command.*;
@@ -48,6 +50,8 @@ import org.junit.runners.Suite;
         //CheaterTest.class,
         //HumanTest.class,
         //OddTest.class
+        GameSaverTest.class,
+        GameLoaderTest.class
 })
 public class MainTest extends TestCase {
 

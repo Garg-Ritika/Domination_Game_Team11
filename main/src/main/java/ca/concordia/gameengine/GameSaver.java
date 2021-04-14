@@ -38,7 +38,9 @@ public class GameSaver {
                 l_PlayerObj.put("armies", l_Player.getNoOfArmies());
                 l_PlayerObj.put("random-card-assigned",l_Player.getD_RandomCardAssigned());
                 l_PlayerObj.put("negotiated",l_Player.getIsNegotiatedPlayer());
-                l_PlayerObj.put("strategy-class",l_Player.getStrategy().getClass().getSimpleName());
+                if(l_Player.getStrategy() != null) {
+                    l_PlayerObj.put("strategy-class", l_Player.getStrategy().getClass().getSimpleName());
+                }
 
                 // add countries
                 JSONArray l_CountryArr = new JSONArray();
