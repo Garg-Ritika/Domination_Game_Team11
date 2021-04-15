@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This class contains details of the Player
+ * This class contains the implementation of the Player.
  */
 public class Player {
 

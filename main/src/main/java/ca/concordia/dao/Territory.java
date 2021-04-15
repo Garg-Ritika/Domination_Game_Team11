@@ -1,5 +1,8 @@
 package ca.concordia.dao;
 
+/**
+ * This class contains the implementation of the territory.
+ */
 public abstract class Territory {
 
     /**

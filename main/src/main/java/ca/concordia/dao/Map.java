@@ -31,10 +31,18 @@ public class Map {
         this.d_ListOfBorders = new ArrayList<Border>();
     }
 
+    /**
+     * This getter method is used to get the name of type string.
+     * @return d_Name
+     */
     public String getName() {
         return d_Name;
     }
 
+    /**
+     * This setter method is used to set the name of the player.
+     * @param p_Name Player Name
+     */
     public void setName(String p_Name) {
         d_Name = p_Name;
     }

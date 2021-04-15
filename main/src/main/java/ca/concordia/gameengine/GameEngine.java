@@ -72,7 +72,13 @@ public class GameEngine {
      */
     public static final String COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 
+    /**
+     * This public data member is used for the tournament command
+     */
     public static final String COMMAND_TOURNAMENT = "tournament";
+    /**
+     * This public data member is used to load the game
+     */
     public static final String COMMAND_LOAD_GAME = "loadgame";
     private Phase d_GamePhase;
     private Map d_Map = new Map();
@@ -272,9 +278,9 @@ public class GameEngine {
     /**
      * This method will be called when player selected option "edit"
      *
-     * @param keyboard
+     * @param p_Keyboard
      */
-    void startMapEditor(Scanner keyboard) {
+    void startMapEditor(Scanner p_Keyboard) {
         boolean l_MaintainLoop = true;
         do {
             LogUtil.log("===================================================================================================");
@@ -288,7 +294,7 @@ public class GameEngine {
             LogUtil.log("| Edit:PostLoad  : validatemap                                                                   |");
             LogUtil.log("| Any            : quit                                                                          |");
             LogUtil.log("===================================================================================================");
-            String l_EditInput = keyboard.nextLine();
+            String l_EditInput = p_Keyboard.nextLine();
             LogUtil.log(l_EditInput);
 
             if ("quit".equalsIgnoreCase(l_EditInput)) {

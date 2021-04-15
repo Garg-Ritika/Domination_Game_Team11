@@ -12,16 +12,24 @@ import java.io.File;
 import java.io.FileWriter;
 
 /**
- *
+ * Game Saver class is used to save the state of the game and Game Load is used to load the game from the saved state.
  */
 public class GameSaver {
 
     private final GameEngine d_Ge;
 
+    /**
+     * Constructor for GameSaver class
+     * @param p_Ge Argument from GameEngine is passed to tge constructor
+     */
     public GameSaver(GameEngine p_Ge) {
         d_Ge = p_Ge;
     }
 
+    /**
+     * This method is the method used for saving the JSON object file
+     * @param p_GameFile Object of File class
+     */
     public void saveFile(File p_GameFile){
         try {
             JSONObject l_Obj = new JSONObject();
@@ -102,5 +110,4 @@ public class GameSaver {
             LogUtil.log(e.getMessage());
         }
     }
-
 }

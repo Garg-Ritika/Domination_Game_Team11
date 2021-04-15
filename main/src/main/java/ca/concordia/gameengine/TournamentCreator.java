@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This class will:
- * 1. check number of maps is between 1 to 5
- * 2. check number of players is between 2 to 4
- * 3. check number of games is between 1 to 5
- * 4. check number of turns between 10 t0 50
- * Now, for each map, start game, find winner and save the results.
+ * <p>
+ * This class will: <br>
+ * 1. check number of maps is between 1 to 5 <br>
+ * 2. check number of players is between 2 to 4 <br>
+ * 3. check number of games is between 1 to 5 <br>
+ * 4. check number of turns between 10 t0 50 <br>
+ * Now, for each map, start game, find winner and save the results. <br>
  * (command format: tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns)
+ * </p>
  **/
 
 public class TournamentCreator {
@@ -150,16 +152,16 @@ public class TournamentCreator {
      * This method finds the different map files
      */
     private void findMapFiles() {
-        boolean foundM = false;
+        boolean l_FoundM = false;
         for (String val : d_CommandArray) {
             if ("-m".equalsIgnoreCase(val)) {
-                foundM = true;
+                l_FoundM = true;
                 continue;
             } else if ("-p".equalsIgnoreCase(val)) {
                 break;
             }
 
-            if (foundM) {
+            if (l_FoundM) {
                 d_mapFiles.add(val);
             }
         }
@@ -170,15 +172,15 @@ public class TournamentCreator {
      * This method finds the computer player' behaviour strategies
      */
     private void findPlayerStrategies() {
-        boolean foundP = false;
+        boolean l_FoundP = false;
         for (String val : d_CommandArray) {
             if ("-p".equalsIgnoreCase(val)) {
-                foundP = true;
+                l_FoundP = true;
                 continue;
             } else if ("-g".equalsIgnoreCase(val)) {
                 break;
             }
-            if (foundP) {
+            if (l_FoundP) {
                 if (val.equalsIgnoreCase(AGGRESSIVE_PLAYER)) {
                     d_playerStrategies.add(AGGRESSIVE_PLAYER);
                 } else if (val.equalsIgnoreCase(BENEVOLENT_PLAYER)) {
@@ -199,16 +201,16 @@ public class TournamentCreator {
      */
     private void findNumberOfGames() {
         try {
-            boolean foundG = false;
+            boolean l_FoundG = false;
             for (String val : d_CommandArray) {
                 if ("-g".equalsIgnoreCase(val)) {
-                    foundG = true;
+                    l_FoundG = true;
                     continue;
                 } else if ("-d".equalsIgnoreCase(val)) {
                     break;
                 }
 
-                if (foundG) {
+                if (l_FoundG) {
                     d_NumberOfGames = Integer.parseInt(val);
                     break;
                 }
@@ -218,7 +220,6 @@ public class TournamentCreator {
             LogUtil.log(e.getMessage());
         }
     }
-
     /**
      * This method finds the maximum number of turns
      * for each game
