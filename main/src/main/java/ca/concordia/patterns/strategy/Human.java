@@ -185,7 +185,6 @@ public class Human extends Strategy {
                 Territory l_TerritoryTarget = d_Ge.getMap().getTerritoryByName(l_CountryNameTarget);
                 String l_Num = p_Command[3];
                 int l_NumInt = Integer.parseInt(l_Num);
-                int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (p_Player.getIsNegotiatedPlayer() == true
                         && l_TerritoryTarget.getOwner().getIsNegotiatedPlayer() == true) {
                     LogUtil.log(p_Player + " cannot attack the target country");

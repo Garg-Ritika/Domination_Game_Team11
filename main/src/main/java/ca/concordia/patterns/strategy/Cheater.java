@@ -56,51 +56,51 @@ public class Cheater extends Strategy {
 
         LogUtil.log(" Turn for player " + p_Player.getPlayerName());
 
-        Random rand = new Random();
-        Country randomCountry = null;
+        Random l_Rand = new Random();
+        Country l_RandomCountry = null;
         for (int i = 0; i < p_Player.getListOfCountries().size(); i++) {
-            int randomIndex = rand.nextInt(p_Player.getListOfCountries().size());
+            int l_RandomIndex = l_Rand.nextInt(p_Player.getListOfCountries().size());
             {
-                randomCountry = p_Player.getListOfCountries().get(randomIndex);
+                l_RandomCountry = p_Player.getListOfCountries().get(l_RandomIndex);
             }
         }
-        List<Integer> neighbourCountry = new ArrayList<>();
+        List<Integer> l_NeighbourCountry = new ArrayList<>();
         for (Border l_Border : d_ge.getMap().getListOfBorders()) {
-            if (randomCountry.getCountryID() == l_Border.getCountryId()) {
-                neighbourCountry = l_Border.getNeighbours();
+            if (l_RandomCountry.getCountryID() == l_Border.getCountryId()) {
+                l_NeighbourCountry = l_Border.getNeighbours();
             }
         }
         System.out.println("--------------for conquering  neighbour countries------");
-        for (Country country : d_ge.getMap().getListOfCountries()) {
-            for (int i = 0; i < neighbourCountry.size(); i++) {
-                if (country.getCountryID() == neighbourCountry.get(i)) {
-                    if (!country.getName().equals(randomCountry.getName())) {
-                        if(!p_Player.getListOfCountries().contains(country)){
-                            p_Player.addNewCountry(country);
+        for (Country l_Country : d_ge.getMap().getListOfCountries()) {
+            for (int i = 0; i < l_NeighbourCountry.size(); i++) {
+                if (l_Country.getCountryID() == l_NeighbourCountry.get(i)) {
+                    if (!l_Country.getName().equals(l_RandomCountry.getName())) {
+                        if(!p_Player.getListOfCountries().contains(l_Country)){
+                            p_Player.addNewCountry(l_Country);
                         }
-                        Player opponent = country.getOwner();
-                        opponent.removeNewCountry(country);
+                        Player l_Opponent = l_Country.getOwner();
+                        l_Opponent.removeNewCountry(l_Country);
 
                     }
                 }
             }
         }
 
-        ArrayList<Country> countriesDoubled = new ArrayList<>();
+        ArrayList<Country> l_CountriesDoubled = new ArrayList<>();
         System.out.println("----- doubling the armies of own countries-------");
-        for (Country country : p_Player.getListOfCountries()) {
+        for (Country l_Country : p_Player.getListOfCountries()) {
             for (Border l_Border : d_ge.getMap().getListOfBorders()) {
-                if (country.getCountryID() == l_Border.getCountryId()) {
+                if (l_Country.getCountryID() == l_Border.getCountryId()) {
                     for (int i : l_Border.getNeighbours()) {
-                        if (country.getCountryID() != i) {
-                            if (country.getArmyCount() > 0 ) {
-                                if(!countriesDoubled.contains(country)) {
-                                    country.setArmyCount(country.getArmyCount() * 2);
-                                    countriesDoubled.add(country);
+                        if (l_Country.getCountryID() != i) {
+                            if (l_Country.getArmyCount() > 0 ) {
+                                if(!l_CountriesDoubled.contains(l_Country)) {
+                                    l_Country.setArmyCount(l_Country.getArmyCount() * 2);
+                                    l_CountriesDoubled.add(l_Country);
                                 }
                                 break;
                             } else {
-                                country.setArmyCount(2);
+                                l_Country.setArmyCount(2);
                                 break;
                             }
                         }
@@ -109,7 +109,7 @@ public class Cheater extends Strategy {
             }
         }
         LogUtil.log("Executed commands for " + p_Player.getPlayerName());
-        countriesDoubled.clear();
+        l_CountriesDoubled.clear();
 
         return false;
     }

@@ -26,7 +26,7 @@ public class Aggressive extends Strategy {
     public static final String COMMAND_AIRLIFT = "airlift";
     public static final String COMMAND_NEGOTIATE = "negotiate";
     public static final String COMMAND_QUIT = "quit";
-    List<String> l_Order_Names = new ArrayList<>();
+    List<String> d_Order_Names = new ArrayList<>();
     GameEngine d_ge;
     private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
 
@@ -64,7 +64,7 @@ public class Aggressive extends Strategy {
 
         boolean l_MaintainLoop = true;
         int l_Army = p_Player.getNoOfArmies();
-        l_Order_Names.clear();
+        d_Order_Names.clear();
 
         do {
             /* no need to print this part for non-human strategy
@@ -83,64 +83,64 @@ public class Aggressive extends Strategy {
             */
 
             String l_CommandInput = null;
-            Country maxArmyCountry = p_Player.getListOfCountries().get(0);
-            Country minArmyCountry = maxArmyCountry;
+            Country l_MaxArmyCountry = p_Player.getListOfCountries().get(0);
+            Country l_MinArmyCountry = l_MaxArmyCountry;
             for (int i = 0; i < p_Player.getListOfCountries().size(); i++) {
-                if (p_Player.getListOfCountries().get(i).getArmyCount() > maxArmyCountry.getArmyCount()) {
-                    maxArmyCountry = p_Player.getListOfCountries().get(i);
+                if (p_Player.getListOfCountries().get(i).getArmyCount() > l_MaxArmyCountry.getArmyCount()) {
+                    l_MaxArmyCountry = p_Player.getListOfCountries().get(i);
                 }
-                if (p_Player.getListOfCountries().get(i).getArmyCount() < minArmyCountry.getArmyCount()) {
-                    minArmyCountry = p_Player.getListOfCountries().get(i);
+                if (p_Player.getListOfCountries().get(i).getArmyCount() < l_MinArmyCountry.getArmyCount()) {
+                    l_MinArmyCountry = p_Player.getListOfCountries().get(i);
                 }
             }
 
-            String targetCountryName = maxArmyCountry.getName();
-            String source_country = targetCountryName;
+            String L_TargetCountryName = l_MaxArmyCountry.getName();
+            String l_Source_country = L_TargetCountryName;
 
-            Random rand = new Random();
-            Country opponentCountry = null;
+            Random l_Rand = new Random();
+            Country l_OpponentCountry = null;
             for (int i = 0; i < d_ge.getMap().getListOfCountries().size(); i++) {
-                int randomIndex = rand.nextInt(d_ge.getMap().getListOfCountries().size());
-                if (!p_Player.getListOfCountries().contains(d_ge.getMap().getListOfCountries().get(randomIndex))) {
-                    opponentCountry = d_ge.getMap().getListOfCountries().get(randomIndex);
+                int l_RandomIndex = l_Rand.nextInt(d_ge.getMap().getListOfCountries().size());
+                if (!p_Player.getListOfCountries().contains(d_ge.getMap().getListOfCountries().get(l_RandomIndex))) {
+                    l_OpponentCountry = d_ge.getMap().getListOfCountries().get(l_RandomIndex);
                 }
             }
-            System.out.println(l_Order_Names.toString());
-            System.out.println(l_Order_Names.isEmpty());
-            if (l_Order_Names.isEmpty()) {
-                l_CommandInput = "deploy " + targetCountryName + " " + p_Player.getNoOfArmies();
-                l_Order_Names.add("deploy");
-            } else if (l_Order_Names.contains("deploy") && (!l_Order_Names.contains("advance"))) {
-                l_CommandInput = "advance " + source_country + " " + opponentCountry.getName() + " " + p_Player.getNoOfArmies();
-                l_Order_Names.add("advance");
-            } else if (l_Order_Names.contains("deploy") && l_Order_Names.contains("advance") && !l_Order_Names.contains("airlift") && !l_Order_Names.contains("bomb") && !l_Order_Names.contains("blockade") && !l_Order_Names.contains("diplomacy")) {
+            System.out.println(d_Order_Names.toString());
+            System.out.println(d_Order_Names.isEmpty());
+            if (d_Order_Names.isEmpty()) {
+                l_CommandInput = "deploy " + L_TargetCountryName + " " + p_Player.getNoOfArmies();
+                d_Order_Names.add("deploy");
+            } else if (d_Order_Names.contains("deploy") && (!d_Order_Names.contains("advance"))) {
+                l_CommandInput = "advance " + l_Source_country + " " + l_OpponentCountry.getName() + " " + p_Player.getNoOfArmies();
+                d_Order_Names.add("advance");
+            } else if (d_Order_Names.contains("deploy") && d_Order_Names.contains("advance") && !d_Order_Names.contains("airlift") && !d_Order_Names.contains("bomb") && !d_Order_Names.contains("blockade") && !d_Order_Names.contains("diplomacy")) {
                 if (p_Player.getOrderCards().isEmpty()) {
                     return false;
                 }
-                for (String card : p_Player.getOrderCards()) {
-                    System.out.println("card available is " + card);
-                    if (card.equals("airlift")) {
-                        l_CommandInput = card + " " + minArmyCountry.getName() + " " + maxArmyCountry.getName() + " " + p_Player.getNoOfArmies();
-                        l_Order_Names.add("airlift");
+                for (String l_Card : p_Player.getOrderCards()) {
+                    System.out.println("l_Card available is " + l_Card);
+                    if (l_Card.equals("airlift")) {
+                        l_CommandInput = l_Card + " " + l_MinArmyCountry.getName() + " " + l_MaxArmyCountry.getName() + " " + p_Player.getNoOfArmies();
+                        d_Order_Names.add("airlift");
                         break;
-                    } else if (card.equals("blockade")) {
-                        l_CommandInput = card + " " + maxArmyCountry.getName() + " " + p_Player.getNoOfArmies();
-                        l_Order_Names.add("blockade");
+                    } else if (l_Card.equals("blockade")) {
+                        l_CommandInput = l_Card + " " + l_MaxArmyCountry.getName() + " " + p_Player.getNoOfArmies();
+                        d_Order_Names.add("blockade");
                         break;
-                    } else if (card.equals("bomb")) {
-                        l_CommandInput = card + " " + opponentCountry.getName() + " " + p_Player.getNoOfArmies();
-                        l_Order_Names.add("bomb");
+                    } else if (l_Card.equals("bomb")) {
+                        l_CommandInput = l_Card + " " + l_OpponentCountry.getName() + " " + p_Player.getNoOfArmies();
+                        d_Order_Names.add("bomb");
                         break;
-                    } else if (card.equals("diplomacy")) {
-                        Player NegotiatePlayer = null;
+                    } else if (l_Card.equals("diplomacy")) {
+                        Player l_NegotiatePlayer = null;
                         for (int i = 0; i < d_ge.getListOfPlayers().size(); i++) {
-                            int randomIndex = rand.nextInt(d_ge.getListOfPlayers().size());
-                            if (!p_Player.equals(d_ge.getListOfPlayers().get(randomIndex))) {
-                                NegotiatePlayer = d_ge.getListOfPlayers().get(randomIndex);
+                            int l_RandomIndex = l_Rand.nextInt(d_ge.getListOfPlayers().size());
+                            if (!p_Player.equals(d_ge.getListOfPlayers().get(l_RandomIndex))) {
+                                l_NegotiatePlayer = d_ge.getListOfPlayers().get(l_RandomIndex);
                             }
                         }
-                        l_CommandInput = card + " " + NegotiatePlayer;
-                        l_Order_Names.add("diplomacy");
+                        l_CommandInput = l_Card + " " + l_NegotiatePlayer;
+                        d_Order_Names.add("diplomacy");
                         break;
                     } else {
                         LogUtil.log("Quitting here");
@@ -244,7 +244,6 @@ public class Aggressive extends Strategy {
                 Territory l_TerritoryTarget = d_Ge.getMap().getTerritoryByName(l_CountryNameTarget);
                 String l_Num = p_Command[3];
                 int l_NumInt = Integer.parseInt(l_Num);
-                int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (p_Player.getIsNegotiatedPlayer() == true
                         && l_TerritoryTarget.getOwner().getIsNegotiatedPlayer() == true) {
                     LogUtil.log(p_Player + " cannot attack the target country");

@@ -81,53 +81,53 @@ public class Odd extends Strategy {
                 }
             }
 
-            Random rand = new Random();
-            Country randomCountry = null;
+            Random l_Rand = new Random();
+            Country l_RandomCountry = null;
             for (int i = 0; i < p_Player.getListOfCountries().size(); i++) {
-                int randomIndex = rand.nextInt(p_Player.getListOfCountries().size());
+                int l_RandomIndex = l_Rand.nextInt(p_Player.getListOfCountries().size());
                 {
-                    randomCountry = p_Player.getListOfCountries().get(randomIndex);
+                    l_RandomCountry = p_Player.getListOfCountries().get(l_RandomIndex);
                 }
             }
 
-            Country opponentCountry = null;
+            Country l_OpponentCountry = null;
             for (int i = 0; i < d_ge.getMap().getListOfCountries().size(); i++) {
-                int randomIndex = rand.nextInt(d_ge.getMap().getListOfCountries().size());
-                if (!p_Player.getListOfCountries().contains(d_ge.getMap().getListOfCountries().get(randomIndex))) {
-                    opponentCountry = d_ge.getMap().getListOfCountries().get(randomIndex);
+                int l_RandomIndex = l_Rand.nextInt(d_ge.getMap().getListOfCountries().size());
+                if (!p_Player.getListOfCountries().contains(d_ge.getMap().getListOfCountries().get(l_RandomIndex))) {
+                    l_OpponentCountry = d_ge.getMap().getListOfCountries().get(l_RandomIndex);
                 }
             }
             System.out.println(l_Order_Names.toString());
             System.out.println(l_Order_Names.isEmpty());
             if (l_Order_Names.isEmpty()) {
-                l_CommandInput = "deploy " + randomCountry.getName() + " " + p_Player.getNoOfArmies();
+                l_CommandInput = "deploy " + l_RandomCountry.getName() + " " + p_Player.getNoOfArmies();
                 l_Order_Names.add("deploy");
             } else if (l_Order_Names.contains("deploy") && (!l_Order_Names.contains("advance"))) {
-                l_CommandInput = "advance " + randomCountry.getName() + " " + opponentCountry.getName() + " " + p_Player.getNoOfArmies();
+                l_CommandInput = "advance " + l_RandomCountry.getName() + " " + l_OpponentCountry.getName() + " " + p_Player.getNoOfArmies();
                 l_Order_Names.add("advance");
             } else if (l_Order_Names.contains("deploy") && l_Order_Names.contains("advance") && !l_Order_Names.contains("airlift") && !l_Order_Names.contains("bomb") && !l_Order_Names.contains("blockade") && !l_Order_Names.contains("diplomacy")) {
                 if (p_Player.getOrderCards().isEmpty()) {
                     return false;
                 }
-                for (String card : p_Player.getOrderCards()) {
-                    if (card.equals("airlift")) {
-                        l_CommandInput = card + " " + maxArmyCountry.getName() + " " + randomCountry.getName() + " " + p_Player.getNoOfArmies();
+                for (String l_Card : p_Player.getOrderCards()) {
+                    if (l_Card.equals("airlift")) {
+                        l_CommandInput = l_Card + " " + maxArmyCountry.getName() + " " + l_RandomCountry.getName() + " " + p_Player.getNoOfArmies();
                         l_Order_Names.add("airlift");
-                    } else if (card.equals("blockade")) {
-                        l_CommandInput = card + " " + randomCountry.getName() + " " + p_Player.getNoOfArmies();
+                    } else if (l_Card.equals("blockade")) {
+                        l_CommandInput = l_Card + " " + l_RandomCountry.getName() + " " + p_Player.getNoOfArmies();
                         l_Order_Names.add("blockade");
-                    } else if (card.equals("bomb")) {
-                        l_CommandInput = card + " " + opponentCountry.getName() + " " + p_Player.getNoOfArmies();
+                    } else if (l_Card.equals("bomb")) {
+                        l_CommandInput = l_Card + " " + l_OpponentCountry.getName() + " " + p_Player.getNoOfArmies();
                         l_Order_Names.add("bomb");
-                    } else if (card.equals("diplomacy")) {
-                        Player NegotiatePlayer = null;
+                    } else if (l_Card.equals("diplomacy")) {
+                        Player l_NegotiatePlayer = null;
                         for (int i = 0; i < d_ge.getListOfPlayers().size(); i++) {
-                            int randomIndex = rand.nextInt(d_ge.getListOfPlayers().size());
-                            if (!p_Player.equals(d_ge.getListOfPlayers().get(randomIndex))) {
-                                NegotiatePlayer = d_ge.getListOfPlayers().get(randomIndex);
+                            int l_RandomIndex = l_Rand.nextInt(d_ge.getListOfPlayers().size());
+                            if (!p_Player.equals(d_ge.getListOfPlayers().get(l_RandomIndex))) {
+                                l_NegotiatePlayer = d_ge.getListOfPlayers().get(l_RandomIndex);
                             }
                         }
-                        l_CommandInput = card + " " + NegotiatePlayer;
+                        l_CommandInput = l_Card + " " + l_NegotiatePlayer;
                         l_Order_Names.add("diplomacy");
                     } else {
                         LogUtil.log("Quitting here");
@@ -230,7 +230,6 @@ public class Odd extends Strategy {
                 Territory l_TerritoryTarget = d_Ge.getMap().getTerritoryByName(l_CountryNameTarget);
                 String l_Num = p_Command[3];
                 int l_NumInt = Integer.parseInt(l_Num);
-                int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (p_Player.getIsNegotiatedPlayer() == true
                         && l_TerritoryTarget.getOwner().getIsNegotiatedPlayer() == true) {
                     LogUtil.log(p_Player + " cannot attack the target country");
