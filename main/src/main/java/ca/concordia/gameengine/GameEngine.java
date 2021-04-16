@@ -229,14 +229,14 @@ public class GameEngine {
         LogUtil.log("Game Engine started");
         Scanner l_Keyboard = new Scanner(System.in);
         do {
-            LogUtil.log("=================================================================================|");
+            LogUtil.log("==================================================================================");
             LogUtil.log("| PURPOSE             COMMAND STRUCTURE                                          |");
             LogUtil.log("| Map Editing     :   edit                                                       |");
             LogUtil.log("| Single Mode     :   play                                                       |");
             LogUtil.log("| Tournament Mode :   tournament -M <maps> -P <players> -G <games> -D <turns>    |");
             LogUtil.log("| Load saved-game :   loadgame <filename>                                        |");
             LogUtil.log("| Close All       :   quit                                                       |");
-            LogUtil.log("> choose one of the option from above?: ");
+            LogUtil.log("> choose one of the option from above?:                                          |");
             LogUtil.log("==================================================================================");
             String l_Input = l_Keyboard.nextLine();
             LogUtil.log(l_Input);
