@@ -57,21 +57,8 @@ public class Odd extends Strategy {
         l_Order_Names.clear();
 
         do {
-               /* no need to print this part for non-human strategy
-            LogUtil.log("============================================================================================");
-            LogUtil.log("| Play:MainPlay:Order  : deploy          <country-name> <num-of-armies>                    |");
-            LogUtil.log("| Play:MainPlay:Order  : advance         <country-from> <country-to> <num-of-armies>       |");
-            LogUtil.log("| Play:MainPlay:Order  : bomb            <country-name>                                    |");
-            LogUtil.log("| Play:MainPlay:Order  : blockade        <country-name>                                    |");
-            LogUtil.log("| Play:MainPlay:Order  : airlift         <source-country> <target-country> <num-of-armies> |");
-            LogUtil.log("| Play:MainPlay:Order  : negotiate       <player-name>                                     |");
-            LogUtil.log("| Any                  : showmap                                                           |");
-            LogUtil.log("| Any                  : quit                                                              |");
-            LogUtil.log("============================================================================================");
 
-            LogUtil.log("deploy, advance, " + p_Player.getOrderCards().toString() + ", quit" + " cards are available for player " + p_Player.getPlayerName());
-            */
-
+            try{
             String l_CommandInput = null;
 
             Country maxArmyCountry = p_Player.getListOfCountries().get(0);
@@ -177,6 +164,10 @@ public class Odd extends Strategy {
                             LogUtil.log("INVALID COMMAND in MainPlay:Order phase");
                     }
                 }
+            }
+        }
+            catch(Exception ex){
+                LogUtil.log("exception in "+ex);
             }
         } while (l_MaintainLoop);
         return false;

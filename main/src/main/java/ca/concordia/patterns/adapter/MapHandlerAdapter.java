@@ -42,7 +42,8 @@ public class MapHandlerAdapter extends DominationMapHandler {
     @Override
     public void writeMapFile(File p_MapFile) {
         LogUtil.log("writing .map file to path " + p_MapFile.getAbsolutePath());
-        new ConquestMapHandler().writeMapFile(p_MapFile);
+        System.out.println(" --> MapHandlerAdapter ");
+        d_CMH.writeMapFile(p_MapFile);
         LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
     }
 

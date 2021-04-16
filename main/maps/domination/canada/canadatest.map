@@ -1,0 +1,13 @@
+; map:canadatest.map
+; created by team-11 
+
+[continents]
+NorthAmerica 20 RED 
+
+[countries]
+1 Canada 1 2 2 
+2 America 1 1 1 
+3 Mexico 1 0 0 
+3 Quebec 1 0 0 
+
+[borders]

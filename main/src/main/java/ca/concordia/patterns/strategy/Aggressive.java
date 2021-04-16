@@ -67,130 +67,121 @@ public class Aggressive extends Strategy {
         d_Order_Names.clear();
 
         do {
-            /* no need to print this part for non-human strategy
-            LogUtil.log("============================================================================================");
-            LogUtil.log("| Play:MainPlay:Order  : deploy          <country-name> <num-of-armies>                    |");
-            LogUtil.log("| Play:MainPlay:Order  : advance         <country-from> <country-to> <num-of-armies>       |");
-            LogUtil.log("| Play:MainPlay:Order  : bomb            <country-name>                                    |");
-            LogUtil.log("| Play:MainPlay:Order  : blockade        <country-name>                                    |");
-            LogUtil.log("| Play:MainPlay:Order  : airlift         <source-country> <target-country> <num-of-armies> |");
-            LogUtil.log("| Play:MainPlay:Order  : negotiate       <player-name>                                     |");
-            LogUtil.log("| Any                  : showmap                                                           |");
-            LogUtil.log("| Any                  : quit                                                              |");
-            LogUtil.log("============================================================================================");
 
-            LogUtil.log("deploy, advance, " + p_Player.getOrderCards().toString() + ", quit" + " cards are available for player " + p_Player.getPlayerName());
-            */
+            try {
+                String l_CommandInput = null;
+                Country l_MaxArmyCountry = p_Player.getListOfCountries().get(0);
+                Country l_MinArmyCountry = l_MaxArmyCountry;
+                for (int i = 0; i < p_Player.getListOfCountries().size(); i++) {
+                    if (p_Player.getListOfCountries().get(i).getArmyCount() > l_MaxArmyCountry.getArmyCount()) {
+                        l_MaxArmyCountry = p_Player.getListOfCountries().get(i);
+                    }
+                    if (p_Player.getListOfCountries().get(i).getArmyCount() < l_MinArmyCountry.getArmyCount()) {
+                        l_MinArmyCountry = p_Player.getListOfCountries().get(i);
+                    }
+                }
 
-            String l_CommandInput = null;
-            Country l_MaxArmyCountry = p_Player.getListOfCountries().get(0);
-            Country l_MinArmyCountry = l_MaxArmyCountry;
-            for (int i = 0; i < p_Player.getListOfCountries().size(); i++) {
-                if (p_Player.getListOfCountries().get(i).getArmyCount() > l_MaxArmyCountry.getArmyCount()) {
-                    l_MaxArmyCountry = p_Player.getListOfCountries().get(i);
-                }
-                if (p_Player.getListOfCountries().get(i).getArmyCount() < l_MinArmyCountry.getArmyCount()) {
-                    l_MinArmyCountry = p_Player.getListOfCountries().get(i);
-                }
-            }
+                String L_TargetCountryName = l_MaxArmyCountry.getName();
+                String l_Source_country = L_TargetCountryName;
 
-            String L_TargetCountryName = l_MaxArmyCountry.getName();
-            String l_Source_country = L_TargetCountryName;
-
-            Random l_Rand = new Random();
-            Country l_OpponentCountry = null;
-            for (int i = 0; i < d_ge.getMap().getListOfCountries().size(); i++) {
-                int l_RandomIndex = l_Rand.nextInt(d_ge.getMap().getListOfCountries().size());
-                if (!p_Player.getListOfCountries().contains(d_ge.getMap().getListOfCountries().get(l_RandomIndex))) {
-                    l_OpponentCountry = d_ge.getMap().getListOfCountries().get(l_RandomIndex);
+                Random l_Rand = new Random();
+                Country l_OpponentCountry = null;
+                for (int i = 0; i < d_ge.getMap().getListOfCountries().size(); i++) {
+                    int l_RandomIndex = l_Rand.nextInt(d_ge.getMap().getListOfCountries().size());
+                    if (!p_Player.getListOfCountries().contains(d_ge.getMap().getListOfCountries().get(l_RandomIndex))) {
+                        l_OpponentCountry = d_ge.getMap().getListOfCountries().get(l_RandomIndex);
+                    }
                 }
-            }
-            System.out.println(d_Order_Names.toString());
-            System.out.println(d_Order_Names.isEmpty());
-            if (d_Order_Names.isEmpty()) {
-                l_CommandInput = "deploy " + L_TargetCountryName + " " + p_Player.getNoOfArmies();
-                d_Order_Names.add("deploy");
-            } else if (d_Order_Names.contains("deploy") && (!d_Order_Names.contains("advance"))) {
-                l_CommandInput = "advance " + l_Source_country + " " + l_OpponentCountry.getName() + " " + p_Player.getNoOfArmies();
-                d_Order_Names.add("advance");
-            } else if (d_Order_Names.contains("deploy") && d_Order_Names.contains("advance") && !d_Order_Names.contains("airlift") && !d_Order_Names.contains("bomb") && !d_Order_Names.contains("blockade") && !d_Order_Names.contains("diplomacy")) {
-                if (p_Player.getOrderCards().isEmpty()) {
-                    return false;
-                }
-                for (String l_Card : p_Player.getOrderCards()) {
-                    System.out.println("l_Card available is " + l_Card);
-                    if (l_Card.equals("airlift")) {
-                        l_CommandInput = l_Card + " " + l_MinArmyCountry.getName() + " " + l_MaxArmyCountry.getName() + " " + p_Player.getNoOfArmies();
-                        d_Order_Names.add("airlift");
-                        break;
-                    } else if (l_Card.equals("blockade")) {
-                        l_CommandInput = l_Card + " " + l_MaxArmyCountry.getName() + " " + p_Player.getNoOfArmies();
-                        d_Order_Names.add("blockade");
-                        break;
-                    } else if (l_Card.equals("bomb")) {
-                        l_CommandInput = l_Card + " " + l_OpponentCountry.getName() + " " + p_Player.getNoOfArmies();
-                        d_Order_Names.add("bomb");
-                        break;
-                    } else if (l_Card.equals("diplomacy")) {
-                        Player l_NegotiatePlayer = null;
-                        for (int i = 0; i < d_ge.getListOfPlayers().size(); i++) {
-                            int l_RandomIndex = l_Rand.nextInt(d_ge.getListOfPlayers().size());
-                            if (!p_Player.equals(d_ge.getListOfPlayers().get(l_RandomIndex))) {
-                                l_NegotiatePlayer = d_ge.getListOfPlayers().get(l_RandomIndex);
-                            }
-                        }
-                        l_CommandInput = l_Card + " " + l_NegotiatePlayer;
-                        d_Order_Names.add("diplomacy");
-                        break;
-                    } else {
-                        LogUtil.log("Quitting here");
+                System.out.println(d_Order_Names.toString());
+                System.out.println(d_Order_Names.isEmpty());
+                if (d_Order_Names.isEmpty()) {
+                    l_CommandInput = "deploy " + L_TargetCountryName + " " + p_Player.getNoOfArmies();
+                    d_Order_Names.add("deploy");
+                } else if (d_Order_Names.contains("deploy") && (!d_Order_Names.contains("advance"))) {
+                    l_CommandInput = "advance " + l_Source_country + " " + l_OpponentCountry.getName() + " " + p_Player.getNoOfArmies();
+                    d_Order_Names.add("advance");
+                } else if (d_Order_Names.contains("deploy") && d_Order_Names.contains("advance") && !d_Order_Names.contains("airlift") && !d_Order_Names.contains("bomb") && !d_Order_Names.contains("blockade") && !d_Order_Names.contains("diplomacy")) {
+                    if (p_Player.getOrderCards().isEmpty()) {
                         return false;
                     }
+                    for (String l_Card : p_Player.getOrderCards()) {
+                        System.out.println("l_Card available is " + l_Card);
+                        if (l_Card.equals("airlift")) {
+                            l_CommandInput = l_Card + " " + l_MinArmyCountry.getName() + " " + l_MaxArmyCountry.getName() + " " + p_Player.getNoOfArmies();
+                            d_Order_Names.add("airlift");
+                            break;
+                        } else if (l_Card.equals("blockade")) {
+                            l_CommandInput = l_Card + " " + l_MaxArmyCountry.getName() + " " + p_Player.getNoOfArmies();
+                            d_Order_Names.add("blockade");
+                            break;
+                        } else if (l_Card.equals("bomb")) {
+                            l_CommandInput = l_Card + " " + l_OpponentCountry.getName() + " " + p_Player.getNoOfArmies();
+                            d_Order_Names.add("bomb");
+                            break;
+                        } else if (l_Card.equals("diplomacy")) {
+                            Player l_NegotiatePlayer = null;
+                            for (int i = 0; i < d_ge.getListOfPlayers().size(); i++) {
+                                int l_RandomIndex = l_Rand.nextInt(d_ge.getListOfPlayers().size());
+                                if (!p_Player.equals(d_ge.getListOfPlayers().get(l_RandomIndex))) {
+                                    l_NegotiatePlayer = d_ge.getListOfPlayers().get(l_RandomIndex);
+                                }
+                            }
+                            l_CommandInput = l_Card + " " + l_NegotiatePlayer;
+                            d_Order_Names.add("diplomacy");
+                            break;
+                        } else {
+                            LogUtil.log("Quitting here");
+                            return false;
+                        }
+                    }
+                } else {
+                    System.out.println("quitting here");
+                    return false;
                 }
-            } else {
-                System.out.println("quitting here");
-                return false;
-            }
 
-            if (l_CommandInput.length() > 0) {
-                String[] l_CommandArray = l_CommandInput.trim().split(" ");
-                if (l_CommandArray.length > 0) {
-                    String l_FirstCommand = l_CommandArray[0].toLowerCase();
-                    LogUtil.log("firstCommand : " + l_FirstCommand);
+                if (l_CommandInput.length() > 0) {
+                    String[] l_CommandArray = l_CommandInput.trim().split(" ");
+                    if (l_CommandArray.length > 0) {
+                        String l_FirstCommand = l_CommandArray[0].toLowerCase();
+                        LogUtil.log("firstCommand : " + l_FirstCommand);
 
-                    switch (l_FirstCommand) {
-                        case COMMAND_DEPLOY:
-                            l_Army = processDeployCommand(p_Player, l_CommandArray, l_Army);
-                            break;
+                        switch (l_FirstCommand) {
+                            case COMMAND_DEPLOY:
+                                l_Army = processDeployCommand(p_Player, l_CommandArray, l_Army);
+                                break;
 
-                        case COMMAND_ADVANCE:
-                            processAdvanceCommand(p_Player, l_CommandArray);
-                            break;
+                            case COMMAND_ADVANCE:
+                                processAdvanceCommand(p_Player, l_CommandArray);
+                                break;
 
-                        case COMMAND_BOMB:
-                            processBombCommand(p_Player, l_CommandArray);
-                            break;
+                            case COMMAND_BOMB:
+                                processBombCommand(p_Player, l_CommandArray);
+                                break;
 
-                        case COMMAND_BLOCKADE:
-                            processBlockadeCommand(p_Player, l_CommandArray);
-                            break;
+                            case COMMAND_BLOCKADE:
+                                processBlockadeCommand(p_Player, l_CommandArray);
+                                break;
 
-                        case COMMAND_AIRLIFT:
-                            processAirliftCommand(p_Player, l_CommandArray);
-                            break;
+                            case COMMAND_AIRLIFT:
+                                processAirliftCommand(p_Player, l_CommandArray);
+                                break;
 
-                        case COMMAND_NEGOTIATE:
-                            processDiplomacyCommand(p_Player, l_CommandArray);
-                            break;
+                            case COMMAND_NEGOTIATE:
+                                processDiplomacyCommand(p_Player, l_CommandArray);
+                                break;
 
-                        case COMMAND_SHOW_MAP:
-                            d_Ge.getPhase().showMap();
-                            break;
+                            case COMMAND_SHOW_MAP:
+                                d_Ge.getPhase().showMap();
+                                break;
 
-                        default:
-                            LogUtil.log("INVALID COMMAND in MainPlay:Order phase");
+                            default:
+                                LogUtil.log("INVALID COMMAND in MainPlay:Order phase");
+                        }
                     }
                 }
+            }
+            catch (Exception ex){
+                LogUtil.log("Exception is "+ex);
             }
         } while (l_MaintainLoop);
         return false;

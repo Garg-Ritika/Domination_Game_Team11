@@ -1,0 +1,12 @@
+[Map]
+author=Team11 
+
+[Continents]
+NorthAmerica=20
+
+[Territories]
+Canada2 2,Canada 
+America1 1,America 
+Mexico0 0,Mexico 
+Quebec0 0,Quebec 
+ 

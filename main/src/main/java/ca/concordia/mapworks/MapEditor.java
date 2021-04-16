@@ -332,7 +332,7 @@ public class MapEditor {
         LogUtil.log("2. Conquest Map ");
         LogUtil.log("Press 1 for Domination map 2 for Conquest map ");
         LogUtil.log("=======================================");
-        int l_Input = l_Keyboard.nextInt();
+        int l_Input = Integer.parseInt(l_Keyboard.next());
         LogUtil.log(Integer.toString(l_Input));
         switch (l_Input) {
             case 1:
@@ -413,9 +413,10 @@ public class MapEditor {
         if (p_MapType.equalsIgnoreCase(DOMINATION_MAP_TYPE)) {
             dmh.writeMapFile(p_MapFile);
         } else if (p_MapType.equalsIgnoreCase(CONQUEST_MAP_TYPE)) {
+            System.out.println("--> "+ d_CurrentMap.getListOfContinents().size());
             ConquestMapHandler cmh = new ConquestMapHandler(d_CurrentMap);
-            dmh = new MapHandlerAdapter(cmh);
-            dmh.writeMapFile(p_MapFile);
+            MapHandlerAdapter l_MHA = new MapHandlerAdapter(cmh);
+            l_MHA.writeMapFile(p_MapFile);
         }
         LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
     }

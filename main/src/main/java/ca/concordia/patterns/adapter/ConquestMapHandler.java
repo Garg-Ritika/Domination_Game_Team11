@@ -166,6 +166,7 @@ public class ConquestMapHandler {
      */
     public void writeMapFile(File p_MapFile) {
         try {
+            System.out.println(d_Map);
 
             FileWriter l_FileWriter = new FileWriter(p_MapFile);
             BufferedWriter l_BufferedWriter = new BufferedWriter(l_FileWriter);
@@ -174,6 +175,7 @@ public class ConquestMapHandler {
             l_Content += "author=Team11 \r\n";
 
             l_Content += "\r\n" + HEADER_CONTINENTS + "\r\n";
+            System.out.println(d_Map.getListOfContinents().size());
             for (Continent l_Continent : d_Map.getListOfContinents()) {
                 l_Content += l_Continent.getName() + "=" + l_Continent.getArmyCount() + "\r\n";
             }

@@ -28,6 +28,7 @@ public class Human extends Strategy {
     public static final String COMMAND_AIRLIFT = "airlift";
     public static final String COMMAND_NEGOTIATE = "negotiate";
     public static final String COMMAND_QUIT = "quit";
+
     private LinkedList<Order> d_ListOfOrders = new LinkedList<Order>();
 
 
